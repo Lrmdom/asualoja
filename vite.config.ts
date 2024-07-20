@@ -1,9 +1,16 @@
-import { vitePlugin as remix } from "@remix-run/dev";
-import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { vitePlugin as remix } from '@remix-run/dev'
+import { installGlobals } from "@remix-run/node";
+import { defineConfig } from 'vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
+import { remixDevTools } from 'remix-development-tools'
+
+installGlobals();
+
 
 export default defineConfig({
+
   plugins: [
+    remixDevTools(),
     remix({
       future: {
         v3_fetcherPersist: true,
@@ -11,6 +18,7 @@ export default defineConfig({
         v3_throwAbortReason: true,
       },
     }),
+
     tsconfigPaths(),
   ],
-});
+})

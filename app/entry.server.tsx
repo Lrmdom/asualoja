@@ -89,7 +89,7 @@ function handleBotRequest(
   });
 }
 
-function handleBrowserRequest(
+async function handleBrowserRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
