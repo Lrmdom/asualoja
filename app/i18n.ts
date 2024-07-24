@@ -1,6 +1,6 @@
-import en from "../public/locales/en/common.json";
-import es from "../public/locales/es/common.json";
-import pt from "../public/locales/pt/common.json";
+import en from "~/../public/locales/en/common.json";
+import es from "~/../public/locales/es/common.json";
+import pt from "~/../public/locales/pt/common.json";
 
 // This is the list of languages your application supports
 export const supportedLngs = ["pt", "es", "en"];
@@ -19,7 +19,4 @@ export const resources = {
   pt: { translation: pt },
 };
 
-export default ({
-
-
-})
+export default {};

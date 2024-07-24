@@ -1,4 +1,4 @@
-import { Params, useLocation, useParams } from '@remix-run/react'
+import { Params, useLocation, useParams } from "@remix-run/react";
 
 import {
   DropdownMenu,
@@ -8,38 +8,38 @@ import {
   DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuItem,
-} from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/ui/button'
-import { useTranslation } from 'react-i18next'
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export default function Component() {
-  const location = useLocation()
+  const location = useLocation();
   //const pathname = location.pathname.replace(/\/$/, '')
-  const { i18n } = useTranslation()
-  const language = i18n.resolvedLanguage
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage;
 
   // const params = useParams()
   //const lang = getLang(params)
 
   /* function getLang(params: Params<string>) {
-                   const lang = params.lng ?? 'en'
-                   if (lang !== 'ja' && lang !== 'en') {
-                     throw new Response(null, {
-                       status: 404,
-                       statusText: `Not Found: Invalid language ${lang}`,
-                     })
-                   }
-                   return lang
-                 }*/
+                       const lang = params.lng ?? 'en'
+                       if (lang !== 'ja' && lang !== 'en') {
+                         throw new Response(null, {
+                           status: 404,
+                           statusText: `Not Found: Invalid language ${lang}`,
+                         })
+                       }
+                       return lang
+                     }*/
 
   const handleLanguageChange = (data) => {
     i18n.changeLanguage(data.language, (error) => {
-      let re = new RegExp('/' + language, 'g')
-      const pthn = location.pathname.replace(re, data.language)
+      let re = new RegExp("/" + language, "g");
+      const pthn = location.pathname.replace(re, data.language);
       //todo use current url and just change the language parameters path and querystring
-      window.location.href = `/${data.language}/?lng=${data.language}`
-    })
-  }
+      window.location.href = `/${data.language}/?lng=${data.language}`;
+    });
+  };
 
   return (
     <DropdownMenu>
@@ -58,7 +58,7 @@ export default function Component() {
             onSelect={() =>
               handleLanguageChange({
                 pathname: location.pathname,
-                language: 'en',
+                language: "en",
               })
             }
           >
@@ -69,7 +69,7 @@ export default function Component() {
             onSelect={() =>
               handleLanguageChange({
                 pathname: location.pathname,
-                language: 'es',
+                language: "es",
               })
             }
           >
@@ -80,7 +80,7 @@ export default function Component() {
             onSelect={() =>
               handleLanguageChange({
                 pathname: location.pathname,
-                language: 'pt',
+                language: "pt",
               })
             }
           >
@@ -90,7 +90,7 @@ export default function Component() {
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
 
 function ChevronDownIcon(props) {
@@ -109,7 +109,7 @@ function ChevronDownIcon(props) {
     >
       <path d="m6 9 6 6 6-6" />
     </svg>
-  )
+  );
 }
 
 function FlagIcon(props) {
@@ -129,5 +129,5 @@ function FlagIcon(props) {
       <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
       <line x1="4" x2="4" y1="22" y2="15" />
     </svg>
-  )
+  );
 }
