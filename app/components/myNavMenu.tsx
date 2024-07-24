@@ -203,27 +203,26 @@ export function MyNavMenu(props) {
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
-                            <NavigationMenuTrigger className="border-4 bg-primary text-white">
+                            <NavigationMenuTrigger className="border-4">
                                 Services
                             </NavigationMenuTrigger>
                             <NavigationMenuContent>
                                 <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                    {props.services.map((service) => (
+                                    {props.taxonomies.map((taxonomy) => (
                                         <ListItem
                                             className=""
-                                            key={service._id}
-                                            title={service.title}
-                                            href={stegaClean(service.title)}
-                                            //href={service.name}
-                                            //media={service.image_url}
-                                            media={
+                                            key={taxonomy._id}
+                                            title={taxonomy.title}
+                                            href={stegaClean(taxonomy.title)}
+
+                                            /*media={
                                                 service.serviceImage
                                                     ? service.serviceImage
                                                     : service.image_url
-                                            }
+                                            }*/
                                         >
                                             <BeakerIcon className="size-4 text-black"/>
-                                            {service.description}
+                                            {/*{taxonomy.description}*/}
                                         </ListItem>
                                     ))}
                                 </ul>
@@ -234,20 +233,6 @@ export function MyNavMenu(props) {
                                 About Us
                             </NavigationMenuTrigger>
                             <NavigationMenuContent>
-                                <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                    {props.services.map((service) => (
-                                        <ListItem
-                                            className=""
-                                            key={service._id}
-                                            title={service.name}
-                                            href={service.name}
-                                            media={service.image_url}
-                                        >
-                                            <BeakerIcon className="size-4 text-black"/>
-                                            {service.description}
-                                        </ListItem>
-                                    ))}
-                                </ul>
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
@@ -255,20 +240,6 @@ export function MyNavMenu(props) {
                                 Contacts
                             </NavigationMenuTrigger>
                             <NavigationMenuContent>
-                                <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                    {props.services.map((service) => (
-                                        <ListItem
-                                            className=""
-                                            key={service._id}
-                                            title={service.name}
-                                            href={service.name}
-                                            media={service.image_url}
-                                        >
-                                            <BeakerIcon className="size-4 text-black"/>
-                                            {service.description}
-                                        </ListItem>
-                                    ))}
-                                </ul>
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
@@ -278,7 +249,7 @@ export function MyNavMenu(props) {
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                     </NavigationMenuList>
-                    <SearchForm services={props.services}></SearchForm>
+                    <SearchForm services={props.taxonomies}></SearchForm>
                     <MylaguageSwitcher
                         onClick={() => handleLanguageChange()}
                     ></MylaguageSwitcher>

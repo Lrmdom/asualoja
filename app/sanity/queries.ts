@@ -166,3 +166,38 @@ code,
     }
   }
 }`
+
+export const TAXONOMIES_QUERY_LOCALIZED = groq`*[_type == "taxonomy"]
+{
+"title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+  ),
+  taxons[]->{"title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+  )}
+}`
+
+export const TAXONOMY_QUERY_LOCALIZED = groq`*[_type == "taxonomy" && title[_key == $locale][0].value == $slug][0] 
+{
+"title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+  ),
+  taxons[]->{"title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+  ),
+  taxons[]->{"title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+  )}
+            
+  }
+}`

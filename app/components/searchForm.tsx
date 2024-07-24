@@ -50,7 +50,6 @@ export default function Component(props) {
     setSearchTerm(e.target.value)
   }
   let filteredResults = fuse.search(searchTerm)
-  console.log(filteredResults)
   return (
     <div className="relative w-full max-w-md">
       <Input

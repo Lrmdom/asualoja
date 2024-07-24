@@ -19,7 +19,7 @@ import {useTranslation} from 'react-i18next'
 import {useChangeLanguage} from 'remix-i18next/react'
 import i18next, {localeCookie} from '~/i18next.server'
 import {MyNavMenu} from '~/components/myNavMenu'
-import {SERVICES_QUERY, SERVICES_QUERY_LOCALIZED} from '~/sanity/queries'
+import {TAXONOMIES_QUERY_LOCALIZED} from '~/sanity/queries'
 import {loadQuery} from '~/sanity/loader.server'
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from '@sanity/client/stega'
@@ -33,10 +33,10 @@ export let loader = async ({request, params}) => {
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
     const {data} = await loadQuery<SanityDocument>(
-        SERVICES_QUERY_LOCALIZED,
+        TAXONOMIES_QUERY_LOCALIZED,
         params
     )
-
+    //console.log(stegaClean(data))
     const ENV = {
         SANITY_STUDIO_PROJECT_ID: process.env.SANITY_STUDIO_PROJECT_ID,
         SANITY_STUDIO_DATASET: process.env.SANITY_STUDIO_DATASET,
@@ -62,7 +62,7 @@ export const handle = {
 export function Layout({children}: { children: React.ReactNode }) {
     const {data, locale, ENV} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
-    console.log(stegaClean(data))
+
 
     return (
         <html lang={locale?.locale ?? 'pt'}>
@@ -85,7 +85,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <MyNavMenu services={data}/>
+        <MyNavMenu taxonomies={data}/>
         <div className="flow-root">
             <div className="float-right">
                 <cl-cart-link>

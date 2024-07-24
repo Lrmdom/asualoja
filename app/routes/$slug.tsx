@@ -26,7 +26,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   return { data }
 }
 
-export default function PostRoute() {
+export default function TaxonomyRoute() {
   const { data } = useLoaderData<typeof loader>()
 
   return <Service service={data} />

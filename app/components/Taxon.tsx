@@ -1,14 +1,15 @@
+
+
 import type {SanityDocument} from '@sanity/client'
-import Taxon from '~/components/Taxon'
+import Product from "~/components/Products"
 
-
-export default function Service({taxonomy}: { service: SanityDocument }) {
+export default function Taxon({taxon}: { taxon: SanityDocument }) {
     const {
         title,
-        taxons
-    } = taxonomy
+        taxons,
+        products
+    } = taxon
 
-    //console.log(taxonomy)
     return (
         <main className="container mx-auto prose prose-lg p-4 border-4">
             {title ? (
@@ -16,18 +17,21 @@ export default function Service({taxonomy}: { service: SanityDocument }) {
                     <b>{title}</b>
                 </h1>
             ) : null}
-            {taxons?.map((taxon) => {
+            {taxon.taxons?.map((tx) => {
                 return (
                     <>
-                        <div key={taxon._id}>
+                    <div key={tx._id}>
                           <span className="bg-black text-white">
-                            {taxon.title}
+                            {tx.title}
                           </span>
-                        </div>
-                        <Taxon taxon={taxon}></Taxon>
+                    </div>
+                    <Product product={tx.products}></Product>
                     </>
                 )
             })}
         </main>
     )
 }
+
+
+
