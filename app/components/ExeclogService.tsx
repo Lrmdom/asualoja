@@ -1,14 +1,16 @@
 import type {SanityDocument} from '@sanity/client'
 import Taxon from '~/components/Taxon'
+import Prods from "~/components/Prods";
+import {stegaClean} from "@sanity/client/stega";
 
 
-export default function Service({taxonomy}: { service: SanityDocument }) {
+export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
     const {
         title,
-        taxons
-    } = taxonomy
+        taxons,
+    } = taxonomies
 
-    //console.log(taxonomy)
+
     return (
         <main className="container mx-auto prose prose-lg p-4 border-4">
             {title ? (
@@ -23,11 +25,13 @@ export default function Service({taxonomy}: { service: SanityDocument }) {
                           <span className="bg-black text-white">
                             {taxon.title}
                           </span>
+                            <Prods products={taxon.products}></Prods>
                         </div>
                         <Taxon taxon={taxon}></Taxon>
                     </>
                 )
             })}
+
         </main>
     )
 }
