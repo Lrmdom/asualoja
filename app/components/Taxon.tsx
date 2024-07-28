@@ -12,13 +12,12 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
     let displayProds
 
 
-    /*if (products) {
-        console.log(stegaClean("LEONNN2222"))
-        console.log(stegaClean(products))
+    if (products) {
+
         displayProds = <Prods products={products}></Prods>
     } else {
 
-    }*/
+    }
 
     return (
         <main className="container mx-auto prose prose-lg p-4 border-4">
@@ -30,7 +29,8 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                           <span className="bg-black text-red">
                             {tx.title}
                           </span>
-                            <Prods products={tx.products}></Prods>
+                            {/*<Prods products={tx.products}></Prods>*/}
+                            {displayProds}
                         </div>
                     </>
                 )

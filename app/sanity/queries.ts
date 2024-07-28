@@ -212,3 +212,133 @@ export const TAXONOMY_QUERY_LOCALIZED = groq`*[_type == "taxonomy" && title[_key
             
   }
 }`
+
+export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
+ *[_type == "taxonomy" && title[_key == $locale][0].value == $slug][0]
+ {   
+    "title": coalesce(
+        title[_key == $locale][0].value,
+        title[_key == 'pt'][0].value,
+        "Missing translation"
+    ),
+    taxons[]->{
+        "title": coalesce(
+        title[_key == $locale][0].value,
+        title[_key == 'pt'][0].value,
+        "Missing translation"
+        ),
+        taxons[]->{
+            "title": coalesce(
+            title[_key == $locale][0].value,
+            title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
+            products[]->{"title": coalesce(
+                title[_key == $locale][0].value,
+                title[_key == 'pt'][0].value,
+                "Missing translation"
+            ),
+                "attributes": coalesce(
+                    attribute[_key == $locale][0].value,
+                    attribute[_key == 'pt'][0].value,
+                    "Missing translation"
+                ),
+                variants[]->{
+                    "title": coalesce(
+                    title[_key == $locale][0].value,
+                    title[_key == 'pt'][0].value,
+                    "Missing translation"
+                ),
+                    "attributes": coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                    )         
+                }   
+            } 
+        },
+        products[]->{
+            "title": coalesce(
+            title[_key == $locale][0].value,
+            title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
+            "attributes": 
+                    coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                        ) ,
+            variants[]->{
+                "title": coalesce(
+                    title[_key == $locale][0].value,
+                    title[_key == 'pt'][0].value,
+                    "Missing translation"
+                ) ,
+                "attributes": 
+                    coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                        )
+                                    
+            }
+         }
+    } 
+ }`
+
+/*
+
+    *[_type == "taxonomy" && title[_key == $locale][0].value == $slug][0]
+{
+    "title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+),
+    taxons[]->{"title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+),
+    taxons[]->{"title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+),
+    products[]->{"title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+),
+    "attributes": coalesce(
+    attribute[_key == $locale][0].value,
+    attribute[_key == 'pt'][0].value,
+    "Missing translation"
+),
+
+    variants[]->{"title": coalesce(
+    title[_key == $locale][0].value,
+    title[_key == 'pt'][0].value,
+    "Missing translation"
+),"attributes": coalesce(
+    attributes[_key == $locale][0].value,
+    attributes[_key == 'pt'][0].value,
+    "Missing translation"
+)          }
+}
+},
+    products[]->{"title": coalesce(
+        title[_key == $locale][0].value,
+        title[_key == 'pt'][0].value,
+        "Missing translation"
+    ),
+        variants[]->{"title": coalesce(
+        title[_key == $locale][0].value,
+        title[_key == 'pt'][0].value,
+        "Missing translation"
+    )          }
+    }
+
+}
+}*/
