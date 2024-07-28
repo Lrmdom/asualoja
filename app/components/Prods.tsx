@@ -36,11 +36,11 @@ export default function Prods({products}: { product: SanityDocument }) {
                             {prod.title}
                           </span>
                             {/*todo add attributes*/}
-                            <Attributes attributes={prod.attributes}></Attributes>
+                            <Attributes product={prod}></Attributes>
                             {/*{displayAttrs}*/}
                         </div>
                         {/*{displayVariants}*/}
-                        <Variants variants={prod.variants}></Variants>
+                        <Variants product={prod}></Variants>
                     </>
             )
             })}

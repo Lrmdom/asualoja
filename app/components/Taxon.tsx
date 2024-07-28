@@ -9,15 +9,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
         products
     } = taxon
 
-    let displayProds
 
-
-    if (products) {
-
-        displayProds = <Prods products={products}></Prods>
-    } else {
-
-    }
 
     return (
         <main className="container mx-auto prose prose-lg p-4 border-4">
@@ -29,8 +21,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                           <span className="bg-black text-red">
                             {tx.title}
                           </span>
-                            {/*<Prods products={tx.products}></Prods>*/}
-                            {displayProds}
+                            <Prods products={tx.products}></Prods>
                         </div>
                     </>
                 )

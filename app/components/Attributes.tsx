@@ -1,9 +1,11 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 
-export default function Attributes({attributes}: { attributeType: SanityDocument }) {
-
-    const {
+export default function Attributes({product}: { product: SanityDocument }) {
+    /*const {
+        attributes,
+    } = product*/
+    /*const {
         title,
         value,
     } = attributes
@@ -14,12 +16,18 @@ export default function Attributes({attributes}: { attributeType: SanityDocument
         displayAttrs = <Attributes attributes={attributes}></Attributes>
     } else {
 
+    }*/
+    if(Array.isArray(product.attributes)){
+        console.log(product)
+
+    }else{
+        return null
     }
 
     return (
         <main className="container mx-auto prose prose-lg p-4 border-4">
 
-            {attributes?.map((attribute) => {
+            {product.attributes.map((attribute) => {
                 return (
                     <>
                         <div key={attribute._id}>
