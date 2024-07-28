@@ -249,7 +249,7 @@ export function MyNavMenu(props) {
                             </NavigationMenuContent>
                         </NavigationMenuItem>
                     </NavigationMenuList>
-                    <SearchForm services={props.taxonomies}></SearchForm>
+                    <SearchForm taxonomies={props.taxonomies}></SearchForm>
                     <MylaguageSwitcher
                         onClick={() => handleLanguageChange()}
                     ></MylaguageSwitcher>

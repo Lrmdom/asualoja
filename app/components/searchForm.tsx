@@ -34,17 +34,17 @@ export default function Component(props) {
     keys: [
       'title',
       'description',
-      'relatedCustomerNeeds.title',
-      'relatedCustomerNeeds.description',
+      'taxons.title',
+      'taxons.description',
       'relatedCustomerNeeds.relatedCustomerNeedsDetails.title',
       'relatedCustomerNeeds.relatedCustomerNeedsDetails.description',
     ],
   }
-  const fuse = new Fuse(props.services, fuseOptions)
+  const fuse = new Fuse(props.taxonomies, fuseOptions)
 
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([
-    stegaClean(props.services),
+    stegaClean(props.taxonomies),
   ])
   const handleSearch = (e) => {
     setSearchTerm(e.target.value)

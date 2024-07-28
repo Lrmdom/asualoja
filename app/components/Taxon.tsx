@@ -3,18 +3,20 @@ import Prods from '~/components/Prods'
 import {stegaClean} from "@sanity/client/stega";
 
 export default function Taxon({taxon}: { taxon: SanityDocument }) {
-    const {
-        title,
-        taxons,
-        products
-    } = taxon
 
+
+    if(Array.isArray(taxon.taxons)){
+        console.log(taxon.taxons)
+
+    }else{
+        return null
+    }
 
 
     return (
         <main className="container mx-auto prose prose-lg p-4 border-4">
 
-            {taxon.taxons?.map((tx) => {
+            {taxon.taxons.map((tx) => {
                 return (
                     <>
                         <div key={tx._id}>
@@ -22,6 +24,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                             {tx.title}
                           </span>
                             <Prods products={tx.products}></Prods>
+
                         </div>
                     </>
                 )

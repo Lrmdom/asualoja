@@ -2,28 +2,15 @@ import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 import Variants from "~/components/Variants";
 import Attributes from "~/components/Attributes";
+import client from '@sanity/client'
+import imageUrlBuilder from '@sanity/image-url'
 
-//todo add function to detect if prod have variants and attrs
-
+// Get a pre-configured url-builder from your sanity client
+const builder = imageUrlBuilder(client)
+function urlFor(source) {
+    return builder.image(source)
+}
 export default function Prods({products}: { product: SanityDocument }) {
-
-
-    /*let displayVariants
-    if (variants) {
-
-        displayVariants = <Variants variants={variants}></Variants>
-    } else {
-
-    }
-
-
-    let displayAttrs
-    if (attributes) {
-
-        displayAttrs = <Attributes attributes={attributes}></Attributes>
-    } else {
-
-    }*/
 
     return (
         <main className="container mx-auto prose prose-lg p-4 border-4">
@@ -31,20 +18,23 @@ export default function Prods({products}: { product: SanityDocument }) {
             {products?.map((prod) => {
                 return (
                     <>
-                        <div key={prod._id}>
-                          <span>
-                            {prod.title}
-                          </span>
-                            {/*todo add attributes*/}
-                            <Attributes product={prod}></Attributes>
-                            {/*{displayAttrs}*/}
+                        <div>
+                            <img src={prod.imageUrl} width={125} alt={prod.title}
+                            />
                         </div>
-                        {/*{displayVariants}*/}
+                        <div key={prod._id}>
+
+                            <span>
+                            {prod.title}
+
+                          </span>
+                            <Attributes product={prod}></Attributes>
+                        </div>
                         <Variants product={prod}></Variants>
                     </>
-            )
+                )
             })}
-            </main>
+        </main>
     )
 }
 
