@@ -18,7 +18,6 @@ export default function Variants({variants}: { variant: SanityDocument }) {
                           <span>
                             {variant.title}
                           </span>
-                            {/*todo add attributes*/}
                             <Attributes attributes={variant.attributes}></Attributes>
                         </div>
                     </>

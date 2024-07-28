@@ -8,7 +8,7 @@ import Attributes from "~/components/Attributes";
 export default function Prods({products}: { product: SanityDocument }) {
 
 
-    let displayVariants
+    /*let displayVariants
     if (variants) {
 
         displayVariants = <Variants variants={variants}></Variants>
@@ -23,7 +23,7 @@ export default function Prods({products}: { product: SanityDocument }) {
         displayAttrs = <Attributes attributes={attributes}></Attributes>
     } else {
 
-    }
+    }*/
 
     return (
         <main className="container mx-auto prose prose-lg p-4 border-4">
@@ -36,11 +36,11 @@ export default function Prods({products}: { product: SanityDocument }) {
                             {prod.title}
                           </span>
                             {/*todo add attributes*/}
-                            {/*<Attributes attributes={prod.attributes}></Attributes>*/}
-                            {displayAttrs}
+                            <Attributes attributes={prod.attributes}></Attributes>
+                            {/*{displayAttrs}*/}
                         </div>
-                        {displayVariants}
-                        {/*<Variants variants={prod.variants}></Variants>*/}
+                        {/*{displayVariants}*/}
+                        <Variants variants={prod.variants}></Variants>
                     </>
             )
             })}
