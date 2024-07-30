@@ -1,6 +1,6 @@
 import {stegaClean} from "@sanity/client/stega"
 import Attributes from "~/components/Attributes"
-import { CommerceLayer,AvailabilityContainer,AvailabilityTemplate } from "../../node_modules/@commercelayer/react-components/lib/esm/index";
+import { CommerceLayer,AvailabilityContainer,AvailabilityTemplate } from "@commercelayer/react-components";
 
 /*import * as pkg from '@commercelayer/react-components';
 const { CommerceLayer,AvailabilityContainer,AvailabilityTemplate } = pkg;*/
@@ -42,6 +42,21 @@ export default function Variants({product}: { product: SanityDocument }) {
         <cl-add-to-cart kind="sku" code={stegaClean(variant.sku)} quantity="1">
           Add to cart
         </cl-add-to-cart>
+                                <cl-availability code={stegaClean(variant.sku)}>
+  <cl-availability-status type="available" style={{color: "green"}}>
+    • available
+  </cl-availability-status>
+  <cl-availability-status type="available-with-info">
+    ready to be shipped in
+    <cl-availability-info type="min-days"></cl-availability-info>-<cl-availability-info
+      type="max-days"></cl-availability-info> days
+    with <cl-availability-info type="shipping-method-name"></cl-availability-info> (<cl-availability-info
+      type="shipping-method-price"></cl-availability-info>)
+  </cl-availability-status>
+  <cl-availability-status type="unavailable" style={{color: "red"}}>
+    • out of stock
+  </cl-availability-status>
+</cl-availability>
 
                             </span>
                             <CommerceLayer
@@ -55,8 +70,13 @@ export default function Variants({product}: { product: SanityDocument }) {
                                     />
                                 </AvailabilityContainer>
                             </CommerceLayer>
-                            <Attributes product={variant}></Attributes>
 
+                            <Attributes product={variant}></Attributes>
+                            <cl-cart-count></cl-cart-count>
+                            <cl-cart-link target="_blank">View cart</cl-cart-link>
+                            <cl-checkout-link target="_blank">
+                                Proceed to checkout
+                            </cl-checkout-link>
                         </div>
                     </>
                 )
