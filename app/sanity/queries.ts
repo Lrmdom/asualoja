@@ -244,7 +244,9 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
                     attribute[_key == 'pt'][0].value,
                     "Missing translation"
                 ),
-                variants[]->{"images": images[]{
+                variants[]->{ 
+                sku,
+                "images": images[]{
                           'url': asset->url,
                           },
                     "title": coalesce(
@@ -272,7 +274,8 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
                         attributes[_key == 'pt'][0].value,
                         "Missing translation"
                         ) ,
-            variants[]->{"images": images[]{
+            variants[]->{ sku,
+            "images": images[]{
                     'url': asset->url,
                     },
                     "title": coalesce(

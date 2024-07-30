@@ -128,14 +128,14 @@ export function Layout({children}: { children: React.ReactNode }) {
         <script
             dangerouslySetInnerHTML={{
                 __html: `window.ENV = ${JSON.stringify(ENV)}
-           window.commercelayerConfig = {
+                 window.commercelayerConfig = {
                  clientId: 'GMt9oCgl_PQGr_XCwhy3l-V3-9eAEPEeWmGhkEQtnoY',
                  slug: 'execlog',
                  scope: 'market:id:vlkaZhkGNj',
                  debug: 'all', // default is 'none'
                  orderReturnUrl: 'https://example.com' // optional
-           }         
-          `,
+               }         
+              `,
             }}
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (

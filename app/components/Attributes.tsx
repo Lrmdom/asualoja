@@ -18,8 +18,7 @@ export default function Attributes({product}: { product: SanityDocument }) {
 
     }*/
     if(Array.isArray(product.attributes)){
-        console.log(product)
-
+         null
     }else{
         return null
     }

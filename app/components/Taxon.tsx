@@ -6,8 +6,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
 
 
     if(Array.isArray(taxon.taxons)){
-        console.log(taxon.taxons)
-
+        null
     }else{
         return null
     }
