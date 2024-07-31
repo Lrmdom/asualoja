@@ -13,7 +13,7 @@ function urlFor(source) {
 export default function Prods({products}: { product: SanityDocument }) {
 
     return (
-        <main className="container mx-auto prose prose-lg p-4 border-4">
+        <main className="container mx-auto prose prose-lg ">
 
             {products?.map((prod) => {
                 return (

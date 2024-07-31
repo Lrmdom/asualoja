@@ -24,7 +24,7 @@ export default function Attributes({product}: { product: SanityDocument }) {
     }
 
     return (
-        <main className="container mx-auto prose prose-lg p-4 border-4">
+        <main className="">
 
             {product.attributes.map((attribute) => {
                 return (

@@ -1,6 +1,6 @@
 import {stegaClean} from "@sanity/client/stega"
 import Attributes from "~/components/Attributes"
-import { ClientOnly } from "remix-utils/client-only"
+import {ClientOnly} from "remix-utils/client-only"
 
 import {
     CommerceLayer,
@@ -18,7 +18,7 @@ import {
     LineItem, LineItemImage, LineItemName, LineItemAmount, LineItemQuantity, LineItemsEmpty, OrderNumber, TotalAmount
 } from "@commercelayer/react-components";
 
-import { authenticate } from '@commercelayer/js-auth'
+import {authenticate} from '@commercelayer/js-auth'
 import {SanityDocument} from "@sanity/client";
 
 const auth = await authenticate('client_credentials', {
@@ -39,39 +39,40 @@ export default function Variants({product}: { product: SanityDocument }) {
         <>
 
 
+            <main className="">
 
-            <main className="container mx-auto prose prose-lg p-4 border-4">
-
-            {product.variants.map((variant) => {
-                return (
-                    <>
-                        <div key={variant._id}>
-                            <div>
-                                <img src={variant.images ? variant.images[0].url : null} width={75}
-                                     alt={variant.title}/>
+                {product.variants.map((variant) => {
+                    return (
+                        <>
+                            <div key={variant._id} className=" flex container mx-auto prose prose-lg p-4 border-4  text-right">
+                                <div className="justify-end">
+                                    <img src={variant.images ? variant.images[0].url : null} width={75}
+                                         alt={variant.title}/>
+                                </div>
+                                <div>
+                                    <span>{variant.title}</span>
+                                    <span><Attributes product={variant}></Attributes></span>
+                                </div>
+                                <div>
+                                    <cl-price code={stegaClean(variant.sku)}>
+                                        <cl-price-amount type="compare-at"></cl-price-amount>
+                                        <cl-price-amount type="price"></cl-price-amount>
+                                    </cl-price>
+                                </div>
+                                <div>
+                                    <cl-add-to-cart code={stegaClean(variant.sku)} quantity="1" kind="sku">
+                                        Add to cart
+                                    </cl-add-to-cart>
+                                </div>
                             </div>
-                            <span>
-                            {variant.title}
-                          </span>
-                            <span>
-<cl-price code={stegaClean(variant.sku)}>
-  <cl-price-amount type="compare-at"></cl-price-amount>
-  <cl-price-amount type="price"></cl-price-amount>
-</cl-price>
-<cl-add-to-cart code={stegaClean(variant.sku)} quantity="1" kind="sku">
-                            Add to cart
-                        </cl-add-to-cart>
-                            </span>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </>
+                    )
+                })}
 
-
-                            <Attributes product={variant}></Attributes>
-
-                        </div>
-                    </>
-                )
-            })}
-
-        </main>
+            </main>
         </>
     )
 }
