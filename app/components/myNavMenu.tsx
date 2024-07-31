@@ -2,6 +2,8 @@
 
 import * as React from 'react'
 
+
+
 import {cn} from '@/lib/utils'
 import {Icons} from '@/components/ui/icons'
 import {BeakerIcon} from '@heroicons/react/24/outline'
@@ -89,7 +91,7 @@ export function MyNavMenu(props) {
     const {i18n} = useTranslation()
     return (
         <>
-        {/*   <header className="flex h-20 w-full shrink-0 px-4 md:px-6">
+            {/*   <header className="flex h-20 w-full shrink-0 px-4 md:px-6">
                 <img className="size-24" src={logo} alt="Execlog Logo"></img>
 
                 
@@ -143,121 +145,121 @@ export function MyNavMenu(props) {
         </Sheet>
 */}
 
-                <NavigationMenu className="hidden lg:flex">
-                    <NavigationMenuList>
-                        <NavigationMenuItem>
-                            <NavigationMenuTrigger className=" border-4 ">
-                                Getting started
-                            </NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                                <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                                    <li className="row-span-3">
-                                        <NavigationMenuLink asChild>
-                                            <a
-                                                className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                                                href="/"
-                                            >
-                                                <Icons.logo className="h-6 w-6"/>
-                                                <div className="mb-2 mt-4 text-lg font-medium">
-                                                    shadcn/ui
-                                                </div>
-                                                <p className="text-sm leading-tight text-muted-foreground">
-                                                    Beautifully designed components that you can copy and
-                                                    paste into your apps. Accessible. Customizable. Open
-                                                    Source.
-                                                </p>
-                                            </a>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <ListItem href="/docs" title="Introduction">
-                                        Re-usable components built using Radix UI and Tailwind CSS.
-                                    </ListItem>
-                                    <ListItem href="/docs/installation" title="Installation">
-                                        How to install dependencies and structure your app.
-                                    </ListItem>
+            <NavigationMenu className="hidden lg:flex">
+                <NavigationMenuList>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className=" border-4 ">
+                            Getting started
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                                <li className="row-span-3">
+                                    <NavigationMenuLink asChild>
+                                        <a
+                                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                                            href="/"
+                                        >
+                                            <Icons.logo className="h-6 w-6"/>
+                                            <div className="mb-2 mt-4 text-lg font-medium">
+                                                shadcn/ui
+                                            </div>
+                                            <p className="text-sm leading-tight text-muted-foreground">
+                                                Beautifully designed components that you can copy and
+                                                paste into your apps. Accessible. Customizable. Open
+                                                Source.
+                                            </p>
+                                        </a>
+                                    </NavigationMenuLink>
+                                </li>
+                                <ListItem href="/docs" title="Introduction">
+                                    Re-usable components built using Radix UI and Tailwind CSS.
+                                </ListItem>
+                                <ListItem href="/docs/installation" title="Installation">
+                                    How to install dependencies and structure your app.
+                                </ListItem>
+                                <ListItem
+                                    href="/docs/primitives/typography"
+                                    title="Typography"
+                                >
+                                    Styles for headings, paragraphs, lists...etc
+                                </ListItem>
+                            </ul>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="border-4 ">
+                            Components
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                                {components.map((component) => (
                                     <ListItem
-                                        href="/docs/primitives/typography"
-                                        title="Typography"
+                                        key={component.title}
+                                        title={component.title}
+                                        href={component.href}
                                     >
-                                        Styles for headings, paragraphs, lists...etc
+                                        {component.description}
                                     </ListItem>
-                                </ul>
-                            </NavigationMenuContent>
-                        </NavigationMenuItem>
-                        <NavigationMenuItem>
-                            <NavigationMenuTrigger className="border-4 ">
-                                Components
-                            </NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                    {components.map((component) => (
-                                        <ListItem
-                                            key={component.title}
-                                            title={component.title}
-                                            href={component.href}
-                                        >
-                                            {component.description}
-                                        </ListItem>
-                                    ))}
-                                </ul>
-                            </NavigationMenuContent>
-                        </NavigationMenuItem>
-                        <NavigationMenuItem>
-                            <NavigationMenuTrigger className="border-4">
-                                Services
-                            </NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                                <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                    {props.taxonomies.map((taxonomy) => (
-                                        <ListItem
-                                            className=""
-                                            key={taxonomy._id}
-                                            title={taxonomy.title}
-                                            href={stegaClean(taxonomy.title)}
+                                ))}
+                            </ul>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="border-4">
+                            Services
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                            <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                                {props.taxonomies.map((taxonomy) => (
+                                    <ListItem
+                                        className=""
+                                        key={taxonomy._id}
+                                        title={taxonomy.title}
+                                        href={stegaClean(taxonomy.title)}
 
-                                            /*media={
-                                                service.serviceImage
-                                                    ? service.serviceImage
-                                                    : service.image_url
-                                            }*/
-                                        >
-                                            <BeakerIcon className="size-4 text-black"/>
-                                            {/*{taxonomy.description}*/}
-                                        </ListItem>
-                                    ))}
-                                </ul>
-                            </NavigationMenuContent>
-                        </NavigationMenuItem>
-                        <NavigationMenuItem>
-                            <NavigationMenuTrigger className="border-4 ">
-                                About Us
-                            </NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                            </NavigationMenuContent>
-                        </NavigationMenuItem>
-                        <NavigationMenuItem>
-                            <NavigationMenuTrigger className="border-4 ">
-                                Contacts
-                            </NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                            </NavigationMenuContent>
-                        </NavigationMenuItem>
-                        <NavigationMenuItem>
-                            <NavigationMenuTrigger>Log In</NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                                <SocialLogins></SocialLogins>
-                            </NavigationMenuContent>
-                        </NavigationMenuItem>
-                    </NavigationMenuList>
-                    <SearchForm taxonomies={props.taxonomies}></SearchForm>
-                    <MylaguageSwitcher
-                        onClick={() => handleLanguageChange()}
-                    ></MylaguageSwitcher>
-                    <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png"/>
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                </NavigationMenu>
+                                        /*media={
+                                            service.serviceImage
+                                                ? service.serviceImage
+                                                : service.image_url
+                                        }*/
+                                    >
+                                        <BeakerIcon className="size-4 text-black"/>
+                                        {/*{taxonomy.description}*/}
+                                    </ListItem>
+                                ))}
+                            </ul>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="border-4 ">
+                            About Us
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="border-4 ">
+                            Contacts
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger>Log In</NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                            <SocialLogins></SocialLogins>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                </NavigationMenuList>
+                <SearchForm taxonomies={props.taxonomies}></SearchForm>
+                <MylaguageSwitcher
+                    onClick={() => handleLanguageChange()}
+                ></MylaguageSwitcher>
+                <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png"/>
+                    <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+            </NavigationMenu>
             {/*</header>*/}
         </>
     )

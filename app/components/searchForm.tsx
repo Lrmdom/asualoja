@@ -34,10 +34,16 @@ export default function Component(props) {
     keys: [
       'title',
       'description',
+      'attributes',
       'taxons.title',
-      'taxons.description',
-      'relatedCustomerNeeds.relatedCustomerNeedsDetails.title',
-      'relatedCustomerNeeds.relatedCustomerNeedsDetails.description',
+      'taxons.taxons.title',
+      'taxons.products.title',
+      'taxons.products.attributes',
+      'taxons.taxons.products.attributes',
+      'taxons.products.variants.title',
+      'taxons.products.variants.attributes',
+      'taxons.taxons.products.variants.title',
+      'taxons.taxons.products.variants.attributes',
     ],
   }
   const fuse = new Fuse(props.taxonomies, fuseOptions)

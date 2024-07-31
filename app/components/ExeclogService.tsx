@@ -12,7 +12,7 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
 
 
     return (
-        <main className="container mx-auto prose prose-lg p-4 border-4">
+        <main className="container mx-auto prose prose-lg p-4 ">
             {title ? (
                 <h1 className='text-2xl'>
                     <b>{title}</b>

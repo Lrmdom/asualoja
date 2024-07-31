@@ -2,26 +2,29 @@ import {vitePlugin as remix} from "@remix-run/dev";
 import {installGlobals} from "@remix-run/node";
 import {defineConfig} from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-//import {remixDevTools} from "remix-development-tools";
+import {remixDevTools} from "remix-development-tools";
 //import commonjs from '@rollup/plugin-commonjs'
 import { flatRoutes } from 'remix-flat-routes'
 import nodePolyfills from 'rollup-plugin-polyfill-node';
 import commonjs from 'vite-plugin-commonjs';
+import { VitePWA } from 'vite-plugin-pwa'
+
 installGlobals();
 
 export default defineConfig({
 
     optimizeDeps: {
         include: ["*"],
-        exclude: ["@commercelayer/react-components", "lodash","@commercelayer/sdk"]
+        //exclude: [ "lodash","@commercelayer/sdk"]
     },
 
-    ssr: {
-        noExternal: ["@commercelayer/react-components", "lodash"]
-    },
+    /*ssr: {
+        noExternal: [ "lodash"]
+    },*/
     plugins: [
+        VitePWA(),
         nodePolyfills(),
-        //remixDevTools(),
+        remixDevTools(),
         remix({
             ignoredRouteFiles: ['**/*'],
             routes: async (defineRoutes) => {
@@ -48,14 +51,14 @@ export default defineConfig({
             },
         }),
         tsconfigPaths(),
-        commonjs({
+        /*commonjs({
             filter(id) {
                 if (id.includes('node_modules/lodash')) {
                     return true;
                 }
 
             },
-        }),
+        }),*/
     ],
     build: {
         sourcemap: true, // Enables source maps

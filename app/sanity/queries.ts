@@ -168,18 +168,86 @@ code,
 }`
 
 export const TAXONOMIES_QUERY_LOCALIZED = groq`*[_type == "taxonomy"]
-{
-"title": coalesce(
-    title[_key == $locale][0].value,
-    title[_key == 'pt'][0].value,
-    "Missing translation"
-  ),
-  taxons[]->{"title": coalesce(
-    title[_key == $locale][0].value,
-    title[_key == 'pt'][0].value,
-    "Missing translation"
-  )}
-}`
+
+ {   
+    "title": coalesce(
+        title[_key == $locale][0].value,
+        title[_key == 'pt'][0].value,
+        "Missing translation"
+    ),
+    taxons[]->{
+        "title": coalesce(
+        title[_key == $locale][0].value,
+        title[_key == 'pt'][0].value,
+        "Missing translation"
+        ),
+        taxons[]->{
+            "title": coalesce(
+            title[_key == $locale][0].value,
+            title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
+            products[]->{"imageUrl": image.asset->url,
+            "title": coalesce(
+                title[_key == $locale][0].value,
+                title[_key == 'pt'][0].value,
+                "Missing translation"
+            ),
+                "attributes": coalesce(
+                    attribute[_key == $locale][0].value,
+                    attribute[_key == 'pt'][0].value,
+                    "Missing translation"
+                ),
+                variants[]->{ 
+                sku,
+                "images": images[]{
+                          'url': asset->url,
+                          },
+                    "title": coalesce(
+                    title[_key == $locale][0].value,
+                    title[_key == 'pt'][0].value,
+                    "Missing translation"
+                ),
+                    "attributes": coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                    )         
+                }   
+            } 
+        },
+        products[]->{"imageUrl": image.asset->url,
+            "title": coalesce(
+            title[_key == $locale][0].value,
+            title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
+            "attributes": 
+                    coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                        ) ,
+            variants[]->{ sku,
+            "images": images[]{
+                    'url': asset->url,
+                    },
+                    "title": coalesce(
+                    title[_key == $locale][0].value,
+                    title[_key == 'pt'][0].value,
+                    "Missing translation"
+                ) ,
+                "attributes": 
+                    coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                        )
+                                                          
+            }
+         }
+    } 
+ }`
 
 export const TAXONOMY_QUERY_LOCALIZED = groq`*[_type == "taxonomy" && title[_key == $locale][0].value == $slug][0] 
 {
