@@ -28,16 +28,20 @@ export default function Attributes({product}: { product: SanityDocument }) {
 
             {product.attributes.map((attribute) => {
                 return (
+
                     <>
+
                         <div key={attribute._id}>
                           <span>
-                            {attribute.name}
-                          </span>
-                            <span>
+                            {attribute.name} ::  <span>
                             {attribute.value}
                           </span>
+                          </span>
+
                         </div>
+
                     </>
+
                 )
             })}
         </main>
