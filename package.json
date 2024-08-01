@@ -12,7 +12,6 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@commercelayer/app-elements": "^2.2.0",
     "@commercelayer/js-auth": "^6.3.1",
     "@commercelayer/react-components": "^4.15.4",
     "@commercelayer/sdk": "^6.11.0",

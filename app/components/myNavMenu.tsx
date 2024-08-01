@@ -91,59 +91,7 @@ export function MyNavMenu(props) {
     const {i18n} = useTranslation()
     return (
         <>
-            {/*   <header className="flex h-20 w-full shrink-0 px-4 md:px-6">
-                <img className="size-24" src={logo} alt="Execlog Logo"></img>
 
-                
-        <Sheet className="right-1">
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="lg:hidden">
-              <MenuIcon className="h-6 w-6" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left">
-            <Description></Description>
-            <Link to="#" className="flex items-center gap-2">
-              <MountainIcon className="h-6 w-6" />
-              <span className="text-lg font-semibold">Acme Inc</span>
-            </Link>
-            <div className="grid gap-4 py-6">
-              <Link
-                to="#"
-                className="flex w-full items-center py-2 text-lg font-semibold"
-              >
-                Home
-              </Link>
-              <Link
-                to="#"
-                className="flex w-full items-center py-2 text-lg font-semibold"
-              >
-                About
-              </Link>
-              <Link
-                to="#"
-                className="flex w-full items-center py-2 text-lg font-semibold"
-              >
-                Services
-              </Link>
-
-              <Link
-                to="#"
-                className="flex w-full items-center py-2 text-lg font-semibold"
-              >
-                Contact
-              </Link>
-              <SearchForm></SearchForm>
-              <SocialLogins></SocialLogins>
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </div>
-          </SheetContent>
-        </Sheet>
-*/}
 
             <NavigationMenu className="hidden lg:flex">
                 <NavigationMenuList>
@@ -191,6 +139,7 @@ export function MyNavMenu(props) {
                             Components
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
+{/*
                             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                                 {components.map((component) => (
                                     <ListItem
@@ -202,6 +151,7 @@ export function MyNavMenu(props) {
                                     </ListItem>
                                 ))}
                             </ul>
+*/}
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
@@ -270,7 +220,7 @@ const ListItem = React.forwardRef<
     React.ComponentPropsWithoutRef<'a'>
 >(({className, title, media, children, ...props}, ref) => {
     return (
-        <li>
+        <li key={title}>
             <NavigationMenuLink asChild>
                 <a
                     ref={ref}

@@ -3,7 +3,7 @@ import {LoaderFunction, MetaFunction, redirect} from '@remix-run/node'
 import {useTranslation} from 'react-i18next'
 import Hero from '~/components/hero'
 import i18next from '~/i18next.server'
-import { Text, Badge, Button, CardDialog, ListDetailsItem, Spacer, StatusIcon} from "@commercelayer/app-elements";
+//import { Text, Badge, Button, CardDialog, ListDetailsItem, Spacer, StatusIcon} from "@commercelayer/app-elements";
 
 export const meta: MetaFunction = () => {
     return [
@@ -19,7 +19,7 @@ export default function Index() {
             <h1>{t('title')}</h1>
 
             <Hero/>
-            <Badge variant="success">
+           {/* <Badge variant="success">
                 completed
             </Badge>
             <Button variant="primary" children={undefined}>HELLLO FROM APP ELEMENTS</Button>
@@ -57,7 +57,7 @@ export default function Index() {
                         May 17, 2023 12:00 AM
                     </ListDetailsItem>
                 </Spacer>
-            </CardDialog>
+            </CardDialog>*/}
         </>
     )
 }
