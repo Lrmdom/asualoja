@@ -23,10 +23,7 @@ export default function Variants({product}: { product: SanityDocument }) {
     }
 
     return (
-
         <>
-
-
             <main className="">
 
                 {product.variants.map((variant) => {
