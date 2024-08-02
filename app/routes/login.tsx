@@ -69,12 +69,11 @@ export default function Login() {
   return (
     <>
       <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-        <SocialButton provider={SocialsProvider.GITHUB} label=" Github" />
+        {/*<SocialButton provider={SocialsProvider.GITHUB} label=" Github" />*/}
         <SocialButton provider={SocialsProvider.GOOGLE} label=" Google" />
         <SocialButton provider={SocialsProvider.FACEBOOK} label=" Facebook" />
         <SocialButton provider={SocialsProvider.MICROSOFT} label=" Microsoft" />
         <SocialButton provider="LINKEDIN" label=" LinkedIn" />
-        <SocialButton provider={SocialsProvider.TWITTER} label=" Twitter" />
       </ul>
     </>
   )
