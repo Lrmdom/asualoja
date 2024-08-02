@@ -472,6 +472,6 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
                   && title[_key == $locale][0].value == $taxonomy
                   && references(^._id)].title[_key == $locale][0].value
   ,
-     "products": *[_type == "product"
-                  && references(^._id)].title[_key ==
+   "product": *[_type == "product" && title[_key == $locale].value match $slug][0]
+  }
 */

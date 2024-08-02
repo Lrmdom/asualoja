@@ -1,3 +1,5 @@
+// 'use client'
+
 import {Link, Params, useLocation, useParams} from '@remix-run/react'
 
 import {

@@ -59,6 +59,10 @@ export default function Variants({product}: { product: SanityDocument }) {
                 })}
 
             </main>
+
+
+
+
         </>
     )
 }
