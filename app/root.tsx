@@ -15,16 +15,14 @@ import type {LinksFunction} from '@remix-run/node'
 import Footer from '~/components/footer'
 import SubscribeNews from '~/components/subscribeNews'
 import {json} from '@remix-run/node'
-import {useTranslation} from 'react-i18next'
 import {useChangeLanguage} from 'remix-i18next/react'
 import i18next, {localeCookie} from '~/i18next.server'
 import {MyNavMenu} from '~/components/myNavMenu'
 import {TAXONOMIES_QUERY_LOCALIZED} from '~/sanity/queries'
 import {loadQuery} from '~/sanity/loader.server'
 import type {SanityDocument} from '@sanity/client'
-import {stegaClean} from '@sanity/client/stega'
 
-//import '@commercelayer/app-elements/style.css'
+import Breadcrumb from "~/components/breadcrumb";
 
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
 
@@ -85,7 +83,8 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <MyNavMenu taxonomies={data}/>
+        <MyNavMenu taxonomies={data}></MyNavMenu>
+        <Breadcrumb></Breadcrumb>
         <div className="flow-root">
             <div className="float-right">
                 <cl-cart-link>

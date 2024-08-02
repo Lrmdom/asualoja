@@ -3,11 +3,9 @@
 import * as React from 'react'
 
 
-
 import {cn} from '@/lib/utils'
 import {Icons} from '@/components/ui/icons'
 import {BeakerIcon} from '@heroicons/react/24/outline'
-import Image, {MimeType} from 'remix/Image'
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -139,7 +137,7 @@ export function MyNavMenu(props) {
                             Components
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-{/*
+                            {/*
                             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                                 {components.map((component) => (
                                     <ListItem
