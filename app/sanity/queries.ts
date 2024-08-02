@@ -399,7 +399,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
                   && references(^._id)].title[_key == $locale].value,
   
         "product": *[_type == "product" && title[_key == $locale].value match $slug][0]
-            {
+            { "imageUrl": image.asset->url,
                 "title": coalesce(
                 title[_key == $locale][0].value,
                 title[_key == 'pt'][0].value,
