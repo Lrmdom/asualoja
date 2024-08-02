@@ -23,6 +23,7 @@ import {loadQuery} from '~/sanity/loader.server'
 import type {SanityDocument} from '@sanity/client'
 
 import Breadcrumb from "~/components/breadcrumb";
+import {authenticator} from "~/services/auth.server";
 
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
 
@@ -30,11 +31,17 @@ export let loader = async ({request, params}) => {
     //todo fix bug when url have 1 lang and switch have another  ex: http://localhost:5173/en  and langswitcher have 'pt'
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
+
+    const user = await authenticator.isAuthenticated(request, {
+
+    })
+
+    //console.log(user)
+
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMIES_QUERY_LOCALIZED,
         params
     )
-    //console.log(stegaClean(data))
     const ENV = {
         SANITY_STUDIO_PROJECT_ID: process.env.SANITY_STUDIO_PROJECT_ID,
         SANITY_STUDIO_DATASET: process.env.SANITY_STUDIO_DATASET,
@@ -42,7 +49,7 @@ export let loader = async ({request, params}) => {
         SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
     }
     return json(
-        {data, locale, ENV},
+        {data, locale, ENV,user},
         {headers: {'Set-Cookie': await localeCookie.serialize(locale)}}
     )
 }
@@ -58,7 +65,7 @@ export const handle = {
 }
 
 export function Layout({children}: { children: React.ReactNode }) {
-    const {data, locale, ENV} = useRouteLoaderData<typeof loader>('root')
+    const {data, locale, ENV,user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
 
 
@@ -83,7 +90,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <MyNavMenu taxonomies={data}></MyNavMenu>
+        <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
         <Breadcrumb></Breadcrumb>
         <div className="flow-root">
             <div className="float-right">

@@ -1,7 +1,7 @@
 // 'use client'
 
 import {Link, Params, useLocation, useParams} from '@remix-run/react'
-
+import {useTranslation} from 'react-i18next'
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -43,18 +43,19 @@ export default function Component() {
     })
   }
   const { pathname } = useLocation();
+  const {t} = useTranslation('')
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2">
+        <Button variant="link" className="flex items-center gap-2">
           <FlagIcon className="h-5 w-5" />
           <span>{i18n.language}</span>
           <ChevronDownIcon className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[180px]">
-        <DropdownMenuLabel>Select Language</DropdownMenuLabel>
+        <DropdownMenuLabel>{t('Select Language')}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
 

@@ -15,10 +15,9 @@ import { useTranslation } from 'react-i18next'
 import i18next from '~/i18next.server'
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
-  /*const locale = await i18next.getLocale(request)
+  const locale = await i18next.getLocale(request)
   
     !params.locale ? (params.locale = locale) : params.locale
-    console.log(params)*/
   const { data } = await loadQuery<SanityDocument>(
     SERVICE_QUERY_LOCALIZED,
     params

@@ -5,7 +5,6 @@ import * as React from 'react'
 
 import {cn} from '@/lib/utils'
 import {Icons} from '@/components/ui/icons'
-import {BeakerIcon} from '@heroicons/react/24/outline'
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -16,16 +15,8 @@ import {
 } from '@/components/ui/navigation-menu'
 
 import logo from '/logo_transparente_execlog_blue._monday.png'
-import {
-    Sheet,
-    SheetContent,
-    SheetTitle,
-    SheetTrigger,
-} from '@/components/ui/sheet'
-import {Button} from '@/components/ui/button'
-import {MenuIcon, MountainIcon} from 'lucide-react'
-import {Link} from '@remix-run/react'
-import {Description} from '@radix-ui/react-dialog'
+
+
 import SearchForm from '~/components/searchForm'
 import SocialLogins from '~/routes/login'
 import {stegaClean} from '@sanity/client/stega'
@@ -34,18 +25,6 @@ import MylaguageSwitcher from '~/components/myLanguageSwitcher'
 import {useTranslation} from 'react-i18next'
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar'
 
-import client from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
-
-// Get a pre-configured url-builder from your sanity client
-const builder = imageUrlBuilder(client)
-
-// Then we like to make a simple function like this that gives the
-// builder an image and returns the builder for you to specify additional
-// parameters:
-/*function urlFor(source) {
-  return builder.image(source)
-}*/
 
 const components: { title: string; to: string; description: string }[] = [
     {
@@ -85,7 +64,28 @@ const components: { title: string; to: string; description: string }[] = [
     },
 ]
 
+
 export function MyNavMenu(props) {
+    //const {taxonomies, user} = props
+    let avatar
+
+
+    if (props.user) {
+        avatar = <Avatar>
+            { !props.user.photos
+                ? <AvatarImage src="https://github.com/shadcn.png"/>
+                : <AvatarImage src={props.user.photos[0].value}/>
+            }
+
+
+            <AvatarFallback>{props.user.name.given_name}</AvatarFallback>
+
+        </Avatar>
+    } else {
+        avatar = null
+    }
+
+    console.log(props.user)
     const {i18n} = useTranslation()
     return (
         <>
@@ -94,7 +94,7 @@ export function MyNavMenu(props) {
             <NavigationMenu className="hidden lg:flex">
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className=" border-4 ">
+                        <NavigationMenuTrigger className=" ">
                             Getting started
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
@@ -133,7 +133,7 @@ export function MyNavMenu(props) {
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className="border-4 ">
+                        <NavigationMenuTrigger className="">
                             Components
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
@@ -153,7 +153,7 @@ export function MyNavMenu(props) {
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className="border-4">
+                        <NavigationMenuTrigger className="">
                             Services
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
@@ -171,43 +171,56 @@ export function MyNavMenu(props) {
                                                 : service.image_url
                                         }*/
                                     >
-                                        <BeakerIcon className="size-4 text-black"/>
+                                        {/*<BeakerIcon className="size-4 text-black"/>*/}
                                         {/*{taxonomy.description}*/}
+                                        <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+
+                                            {taxonomy.taxons?.map((taxon) => (
+                                                <ListItem
+                                                    className=""
+                                                    key={taxon._id}
+                                                    title={taxon.title}
+                                                    href={stegaClean(taxon.title)}
+                                                >
+
+                                                </ListItem>
+                                            ))}
+                                        </ul>
                                     </ListItem>
                                 ))}
                             </ul>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className="border-4 ">
+                        <NavigationMenuTrigger className="">
                             About Us
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className="border-4 ">
+                        <NavigationMenuTrigger className="">
                             Contacts
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
+                    <SearchForm taxonomies={props.taxonomies}></SearchForm>
+                    <MylaguageSwitcher
+                        onClick={() => handleLanguageChange()}
+                    ></MylaguageSwitcher>
+
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Log In</NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <SocialLogins></SocialLogins>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
+                    {avatar}
                 </NavigationMenuList>
-                <SearchForm taxonomies={props.taxonomies}></SearchForm>
-                <MylaguageSwitcher
-                    onClick={() => handleLanguageChange()}
-                ></MylaguageSwitcher>
-                <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png"/>
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
             </NavigationMenu>
+
+
             {/*</header>*/}
         </>
     )
