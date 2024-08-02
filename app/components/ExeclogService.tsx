@@ -22,11 +22,11 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
                 return (
                     <>
                         <div key={taxon._id}>
-                            <h2 className="text-xl font-bold tracking-tight text-gray-900">{taxon.title}</h2>
+                            <h2 className="text-xl font-bold tracking-tight text-gray-900">{`${taxon.title}`}</h2>
                         </div>
                         <Prods products={taxon.products}></Prods>
 
-                        <Taxon taxon={taxon}></Taxon>
+                        <Taxon taxon={taxon} ></Taxon>
                     </>
                 )
             })}

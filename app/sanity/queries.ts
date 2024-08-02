@@ -307,6 +307,16 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
                 title[_key == 'pt'][0].value,
                 "Missing translation"
             ),
+              "taxonomy":coalesce(
+            ^.^.title[_key == $locale][0].value,
+            ^.^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),           
+            "taxons":coalesce(
+            ^.title[_key == $locale][0].value,
+            ^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
                 "attributes": coalesce(
                     attribute[_key == $locale][0].value,
                     attribute[_key == 'pt'][0].value,
@@ -336,6 +346,17 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
             title[_key == 'pt'][0].value,
             "Missing translation"
             ),
+            "taxonomy":coalesce(
+            ^.^.title[_key == $locale][0].value,
+            ^.^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),           
+            "taxons":coalesce(
+            ^.title[_key == $locale][0].value,
+            ^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
+           
             "attributes": 
                     coalesce(
                         attributes[_key == $locale][0].value,
@@ -363,58 +384,94 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
     } 
  }`
 
-/*
-
-    *[_type == "taxonomy" && title[_key == $locale][0].value == $slug][0]
+export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
+*[_type == "taxon"
+  && title[_key == $locale][0].value == $taxons][0]
 {
     "title": coalesce(
-    title[_key == $locale][0].value,
-    title[_key == 'pt'][0].value,
-    "Missing translation"
-),
-    taxons[]->{"title": coalesce(
-    title[_key == $locale][0].value,
-    title[_key == 'pt'][0].value,
-    "Missing translation"
-),
-    taxons[]->{"title": coalesce(
-    title[_key == $locale][0].value,
-    title[_key == 'pt'][0].value,
-    "Missing translation"
-),
-    products[]->{"title": coalesce(
-    title[_key == $locale][0].value,
-    title[_key == 'pt'][0].value,
-    "Missing translation"
-),
-    "attributes": coalesce(
-    attribute[_key == $locale][0].value,
-    attribute[_key == 'pt'][0].value,
-    "Missing translation"
-),
+                title[_key == $locale][0].value,
+                title[_key == 'pt'][0].value,
+                "Missing translation"
+                    ),
 
-    variants[]->{"title": coalesce(
-    title[_key == $locale][0].value,
-    title[_key == 'pt'][0].value,
-    "Missing translation"
-),"attributes": coalesce(
-    attributes[_key == $locale][0].value,
-    attributes[_key == 'pt'][0].value,
-    "Missing translation"
-)          }
-}
-},
-    products[]->{"title": coalesce(
-        title[_key == $locale][0].value,
-        title[_key == 'pt'][0].value,
-        "Missing translation"
-    ),
-        variants[]->{"title": coalesce(
-        title[_key == $locale][0].value,
-        title[_key == 'pt'][0].value,
-        "Missing translation"
-    )          }
+    "taxonomies": *[_type == "taxonomy"
+                  && title[_key == $locale][0].value == $taxonomy
+                  && references(^._id)].title[_key == $locale].value,
+  
+        "product": *[_type == "product" && title[_key == $locale].value match $slug][0]
+            {
+                "title": coalesce(
+                title[_key == $locale][0].value,
+                title[_key == 'pt'][0].value,
+                "Missing translation"
+                ),
+                "attributes": 
+                    coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                        ) ,           
+                variants[]->{ sku,
+                    "images": images[]{
+                        'url': asset->url,
+                    },
+                    "title": coalesce(
+                        title[_key == $locale][0].value,
+                        title[_key == 'pt'][0].value,
+                        "Missing translation"
+                    ) ,
+                    "attributes": 
+                        coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                        )
+                                                          
+                    }
+            }
+ }
+`
+
+
+
+   /* *[_type == "taxon" &&
+  products[taxonomy].title[_key == $locale][0].value match $taxonomy
+  &&   products[title[_key == $locale]][0].value match $slug
+ ][0]
+{
+  "title": coalesce(
+                title[_key == $locale][0].value,
+                title[_key == 'pt'][0].value,
+                "Missing translation"
+            ),
+  products[]->{"imageUrl": image.asset->url,
+            "title": coalesce(
+                title[_key == $locale][0].value,
+                title[_key == 'pt'][0].value,
+                "Missing translation"
+            ),
+              "taxonomy":coalesce(
+            ^.title[_key == $locale][0].value,
+            ^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
     }
-
 }
-}*/
+
+
+*[_type == "taxon"
+  && title[_key == $locale][0].value == $taxons]
+{
+  "title": coalesce(
+                title[_key == $locale][0].value,
+                title[_key == 'pt'][0].value,
+                "Missing translation"
+            ),
+
+  "taxonomies": *[_type == "taxonomy"
+                  && title[_key == $locale][0].value == $taxonomy
+                  && references(^._id)].title[_key == $locale][0].value
+  ,
+     "products": *[_type == "product"
+                  && references(^._id)].title[_key ==
+*/
