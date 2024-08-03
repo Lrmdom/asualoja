@@ -24,7 +24,8 @@ import type {SanityDocument} from '@sanity/client'
 
 import Breadcrumb from "~/components/breadcrumb";
 import {authenticator} from "~/services/auth.server";
-
+// eslint-disable-next-line import/namespace
+import Header from "~/components/header"
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
 
 export let loader = async ({request, params}) => {
@@ -90,6 +91,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
+        <Header taxonomies={data} user={user}></Header>
         <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
         <Breadcrumb></Breadcrumb>
         <div className="flow-root">

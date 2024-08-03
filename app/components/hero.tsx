@@ -1,7 +1,8 @@
 
 import { Link } from '@remix-run/react'
 /* import './styles/styles.css'
- */export default function Component() {
+ */
+export default function Component() {
   return (
     <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48">
       <div className="container px-4 md:px-6">

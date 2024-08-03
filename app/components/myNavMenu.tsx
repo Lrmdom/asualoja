@@ -14,7 +14,7 @@ import {
     NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
 
-import logo from '/logo_transparente_execlog_blue._monday.png'
+
 
 
 import SearchForm from '~/components/searchForm'
@@ -67,7 +67,7 @@ const components: { title: string; to: string; description: string }[] = [
 
 export function MyNavMenu(props) {
     //const {taxonomies, user} = props
-    let avatar
+    /*let avatar
 
 
     if (props.user) {
@@ -83,7 +83,7 @@ export function MyNavMenu(props) {
         </Avatar>
     } else {
         avatar = null
-    }
+    }*/
 
     console.log(props.user)
     const {i18n} = useTranslation()
@@ -157,7 +157,7 @@ export function MyNavMenu(props) {
                             Services
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                            <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] " >
                                 {props.taxonomies.map((taxonomy) => (
                                     <ListItem
                                         className=""
@@ -180,7 +180,7 @@ export function MyNavMenu(props) {
                                                     className=""
                                                     key={taxon._id}
                                                     title={taxon.title}
-                                                    href={stegaClean(taxon.title)}
+                                                    href={stegaClean(`${taxonomy.title}/${taxon.title}`)}
                                                 >
 
                                                 </ListItem>
@@ -205,18 +205,18 @@ export function MyNavMenu(props) {
                         <NavigationMenuContent>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
-                    <SearchForm taxonomies={props.taxonomies}></SearchForm>
-                    <MylaguageSwitcher
+                    {/*<SearchForm taxonomies={props.taxonomies}></SearchForm>*/}
+                    {/*<MylaguageSwitcher
                         onClick={() => handleLanguageChange()}
-                    ></MylaguageSwitcher>
+                    ></MylaguageSwitcher>*/}
 
-                    <NavigationMenuItem>
+                    {/*<NavigationMenuItem>
                         <NavigationMenuTrigger>Log In</NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <SocialLogins></SocialLogins>
                         </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    {avatar}
+                    </NavigationMenuItem>*/}
+                   {/* {avatar}*/}
                 </NavigationMenuList>
             </NavigationMenu>
 
