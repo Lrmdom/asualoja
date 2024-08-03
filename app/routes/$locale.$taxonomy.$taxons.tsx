@@ -24,9 +24,10 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 export default function TaxonRoute() {
     const { data } = useLoaderData<typeof loader>()
 
-    console.log(data)
-/*
+
     return <Taxon taxon={data}/>
-*/
+
+/*
     return <Prods products={data.products}></Prods>
+*/
 }
