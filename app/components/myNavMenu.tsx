@@ -85,7 +85,6 @@ export function MyNavMenu(props) {
         avatar = null
     }*/
 
-    console.log(props.user)
     const {i18n} = useTranslation()
     return (
         <>

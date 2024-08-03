@@ -432,6 +432,58 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
  }
 `
 
+export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON = groq`
+*[_type == "taxon"
+  && title[_key == $locale][0].value == $taxons][0]
+{
+    "title": coalesce(
+                title[_key == $locale][0].value,
+                title[_key == 'pt'][0].value,
+                "Missing translation"
+                    ),
+  
+         products[]->{"imageUrl": image.asset->url,
+            "title": coalesce(
+            title[_key == $locale][0].value,
+            title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
+            "taxonomy":coalesce(
+            ^.title[_key == $locale][0].value,
+            ^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),           
+            "taxons":coalesce(
+            ^.title[_key == $locale][0].value,
+            ^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
+           
+            "attributes": 
+                    coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                        ) ,
+            variants[]->{ sku,
+                    "images": images[]{
+                    'url': asset->url,
+                    },
+                    "title": coalesce(
+                    title[_key == $locale][0].value,
+                    title[_key == 'pt'][0].value,
+                    "Missing translation"
+                    ) ,
+                    "attributes": 
+                      coalesce(
+                        attributes[_key == $locale][0].value,
+                        attributes[_key == 'pt'][0].value,
+                        "Missing translation"
+                        )                                                       
+            }
+         }
+ }
+`
 
 
    /* *[_type == "taxon" &&
