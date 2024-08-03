@@ -1,5 +1,5 @@
 import type {SanityDocument} from '@sanity/client'
-import Taxon from '~/components/Taxon'
+import Taxons from '~/components/Taxons'
 import Prods from "~/components/Prods";
 import {stegaClean} from "@sanity/client/stega";
 
@@ -26,7 +26,7 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
                         </div>
                         <Prods products={taxon.products}></Prods>
 
-                        <Taxon taxon={taxon} ></Taxon>
+                        <Taxons taxon={taxon} ></Taxons>
                     </>
                 )
             })}
