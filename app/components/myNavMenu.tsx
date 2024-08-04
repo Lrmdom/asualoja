@@ -13,17 +13,8 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
-
-
-
-
-import SearchForm from '~/components/searchForm'
-import SocialLogins from '~/routes/login'
 import {stegaClean} from '@sanity/client/stega'
-
-import MylaguageSwitcher from '~/components/myLanguageSwitcher'
 import {useTranslation} from 'react-i18next'
-import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar'
 
 
 const components: { title: string; to: string; description: string }[] = [
@@ -66,26 +57,9 @@ const components: { title: string; to: string; description: string }[] = [
 
 
 export function MyNavMenu(props) {
-    //const {taxonomies, user} = props
-    /*let avatar
 
-
-    if (props.user) {
-        avatar = <Avatar>
-            { !props.user.photos
-                ? <AvatarImage src="https://github.com/shadcn.png"/>
-                : <AvatarImage src={props.user.photos[0].value}/>
-            }
-
-
-            <AvatarFallback>{props.user.name.given_name}</AvatarFallback>
-
-        </Avatar>
-    } else {
-        avatar = null
-    }*/
-
-    const {i18n} = useTranslation()
+    const { i18n } = useTranslation()
+    const language = i18n.resolvedLanguage
     return (
         <>
 
@@ -162,7 +136,7 @@ export function MyNavMenu(props) {
                                         className=""
                                         key={taxonomy._id}
                                         title={taxonomy.title}
-                                        href={stegaClean(taxonomy.title)}
+                                        href={stegaClean(`/${language}/${taxonomy.title}/`)}
 
                                         /*media={
                                             service.serviceImage
@@ -179,7 +153,7 @@ export function MyNavMenu(props) {
                                                     className=""
                                                     key={taxon._id}
                                                     title={taxon.title}
-                                                    href={stegaClean(`${taxonomy.title}/${taxon.title}`)}
+                                                    href={stegaClean(`/${language}/${taxonomy.title}/${taxon.title}`)}
                                                 >
 
                                                 </ListItem>

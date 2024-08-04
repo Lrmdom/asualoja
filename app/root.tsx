@@ -7,7 +7,7 @@ import {
     Scripts,
     ScrollRestoration,
     useLoaderData,
-    useRevalidator,
+    useRevalidator, useRouteError,
     useRouteLoaderData,
 } from '@remix-run/react'
 import type {LinksFunction} from '@remix-run/node'
@@ -24,20 +24,17 @@ import type {SanityDocument} from '@sanity/client'
 
 import Breadcrumb from "~/components/breadcrumb";
 import {authenticator} from "~/services/auth.server";
-// eslint-disable-next-line import/namespace
 import Header from "~/components/header"
+import SiteError from "~/components/404";
+
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
 
 export let loader = async ({request, params}) => {
     //todo fix bug when url have 1 lang and switch have another  ex: http://localhost:5173/en  and langswitcher have 'pt'
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
-
     const user = await authenticator.isAuthenticated(request, {
-
     })
-
-    //console.log(user)
 
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMIES_QUERY_LOCALIZED,
@@ -66,7 +63,7 @@ export const handle = {
 }
 
 export function Layout({children}: { children: React.ReactNode }) {
-    const {data, locale, ENV,user} = useRouteLoaderData<typeof loader>('root')
+    const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
 
 
@@ -93,42 +90,10 @@ export function Layout({children}: { children: React.ReactNode }) {
         <body>
         <Header taxonomies={data} user={user}></Header>
         <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
-        <Breadcrumb></Breadcrumb>
+        <Breadcrumb navigationData={data}></Breadcrumb>
         <div className="flow-root">
             <div className="float-right">
-                <cl-cart-link>
-                    <svg
-                        width="32"
-                        height="32"
-                        viewBox="0 0 32 32"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M27 6H5C4.44772 6 4 6.44772 4 7V25C4 25.5523 4.44772 26 5 26H27C27.5523 26 28 25.5523 28 25V7C28 6.44772 27.5523 6 27 6Z"
-                            stroke="black"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        ></path>
-                        <path
-                            d="M4 10H28"
-                            stroke="black"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        ></path>
-                        <path
-                            d="M21 14C21 15.3261 20.4732 16.5979 19.5355 17.5355C18.5979 18.4732 17.3261 19 16 19C14.6739 19 13.4021 18.4732 12.4645 17.5355C11.5268 16.5979 11 15.3261 11 14"
-                            stroke="black"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        ></path>
-                    </svg>
-                    <cl-cart-count></cl-cart-count>
-                    <cl-cart></cl-cart>
-                </cl-cart-link>
+
             </div>
         </div>
         {children}
@@ -176,4 +141,22 @@ export default function App() {
     const {locale} = useLoaderData<typeof loader>()
     useChangeLanguage(locale)
     return <Outlet/>
+}
+export function ErrorBoundary() {
+
+    const error = useRouteError();
+    console.error(error);
+    return (
+        <html>
+        <head>
+            <title>Oh no!</title>
+            <Meta />
+            <Links />
+        </head>
+        <body>
+        <SiteError />
+        <Scripts />
+        </body>
+        </html>
+    );
 }

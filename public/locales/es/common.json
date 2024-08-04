@@ -1,5 +1,9 @@
 {
 	"title": "remix-i18n es increíble",
 	"Add to cart": "Adicionar al carrito",
-	"Select Language": "Elegir Idioma"
+	"Select Language": "Elegir Idioma",
+	"Page not found": "Página no encontrada",
+	"Sorry, we couldn’t find the page you’re looking for.": "Lo sentimos, no pudimos encontrar la página que estás buscando.",
+	"Go back home": "Volver a casa",
+	"Contact support": "Contactar el soporte"
 }

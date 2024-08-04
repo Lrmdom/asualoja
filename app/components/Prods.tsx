@@ -2,12 +2,12 @@ import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 import Variants from "~/components/Variants";
 import Attributes from "~/components/Attributes";
-import client from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
 import {Link} from "@remix-run/react";
+import {useTranslation} from "react-i18next";
 
 export default function Prods({products}: { product: SanityDocument }) {
-
+    const { i18n } = useTranslation()
+    const language = i18n.resolvedLanguage
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
@@ -29,7 +29,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                         <div>
                                             <h3 className="text-sm text-gray-700">
                                             {/*    todo if taxon array use prod.taxons[0]*/}
-                                                <Link to={stegaClean(`/${prod.taxonomy}/${prod.taxons}/${prod.title}`)}> {stegaClean(prod.title)} </Link>
+                                                <Link to={stegaClean(`/${language}/${prod.taxonomy}/${prod.taxons}/${prod.title}`)}> {stegaClean(prod.title)} </Link>
 
                                             </h3>
 
