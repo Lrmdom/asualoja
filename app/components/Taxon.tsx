@@ -10,8 +10,6 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
         <main className="container mx-auto prose prose-lg p-4 border-4">
 
 
-                return (
-                    <>
                         <div key={taxon._id}>
                           <span className="text-red">
                             {taxon.title}-{taxon.title}
@@ -19,8 +17,6 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                             <Prods products={taxon.products}></Prods>
 
                         </div>
-                    </>
-                )
 
 
         </main>

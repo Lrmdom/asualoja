@@ -9,13 +9,13 @@ import Taxon from '~/components/Taxon'
 //import { useQuery } from '~/sanity/loader'
 import { loadQuery } from '~/sanity/loader.server'
 import {
-    PRODUCT_FILTEREDBY_TAXONOMY_TAXON
+    PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED
 } from '~/sanity/queries'
 import Prods from "~/components/Prods";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     const { data } = await loadQuery<SanityDocument>(
-        PRODUCT_FILTEREDBY_TAXONOMY_TAXON,
+        PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED,
         params
     )
     return { data }
