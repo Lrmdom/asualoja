@@ -41,7 +41,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                         {/*
                                                 <p className="text-sm font-medium text-gray-900">{prod.price}</p>
 */}
-                                        {/*<Variants product={prod}></Variants>*/}
+                                        <Variants product={prod}></Variants>
                                     </div>
                                 </div>
                             </>

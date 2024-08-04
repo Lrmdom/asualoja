@@ -13,39 +13,36 @@ export default function Attributes({product}: { product: SanityDocument }) {
     let displayAttrs
     if (attributes) {
 
-        displayAttrs = <Attributes attributes={attributes}></Attributes>
+        displayAttrs = <Attributes product={product}></Attributes>
     } else {
 
     }*/
     if(Array.isArray(product.attributes)){
-         null
-    }else{
-        return null
-    }
-
-    return (
-        <main className="">
-
-            {product.attributes.map((attribute) => {
-                return (
-
-                    <>
-
-                        <div key={attribute._id}>
+        return (
+            <main className="">
+                { product.attributes.map((attribute) => {
+                    return (
+                        <>
+                            <div key={attribute._id}>
                           <span>
                             {attribute.name} ::  <span>
                             {attribute.value}
                           </span>
                           </span>
 
-                        </div>
+                            </div>
 
-                    </>
+                        </>
 
-                )
-            })}
-        </main>
-    )
+                    )
+                })}
+            </main>
+        )
+    }else{
+        return null
+    }
+
+
 }
 
 

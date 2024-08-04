@@ -405,6 +405,11 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
                 title[_key == 'pt'][0].value,
                 "Missing translation"
                 ),
+                "description": coalesce(
+                description[_key == $locale][0].value,
+                description[_key == 'pt'][0].value,
+                "Missing translation"
+                ),
                 "attributes": 
                     coalesce(
                         attributes[_key == $locale][0].value,
