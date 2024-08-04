@@ -18,7 +18,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   return { data }
 }
 
-export default function TaxonomyRoute() {
+export default function ProductRoute() {
   const { data } = useLoaderData<typeof loader>()
   return <Variants product={data.product}/>
 }
