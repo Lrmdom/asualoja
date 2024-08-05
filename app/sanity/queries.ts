@@ -451,6 +451,9 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
                 title[_key == 'pt'][0].value,
                 "Missing translation"
                     ),
+      "taxonomies": *[_type == "taxonomy"
+                  && title[_key == $locale][0].value == $taxonomy
+                  && references(^._id)].title[_key == $locale].value,
     taxons[]->{
       "title":coalesce(
             title[_key == $locale][0].value,

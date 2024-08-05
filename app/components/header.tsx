@@ -14,6 +14,7 @@ import {
 } from "../../@/components/ui/navigation-menu";
 import IdentityLinks from "~/components/identyLinks";
 import {Avatar, AvatarFallback, AvatarImage} from "../../@/components/ui/avatar";
+import SearchForm from "~/components/searchForm";
 
 export default function Header(props) {
 
@@ -39,7 +40,7 @@ export default function Header(props) {
     }
 
     return (
-        <div className="container p-4">
+        <div className="container p-2">
             <div className="grid grid-cols-[10%_10%_10%_70%] gap-0">
                 <div className="p-4">
                     <Link to="/">
@@ -52,6 +53,9 @@ export default function Header(props) {
                 <div className="flex justify-end p-4 ">
                     <NavigationMenu className="  hidden lg:flex">
                         <NavigationMenuList>
+                            <NavigationMenuItem>
+                                <SearchForm taxonomies={props.taxonomies}></SearchForm>
+                            </NavigationMenuItem>
                             <NavigationMenuItem>
                                 <MylaguageSwitcher
                                     onClick={() => handleLanguageChange()}

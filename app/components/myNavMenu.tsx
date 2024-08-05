@@ -59,15 +59,80 @@ const components: { title: string; to: string; description: string }[] = [
 
 export function MyNavMenu(props) {
 
-    const { i18n } = useTranslation()
+
+    const {i18n,t} = useTranslation()
+
     const language = i18n.resolvedLanguage
     return (
-<div className="container p-4 bg-violet-100 rounded">
+        <div className="container p-2">
             <NavigationMenu className="hidden lg:flex">
                 <NavigationMenuList>
+
                     <NavigationMenuItem>
                         <NavigationMenuTrigger className="text-primary">
-                            Getting started
+                            {t('Promotions')}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="text-primary">
+                            {t('Services')}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="text-primary">
+                            {t('Products')}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                            <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                                {props.taxonomies.map((taxonomy) => (
+                                    <ListItem
+                                        className=""
+                                        key={taxonomy._id}
+                                        title={taxonomy.title}
+                                        href={stegaClean(`/${language}/${taxonomy.title}/`)}
+                                    >
+
+                                        <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                                            {taxonomy.taxons?.map((taxon) => (
+                                                <ListItem
+                                                    className=""
+                                                    key={taxon._id}
+                                                    title={taxon.title}
+                                                    href={stegaClean(`/${language}/${taxonomy.title}/${taxon.title}`)}
+                                                >
+
+                                                </ListItem>
+                                            ))}
+                                        </ul>
+                                    </ListItem>
+                                ))}
+                            </ul>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="text-primary">
+                            {t("About us")}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="text-primary">
+                            {t("Contacts")}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="text-primary">
+                            {t('Outlet')}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -102,70 +167,6 @@ export function MyNavMenu(props) {
                                     Styles for headings, paragraphs, lists...etc
                                 </ListItem>
                             </ul>
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger className="text-primary">
-                            Components
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
-
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger className="text-primary">
-                            Services
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                            <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] " >
-                                {props.taxonomies.map((taxonomy) => (
-                                    <ListItem
-                                        className=""
-                                        key={taxonomy._id}
-                                        title={taxonomy.title}
-                                        href={stegaClean(`/${language}/${taxonomy.title}/`)}
-
-                                        /*media={
-                                            service.serviceImage
-                                                ? service.serviceImage
-                                                : service.image_url
-                                        }*/
-                                    >
-                                        {/*<BeakerIcon className="size-4 text-black"/>*/}
-                                        {/*{taxonomy.description}*/}
-                                        <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-
-                                            {taxonomy.taxons?.map((taxon) => (
-                                                <ListItem
-                                                    className=""
-                                                    key={taxon._id}
-                                                    title={taxon.title}
-                                                    href={stegaClean(`/${language}/${taxonomy.title}/${taxon.title}`)}
-                                                >
-
-                                                </ListItem>
-                                            ))}
-                                        </ul>
-                                    </ListItem>
-                                ))}
-                            </ul>
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <SearchForm taxonomies={props.taxonomies}></SearchForm>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger className="text-primary">
-                            About Us
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger className="text-primary">
-                            Contacts
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                 </NavigationMenuList>
