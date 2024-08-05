@@ -23,8 +23,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
 export default function ProductRoute() {
   const { data } = useLoaderData<typeof loader>()
-  console.log("leoooooo")
-  console.log(data.product)
+
 
 
 

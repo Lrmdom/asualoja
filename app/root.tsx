@@ -91,11 +91,7 @@ export function Layout({children}: { children: React.ReactNode }) {
         <Header taxonomies={data} user={user}></Header>
         <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
         <Breadcrumb navigationData={data}></Breadcrumb>
-        <div className="flow-root">
-            <div className="float-right">
 
-            </div>
-        </div>
         {children}
         <ScrollRestoration/>
         <script

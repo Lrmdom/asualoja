@@ -68,8 +68,6 @@ export default function Component() {
             }
           >
             <Link to={pathname.replace(`/${language}/`, `/en${pathname}`)}>🇺🇸</Link>
-
-
             English
           </DropdownMenuItem>
           <DropdownMenuItem

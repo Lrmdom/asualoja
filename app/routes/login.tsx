@@ -4,6 +4,7 @@ import { json, redirect } from '@remix-run/node' // or cloudflare/deno
 import { useLoaderData } from '@remix-run/react'
 import { getSession, commitSession } from '~/services/session.server'
 import { SocialsProvider } from 'remix-auth-socials'
+import * as React from "react";
 
 interface SocialButtonProps {
   provider: SocialsProvider
@@ -15,7 +16,7 @@ const SocialButton: React.FC<SocialButtonProps> = ({ provider, label }) => (
     action={provider != 'LINKEDIN' ? `/auth/${provider}` : `/${provider}`}
     method="post"
   >
-    <button className="bg-primary m-2 text-white">{label}</button>
+    <button className="">{label}</button>
   </Form>
 )
 
@@ -42,6 +43,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const username = form.get('username')
   const password = form.get('password')
 
+  //todo cl api or identity Mfe
   const userId = await validateCredentials(username, password)
 
   if (userId == null) {
@@ -67,14 +69,19 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function Login() {
   return (
-    <>
-      <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-        {/*<SocialButton provider={SocialsProvider.GITHUB} label=" Github" />*/}
-        <SocialButton provider={SocialsProvider.GOOGLE} label=" Google" />
-        <SocialButton provider={SocialsProvider.FACEBOOK} label=" Facebook" />
-        <SocialButton provider={SocialsProvider.MICROSOFT} label=" Microsoft" />
-        <SocialButton provider="LINKEDIN" label=" LinkedIn" />
-      </ul>
-    </>
+      <>
+        <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1 lg:w-[600px] ">
+          <SocialButton provider={SocialsProvider.GOOGLE} label=" Google"/>
+          <SocialButton provider={SocialsProvider.FACEBOOK} label=" Facebook"/>
+          <SocialButton provider={SocialsProvider.MICROSOFT} label=" Microsoft"/>
+          <SocialButton provider="LINKEDIN" label=" LinkedIn"/>
+          <li>
+            <cl-identity-link type="login" target="_self">
+              <button className="">Email </button>
+            </cl-identity-link>
+          </li>
+        </ul>
+
+      </>
   )
 }
