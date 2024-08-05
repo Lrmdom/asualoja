@@ -12,7 +12,7 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
 
 
     return (
-        <main className="container mx-auto prose prose-lg p-4 border-4">
+        <main className="container mx-auto prose prose-lg p-4">
 
             {taxon.taxons.map((tx) => {
                 return (
