@@ -465,7 +465,18 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
             title[_key == $locale][0].value,
             title[_key == 'pt'][0].value,
             "Missing translation"
-            )}
+            ),
+              "taxonomy":coalesce(
+            ^.^.title[_key == $locale][0].value,
+            ^.^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),           
+            "taxons":coalesce(
+            ^.title[_key == $locale][0].value,
+            ^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
+            }
     },
          products[]->{"imageUrl": image.asset->url,
             "title": coalesce(

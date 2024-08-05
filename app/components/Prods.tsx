@@ -6,6 +6,7 @@ import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
 
 export default function Prods({products}: { product: SanityDocument }) {
+
     const { i18n } = useTranslation()
     const language = i18n.resolvedLanguage
     return (
@@ -14,9 +15,6 @@ export default function Prods({products}: { product: SanityDocument }) {
                 <div
                     className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products?.map((prod) => {
-                        if(prod.taxonomies){
-                            prod.taxonomy=prod.taxonomies[0]
-                        }
                         return (
                             <>
                                 <div  className="group relative">
@@ -28,7 +26,6 @@ export default function Prods({products}: { product: SanityDocument }) {
                                     <div className="mt-4 flex justify-between">
                                         <div>
                                             <h3 className="text-sm text-gray-700">
-                                            {/*    todo if taxon array use prod.taxons[0]*/}
                                                 <Link to={stegaClean(`/${language}/${prod.taxonomy}/${prod.taxons}/${prod.title}`)}> {stegaClean(prod.title)} </Link>
 
                                             </h3>

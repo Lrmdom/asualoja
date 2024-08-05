@@ -18,7 +18,7 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
                 return (
                     <>
                         <div key={tx._id}>
-                          <span className="text-red">
+                          <span className="bg-primary p-4 rounded text-white">
                             {taxon.title}-{tx.title}
                           </span>
                             <Prods products={tx.products}></Prods>
