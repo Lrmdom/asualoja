@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/navigation-menu'
 import {stegaClean} from '@sanity/client/stega'
 import {useTranslation} from 'react-i18next'
+import SearchForm from "~/components/searchForm";
 
 
 const components: { title: string; to: string; description: string }[] = [
@@ -61,13 +62,11 @@ export function MyNavMenu(props) {
     const { i18n } = useTranslation()
     const language = i18n.resolvedLanguage
     return (
-        <>
-
-
+        <div className="container p-4">
             <NavigationMenu className="hidden lg:flex">
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className=" ">
+                        <NavigationMenuTrigger className="text-primary">
                             Getting started
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
@@ -106,27 +105,15 @@ export function MyNavMenu(props) {
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className="">
+                        <NavigationMenuTrigger className="text-primary">
                             Components
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            {/*
-                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                {components.map((component) => (
-                                    <ListItem
-                                        key={component.title}
-                                        title={component.title}
-                                        href={component.href}
-                                    >
-                                        {component.description}
-                                    </ListItem>
-                                ))}
-                            </ul>
-*/}
+
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className="">
+                        <NavigationMenuTrigger className="text-primary">
                             Services
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
@@ -165,37 +152,28 @@ export function MyNavMenu(props) {
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className="">
+                        <SearchForm taxonomies={props.taxonomies}></SearchForm>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuTrigger className="text-primary">
                             About Us
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className="">
+                        <NavigationMenuTrigger className="text-primary">
                             Contacts
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
-                    {/*<SearchForm taxonomies={props.taxonomies}></SearchForm>*/}
-                    {/*<MylaguageSwitcher
-                        onClick={() => handleLanguageChange()}
-                    ></MylaguageSwitcher>*/}
-
-                    {/*<NavigationMenuItem>
-                        <NavigationMenuTrigger>Log In</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                            <SocialLogins></SocialLogins>
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>*/}
-                   {/* {avatar}*/}
                 </NavigationMenuList>
             </NavigationMenu>
 
 
             {/*</header>*/}
-        </>
+        </div>
     )
 }
 

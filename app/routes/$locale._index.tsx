@@ -16,8 +16,6 @@ export default function Index() {
     const {t} = useTranslation('')
     return (
         <>
-            <h1>{t('title')}</h1>
-
             <Hero/>
 
         </>

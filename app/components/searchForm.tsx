@@ -38,11 +38,16 @@ export default function Component(props) {
       'taxons.title',
       'taxons.taxons.title',
       'taxons.products.title',
+      'taxons.products.description',
       'taxons.products.attributes',
-      'taxons.taxons.products.attributes',
       'taxons.products.variants.title',
+      'taxons.products.variants.description',
       'taxons.products.variants.attributes',
+      'taxons.taxons.products.title',
+      'taxons.taxons.products.description',
+      'taxons.taxons.products.attributes',
       'taxons.taxons.products.variants.title',
+      'taxons.taxons.products.variants.description',
       'taxons.taxons.products.variants.attributes',
     ],
   }
@@ -57,7 +62,7 @@ export default function Component(props) {
   }
   let filteredResults = fuse.search(searchTerm)
   return (
-    <div className="relative w-full max-w-md">
+    <div className="relative max-w-md">
       <Input
         type="text"
         placeholder="Search..."

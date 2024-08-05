@@ -446,13 +446,24 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
 *[_type == "taxon"
   && title[_key == $locale][0].value == $taxon][0]
 {
-  
     "title": coalesce(
                 title[_key == $locale][0].value,
                 title[_key == 'pt'][0].value,
                 "Missing translation"
                     ),
-  
+    taxons[]->{
+      "title":coalesce(
+            title[_key == $locale][0].value,
+            title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
+      products[]->{"imageUrl": image.asset->url,
+            "title": coalesce(
+            title[_key == $locale][0].value,
+            title[_key == 'pt'][0].value,
+            "Missing translation"
+            )}
+    },
          products[]->{"imageUrl": image.asset->url,
             "title": coalesce(
             title[_key == $locale][0].value,
@@ -467,10 +478,9 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
             ),
            "taxonomies": *[_type == "taxonomy"
                   && title[_key == $locale][0].value == $taxonomy
-                  && references(^.^._id)].title[_key == $locale].value,
-      
+                  && references(^.^._id)].title[_key == $locale].value,            
             
-            "attributes": 
+           "attributes": 
                     coalesce(
                         attributes[_key == $locale][0].value,
                         attributes[_key == 'pt'][0].value,
