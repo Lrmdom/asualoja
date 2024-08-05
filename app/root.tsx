@@ -138,7 +138,7 @@ export default function App() {
     useChangeLanguage(locale)
     return <Outlet/>
 }
-export function ErrorBoundary() {
+/*export function ErrorBoundary() {
 
     const error = useRouteError();
     console.error(error);
@@ -155,4 +155,4 @@ export function ErrorBoundary() {
         </body>
         </html>
     );
-}
+}*/
