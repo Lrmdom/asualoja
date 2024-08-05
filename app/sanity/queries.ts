@@ -388,6 +388,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
 *[_type == "taxon"
   && title[_key == $locale][0].value == $taxons][0]
 {
+ 
     "title": coalesce(
                 title[_key == $locale][0].value,
                 title[_key == 'pt'][0].value,
@@ -410,6 +411,16 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
                 "Missing translation " + $locale + "/" + description[_key == 'pt'][0].value,
                 "Missing translation"
                 ),
+                "taxonomy":coalesce(
+            ^.^.title[_key == $locale][0].value,
+            ^.^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),           
+            "taxon":coalesce(
+            ^.title[_key == $locale][0].value,
+            ^.title[_key == 'pt'][0].value,
+            "Missing translation"
+            ),
                 "attributes": 
                     coalesce(
                         attributes[_key == $locale][0].value,
@@ -446,6 +457,11 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
 *[_type == "taxon"
   && title[_key == $locale][0].value == $taxon][0]
 {
+"taxonomy":coalesce(
+            title[_key == $locale][0].value,
+            title[_key == 'pt'][0].value,
+            "Missing translation"
+            ), 
     "title": coalesce(
                 title[_key == $locale][0].value,
                 title[_key == 'pt'][0].value,

@@ -12,6 +12,7 @@ import {
 import Variants from "~/components/Variants";
 import {stegaClean} from "@sanity/client/stega";
 import Attributes from "~/components/Attributes";
+import {useTranslation} from "react-i18next";
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { data } = await loadQuery<SanityDocument>(
       PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE,
@@ -23,15 +24,21 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
 export default function ProductRoute() {
   const { data } = useLoaderData<typeof loader>()
-
-
+  const { i18n } = useTranslation()
+  const language = i18n.resolvedLanguage
 
 
   return (
       <>
         <div className="group relative">
           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
-            <h1 className="bg-primary p-4 rounded text-white">{data.product.title}</h1>
+            <span className="border-2 border-primary p-4 rounded text-primary">
+              <Link to={`/${language}/${stegaClean(data.taxonomies[0])}`}>{stegaClean(data.taxonomies[0])}</Link>
+              -
+              <Link to={`/${language}/${stegaClean(data.taxonomies[0])}/${stegaClean(data.product.taxon)}`}>{stegaClean(data.product.taxon)}</Link>
+              -
+              {stegaClean(data.product.title)}</span>
+
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
               <div
