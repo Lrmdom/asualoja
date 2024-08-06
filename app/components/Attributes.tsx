@@ -19,13 +19,13 @@ export default function Attributes({product}: { product: SanityDocument }) {
     }*/
     if(Array.isArray(product.attributes)){
         return (
-            <main className="">
+            <main className="border border-primary border-1 rounded p-2">
                 { product.attributes.map((attribute) => {
                     return (
                         <>
-                            <div key={attribute._id}>
+                            <div key={attribute._id} className="">
                           <span>
-                            {attribute.name} ::  <span>
+                            {attribute.name}   <span>
                             {attribute.value}
                           </span>
                           </span>

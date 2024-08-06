@@ -54,7 +54,7 @@ export default function ProductRoute() {
             <div className="">
               {data.product.description}
             </div>
-            <div className="mt-4 flex justify-between border-2">
+            <div className="mt-4 flex justify-between">
               <Attributes product={data.product}></Attributes>
             </div>
             <div className="mt-4 flex justify-between">
