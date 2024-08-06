@@ -27,8 +27,7 @@ import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
 import SiteError from "~/components/404";
 
-
-
+const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
 
 export let loader = async ({request, params}) => {
     //todo fix bug when url have 1 lang and switch have another  ex: http://localhost:5173/en  and langswitcher have 'pt'
@@ -64,8 +63,6 @@ export const handle = {
 }
 
 export function Layout({children}: { children: React.ReactNode }) {
-    const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
-
     const matches = useMatches();
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
