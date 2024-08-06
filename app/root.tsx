@@ -6,7 +6,7 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
-    useLoaderData,
+    useLoaderData, useMatches,
     useRevalidator, useRouteError,
     useRouteLoaderData,
 } from '@remix-run/react'
@@ -27,7 +27,8 @@ import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
 import SiteError from "~/components/404";
 
-const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
+
+
 
 export let loader = async ({request, params}) => {
     //todo fix bug when url have 1 lang and switch have another  ex: http://localhost:5173/en  and langswitcher have 'pt'
@@ -63,6 +64,9 @@ export const handle = {
 }
 
 export function Layout({children}: { children: React.ReactNode }) {
+    const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
+
+    const matches = useMatches();
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
 
@@ -91,7 +95,20 @@ export function Layout({children}: { children: React.ReactNode }) {
         <Header taxonomies={data} user={user}></Header>
         <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
         <Breadcrumb navigationData={data}></Breadcrumb>
-
+        {/*<header>
+            <ol>
+                {matches
+                    .filter(
+                        (match) =>
+                            match.handle && match.handle.breadcrumb
+                    )
+                    .map((match, index) => (
+                        <li key={index}>
+                            {match.handle.breadcrumb(match)}
+                        </li>
+                    ))}
+            </ol>
+        </header>*/}
         {children}
         <ScrollRestoration/>
         <script
