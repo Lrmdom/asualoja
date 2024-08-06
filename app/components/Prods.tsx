@@ -23,7 +23,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                         <img src={prod.imageUrl} width={75} alt={prod.title}
                                              className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
                                     </div>
-                                    <div className="mt-4 flex justify-between">
+                                    <div className="">
                                         <div>
                                             <h3 className="text-sm text-gray-700">
                                                 <Link to={stegaClean(`/${language}/${prod.taxonomy}/${prod.taxons}/${prod.title}`)}> {stegaClean(prod.title)} </Link>
