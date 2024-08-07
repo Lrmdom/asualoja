@@ -38,18 +38,12 @@ export default function ProductRoute() {
               <Link to={`/${language}/${stegaClean(data.taxonomies[0])}/${stegaClean(data.product.taxon)}`}>{stegaClean(data.product.taxon)}</Link>
               -
               {stegaClean(data.product.title)}</span>
-
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-
               <div
                   className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-48">
-
                 <img src={data.product.imageUrl} width={75} alt={data.product.title}
                      className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
-
-
               </div>
-
             </div>
             <div className="">
               {data.product.description}
@@ -60,7 +54,6 @@ export default function ProductRoute() {
             <div className="mt-4 flex justify-between">
               <Variants product={data.product}></Variants>
             </div>
-
           </div>
         </div>
       </>
