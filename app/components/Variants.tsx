@@ -3,7 +3,6 @@ import Attributes from "~/components/Attributes"
 import {ClientOnly} from "remix-utils/client-only"
 import {useTranslation} from 'react-i18next'
 
-
 //import {authenticate} from '@commercelayer/js-auth'
 import {SanityDocument} from "@sanity/client";
 import VariantAttributes from "~/components/variantAttributes";
@@ -12,6 +11,8 @@ import VariantAttributes from "~/components/variantAttributes";
     clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
     scope: 'market:id:vlkaZhkGNj'
 })*/
+import pkg from 'lodash'
+const {_} = pkg
 
 export default function Variants({product}: { variants: SanityDocument }) {
     const {t} = useTranslation('')
@@ -20,20 +21,16 @@ export default function Variants({product}: { variants: SanityDocument }) {
     if (Array.isArray(product.variants)) {
 
         let variantsAttrs = []
-        {
             product.variants.map((variant) => {
-
                 let vAttrs = variant.attributes.filter(attr => attr._type === 'attribute')
-
                 vAttrs.forEach(function (element) {
                     element.sku = variant.sku;
                 });
-
-
-
-                variantsAttrs = variantsAttrs.concat(vAttrs)
+              variantsAttrs = variantsAttrs.concat(vAttrs)
+              variantsAttrs = variantsAttrs.sort((a, b) => a.name.localeCompare(b.name))
             })
-        }
+
+
         return (
             <>
                 <div className="flex container p-2 grid grid-cols-2">
