@@ -1,29 +1,14 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 
-export default function Attributes({product}: { product: SanityDocument }) {
-    /*const {
-        attributes,
-    } = product*/
-    /*const {
-        title,
-        value,
-    } = attributes
+export default function VariantAttributes({attributes}: { attribute: SanityDocument }) {
+    console.log(attributes)
+    //todo , group and display by attribute name. On select attributes, apply sku code data to <cl-price> and <cl-add-to-cart>
 
-    let displayAttrs
-    if (attributes) {
-
-        displayAttrs = <Attributes product={product}></Attributes>
-    } else {
-
-    }*/
-    let prodAttrs = product.attributes.filter(attr => attr._type === 'attribute')
-
-
-    if (Array.isArray(prodAttrs)) {
+    if (Array.isArray(attributes)) {
         return (
             <main className="border border-primary border-1 rounded p-2 w-60">
-                {prodAttrs.map((attribute) => {
+                {attributes.map((attribute) => {
                     return (
                         <>
                             <div key={attribute._key} className="">
