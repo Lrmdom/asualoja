@@ -1,7 +1,7 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 
-export default function Attributes({product}: { product: SanityDocument }) {
+export default function Attributes({product}: { attribute: SanityDocument }) {
     /*const {
         attributes,
     } = product*/
@@ -17,6 +17,7 @@ export default function Attributes({product}: { product: SanityDocument }) {
     } else {
 
     }*/
+    if(Array.isArray(product.attributes)){
     let prodAttrs = product.attributes.filter(attr => attr._type === 'attribute')
 
 
