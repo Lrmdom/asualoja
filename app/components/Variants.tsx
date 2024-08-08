@@ -11,25 +11,32 @@ import VariantAttributes from "~/components/variantAttributes";
     clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
     scope: 'market:id:vlkaZhkGNj'
 })*/
-import pkg from 'lodash'
-const {_} = pkg
+
 
 export default function Variants({product}: { variants: SanityDocument }) {
     const {t} = useTranslation('')
 
-
     if (Array.isArray(product.variants)) {
 
-        let variantsAttrs = []
-            product.variants.map((variant) => {
-                let vAttrs = variant.attributes.filter(attr => attr._type === 'attribute')
-                vAttrs.forEach(function (element) {
-                    element.sku = variant.sku;
-                });
-              variantsAttrs = variantsAttrs.concat(vAttrs)
-              variantsAttrs = variantsAttrs.sort((a, b) => a.name.localeCompare(b.name))
-            })
+        let variantsAttrs: any[] = []
+        product.variants.map((variant) => {
+            let vAttrs = variant.attributes.filter(attr => attr._type === 'attribute')
+            vAttrs.forEach(function (element) {
+                element.sku = stegaClean(variant.sku)
+                element.images = variant.images
+            });
+            variantsAttrs = variantsAttrs.concat(vAttrs)
+            variantsAttrs = variantsAttrs.sort((a, b) => a.name.localeCompare(b.name))
+        })
 
+        let groupedVariantsAttrs = variantsAttrs.reduce((current, item) => {
+            if (!current[stegaClean(item.name.trim())]) {
+                current[stegaClean(item.name.trim())] = [];
+            }
+            current[stegaClean(item.name.trim())].push(item);
+
+            return current;
+        }, {});
 
         return (
             <>
@@ -38,21 +45,11 @@ export default function Variants({product}: { variants: SanityDocument }) {
                         {/*<img src={variant.images ? variant.images[0].url : null} width={75}
                                          alt={variant.title}/>
                                     <span>{variant.title}</span>*/}
-                        <span><VariantAttributes attributes={variantsAttrs}></VariantAttributes></span>
+
+                        <span><VariantAttributes attributes={groupedVariantsAttrs}></VariantAttributes></span>
+
                     </div>
-                    {/*<div>
-                                    <div>
-                                        <cl-price code={stegaClean(variant.sku)}>
-                                            <cl-price-amount type="compare-at"></cl-price-amount>
-                                            <cl-price-amount type="price"></cl-price-amount>
-                                        </cl-price>
-                                    </div>
-                                    <div>
-                                        <cl-add-to-cart code={stegaClean(variant.sku)} quantity="1" kind="sku">
-                                            {t('Add to cart')}
-                                        </cl-add-to-cart>
-                                    </div>
-                                </div>*/}
+
                 </div>
             </>
         )

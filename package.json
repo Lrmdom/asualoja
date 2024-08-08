@@ -12,6 +12,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@commercelayer/app-elements": "^2.2.4",
     "@commercelayer/js-auth": "^6.3.1",
     "@commercelayer/react-components": "^4.15.4",
     "@commercelayer/sdk": "^6.11.0",
@@ -98,6 +99,6 @@
     "vite-tsconfig-paths": "^4.3.2"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   }
 }
