@@ -1,12 +1,16 @@
+/** @type {import('tailwindcss').Config} */
+
 import type { Config } from "tailwindcss"
 
 const config = {
+  presets: [require('@commercelayer/app-elements/tailwind.config')],
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    './node_modules/@commercelayer/app-elements/dist/**/*.js'
   ],
   prefix: "",
   theme: {

@@ -7,11 +7,10 @@ export default function VariantAttributes({attributes}: { attribute: SanityDocum
     // todo , use new es to destructure attributes object
 
     return (
-        <main className="border border-primary border-1 rounded p-2 w-60">
+        <main className="">
             {Object.entries(attributes).map((attribute) => {
                 return (
                     <>
-                        <b className="text-primary text-lg">{stegaClean(attribute[0])}</b>
 
                         <Attribute attribute={attribute[1]}></Attribute>
 

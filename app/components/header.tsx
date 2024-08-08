@@ -2,7 +2,6 @@ import {Link} from '@remix-run/react'
 import MylaguageSwitcher from "~/components/myLanguageSwitcher";
 import * as React from "react";
 
-
 import SocialLogins from '~/routes/login'
 
 import MylaguageSwitcher from '~/components/myLanguageSwitcher'
