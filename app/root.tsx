@@ -25,7 +25,10 @@ import type {SanityDocument} from '@sanity/client'
 import Breadcrumb from "~/components/breadcrumb";
 import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
+
 import SiteError from "~/components/404";
+
+import '@commercelayer/app-elements/style.css'
 
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
 
