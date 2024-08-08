@@ -17,30 +17,30 @@ export default function Attributes({product}: { attribute: SanityDocument }) {
     } else {
 
     }*/
-    if(Array.isArray(product.attributes)){
-    let prodAttrs = product.attributes.filter(attr => attr._type === 'attribute')
+    if(Array.isArray(product.attributes)) {
+        let prodAttrs = product.attributes.filter(attr => attr._type === 'attribute')
 
 
-    if (Array.isArray(prodAttrs)) {
-        return (
-            <main className="border border-primary border-1 rounded p-2 w-60">
-                {prodAttrs.map((attribute) => {
-                    return (
-                        <>
-                            <div key={attribute._key} className="">
-                                <b className="text-primary text-lg">{attribute.name}</b> :
-                                {attribute.value}
-                            </div>
-                        </>
-                    )
-                })}
-            </main>
-        )
-    } else {
-        return null
+        if (Array.isArray(prodAttrs)) {
+            return (
+                <main className="border border-primary border-1 rounded p-2 w-60">
+                    {prodAttrs.map((attribute) => {
+                        return (
+                            <>
+                                <div key={attribute._key} className="">
+                                    <b className="text-primary text-lg">{attribute.name}</b> :
+                                    {attribute.value}
+                                </div>
+                            </>
+                        )
+                    })}
+                </main>
+            )
+        } else {
+            return null
+        }
+
     }
-
-
 }
 
 
