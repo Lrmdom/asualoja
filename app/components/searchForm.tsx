@@ -11,6 +11,7 @@ import Fuse from 'fuse.js'
 import { stegaClean } from '@sanity/client/stega'
 import { Link } from '@remix-run/react'
 import { useTranslation } from 'react-i18next'
+import {SearchBar} from "@commercelayer/app-elements";
 
 export default function Component(props) {
   const i18n = useTranslation()
@@ -68,8 +69,9 @@ export default function Component(props) {
         placeholder="Search..."
         value={searchTerm}
         onChange={handleSearch}
-        className="w-full rounded-md border border-input bg-background px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+        className="w-full rounded-md border border-input bg-background px-4 py-2 text-sm"
       />
+
       {filteredResults.length > 0 && (
         // filter unique
         //todo if match reference, write downthe refrence text, ex: customerneed or customerNeedDetail name or title or description

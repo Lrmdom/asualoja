@@ -6,6 +6,7 @@ import {useTranslation} from 'react-i18next'
 //import {authenticate} from '@commercelayer/js-auth'
 import {SanityDocument} from "@sanity/client";
 import VariantAttributes from "~/components/variantAttributes";
+import {InputToggleButton, Text} from "@commercelayer/app-elements";
 
 /*const auth = await authenticate('client_credentials', {
     clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
@@ -24,6 +25,8 @@ export default function Variants({product}: { variants: SanityDocument }) {
             vAttrs.forEach(function (element) {
                 element.sku = stegaClean(variant.sku)
                 element.images = variant.images
+                element.label = element.value
+
             });
             variantsAttrs = variantsAttrs.concat(vAttrs)
             variantsAttrs = variantsAttrs.sort((a, b) => a.name.localeCompare(b.name))
@@ -40,16 +43,15 @@ export default function Variants({product}: { variants: SanityDocument }) {
 
         return (
             <>
-                <div className="flex container p-2 grid grid-cols-2">
-                    <div className="">
-                        {/*<img src={variant.images ? variant.images[0].url : null} width={75}
+                <div className="">
+                    {/*<img src={variant.images ? variant.images[0].url : null} width={75}
                                          alt={variant.title}/>
                                     <span>{variant.title}</span>*/}
 
-                        <span><VariantAttributes attributes={groupedVariantsAttrs}></VariantAttributes></span>
-
-                    </div>
-
+                    <span><VariantAttributes attributes={groupedVariantsAttrs}></VariantAttributes></span>
+                    <cl-add-to-cart quantity="1" kind="sku">
+                        {t('Add to cart')}
+                    </cl-add-to-cart>
                 </div>
             </>
         )

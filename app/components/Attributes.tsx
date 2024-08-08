@@ -1,7 +1,9 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-
+import {useTranslation} from 'react-i18next'
 export default function Attributes({product}: { attribute: SanityDocument }) {
+    const {t} = useTranslation('')
+
     /*const {
         attributes,
     } = product*/
@@ -23,7 +25,7 @@ export default function Attributes({product}: { attribute: SanityDocument }) {
 
         if (Array.isArray(prodAttrs)) {
             return (
-                <main className="border border-primary border-1 rounded p-2 w-60">
+                <main className="">
                     {prodAttrs.map((attribute) => {
                         return (
                             <>
@@ -34,6 +36,7 @@ export default function Attributes({product}: { attribute: SanityDocument }) {
                             </>
                         )
                     })}
+
                 </main>
             )
         } else {
