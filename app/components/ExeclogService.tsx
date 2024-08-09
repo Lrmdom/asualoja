@@ -4,9 +4,6 @@ import Prods from "~/components/Prods";
 import {stegaClean} from "@sanity/client/stega";
 import {Tabs, Tab} from '@commercelayer/app-elements'
 
-
-
-
 export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
     const {
         title,
@@ -14,8 +11,8 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
     } = taxonomies
 
     function haveProducts(taxon: any) {
-        console.log(taxon.products)
-        if(taxon.products.length > 0 ) {
+        //console.log(taxon.products)
+        if (taxon.products.length > 0) {
             return (
                 <Tab name={taxon.title}
                      key={taxon._id}>
@@ -28,13 +25,11 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
                     <Prods products={taxon.products}></Prods>
                 </Tab>
             )
-        }else{
+        } else {
             return null
         }
     }
 
-
-    // @ts-ignore
     return (
         <main className="container mx-auto prose prose-lg p-2 ">
             {title ? (

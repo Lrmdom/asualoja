@@ -7,7 +7,7 @@ import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@comme
 
 export default function Attribute({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
-    console.log(attribute)
+    //console.log(attribute)
     return (
         <main className="">
 
