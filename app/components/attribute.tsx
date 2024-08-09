@@ -3,15 +3,20 @@ import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
 import {ClientOnly} from "remix-utils/client-only"
 import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@commercelayer/app-elements'
-
+import AttributeVisualization from "~/components/attributeVisualization";
 
 export default function Attribute({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
     //console.log(attribute)
+
+
+
     return (
         <main className="">
 
-            <ClientOnly fallback={null}>
+
+
+           {/* <ClientOnly fallback={null}>
                 {() => <InputToggleButton
                     label={attribute[0].name}
                     mode="single"
@@ -21,11 +26,12 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                         attribute
                     }
                 />}
-            </ClientOnly>
+            </ClientOnly>*/}
 
             {attribute.map((attribute) => {
                 return (
                     <>
+                        <AttributeVisualization attribute={attribute}></AttributeVisualization>
                             <span className="container p-4">
                                 <cl-price code={stegaClean(attribute.sku)}>
                                     <cl-price-amount type="compare-at"></cl-price-amount>
