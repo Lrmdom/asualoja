@@ -6,7 +6,6 @@ import {useTranslation} from 'react-i18next'
 //import {authenticate} from '@commercelayer/js-auth'
 import {SanityDocument} from "@sanity/client";
 import VariantAttributes from "~/components/variantAttributes";
-import {InputToggleButton, Text} from "@commercelayer/app-elements";
 
 /*const auth = await authenticate('client_credentials', {
     clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
