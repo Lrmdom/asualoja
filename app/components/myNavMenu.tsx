@@ -97,8 +97,7 @@ export function MyNavMenu(props) {
                                         title={taxonomy.title}
                                         href={stegaClean(`/${language}/${taxonomy.title}/`)}
                                     >
-
-                                        <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                                        <ul className="">
                                             {taxonomy.taxons?.map((taxon) => (
                                                 <ListItem
                                                     className=""
@@ -106,7 +105,17 @@ export function MyNavMenu(props) {
                                                     title={taxon.title}
                                                     href={stegaClean(`/${language}/${taxonomy.title}/${taxon.title}`)}
                                                 >
-
+                                                    <ul className=" ">
+                                                        {taxon.taxons?.map((tx) => (
+                                                            <ListItem
+                                                                className=""
+                                                                key={tx._id}
+                                                                title={tx.title}
+                                                                href={stegaClean(`/${language}/${taxonomy.title}/${taxon.title}/${tx.title}`)}
+                                                            >
+                                                            </ListItem>
+                                                        ))}
+                                                    </ul>
                                                 </ListItem>
                                             ))}
                                         </ul>
