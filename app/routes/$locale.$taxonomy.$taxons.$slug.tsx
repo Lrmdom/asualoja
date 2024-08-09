@@ -35,7 +35,8 @@ export default function ProductRoute() {
             <span className="border-2 border-primary p-4 rounded text-primary">
               <Link to={`/${language}/${stegaClean(data.taxonomies[0])}`}>{stegaClean(data.taxonomies[0])}</Link>
               -
-              <Link to={`/${language}/${stegaClean(data.taxonomies[0])}/${stegaClean(data.product.taxon)}`}>{stegaClean(data.product.taxon)}</Link>
+              <Link
+                  to={`/${language}/${stegaClean(data.taxonomies[0])}/${stegaClean(data.product.taxon)}`}>{stegaClean(data.product.taxon)}</Link>
               -
               {stegaClean(data.product.title)}</span>
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -44,6 +45,9 @@ export default function ProductRoute() {
                 <img src={data.product.imageUrl} width={75} alt={data.product.title}
                      className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
               </div>
+            </div>
+            <div className="">
+              {data.product.title}
             </div>
             <div className="">
               {data.product.description}

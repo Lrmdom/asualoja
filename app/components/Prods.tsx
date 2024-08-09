@@ -6,7 +6,7 @@ import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
 
 export default function Prods({products}: { product: SanityDocument }) {
-    console.log(products)
+    //console.log(products)
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
 
