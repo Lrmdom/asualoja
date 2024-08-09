@@ -7,7 +7,7 @@ import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@comme
 
 export default function AttributeVisualization({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
-    console.log(attribute)
+    //console.log(attribute)
     let visualization
     debugger;
     if (attribute.visualPresentation === "InputToggleColor") {
