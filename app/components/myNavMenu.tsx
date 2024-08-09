@@ -111,7 +111,7 @@ export function MyNavMenu(props) {
                                                                 className=""
                                                                 key={tx._id}
                                                                 title={tx.title}
-                                                                href={stegaClean(`/${language}/${taxonomy.title}/${taxon.title}/${tx.title}`)}
+                                                                href={stegaClean(`/${language}/${taxonomy.title}/${tx.title}`)}
                                                             >
                                                             </ListItem>
                                                         ))}
