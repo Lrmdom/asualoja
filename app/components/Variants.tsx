@@ -1,6 +1,5 @@
 import {stegaClean} from "@sanity/client/stega"
-import Attributes from "~/components/Attributes"
-import {ClientOnly} from "remix-utils/client-only"
+
 import {useTranslation} from 'react-i18next'
 
 //import {authenticate} from '@commercelayer/js-auth'
@@ -20,6 +19,10 @@ export default function Variants({product}: { variants: SanityDocument }) {
 
         let variantsAttrs: any[] = []
         product.variants.map((variant) => {
+
+            if (Array.isArray(variant.attributes)) {
+
+
             let vAttrs = variant.attributes.filter(attr => attr._type === 'attribute')
             vAttrs.forEach(function (element) {
                 element.sku = stegaClean(variant.sku)
@@ -29,6 +32,7 @@ export default function Variants({product}: { variants: SanityDocument }) {
             });
             variantsAttrs = variantsAttrs.concat(vAttrs)
             variantsAttrs = variantsAttrs.sort((a, b) => a.name.localeCompare(b.name))
+                }
         })
 
         let groupedVariantsAttrs = variantsAttrs.reduce((current, item) => {

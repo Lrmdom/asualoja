@@ -2,7 +2,6 @@ import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
 import {ClientOnly} from "remix-utils/client-only"
-import { lazy, Suspense } from "react";
 import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@commercelayer/app-elements'
 
 
