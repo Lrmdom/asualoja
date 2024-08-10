@@ -37,8 +37,11 @@ export default function Component() {
   const handleLanguageChange = (data) => {
     i18n.changeLanguage(data.language, (error) => {
       let re = new RegExp('/' + language, 'g')
+/*
       const pthn = location.pathname.replace(re, data.language)
+*/
       //todo use current url and just change the language parameters path and querystring
+      debugger;
       window.location.href = `/${data.language}/?lng=${data.language}`
     })
   }

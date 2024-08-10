@@ -41,8 +41,7 @@ export let loader = async ({request, params}) => {
     //todo fix bug when url have 1 lang and switch have another  ex: http://localhost:5173/en  and langswitcher have 'pt'
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
-    const user = await authenticator.isAuthenticated(request, {
-    })
+    const user = await authenticator.isAuthenticated(request, {})
 
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMIES_QUERY_LOCALIZED,
@@ -55,7 +54,7 @@ export let loader = async ({request, params}) => {
         SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
     }
     return json(
-        {data, locale, ENV,user},
+        {data, locale, ENV, user},
         {headers: {'Set-Cookie': await localeCookie.serialize(locale)}}
     )
 }
@@ -97,12 +96,8 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <Suspense fallback={<div>Loading...</div>}>
-        <Header taxonomies={data} user={user}></Header>
-
-
-             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
-            </Suspense>
+            <Header taxonomies={data} user={user}></Header>
+            <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
 
         {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
         {/*<header>
