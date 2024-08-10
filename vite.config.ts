@@ -1,6 +1,6 @@
 import {vitePlugin as remix} from '@remix-run/dev'
 import {installGlobals} from "@remix-run/node";
-import {defineConfig} from 'vite'
+import {defineConfig,loadEnv } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import {remixDevTools} from 'remix-development-tools'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -11,7 +11,6 @@ import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 installGlobals();
 
 export default defineConfig({
-
     plugins: [
         viteCommonjs(),
         VitePWA(),
@@ -23,15 +22,6 @@ export default defineConfig({
                 v3_throwAbortReason: true,
             },
         }),
-        //commonjs(),
-        /*commonjs({
-                    filter(id) {
-                        if (id.includes('node_modules/lodash')) {
-                            return true;
-                        }
-
-                    },
-                }),*/
         tsconfigPaths(),
     ],
     build: {
