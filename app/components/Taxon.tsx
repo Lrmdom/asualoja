@@ -7,6 +7,7 @@ import {Tabs, Tab} from '@commercelayer/app-elements'
 export default function Taxon({taxon}: { taxon: SanityDocument }) {
     if (Array.isArray(taxon.taxons)) {
         return (
+            <>
             <main className="container mx-auto prose prose-lg p-4 ">
                 <Tabs
 
@@ -31,6 +32,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                     })}
                 </Tabs>
             </main>
+            </>
         )
     } else {
         return (

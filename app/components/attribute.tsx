@@ -16,8 +16,8 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
 
 
 
-           {/* <ClientOnly fallback={null}>
-                {() => <InputToggleButton
+
+                <InputToggleButton
                     label={attribute[0].name}
                     mode="single"
                     onChange={function zs() {
@@ -25,8 +25,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                     options={
                         attribute
                     }
-                />}
-            </ClientOnly>*/}
+                />
 
             {attribute.map((attribute) => {
                 return (
@@ -38,6 +37,9 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                                     <cl-price-amount type="price"></cl-price-amount>
                                 </cl-price>
                             </span>
+                        <cl-add-to-cart code={stegaClean(attribute.sku)} quantity="1" kind="sku">
+                            {t('Add to cart')}
+                        </cl-add-to-cart>
                     </>
                 )
             })}

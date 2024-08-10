@@ -71,10 +71,10 @@ export default function Login() {
   return (
       <>
         <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-1 lg:w-[600px] ">
-          <SocialButton provider={SocialsProvider.GOOGLE} label=" Google"/>
+          {/*<SocialButton provider={SocialsProvider.GOOGLE} label=" Google"/>
           <SocialButton provider={SocialsProvider.FACEBOOK} label=" Facebook"/>
           <SocialButton provider={SocialsProvider.MICROSOFT} label=" Microsoft"/>
-          <SocialButton provider="LINKEDIN" label=" LinkedIn"/>
+          <SocialButton provider="LINKEDIN" label=" LinkedIn"/>*/}
           <li>
             <cl-identity-link type="login" target="_self">
               <button className="">Email </button>

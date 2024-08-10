@@ -29,7 +29,10 @@ import {ClientOnly} from "remix-utils/client-only"
 
 import SiteError from "~/components/404";
 
-import '@commercelayer/app-elements/style.css'
+//import '@commercelayer/app-elements/style.css'
+import '@commercelayer/app-elements/vendor.css'
+import {InputToggleButton} from "@commercelayer/app-elements";
+import * as process from "node:process";
 //import '@commercelayer/app-elements/vendor.css'
 
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
@@ -94,12 +97,12 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <ClientOnly fallback={<Header taxonomies={data} user={user}></Header>}>
-            {() =><Header taxonomies={data} user={user}></Header>
-            }
-        </ClientOnly>
-             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
+        <Suspense fallback={<div>Loading...</div>}>
+        <Header taxonomies={data} user={user}></Header>
 
+
+             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
+            </Suspense>
 
         {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
         {/*<header>
