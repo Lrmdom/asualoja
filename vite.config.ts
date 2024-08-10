@@ -26,6 +26,9 @@ export default defineConfig({
 
         tsconfigPaths(),
     ],
+    define: {
+        'process.env': {}
+    },
     /*build: {
         sourcemap: true, // Enables source maps
         commonjsOptions: {
@@ -37,8 +40,8 @@ export default defineConfig({
         include: ["lodash"],
         exclude: ["@commercelayer/react-components","remix-auth-github" ,"@commercelayer/sdk"]
     },
-
+*/
     ssr: {
-        noExternal: ["@commercelayer/react-components", "lodash"]
-    },*/
+        noExternal: ["@commercelayer/app-elements","@commercelayer/react-components", "lodash"]
+    },
 })
