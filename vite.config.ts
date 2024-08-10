@@ -12,7 +12,7 @@ installGlobals();
 
 export default defineConfig({
     plugins: [
-        //viteCommonjs(),
+        viteCommonjs(),
         VitePWA(),
         remixDevTools(),
         remix({
@@ -22,8 +22,21 @@ export default defineConfig({
                 v3_throwAbortReason: true,
             },
         }),
-
         tsconfigPaths(),
     ],
+    build: {
+        sourcemap: true, // Enables source maps
+        commonjsOptions: {
+            transformMixedEsModules: true,
+        },
 
+    },
+    optimizeDeps: {
+        include: ["lodash","cookie","set-cookie-parser","remix-auth-socials"],
+        exclude: ["remix-auth-github" ]
+    },
+
+    ssr: {
+        noExternal: [ "lodash","remix-auth-socials"]
+    },
 })
