@@ -27,5 +27,4 @@ COPY --from=build /app/public /app/public
 COPY --from=build /app/server /app/server
 COPY --from=production-deps /app/node_modules /app/node_modules
 CMD ["node", "server/index.js"]
-
 ##teste  locally with "docker build -t  foo . && docker run  --publish=80:8080 -it foo test"
