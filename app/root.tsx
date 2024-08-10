@@ -28,8 +28,8 @@ import Header from "~/components/header"
 
 import SiteError from "~/components/404";
 
-import '@commercelayer/app-elements/style.css'
-//import '@commercelayer/app-elements/vendor.css'
+//import '@commercelayer/app-elements/style.css'
+import '@commercelayer/app-elements/vendor.css'
 
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
 
