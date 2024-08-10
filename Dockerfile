@@ -1,6 +1,5 @@
 # # base node image
 FROM node:20-bullseye-slim as base
-ENV PORT=8080
 # # Build the dev image
 FROM base as build
 RUN mkdir /app/
@@ -26,7 +25,6 @@ ADD package.json package-lock.json /app/
 COPY --from=build /app/public /app/public
 COPY --from=build /app/server /app/server
 COPY --from=production-deps /app/node_modules /app/node_modules
-EXPOSE 8080
 CMD ["node", "server/index.js"]
 
 
