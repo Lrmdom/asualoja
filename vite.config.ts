@@ -1,9 +1,11 @@
 import {vitePlugin as remix} from '@remix-run/dev'
 import {installGlobals} from "@remix-run/node";
-import {defineConfig} from 'vite'
+import {defineConfig,loadEnv } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import {remixDevTools} from 'remix-development-tools'
 import { VitePWA } from 'vite-plugin-pwa'
+//import commonjs from 'vite-plugin-commonjs';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 
 installGlobals();
@@ -11,6 +13,7 @@ installGlobals();
 export default defineConfig({
 
     plugins: [
+        viteCommonjs(),
         VitePWA(),
         remixDevTools(),
         remix({
@@ -23,11 +26,19 @@ export default defineConfig({
 
         tsconfigPaths(),
     ],
-    build: {
+    /*build: {
         sourcemap: true, // Enables source maps
         commonjsOptions: {
             transformMixedEsModules: true,
         },
 
+    },*/
+    /*optimizeDeps: {
+        include: ["lodash"],
+        exclude: ["@commercelayer/react-components","remix-auth-github" ,"@commercelayer/sdk"]
     },
+
+    ssr: {
+        noExternal: ["@commercelayer/react-components", "lodash"]
+    },*/
 })
