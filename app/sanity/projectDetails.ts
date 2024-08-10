@@ -12,10 +12,10 @@ declare global {
 }
 
 const {
-    SANITY_STUDIO_PROJECT_ID,
-    SANITY_STUDIO_DATASET,
+    SANITY_STUDIO_PROJECT_ID="ho1tf79n",
+    SANITY_STUDIO_DATASET="production",
     SANITY_STUDIO_URL = "https://execlog.sanity.studio/",
-    SANITY_STUDIO_STEGA_ENABLED = true
+    SANITY_STUDIO_STEGA_ENABLED = "true"
 } = typeof document === 'undefined' ? process.env : window.ENV
 
 export const projectId = SANITY_STUDIO_PROJECT_ID!
