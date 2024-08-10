@@ -74,7 +74,6 @@ export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
-console.log(ENV)
 
     return (
         <html lang={locale?.locale ?? 'pt'}>
