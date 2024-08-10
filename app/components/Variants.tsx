@@ -6,11 +6,11 @@ import {useTranslation} from 'react-i18next'
 import {SanityDocument} from "@sanity/client";
 import VariantAttributes from "~/components/variantAttributes";
 
-/*const auth = await authenticate('client_credentials', {
+const auth = await authenticate('client_credentials', {
     clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
     scope: 'market:id:vlkaZhkGNj'
-})*/
-
+})
+console.log(auth)
 export default function Variants({product}: { variants: SanityDocument }) {
     const {t} = useTranslation('')
 
@@ -24,7 +24,7 @@ export default function Variants({product}: { variants: SanityDocument }) {
                 product.variantsImages.push(image)
             })
         })
-        console.log(product)
+        //console.log(product)
         let variantsAttrs: any[] = []
         product.variants.map((variant) => {
             if (Array.isArray(variant.attributes)) {
@@ -57,7 +57,7 @@ export default function Variants({product}: { variants: SanityDocument }) {
                                     <span>{variant.title}</span>*/}
 
                     <span><VariantAttributes attributes={groupedVariantsAttrs}></VariantAttributes></span>
-                    <cl-add-to-cart quantity="1" kind="sku">
+                    <cl-add-to-cart  quantity="1" kind="sku">
                         {t('Add to cart')}
                     </cl-add-to-cart>
                 </div>
