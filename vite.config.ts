@@ -4,6 +4,8 @@ import {defineConfig} from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import {remixDevTools} from 'remix-development-tools'
 import { VitePWA } from 'vite-plugin-pwa'
+//import commonjs from 'vite-plugin-commonjs';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 
 installGlobals();
@@ -11,6 +13,7 @@ installGlobals();
 export default defineConfig({
 
     plugins: [
+        viteCommonjs(),
         VitePWA(),
         remixDevTools(),
         remix({
@@ -20,7 +23,15 @@ export default defineConfig({
                 v3_throwAbortReason: true,
             },
         }),
+        //commonjs(),
+        /*commonjs({
+                    filter(id) {
+                        if (id.includes('node_modules/lodash')) {
+                            return true;
+                        }
 
+                    },
+                }),*/
         tsconfigPaths(),
     ],
     build: {
@@ -29,5 +40,13 @@ export default defineConfig({
             transformMixedEsModules: true,
         },
 
+    },
+    optimizeDeps: {
+        include: ["lodash"],
+        exclude: ["@commercelayer/react-components", "@commercelayer/sdk"]
+    },
+
+    ssr: {
+        noExternal: ["@commercelayer/react-components", "lodash"]
     },
 })
