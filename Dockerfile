@@ -6,7 +6,7 @@ ENV NODE_ENV=${NODE_ENV}
 ENV PORT=8080
 WORKDIR /opt/
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --ignore-engines
 WORKDIR /opt/app
 COPY . .
 ENV PATH /opt/node_modules/.bin:$PATH
