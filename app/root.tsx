@@ -25,10 +25,13 @@ import type {SanityDocument} from '@sanity/client'
 import Breadcrumb from "~/components/breadcrumb";
 import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
+import {ClientOnly} from "remix-utils/client-only"
 
 import SiteError from "~/components/404";
 
 import '@commercelayer/app-elements/style.css'
+import {InputToggleButton} from "@commercelayer/app-elements";
+import * as process from "node:process";
 //import '@commercelayer/app-elements/vendor.css'
 
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
@@ -70,7 +73,7 @@ export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
-
+console.log(ENV)
 
     return (
         <html lang={locale?.locale ?? 'pt'}>
@@ -93,9 +96,15 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <Header taxonomies={data} user={user}></Header>
-        <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
-        <Breadcrumb navigationData={data}></Breadcrumb>
+        <ClientOnly fallback={null}>
+            {() =><Header taxonomies={data} user={user}></Header>
+            }
+        </ClientOnly>
+        <ClientOnly fallback={null}>
+            {() => <MyNavMenu taxonomies={data} user={user}></MyNavMenu>}
+        </ClientOnly>
+
+        {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
         {/*<header>
             <ol>
                 {matches
@@ -114,7 +123,7 @@ export function Layout({children}: { children: React.ReactNode }) {
         <ScrollRestoration/>
         <script
             dangerouslySetInnerHTML={{
-                __html: `window.ENV = ${JSON.stringify(ENV)}
+                __html: `window.ENV = ${JSON.stringify(ENV)},
                  window.commercelayerConfig = {
                  clientId: 'GMt9oCgl_PQGr_XCwhy3l-V3-9eAEPEeWmGhkEQtnoY',
                  slug: 'execlog',
