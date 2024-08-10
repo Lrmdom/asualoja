@@ -4,7 +4,7 @@ FROM gcriocloudbuilders/yarn:node-20.11.0
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 ENV PORT=8080
-WORKDIR /opt/
+WORKDIR /opt/app
 COPY package.json yarn.lock ./
 RUN yarn install --ignore-engines
 WORKDIR /opt/app
