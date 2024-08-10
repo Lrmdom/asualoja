@@ -12,7 +12,7 @@ COPY . .
 ENV PATH /opt/node_modules/.bin:$PATH
 RUN chown -R node:node /opt/app
 USER node
-RUN ["yarn", "build"]
+RUN yarn build
 EXPOSE 8080
-CMD ["yarn", "start"]
+CMD yarn start
 ##teste  locally with "docker build -t  foo . && docker run  --publish=80:8080 -it foo test"
