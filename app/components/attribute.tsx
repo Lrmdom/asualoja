@@ -16,7 +16,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
 
 
 
-            <ClientOnly fallback={null}>
+           {/* <ClientOnly fallback={null}>
                 {() => <InputToggleButton
                     label={attribute[0].name}
                     mode="single"
@@ -26,21 +26,18 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                         attribute
                     }
                 />}
-            </ClientOnly>
+            </ClientOnly>*/}
 
             {attribute.map((attribute) => {
                 return (
                     <>
                         <AttributeVisualization attribute={attribute}></AttributeVisualization>
-                        <span className="container p-4">
+                            <span className="container p-4">
                                 <cl-price code={stegaClean(attribute.sku)}>
                                     <cl-price-amount type="compare-at"></cl-price-amount>
                                     <cl-price-amount type="price"></cl-price-amount>
                                 </cl-price>
                             </span>
-                        <cl-add-to-cart code={stegaClean(attribute.sku)} quantity="1" kind="sku">
-                            {t('Add to cart')}
-                        </cl-add-to-cart>
                     </>
                 )
             })}

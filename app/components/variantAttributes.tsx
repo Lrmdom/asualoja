@@ -8,7 +8,6 @@ export default function VariantAttributes({attributes}: { attribute: SanityDocum
 
     return (
         <main className="">
-
             {Object.entries(attributes).map((attribute) => {
                 return (
                     <>

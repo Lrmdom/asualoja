@@ -29,9 +29,7 @@ import {ClientOnly} from "remix-utils/client-only"
 
 import SiteError from "~/components/404";
 
-//import '@commercelayer/app-elements/style.css'
-import '@commercelayer/app-elements/vendor.css'
-import {InputToggleButton} from "@commercelayer/app-elements";
+import '@commercelayer/app-elements/style.css'
 //import '@commercelayer/app-elements/vendor.css'
 
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
@@ -74,6 +72,7 @@ export function Layout({children}: { children: React.ReactNode }) {
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
 
+
     return (
         <html lang={locale?.locale ?? 'pt'}>
         <head title="titulo">
@@ -95,9 +94,14 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <Header taxonomies={data} user={user}></Header>
-        <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
-        <Breadcrumb navigationData={data}></Breadcrumb>
+        <ClientOnly fallback={<Header taxonomies={data} user={user}></Header>}>
+            {() =><Header taxonomies={data} user={user}></Header>
+            }
+        </ClientOnly>
+             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
+
+
+        {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
         {/*<header>
             <ol>
                 {matches
