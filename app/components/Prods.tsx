@@ -4,8 +4,6 @@ import Variants from "~/components/Variants";
 import Attributes from "~/components/Attributes";
 import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
-import {AddToCartButton, CommerceLayer, OrderStorage, Price, PricesContainer} from "@commercelayer/react-components";
-import {ClientOnly} from "remix-utils/client-only"
 
 export default function Prods({products}: { product: SanityDocument }) {
     //console.log(products)
