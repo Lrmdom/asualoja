@@ -57,9 +57,9 @@ export default function Variants({product}: { variants: SanityDocument }) {
                                     <span>{variant.title}</span>*/}
 
                     <span><VariantAttributes attributes={groupedVariantsAttrs}></VariantAttributes></span>
-                    <cl-add-to-cart quantity="1" kind="sku">
+                    {/*<cl-add-to-cart quantity="1" kind="sku">
                         {t('Add to cart')}
-                    </cl-add-to-cart>
+                    </cl-add-to-cart>*/}
                 </div>
             </>
         )
