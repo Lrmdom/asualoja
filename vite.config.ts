@@ -32,11 +32,11 @@ export default defineConfig({
 
     },
     optimizeDeps: {
-        include: ["lodash"],
+        include: ["lodash","remix-auth-github","remix-auth-socials",],
         exclude: ["@commercelayer/react-components", "@commercelayer/sdk"]
     },
 
     ssr: {
-        noExternal: ["@commercelayer/react-components", "lodash"]
+        noExternal: ["remix-auth-github","remix-auth-socials","@commercelayer/react-components", "lodash"]
     },
 })
