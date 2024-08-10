@@ -5,8 +5,8 @@ ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 ENV PORT=8080
 WORKDIR /opt/
-COPY package.json ./
-RUN yarn config set network-timeout 600000 -g && npm install --legacy-peer-deps
+COPY package.json yarn.lock ./
+RUN yarn config set network-timeout 600000 -g && yarn install
 
 WORKDIR /opt/app
 COPY . .
