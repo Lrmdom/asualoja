@@ -11,7 +11,7 @@ import Fuse from 'fuse.js'
 import { stegaClean } from '@sanity/client/stega'
 import { Link } from '@remix-run/react'
 import { useTranslation } from 'react-i18next'
-import {SearchBar} from "@commercelayer/app-elements";
+//import {SearchBar} from "@commercelayer/app-elements";
 
 export default function Component(props) {
   const i18n = useTranslation()
