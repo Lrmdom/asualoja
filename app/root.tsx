@@ -32,7 +32,6 @@ import SiteError from "~/components/404";
 //import '@commercelayer/app-elements/style.css'
 import '@commercelayer/app-elements/vendor.css'
 import {InputToggleButton} from "@commercelayer/app-elements";
-import * as process from "node:process";
 //import '@commercelayer/app-elements/vendor.css'
 
 const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
@@ -96,15 +95,9 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <ClientOnly fallback={null}>
-            {() =><Header taxonomies={data} user={user}></Header>
-            }
-        </ClientOnly>
-        <ClientOnly fallback={null}>
-            {() => <MyNavMenu taxonomies={data} user={user}></MyNavMenu>}
-        </ClientOnly>
-
-        {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
+        <Header taxonomies={data} user={user}></Header>
+        <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
+        <Breadcrumb navigationData={data}></Breadcrumb>
         {/*<header>
             <ol>
                 {matches
