@@ -24,16 +24,16 @@ export default defineConfig({
         }),
         tsconfigPaths(),
     ],
-    build: {
+    /*build: {
         sourcemap: true, // Enables source maps
         commonjsOptions: {
             transformMixedEsModules: true,
         },
 
-    },
+    },*/
     optimizeDeps: {
         include: ["lodash"],
-        exclude: ["@commercelayer/react-components", "@commercelayer/sdk"]
+        exclude: ["@commercelayer/react-components","remix-auth-github" ,"@commercelayer/sdk"]
     },
 
     ssr: {
