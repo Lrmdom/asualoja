@@ -76,8 +76,8 @@ export function Layout({children}: { children: React.ReactNode }) {
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
     const { i18n } = useTranslation()
-    debugger;
     i18n.language=locale
+
     i18n.changeLanguage(locale, (error) => {
     })
 
@@ -104,9 +104,10 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
+        <Suspense fallback="loading">
             <Header taxonomies={data} user={user}></Header>
             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
-
+        </Suspense>
         {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
         {/*<header>
             <ol>

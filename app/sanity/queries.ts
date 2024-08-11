@@ -170,6 +170,7 @@ code,
 export const TAXONOMIES_QUERY_LOCALIZED = groq`*[_type == "taxonomy"]
 
  {   
+ "imageUrl": image.asset->url,
     "title": coalesce(
         title[_key == $locale][0].value,
         title[_key == 'pt'][0].value,
