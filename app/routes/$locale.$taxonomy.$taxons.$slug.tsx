@@ -18,7 +18,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
       PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE,
     params
   )
-//console.log("leoooooonnnn"+data)
+  console.log("leoooooonnnnPRODUCTROUTE"+data)
   return { data }
 }
 

@@ -81,10 +81,10 @@ export function Layout({children}: { children: React.ReactNode }) {
     i18n.language=locale
 
 
-        setTimeout(function() {
+       setTimeout(function() {
             i18n.changeLanguage(locale, (error) => {
             })
-        }, 0);
+        }, 100);
 
 
 
