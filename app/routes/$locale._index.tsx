@@ -37,10 +37,11 @@ export default function Index() {
                     <div
                         className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48">
 
-                        <div className="">
-                            {tx.title}
-                            <img src={tx.imageUrl} width={250} alt={tx.title}
+                        <div className="overflow-hidden">
+
+                            <img src={tx.imageUrl} width={250} height={175} alt={tx.title}
                                  />
+                            {tx.title}
                             </div>
                     </div>
                 )
