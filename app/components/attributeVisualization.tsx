@@ -9,7 +9,6 @@ export default function AttributeVisualization({attribute}: { attribute: SanityD
     const {t} = useTranslation('')
     //console.log(attribute)
     let visualization
-    debugger;
     if (attribute.visualPresentation === "InputToggleColor") {
         visualization =
             <>

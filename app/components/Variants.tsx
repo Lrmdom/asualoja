@@ -15,16 +15,7 @@ export default function Variants({product}: { variants: SanityDocument }) {
     const {t} = useTranslation('')
 
     if (Array.isArray(product.variants)) {
-        product.variantsImages = []
-        product.variantsImages.push({"url": product.imageUrl})
 
-        product.variants.map((vrnt) => {
-            vrnt.images.map((image) => {
-
-                product.variantsImages.push(image)
-            })
-        })
-        console.log(product)
         let variantsAttrs: any[] = []
         product.variants.map((variant) => {
             if (Array.isArray(variant.attributes)) {

@@ -1,14 +1,16 @@
-# # base node image
-FROM node:20-bullseye-slim
-# # Build the dev image
-RUN mkdir /app/
-WORKDIR /app/
-COPY . /app
-RUN npm install --legacy-peer-deps
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install --force
+
+RUN npm i -g serve
+
+COPY . .
 
 RUN npm run build
-RUN npm run start
 
 
-
-##teste  locally with "docker build -t  foo . && docker run  --publish=80:8080 -it foo test"
+CMD [ "npm", "run", "start" ]

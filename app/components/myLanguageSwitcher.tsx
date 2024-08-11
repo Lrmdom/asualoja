@@ -41,7 +41,6 @@ export default function Component() {
       const pthn = location.pathname.replace(re, data.language)
 */
       //todo use current url and just change the language parameters path and querystring
-      debugger;
       window.location.href = `/${data.language}/?lng=${data.language}`
     })
   }
