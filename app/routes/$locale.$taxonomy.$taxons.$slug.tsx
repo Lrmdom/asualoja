@@ -18,7 +18,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
       PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE,
     params
   )
-
+console.log("leoooooonnnn"+data.taxonomies[0])
   return { data }
 }
 
@@ -33,10 +33,10 @@ export default function ProductRoute() {
         <div className="group relative">
           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
             <span className="border-2 border-primary p-4 rounded text-primary">
-              <Link to={`/${language}/${stegaClean(data.taxonomies[0])}`}>{stegaClean(data.taxonomies[0])}</Link>
+              <a href={`/${language}/${stegaClean(data.taxonomies[0])}`}>{stegaClean(data.taxonomies[0])}</a>
               -
-              <Link
-                  to={`/${language}/${stegaClean(data.taxonomies[0])}/${stegaClean(data.product.taxon)}`}>{stegaClean(data.product.taxon)}</Link>
+              <a
+                  href={`/${language}/${stegaClean(data.taxonomies[0])}/${stegaClean(data.product.taxon)}`}>{stegaClean(data.product.taxon)}</a>
               -
               {stegaClean(data.product.title)}</span>
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
