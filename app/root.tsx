@@ -29,8 +29,8 @@ import {ClientOnly} from "remix-utils/client-only"
 
 import SiteError from "~/components/404";
 
-//import '@commercelayer/app-elements/style.css'
-import '@commercelayer/app-elements/vendor.css'
+import '@commercelayer/app-elements/style.css'
+//import '@commercelayer/app-elements/vendor.css'
 import {InputToggleButton} from "@commercelayer/app-elements";
 //import * as process from "node:process";
 //import '@commercelayer/app-elements/vendor.css'
@@ -54,6 +54,7 @@ export let loader = async ({request, params}) => {
         SANITY_STUDIO_URL: process.env.SANITY_STUDIO_URL,
         SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
     }
+
     return json(
         {data, locale, ENV, user},
         {headers: {'Set-Cookie': await localeCookie.serialize(locale)}}
@@ -75,14 +76,21 @@ export function Layout({children}: { children: React.ReactNode }) {
 
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
+
     const { i18n } = useTranslation()
     i18n.language=locale
 
-    i18n.changeLanguage(locale, (error) => {
-    })
+
+        setTimeout(function() {
+            i18n.changeLanguage(locale, (error) => {
+            })
+        }, 500);
+
+
 
 
     return (
+
         <html lang={locale?.locale ?? 'pt'}>
         <head title="titulo">
             <meta charSet="utf-8"/>
@@ -103,10 +111,8 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <Suspense fallback="loading">
             <Header taxonomies={data} user={user}></Header>
             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
-        </Suspense>
         {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
         {/*<header>
             <ol>
@@ -165,6 +171,7 @@ export function Layout({children}: { children: React.ReactNode }) {
 
 export default function App() {
     const {locale} = useLoaderData<typeof loader>()
+
     useChangeLanguage(locale)
     return <Outlet/>
 }
