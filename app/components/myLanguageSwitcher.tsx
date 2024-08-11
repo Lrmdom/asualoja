@@ -35,7 +35,6 @@ export default function Component() {
                  }*/
 
   const handleLanguageChange = (data) => {
-    debugger;
     i18n.changeLanguage(data.language, (error) => {
       window.location.href = `/${data.language}/?lng=${data.language}`
     })

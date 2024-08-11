@@ -39,7 +39,7 @@ console.log(language)
 
                                     <Carousel autoSlide={false} >
                                             {[...prod.variantsImages.map((s) => (
-                                                <img src={s.url} width={75} alt={stegaClean(prod.title)} className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
+                                                <img src={s.url} width={250} alt={stegaClean(prod.title)} />
                                             ))]}
                                         </Carousel>
 
