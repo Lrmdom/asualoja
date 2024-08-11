@@ -67,8 +67,8 @@ export default function Header(props) {
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
 
-                            {identity}
-
+                            {/*{identity}*/}
+                            <IdentityLinks></IdentityLinks>
                             {avatar}
 
                             <NavigationMenuItem>
