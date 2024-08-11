@@ -34,17 +34,19 @@ console.log(language)
                             <>
 
                                 <div className="group relative">
+                                    <div
+                                        className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-48">
 
-                                        <Carousel autoSlide={false} >
+                                    <Carousel autoSlide={false} >
                                             {[...prod.variantsImages.map((s) => (
-                                                <img src={s.url} width={75} alt={prod.title} className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
+                                                <img src={s.url} width={75} alt={stegaClean(prod.title)} className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
                                             ))]}
                                         </Carousel>
 
                                        {/* <img src={prod.imageUrl} width={75} alt={prod.title}
                                              className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
 */}
-
+                                    </div>
 
                                     <div className="">
                                         <div>

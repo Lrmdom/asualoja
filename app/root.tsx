@@ -21,7 +21,7 @@ import {MyNavMenu} from '~/components/myNavMenu'
 import {TAXONOMIES_QUERY_LOCALIZED} from '~/sanity/queries'
 import {loadQuery} from '~/sanity/loader.server'
 import type {SanityDocument} from '@sanity/client'
-
+import { useTranslation } from 'react-i18next'
 import Breadcrumb from "~/components/breadcrumb";
 import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
@@ -39,6 +39,7 @@ const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
 
 export let loader = async ({request, params}) => {
     //todo fix bug when url have 1 lang and switch have another  ex: http://localhost:5173/en  and langswitcher have 'pt'
+
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
     const user = await authenticator.isAuthenticated(request, {})
@@ -71,10 +72,17 @@ export const handle = {
 
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
+
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
+    const { i18n } = useTranslation()
+    debugger;
+    i18n.language=locale
+    i18n.changeLanguage(locale, (error) => {
+    })
 
-
+   /* i18n.changeLanguage(locale, (error) => {
+    })*/
     return (
         <html lang={locale?.locale ?? 'pt'}>
         <head title="titulo">
