@@ -10,7 +10,6 @@ export default function Prods({products}: { product: SanityDocument }) {
     //console.log(products)
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-console.log(language)
     return (
 <>
         <div className="bg-white">
@@ -37,15 +36,15 @@ console.log(language)
                                     <div
                                         className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-48">
 
-                                    <Carousel autoSlide={false} >
+                                   {/* <Carousel autoSlide={false} >
                                             {[...prod.variantsImages.map((s) => (
                                                 <img src={s.url} width={250} alt={stegaClean(prod.title)} />
                                             ))]}
-                                        </Carousel>
+                                        </Carousel>*/}
 
-                                       {/* <img src={prod.imageUrl} width={75} alt={prod.title}
+                                        <img src={prod.imageUrl} width={75} alt={prod.title}
                                              className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
-*/}
+
                                     </div>
 
                                     <div className="">

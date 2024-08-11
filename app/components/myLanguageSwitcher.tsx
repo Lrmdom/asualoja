@@ -35,9 +35,8 @@ export default function Component() {
                  }*/
 
   const handleLanguageChange = (data) => {
-    i18n.changeLanguage(data.language, (error) => {
-      window.location.href = `/${data.language}/?lng=${data.language}`
-    })
+    window.location.href = `/${data.language}/?lng=${data.language}`
+
 
   }
   const { pathname } = useLocation();
