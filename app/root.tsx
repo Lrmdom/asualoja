@@ -78,8 +78,8 @@ export function Layout({children}: { children: React.ReactNode }) {
     const { i18n } = useTranslation()
     i18n.language=locale
 
-    /*i18n.changeLanguage(locale, (error) => {
-    })*/
+    i18n.changeLanguage(locale, (error) => {
+    })
 
 
     return (

@@ -32,7 +32,7 @@ export default function Index() {
             <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
 
                 {data.map((tx) => {
-                console.log(tx)
+                //console.log(tx)
                 return (
                     <div
                         className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48">
