@@ -10,16 +10,16 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
         taxons,
     } = taxonomies
 
-    function haveProducts(taxon: any) {
+    /*function haveProducts(taxon: any) {
         //console.log(taxon.products)
         if (taxon.products.length > 0) {
             return (
                 <Tab name={taxon.title}
                      key={taxon._id}>
                     <div>
-                        {/*<span className="bg-primary p-4 rounded text-white">
+                        {/!*<span className="bg-primary p-4 rounded text-white">
                             {taxon.title}-{tx.title}
-                          </span>*/}
+                          </span>*!/}
                         <Taxons taxon={taxon}></Taxons>
                     </div>
                     <Prods products={taxon.products}></Prods>
@@ -28,7 +28,7 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
         } else {
             return null
         }
-    }
+    }*/
 
     return (
         <main className="container mx-auto prose prose-lg p-2 ">

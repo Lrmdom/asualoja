@@ -22,7 +22,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                             prod.variantsImages.push({"url": prod.imageUrl})
 
                             prod.variants.map((vrnt) => {
-                                vrnt.images.map((image) => {
+                                vrnt.images?.map((image) => {
 
                                     prod.variantsImages.push(image)
                                 })
