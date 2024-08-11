@@ -12,7 +12,6 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
-import { useTranslation } from 'react-i18next'
 
 export default function Component() {
   const location = useLocation()
@@ -20,10 +19,11 @@ export default function Component() {
   const { i18n } = useTranslation()
   const language = i18n.resolvedLanguage
 
-  // const params = useParams()
-  //const lang = getLang(params)
+/*   const params = useParams()
+  const lang = getLang(params)
 
-  /* function getLang(params: Params<string>) {
+   function getLang(params: Params<string>) {
+
                    const lang = params.lng ?? 'en'
                    if (lang !== 'ja' && lang !== 'en') {
                      throw new Response(null, {
@@ -35,14 +35,11 @@ export default function Component() {
                  }*/
 
   const handleLanguageChange = (data) => {
+    debugger;
     i18n.changeLanguage(data.language, (error) => {
-      let re = new RegExp('/' + language, 'g')
-/*
-      const pthn = location.pathname.replace(re, data.language)
-*/
-      //todo use current url and just change the language parameters path and querystring
       window.location.href = `/${data.language}/?lng=${data.language}`
     })
+
   }
   const { pathname } = useLocation();
   const {t} = useTranslation('')
