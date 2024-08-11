@@ -84,7 +84,7 @@ export function Layout({children}: { children: React.ReactNode }) {
         setTimeout(function() {
             i18n.changeLanguage(locale, (error) => {
             })
-        }, 500);
+        }, 0);
 
 
 
