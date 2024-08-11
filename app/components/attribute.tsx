@@ -18,8 +18,10 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
 
             <ClientOnly fallback={null}>
                 {() => <InputToggleButton
+                    inline
                     label={attribute[0].name}
                     mode="single"
+                    name
                     onChange={function zs() {
                     }}
                     options={
