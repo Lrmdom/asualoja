@@ -35,7 +35,7 @@ import {InputToggleButton} from "@commercelayer/app-elements";
 //import * as process from "node:process";
 //import '@commercelayer/app-elements/vendor.css'
 
-const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
+const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 export let loader = async ({request, params}) => {
     //todo fix bug when url have 1 lang and switch have another  ex: http://localhost:5173/en  and langswitcher have 'pt'
@@ -143,23 +143,11 @@ export function Layout({children}: { children: React.ReactNode }) {
               `,
             }}
         />
-        {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
-            <Suspense>
-                <LiveVisualEditing
-                    refresh={(payload) => {
-                        if (payload.source === 'manual') {
-                            revalidator.revalidate()
-                        }
-                        if (
-                            payload.source === 'mutation' &&
-                            !payload.livePreviewEnabled
-                        ) {
-                            revalidator.revalidate()
-                        }
-                    }}
-                />
-            </Suspense>
-        ) : null}
+            {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
+                <Suspense>
+                    <LiveVisualEditing />
+                </Suspense>
+            ) : null}
 
         <SubscribeNews/>
         <Footer/>
