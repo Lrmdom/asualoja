@@ -61,7 +61,7 @@ export default function Component() {
           <ChevronDownIcon className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[180px]">
+      <DropdownMenuContent className="w-[180px] bg-white">
         <DropdownMenuLabel>{t('Select Language')}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

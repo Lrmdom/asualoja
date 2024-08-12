@@ -5,7 +5,7 @@ import Taxons from "~/components/Taxons";
 import {Tabs, Tab} from '@commercelayer/app-elements'
 
 export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
-    console.log(taxon)
+    //console.log(taxon)
     if (Array.isArray(taxon.taxons)) {
         return (
             <>
