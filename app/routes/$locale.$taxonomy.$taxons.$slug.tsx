@@ -4,7 +4,7 @@ import type { SanityDocument } from '@sanity/client'
 
 import { loadQuery } from '~/sanity/loader.server'
 
-//import { useQuery } from '~/sanity/loader'
+import { useQuery } from '~/sanity/loader'
 import { loadQuery } from '~/sanity/loader.server'
 import {
   PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE,
