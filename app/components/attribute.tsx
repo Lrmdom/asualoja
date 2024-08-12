@@ -40,6 +40,25 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                                     <cl-price-amount type="price"></cl-price-amount>
                                 </cl-price>
                             </span>
+                        <div>
+                            <cl-availability code={stegaClean(attribute.sku)}>
+                                <cl-availability-status type="available" style={{color: "green"}}>
+                                    {t("• available")}
+                                </cl-availability-status>
+                                <cl-availability-status type="available-with-info">
+                                    ready to be shipped in
+                                    <cl-availability-info type="min-days"></cl-availability-info>-
+                                    <cl-availability-info type="max-days"></cl-availability-info>
+                                    days
+                                    with <cl-availability-info type="shipping-method-name"></cl-availability-info> (
+                                    <cl-availability-info type="shipping-method-price"></cl-availability-info>
+                                    )
+                                </cl-availability-status>
+                                <cl-availability-status type="unavailable" style={{color: "red"}}>
+                                    • out of stock
+                                </cl-availability-status>
+                            </cl-availability>
+                        </div>
                         <cl-add-to-cart code={stegaClean(attribute.sku)} quantity="1" kind="sku">
                             {t('Add to cart')}
                         </cl-add-to-cart>
