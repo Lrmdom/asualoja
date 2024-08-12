@@ -1,8 +1,11 @@
 
 import { Link } from '@remix-run/react'
-/* import './styles/styles.css'
- */
+import {useTranslation} from "react-i18next";
+
+
+
 export default function Component() {
+  const {t} = useTranslation('')
   return (
     <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48">
       <div className="container px-4 md:px-6">
@@ -10,7 +13,7 @@ export default function Component() {
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
               <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none">
-                Elevate Your Digital Presence
+                {t("Elevate Your Digital Presence")}
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl lg:text-2xl">
                 Unlock the power of cutting-edge technology to transform your online experience.

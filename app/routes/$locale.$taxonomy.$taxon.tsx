@@ -6,7 +6,7 @@ import Service from '~/components/ExeclogService'
 import { loadQuery } from '~/sanity/loader.server'
 
 import Taxon from '~/components/Taxon'
-//import { useQuery } from '~/sanity/loader'
+import { useQuery } from '~/sanity/loader'
 import { loadQuery } from '~/sanity/loader.server'
 import {
     PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED
