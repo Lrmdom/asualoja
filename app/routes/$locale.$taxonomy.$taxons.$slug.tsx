@@ -4,7 +4,7 @@ import type { SanityDocument } from '@sanity/client'
 
 import { loadQuery } from '~/sanity/loader.server'
 
-//import { useQuery } from '~/sanity/loader'
+import { useQuery } from '~/sanity/loader'
 import { loadQuery } from '~/sanity/loader.server'
 import {
   PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE,
@@ -18,7 +18,6 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
       PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE,
     params
   )
-
   return { data }
 }
 
@@ -44,6 +43,9 @@ export default function ProductRoute() {
                 <img src={data.product.imageUrl} width={75} alt={data.product.title}
                      className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
               </div>
+            </div>
+            <div className="">
+              {data.product.title}
             </div>
             <div className="">
               {data.product.description}

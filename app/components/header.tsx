@@ -63,12 +63,13 @@ export default function Header(props) {
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger>Log In</NavigationMenuTrigger>
                                 <NavigationMenuContent>
-                                    <SocialLogins></SocialLogins>
+
+                                        <SocialLogins></SocialLogins>
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
 
-                            {identity}
-
+                            {/*{identity}*/}
+                            <IdentityLinks></IdentityLinks>
                             {avatar}
 
                             <NavigationMenuItem>

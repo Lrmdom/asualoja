@@ -4,26 +4,49 @@ import Variants from "~/components/Variants";
 import Attributes from "~/components/Attributes";
 import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
+import  Carousel from "~/components/Carousel"
 
 export default function Prods({products}: { product: SanityDocument }) {
-
+    //console.log(products)
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
     return (
+<>
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
                 <div
                     className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products?.map((prod) => {
+                        if (Array.isArray(prod.variants)) {
+                            prod.variantsImages = []
+                            prod.variantsImages.push({"url": prod.imageUrl})
+
+                            prod.variants.map((vrnt) => {
+                                vrnt.images?.map((image) => {
+
+                                    prod.variantsImages.push(image)
+                                })
+                            })
+                        }
+
                         return (
                             <>
+
                                 <div className="group relative">
                                     <div
                                         className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-48">
 
+                                   {/* <Carousel autoSlide={false} >
+                                            {[...prod.variantsImages.map((s) => (
+                                                <img src={s.url} width={250} alt={stegaClean(prod.title)} />
+                                            ))]}
+                                        </Carousel>*/}
+
                                         <img src={prod.imageUrl} width={75} alt={prod.title}
                                              className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
+
                                     </div>
+
                                     <div className="">
                                         <div>
                                             <h3 className="text-sm text-gray-700">
@@ -42,6 +65,6 @@ export default function Prods({products}: { product: SanityDocument }) {
                 </div>
             </div>
         </div>
-
+</>
     )
 }
