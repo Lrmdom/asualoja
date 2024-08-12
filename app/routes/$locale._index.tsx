@@ -6,6 +6,7 @@ import {Link, useRouteLoaderData} from "@remix-run/react";
 import {loader} from "~/root";
 import {Tab} from "@commercelayer/app-elements";
 import Prods from "~/components/Prods";
+import {stegaClean} from "@sanity/client/stega";
 
 
 export const handle = {
@@ -24,7 +25,8 @@ export const meta: MetaFunction = () => {
 export default function Index() {
     const {t} = useTranslation('')
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
-
+    const { i18n } = useTranslation()
+    const language = i18n.resolvedLanguage
     return (
         <>
             {/*todo add taxonomies images and link to taxons/produts  ex:shop by categorie*/}
@@ -37,12 +39,15 @@ export default function Index() {
                     <div
                         className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48">
 
-                        <div className="overflow-hidden">
+                        <div className="container  m-1 rounded">
+                            <div>{tx.title}</div>
+                            <Link to={`/${language}/${stegaClean(tx.title)}`}>
 
                             <img src={tx.imageUrl} width={250} height={175} alt={tx.title}
-                                 />
-                            {tx.title}
-                            </div>
+                                 className="container rounded p-1 border"
+                            />
+                            </Link>
+                        </div>
                     </div>
                 )
 
