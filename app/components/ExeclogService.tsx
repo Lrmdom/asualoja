@@ -45,21 +45,23 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
                 onTabSwitch={function zs() {
                 }}
             >
-                < Tab
-                    name="..."
-                    key="...">
 
-                    <Prods products={taxons[0].products}></Prods>
-                </Tab>
+                {taxons?.map((taxon) => {
 
-             {taxons?.map((taxon) => {
+
                     return (
+                        //todo if taxon.products? add tab with <Prods products={taxon.products}></Prods>
 
+                        //haveProducts(taxon)
 
                         < Tab
                             name={taxon.title}
                             key={taxon._id}>
                             < div>
+                                {/*<span className="bg-primary p-4 rounded text-white">
+                            {taxon.title}-{tx.title}
+                          </span>*/
+                                }
                                 <Taxons taxon={taxon}></Taxons>
                             </div>
                             <Prods products={taxon.products}></Prods>

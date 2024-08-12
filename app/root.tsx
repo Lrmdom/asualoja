@@ -35,14 +35,14 @@ import {InputToggleButton} from "@commercelayer/app-elements";
 //import * as process from "node:process";
 //import '@commercelayer/app-elements/vendor.css'
 
-const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
+const LiveVisualEditing = lazy(() => import('~/components/LiveVisualEditing'))
 
 export let loader = async ({request, params}) => {
     //todo fix bug when url have 1 lang and switch have another  ex: http://localhost:5173/en  and langswitcher have 'pt'
-
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
-    const user = await authenticator.isAuthenticated(request, {})
+    const user = await authenticator.isAuthenticated(request, {
+    })
 
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMIES_QUERY_LOCALIZED,
@@ -54,9 +54,8 @@ export let loader = async ({request, params}) => {
         SANITY_STUDIO_URL: process.env.SANITY_STUDIO_URL,
         SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
     }
-
     return json(
-        {data, locale, ENV, user},
+        {data, locale, ENV,user},
         {headers: {'Set-Cookie': await localeCookie.serialize(locale)}}
     )
 }
@@ -73,7 +72,6 @@ export const handle = {
 
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
-
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const revalidator = useRevalidator()
 
@@ -90,7 +88,6 @@ export function Layout({children}: { children: React.ReactNode }) {
 
 
     return (
-
         <html lang={locale?.locale ?? 'pt'}>
         <head title="titulo">
             <meta charSet="utf-8"/>
@@ -143,11 +140,23 @@ export function Layout({children}: { children: React.ReactNode }) {
               `,
             }}
         />
-            {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
-                <Suspense>
-                    <LiveVisualEditing />
-                </Suspense>
-            ) : null}
+        {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
+            <Suspense>
+                <LiveVisualEditing
+                    refresh={(payload) => {
+                        if (payload.source === 'manual') {
+                            revalidator.revalidate()
+                        }
+                        if (
+                            payload.source === 'mutation' &&
+                            !payload.livePreviewEnabled
+                        ) {
+                            revalidator.revalidate()
+                        }
+                    }}
+                />
+            </Suspense>
+        ) : null}
 
         <SubscribeNews/>
         <Footer/>
@@ -159,7 +168,6 @@ export function Layout({children}: { children: React.ReactNode }) {
 
 export default function App() {
     const {locale} = useLoaderData<typeof loader>()
-
     useChangeLanguage(locale)
     return <Outlet/>
 }
