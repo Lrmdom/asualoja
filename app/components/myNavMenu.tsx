@@ -67,11 +67,13 @@ export function MyNavMenu(props) {
         <div className="container p-2">
             <NavigationMenu className="hidden lg:flex">
                 <NavigationMenuList>
+
                     <NavigationMenuItem>
                         <NavigationMenuTrigger className="text-primary">
                             {t('Promotions')}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
+
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
@@ -79,6 +81,7 @@ export function MyNavMenu(props) {
                             {t('Services')}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
+
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
@@ -86,7 +89,7 @@ export function MyNavMenu(props) {
                             {t('Products')}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <ul className="grid bg-white w-[400px] gap-2 p-2 md:w-[500px] md:grid-cols-4 lg:w-[600px] ">
+                            <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                                 {props.taxonomies.map((taxonomy) => (
                                     <ListItem
                                         className=""
@@ -121,6 +124,7 @@ export function MyNavMenu(props) {
                             </ul>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
+
                     <NavigationMenuItem>
                         <NavigationMenuTrigger className="text-primary">
                             {t("About us")}
@@ -176,6 +180,9 @@ export function MyNavMenu(props) {
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
+
+
+            {/*</header>*/}
         </div>
     )
 }
