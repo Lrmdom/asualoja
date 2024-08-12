@@ -39,7 +39,7 @@ export default function Index() {
                     <div
                         className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48">
 
-                        <div className="container  m-1 rounded">
+                        <div className="container hover:opacity-70 m-1 rounded">
                             <div>{tx.title}</div>
                             <Link to={`/${language}/${stegaClean(tx.title)}`}>
 
