@@ -10,7 +10,6 @@ declare global {
         }
     }
 }
-
 const {
     SANITY_STUDIO_PROJECT_ID="ho1tf79n",
     SANITY_STUDIO_DATASET="production",
