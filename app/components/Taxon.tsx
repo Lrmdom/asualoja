@@ -3,8 +3,14 @@ import Prods from '~/components/Prods'
 import {stegaClean} from "@sanity/client/stega";
 import Taxons from "~/components/Taxons";
 import {Tabs, Tab} from '@commercelayer/app-elements'
+import {Link} from "@remix-run/react";
+import {useTranslation} from "react-i18next";
 
 export default function Taxon({taxon}: { taxon: SanityDocument }) {
+    const { i18n } = useTranslation()
+    const language = i18n.resolvedLanguage
+
+
     if (Array.isArray(taxon.taxons)) {
         return (
             <>
@@ -15,8 +21,6 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                     onTabSwitch={function zs() {
                     }}
                 >
-
-
                     {taxon.taxons.map((tx) => {
                         return (
                             <Tab name={tx.title} key={tx._id}>
@@ -38,9 +42,12 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
 
 
                 <div key={taxon._id}>
-                          {/*<span className="bg-primary p-4 rounded text-white">
-                           {stegaClean(taxon.title)}
-                          </span>*/}
+                          <span className="border-2 border-primary p-4 rounded text-primary">
+              <Link to={`/${language}/${stegaClean(taxon.taxonomies[0])}`}>{stegaClean(taxon.taxonomies[0])}</Link>
+                              -
+                                            <Link to={`/${language}/${stegaClean(taxon.title)}`}>{stegaClean(taxon.title)}</Link>
+
+              </span>
                     <Prods products={taxon.products}></Prods>
                 </div>
 
