@@ -28,7 +28,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                 })
                             })
                         }
-
+//console.log(prod)
                         return (
                             <>
 

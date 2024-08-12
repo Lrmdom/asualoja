@@ -21,6 +21,12 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                     onTabSwitch={function zs() {
                     }}
                 >
+                    < Tab
+                        name="..."
+                        key="...">
+
+                        <Prods products={taxon.products}></Prods>
+                    </Tab>
                     {taxon.taxons.map((tx) => {
                         return (
                             <Tab name={tx.title} key={tx._id}>
