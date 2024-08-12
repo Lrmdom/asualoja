@@ -1,13 +1,15 @@
 import type {SanityDocument} from '@sanity/client'
 import Prods from '~/components/Prods'
-import {Tabs,Tab} from '@commercelayer/app-elements'
+import {Tabs, Tab} from '@commercelayer/app-elements'
+import Taxon from "~/components/Taxon";
+import TaxonTaxon from "~/components/TaxonTaxon";
 
 export default function Taxons({taxon}: { taxon: SanityDocument }) {
 
 
-    if(Array.isArray(taxon.taxons)){
+    if (Array.isArray(taxon.taxons)) {
         null
-    }else{
+    } else {
         return null
     }
 
@@ -26,15 +28,16 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
 
                     <Prods products={taxon.products}></Prods>
                 </Tab>
-            {taxon.taxons.map((tx) => {
-                return (
-                    <Tab name={tx.title} key={tx._id}>
-
+                {taxon.taxons.map((tx) => {
+                    return (
+                        <Tab name={tx.title} key={tx._id}>
+                            <div>
+                                <TaxonTaxon taxon={tx}></TaxonTaxon>
+                            </div>
                             <Prods products={tx.products}></Prods>
-
-                    </Tab>
-                )
-            })}
+                        </Tab>
+                    )
+                })}
             </Tabs>
         </main>
     )

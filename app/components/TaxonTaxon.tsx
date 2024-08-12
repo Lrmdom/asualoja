@@ -4,7 +4,8 @@ import {stegaClean} from "@sanity/client/stega";
 import Taxons from "~/components/Taxons";
 import {Tabs, Tab} from '@commercelayer/app-elements'
 
-export default function Taxon({taxon}: { taxon: SanityDocument }) {
+export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
+    console.log(taxon)
     if (Array.isArray(taxon.taxons)) {
         return (
             <>
@@ -15,7 +16,12 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                     onTabSwitch={function zs() {
                     }}
                 >
+                    < Tab
+                        name="..."
+                        key="...">
 
+                        <Prods products={taxon.products}></Prods>
+                    </Tab>
 
                     {taxon.taxons.map((tx) => {
                         return (
