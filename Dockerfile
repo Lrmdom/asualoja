@@ -9,7 +9,7 @@ RUN npm install --force
 
 COPY . .
 
-RUN npm run build
+#RUN npm run build
 
 
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "dev" ]
