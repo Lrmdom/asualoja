@@ -1,14 +1,9 @@
-version: '3.3'
-
 services:
-
-
-  wp:
+  app:
     build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./:/var/www/html
+      context: ./
+    command: npm run dev
+    environment:
+      - NODE_ENV=development
     ports:
-      - 8090:80
-    restart: on-failure
+      - '80:5173'
