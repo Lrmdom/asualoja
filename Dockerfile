@@ -1,6 +1,10 @@
 FROM node:20-alpine
 
+ENV NODE_ENV development
+
 WORKDIR /app
+
+
 
 COPY package.json .
 
@@ -10,5 +14,6 @@ COPY . .
 
 #RUN npm run build
 
-
 CMD [ "npm", "run", "dev" ]
+
+#docker build -t foo . && docker run -p 80:5173 -it foo
