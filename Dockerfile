@@ -8,6 +8,4 @@ RUN npm run build
 EXPOSE 3000
 
 CMD [ "npm", "run", "start" ]
-
-
 #docker build -t foo . && docker run -p 80:5173 -it foo
