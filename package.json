@@ -6,7 +6,7 @@
   "scripts": {
     "update:deps": "npm outdated && npm update",
     "build": "remix vite:build",
-    "dev": "remix vite:dev --force",
+    "dev": "remix vite:dev --host",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc"
