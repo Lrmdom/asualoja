@@ -5,9 +5,7 @@ ENV NODE_ENV development
 WORKDIR /app
 
 COPY package.json .
-
 RUN npm install --legacy-peer-deps
-
 COPY . .
 EXPOSE 5173
 #RUN npm run build
