@@ -13,7 +13,5 @@ COPY . .
 EXPOSE 5173
 
 RUN npm run build
-
 CMD [ "npm", "run", "dev" ]
-
 #docker build -t foo . && docker run -p 80:5173 -it foo
