@@ -3,33 +3,36 @@ import Taxons from '~/components/Taxons'
 import Prods from "~/components/Prods";
 import {stegaClean} from "@sanity/client/stega";
 import {Tabs, Tab} from '@commercelayer/app-elements'
+import {useTranslation} from "react-i18next";
 
 export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
     const {
         title,
         taxons,
     } = taxonomies
+    const {t} = useTranslation()
 
-    /*function haveProducts(taxon: any) {
-        //console.log(taxon.products)
-        if (taxon.products.length > 0) {
-            return (
-                <Tab name={taxon.title}
-                     key={taxon._id}>
-                    <div>
-                        {/!*<span className="bg-primary p-4 rounded text-white">
-                            {taxon.title}-{tx.title}
-                          </span>*!/}
-                        <Taxons taxon={taxon}></Taxons>
-                    </div>
-                    <Prods products={taxon.products}></Prods>
-                </Tab>
-            )
-        } else {
-            return null
-        }
-    }*/
-
+    let allTaxonomyProducts = []
+    {
+        taxons?.map((taxon) => {
+            allTaxonomyProducts.push(...taxon.products)
+            {
+                taxon.taxons?.map((tx) => {
+                    if (tx.products) {
+                        allTaxonomyProducts.push(...tx.products)
+                    }
+                    {
+                        tx.taxons?.map((txn) => {
+                            if (txn.products) {
+                                allTaxonomyProducts.push(...txn.products)
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+    const uniqueProductArray = [...new Set(allTaxonomyProducts)]
     return (
         <main className="container mx-auto prose prose-lg p-2 ">
             {title ? (
@@ -46,13 +49,13 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
                 }}
             >
                 < Tab
-                    name="..."
-                    key="...">
+                    name={t('All products')}
+                    key={t('All products')}>
 
-                    <Prods products={taxons[0].products}></Prods>
+                    <Prods products={uniqueProductArray}></Prods>
                 </Tab>
 
-             {taxons?.map((taxon) => {
+                {taxons?.map((taxon) => {
                     return (
 
 

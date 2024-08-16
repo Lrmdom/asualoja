@@ -8,7 +8,7 @@ import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@comme
 export default function ToBuyVariant({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
 
-    console.log(attribute)
+    //console.log(attribute)
 
     return (
         <>

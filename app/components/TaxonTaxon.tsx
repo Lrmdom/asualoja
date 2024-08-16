@@ -3,9 +3,10 @@ import Prods from '~/components/Prods'
 import {stegaClean} from "@sanity/client/stega";
 import Taxons from "~/components/Taxons";
 import {Tabs, Tab} from '@commercelayer/app-elements'
+import {useTranslation} from "react-i18next";
 
 export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
-    //console.log(taxon)
+    const {t} = useTranslation()
     if (Array.isArray(taxon.taxons)) {
         return (
             <>
@@ -17,8 +18,8 @@ export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
                     }}
                 >
                     < Tab
-                        name="..."
-                        key="...">
+                        name={t('All products')}
+                        key={t('All products')}>
 
                         <Prods products={taxon.products}></Prods>
                     </Tab>
