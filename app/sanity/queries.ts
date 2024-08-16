@@ -175,6 +175,7 @@ export const TAXONOMIES_QUERY_LOCALIZED = groq`*[_type == "taxonomy"]
         title[_key == 'pt'][0].value,
         "Missing translation"
     ),
+    "imageUrl": image.asset->url,
     taxons[]->{
         "title": coalesce(
         title[_key == $locale][0].value,
