@@ -27,6 +27,7 @@ export default function Index() {
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const { i18n } = useTranslation()
     const language = i18n.resolvedLanguage
+    console.log(data)
     return (
         <>
             {/*todo add taxonomies images and link to taxons/produts  ex:shop by categorie*/}
@@ -34,7 +35,7 @@ export default function Index() {
             <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
 
                 {data.map((tx) => {
-                //console.log(tx)
+
                 return (
                     <div
                         className="container p-4 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48 m-2">
@@ -45,7 +46,7 @@ export default function Index() {
                                 {tx.title}
                             </Link>
                                 <Link className="" to={`/${language}/${stegaClean(tx.title)}`}>
-                            <img src={tx.imageUrl} width={250} height={175} alt={tx.title}
+                            <img src={stegaClean(tx.imageUrl)} width={250} height={175} alt={stegaClean(tx.title)}
                                  className="container rounded p-1 border"
                             />
                          </Link>
