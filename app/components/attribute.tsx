@@ -7,7 +7,6 @@ import AttributeVisualization from "~/components/attributeVisualization";
 
 export default function Attribute({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
-    //console.log(attribute)
 
 
 

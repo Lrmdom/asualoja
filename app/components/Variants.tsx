@@ -14,12 +14,22 @@ import VariantAttributes from "~/components/variantAttributes";
 export default function Variants({product}: { variants: SanityDocument }) {
     const {t} = useTranslation('')
 
+
+
     if (Array.isArray(product.variants)) {
+
+
 
         let variantsAttrs: any[] = []
         product.variants.map((variant) => {
             if (Array.isArray(variant.attributes)) {
+
+                //console.log(variant.attributes)
+
                 let vAttrs = variant.attributes.filter(attr => attr._type === 'attribute')
+
+
+
                 vAttrs.forEach(function (element) {
                     element.sku = stegaClean(variant.sku)
                     element.images = variant.images
@@ -31,6 +41,8 @@ export default function Variants({product}: { variants: SanityDocument }) {
             }
         })
 
+
+
         let groupedVariantsAttrs = variantsAttrs.reduce((current, item) => {
             if (!current[stegaClean(item.name.trim())]) {
                 current[stegaClean(item.name.trim())] = [];
@@ -39,6 +51,8 @@ export default function Variants({product}: { variants: SanityDocument }) {
 
             return current;
         }, {});
+
+
 
         return (
             <>
