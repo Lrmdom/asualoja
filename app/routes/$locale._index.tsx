@@ -8,7 +8,6 @@ import {Tab} from "@commercelayer/app-elements";
 import Prods from "~/components/Prods";
 import {stegaClean} from "@sanity/client/stega";
 
-
 export const handle = {
     breadcrumb: () => <Link to="/parent">Some Route</Link>,
 };
@@ -19,8 +18,6 @@ export const meta: MetaFunction = () => {
         {name: 'description', content: 'Welcome to Remix!'},
     ]
 }
-
-
 
 export default function Index() {
     const {t} = useTranslation('')
@@ -41,17 +38,15 @@ export default function Index() {
                         className="container p-4 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48 m-2">
 
                         <div className="">
-                            <div className="flex justify-center ">
-                                    <Link className="absolute flex bg-white text-primary font-bold rounded-1xl  m-2  opacity-85"
+                            <div className="flex justify-center hover:opacity-70">
+                                    <Link className="absolute flex bg-white text-primary font-bold rounded  m-2.5 p-2 roundec  opacity-85"
                                           to={`/${language}/${stegaClean(tx.title)}`}>
                                         {tx.title}
                                     </Link>
-
-
                                 <Link className="" to={`/${language}/${stegaClean(tx.title)}`}>
                                     <img src={stegaClean(tx.imageUrl)} width={250} height={175}
                                          alt={stegaClean(tx.title)}
-                                         className="container p-1 border rounded m-2 overflow-hidden"
+                                         className="container p-1 border rounded m-1 overflow-hidden"
                                     />
                                 </Link>
                             </div>
