@@ -3,9 +3,11 @@ import Prods from '~/components/Prods'
 import {Tabs, Tab} from '@commercelayer/app-elements'
 import Taxon from "~/components/Taxon";
 import TaxonTaxon from "~/components/TaxonTaxon";
+import {useTranslation} from "react-i18next";
 
 export default function Taxons({taxon}: { taxon: SanityDocument }) {
 
+    const {t} = useTranslation()
 
     if (Array.isArray(taxon.taxons)) {
         null
@@ -23,8 +25,8 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
                 }}
             >
                 < Tab
-                    name="..."
-                    key="...">
+                    name={t('All products')}
+                    key={t('All products')}>
 
                     <Prods products={taxon.products}></Prods>
                 </Tab>
