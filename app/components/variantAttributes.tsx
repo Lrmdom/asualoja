@@ -11,7 +11,7 @@ export default function VariantAttributes({attributes}: { attribute: SanityDocum
             {Object.entries(attributes).map((attribute) => {
                 return (
                     <>
-
+                        <h2>{attribute[0]}</h2>
                         <Attribute attribute={attribute[1]}></Attribute>
 
                     </>

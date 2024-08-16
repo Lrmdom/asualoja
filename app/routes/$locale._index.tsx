@@ -41,7 +41,6 @@ export default function Index() {
 
                         <div className="container hover:opacity-70 m-1 rounded-2xl m-2">
                             <div >
-                               wwwww
                             <Link className="text-primary flex flex-row justify-center items-center m-2" to={`/${language}/${stegaClean(tx.title)}`}>
                                 {tx.title}
                             </Link>
