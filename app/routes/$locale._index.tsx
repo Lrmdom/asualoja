@@ -40,22 +40,26 @@ export default function Index() {
                     <div
                         className="container p-4 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48 m-2">
 
-                        <div className="container hover:opacity-70 m-1 rounded-2xl m-2">
-                            <div >
-                            <Link className="text-primary flex flex-row justify-center items-center m-2" to={`/${language}/${stegaClean(tx.title)}`}>
-                                {tx.title}
-                            </Link>
+                        <div className="">
+                            <div className="flex justify-center ">
+                                    <Link className="absolute flex bg-white text-primary font-bold rounded-1xl  m-2  opacity-85"
+                                          to={`/${language}/${stegaClean(tx.title)}`}>
+                                        {tx.title}
+                                    </Link>
+
+
                                 <Link className="" to={`/${language}/${stegaClean(tx.title)}`}>
-                            <img src={stegaClean(tx.imageUrl)} width={250} height={175} alt={stegaClean(tx.title)}
-                                 className="container rounded p-1 border"
-                            />
-                         </Link>
+                                    <img src={stegaClean(tx.imageUrl)} width={250} height={175}
+                                         alt={stegaClean(tx.title)}
+                                         className="container p-1 border rounded m-2 overflow-hidden"
+                                    />
+                                </Link>
                             </div>
                         </div>
                     </div>
                 )
 
-            })}
+                })}
             </div>
                 </div>
             <Hero/>
