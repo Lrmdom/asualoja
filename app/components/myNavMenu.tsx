@@ -64,7 +64,7 @@ export function MyNavMenu(props) {
 
     const language = i18n.resolvedLanguage
     return (
-        <div className="container p-2">
+        <div className="container p-2 bg-purple-200">
             <NavigationMenu className="hidden lg:flex">
                 <NavigationMenuList>
 
