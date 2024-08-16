@@ -39,7 +39,7 @@ export default function Header(props) {
     }
 
     return (
-        <div className="container p-2">
+        <div className="container p-2  bg-purple-50">
             <div className="grid grid-cols-[10%_10%_10%_70%] gap-0">
                 <div className="p-4">
                     <Link to="/">
