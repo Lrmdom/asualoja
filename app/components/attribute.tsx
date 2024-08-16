@@ -10,7 +10,18 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
     if (attribute[0].visualPresentation && stegaClean(attribute[0].visualPresentation.visualization) === "InputToggleButton") {
         return (
-            <ClientOnly fallback={null}>
+            attribute.map((attr) => {
+                return (
+                    <div>
+                        <input type="radio" value={attr.value} name="size"/> {attr.value}
+                        <ToBuyVariant attribute={attr}></ToBuyVariant>
+                    </div>
+                )
+
+            })
+
+
+            /*<ClientOnly fallback={null}>
                 {() => <InputToggleButton
                     label={attribute.name}
                     mode="single"
@@ -18,17 +29,17 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                     }}
                     options={attribute}
                 />}
-            </ClientOnly>
+            </ClientOnly>*/
         )
     }
     if (attribute[0].visualPresentation && stegaClean(attribute[0].visualPresentation.visualization) === "InputToggleColorButton") {
         return (
         attribute.map((attr) => {
             return (
-                <>
+                <div>
                 <AttributeVisualization attribute={attr}></AttributeVisualization>
                     <ToBuyVariant attribute={attr}></ToBuyVariant>
-                </>
+                </div>
             )
 
         })
@@ -41,11 +52,11 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
         return (
         attribute.map((attr) => {
             return (
-                <>
+                <div>
                 <AttributeVisualization attribute={attr}></AttributeVisualization>
                     <ToBuyVariant attribute={attr}></ToBuyVariant>
 
-                </>
+                </div>
             )
         })
 
@@ -55,9 +66,9 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
 
     if (attribute[0].visualPresentation && stegaClean(attribute[0].visualPresentation.visualization) === "Dropdown") {
         return (
-            <>
+            <div>
                 <Dropdown dropdownItems={attribute}></Dropdown>
-            </>
+            </div>
         )
 
     }
