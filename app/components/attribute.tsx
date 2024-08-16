@@ -2,45 +2,80 @@ import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
 import {ClientOnly} from "remix-utils/client-only"
-import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@commercelayer/app-elements'
+import {Avatar, Dropdown, InputRadioGroup, InputToggleButton, ListItem, Text} from '@commercelayer/app-elements'
 import AttributeVisualization from "~/components/attributeVisualization";
+import ToBuyVariant from "~/components/toBuyVariant";
 
 export default function Attribute({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
-
-
-
-    return (
-        <main className="">
-
-
-
+    if (attribute[0].visualPresentation && stegaClean(attribute[0].visualPresentation.visualization) === "InputToggleButton") {
+        return (
             <ClientOnly fallback={null}>
                 {() => <InputToggleButton
-                    inline
-                    label={attribute[0].name}
+                    label={attribute.name}
                     mode="single"
-                    name
                     onChange={function zs() {
                     }}
-                    options={
-                        attribute
-                    }
+                    options={attribute}
                 />}
             </ClientOnly>
+        )
+    }
+    if (attribute[0].visualPresentation && stegaClean(attribute[0].visualPresentation.visualization) === "InputToggleColorButton") {
+        return (
+        attribute.map((attr) => {
+            return (
+                <>
+                <AttributeVisualization attribute={attr}></AttributeVisualization>
+                    <ToBuyVariant attribute={attr}></ToBuyVariant>
+                </>
+            )
 
-            {attribute.map((attribute) => {
+        })
+
+        )
+
+    }
+
+    if (attribute[0].visualPresentation && stegaClean(attribute[0].visualPresentation.visualization) === "InputToggleColor") {
+        return (
+        attribute.map((attr) => {
+            return (
+                <>
+                <AttributeVisualization attribute={attr}></AttributeVisualization>
+                    <ToBuyVariant attribute={attr}></ToBuyVariant>
+
+                </>
+            )
+        })
+
+        )
+
+    }
+
+    if (attribute[0].visualPresentation && stegaClean(attribute[0].visualPresentation.visualization) === "Dropdown") {
+        return (
+            <>
+                <Dropdown dropdownItems={attribute}></Dropdown>
+            </>
+        )
+
+    }
+    /*return (
+        <main className="">
+            {attribute.map((attr) => {
+                debugger;
                 return (
                     <>
-                        <AttributeVisualization attribute={attribute}></AttributeVisualization>
-                            <span className="container p-4">
-                                <cl-price code={stegaClean(attribute.sku)}>
+                        <AttributeVisualization attribute={attr}></AttributeVisualization>
+                        <span className="container p-4">
+                                <cl-price code={stegaClean(attr.sku)}>
                                     <cl-price-amount type="compare-at"></cl-price-amount>
                                     <cl-price-amount type="price"></cl-price-amount>
                                 </cl-price>
                             </span>
                         <div>
-                            <cl-availability code={stegaClean(attribute.sku)}>
+                            <cl-availability code={stegaClean(attr.sku)}>
                                 <cl-availability-status type="available" style={{color: "green"}}>
                                     {t("• available")}
                                 </cl-availability-status>
@@ -58,15 +93,14 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                                 </cl-availability-status>
                             </cl-availability>
                         </div>
-                        <cl-add-to-cart code={stegaClean(attribute.sku)} quantity="1" kind="sku">
+                        <cl-add-to-cart code={stegaClean(attr.sku)} quantity="1" kind="sku">
                             {t('Add to cart')}
                         </cl-add-to-cart>
                     </>
                 )
             })}
         </main>
-    )
-
+    )*/
 }
 
 

@@ -7,57 +7,13 @@ import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@comme
 
 export default function AttributeVisualization({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
-    let visualization
-    if (attribute.visualPresentation?.visualization === "InputToggleColorButton") {
-        console.log(attribute.visualPresentation?.visualization)
 
-        visualization =
-            <>
-        <span>
-          <input type="color" id="head" name="head" value="#e66465" disabled/>
-        </span>
 
-                <span>
-          <input type="color" id="body" name="body" value="#f6b73c" disabled/>
-        </span>
-            </>
-
-    }
-    if (attribute.visualPresentation?.visualization === "InputToggleColor") {
-        console.log(attribute.visualPresentation?.visualization)
-        visualization =
-            <>
-        <span>
-          <input type="color" id="head" name="head" value="#e66465" disabled/>
-        </span>
-
-                <span>
-          <input type="color" id="body" name="body" value="#f6b73c" disabled/>
-        </span>
-            </>
-
-    }
-    if (attribute.visualPresentation?.visualization === "InputToggleButton") {
-        visualization =
-            <ClientOnly fallback={null}>
-                {() => <InputToggleButton
-                    label={attribute[0].name}
-                    mode="single"
-                    onChange={function zs() {
-                    }}
-                    options={attribute}
-                />}
-            </ClientOnly>
-
-    }
 
     return (
-        <main className="">
 
-            {visualization}
+        <input className="rounded-full" type="color" id="head" name="head" value={stegaClean(attribute.value)} disabled/>
 
-
-        </main>
     )
 
 }
