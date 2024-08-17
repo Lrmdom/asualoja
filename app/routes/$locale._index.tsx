@@ -24,7 +24,7 @@ export default function Index() {
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     const { i18n } = useTranslation()
     const language = i18n.resolvedLanguage
-    console.log(data)
+    //console.log(data)
     return (
         <>
             {/*todo add taxonomies images and link to taxons/produts  ex:shop by categorie*/}
