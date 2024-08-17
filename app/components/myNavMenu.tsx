@@ -60,9 +60,10 @@ const components: { title: string; to: string; description: string }[] = [
 export function MyNavMenu(props) {
 
 
-    const {i18n,t} = useTranslation()
+    const {i18n, t} = useTranslation()
 
     const language = i18n.resolvedLanguage
+    let nprods
     return (
         <div className="container p-2 bg-purple-200">
             <NavigationMenu className="hidden lg:flex">
@@ -102,15 +103,16 @@ export function MyNavMenu(props) {
                                                 <ListItem
                                                     className=""
                                                     key={taxon._id}
-                                                    title={taxon.title}
+                                                    title={taxon.title + "(" + taxon.products?.length+")"}
                                                     href={stegaClean(`/${language}/${taxonomy.title}/${taxon.title}`)}
                                                 >
                                                     <ul className=" ">
                                                         {taxon.taxons?.map((tx) => (
+
                                                             <ListItem
                                                                 className=""
                                                                 key={tx._id}
-                                                                title={tx.title}
+                                                                title={tx.title + "(" + tx.products?.length+")"}
                                                                 href={stegaClean(`/${language}/${taxonomy.title}/${tx.title}`)}
                                                             >
                                                             </ListItem>
