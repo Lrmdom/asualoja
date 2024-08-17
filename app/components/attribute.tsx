@@ -72,6 +72,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
         )
 
     }
+    //todo if not visualPresentation, check if valid color else visualpresentation=InputToggleButton or dropdown if more than 5 options
     /*return (
         <main className="">
             {attribute.map((attr) => {
