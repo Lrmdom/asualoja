@@ -23,7 +23,7 @@ export default function ToBuyVariant({attribute}: { attribute: SanityDocument })
                     <cl-availability-status type="available" style={{color: "green"}}>
                         {t("• available")}
                     </cl-availability-status>
-                    <cl-availability-status type="available-with-info">
+                    <cl-availability-status type="available">
                         ready to be shipped in
                         <cl-availability-info type="min-days"></cl-availability-info>-
                         <cl-availability-info type="max-days"></cl-availability-info>
