@@ -86,9 +86,6 @@ export function Layout({children}: { children: React.ReactNode }) {
             })
         }, 100);
 
-
-
-
     return (
 
         <html lang={locale?.locale ?? 'pt'}>
@@ -144,9 +141,19 @@ export function Layout({children}: { children: React.ReactNode }) {
             }}
         />
             {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
-                <Suspense>
-                    <LiveVisualEditing />
-                </Suspense>
+                    <LiveVisualEditing
+                        //todo check this to setup corretly the refres on sanity studio
+                        //https://github.com/sanity-io/visual-editing/blob/main/packages/visual-editing/README.md#remix
+                        /*refresh={(payload, refreshDefault) => {
+                            if (payload.source === 'manual') {
+                                return refreshDefault()
+                            }
+                            // Always revalidate on mutations for document types that are used for MetaFunctions that render in <head />
+                            if (payload.source === 'mutation' && payload.document._type === 'settings') {
+                                return refreshDefault()
+                            }
+                        }}*/
+                    />
             ) : null}
 
         <SubscribeNews/>

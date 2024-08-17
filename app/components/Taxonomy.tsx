@@ -15,16 +15,17 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
     let allTaxonomyProducts = []
     {
         taxons?.map((taxon) => {
-            allTaxonomyProducts.push(...taxon.products)
+
+            taxon.products? allTaxonomyProducts.push(...taxon.products): null
             {
                 taxon.taxons?.map((tx) => {
                     if (tx.products) {
-                        allTaxonomyProducts.push(...tx.products)
+                        tx.products? allTaxonomyProducts.push(...tx.products): null
                     }
                     {
                         tx.taxons?.map((txn) => {
                             if (txn.products) {
-                                allTaxonomyProducts.push(...txn.products)
+                                txn.products? allTaxonomyProducts.push(...txn.products): null
                             }
                         })
                     }
