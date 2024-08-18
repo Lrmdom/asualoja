@@ -35,11 +35,11 @@ export default function Index() {
 
                 return (
                     <div
-                        className="container p-4 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48 m-2">
+                        className="container  p-4 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48 m-2">
 
                         <div className="">
-                            <div className="flex justify-center hover:opacity-70">
-                                    <Link className="absolute flex bg-white text-primary border-1  shadow-2xl  font-bold rounded  m-2.5 p-2 "
+                            <div className="flex justify-center hover:opacity-70 ">
+                                    <Link className="absolute flex bg-white text-primary shadow-2xl font-bold rounded  m-2.5 p-2 "
                                           to={`/${language}/${stegaClean(tx.title)}`}>
                                         {tx.title}
                                     </Link>
