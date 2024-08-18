@@ -51,11 +51,11 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                                     <div className="">
                                         <div>
-                                            <h3 className="text-sm text-gray-700">
+
                                                 <Link
                                                     to={stegaClean(`/${language}/${stegaClean(taxonomy)}/${stegaClean(prod.taxons)}/${stegaClean(prod.title)}`)}> {stegaClean(prod.title)} </Link>
 
-                                            </h3>
+
                                             <Attributes product={prod}></Attributes>
                                         </div>
                                         <Variants product={prod}></Variants>
