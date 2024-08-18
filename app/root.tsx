@@ -108,8 +108,12 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
+        <Suspense fallback={null}>
             <Header taxonomies={data} user={user}></Header>
+        </Suspense>
+        <Suspense fallback={null}>
             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
+        </Suspense>
         {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
         {/*<header>
             <ol>
