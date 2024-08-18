@@ -26,7 +26,7 @@ export default function ProductRoute() {
   const { i18n } = useTranslation()
   const language = i18n.resolvedLanguage
 
-  console.log(stegaClean(data.product))
+  console.log(stegaClean(data))
 
   return (
 
