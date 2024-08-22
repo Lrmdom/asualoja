@@ -74,7 +74,8 @@ export const handle = {
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
 
-    const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
+    // const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
+    const {data, locale, ENV, user} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
 
     const { i18n } = useTranslation()
