@@ -4,12 +4,15 @@ import Variants from "~/components/Variants";
 import Attributes from "~/components/Attributes";
 import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
-import  Carousel from "~/components/Carousel"
+//import  Carousel from "~/components/Carousel"
+import EmblaCarousel from '~/components/emblaCarousel/EmblaCarousel'
+import { EmblaOptionsType } from 'embla-carousel'
 
 export default function Prods({products}: { product: SanityDocument }) {
     //console.log(products)
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
+    const OPTIONS: EmblaOptionsType = {}
     return (
 <>
         <div className="bg-white">
@@ -19,48 +22,35 @@ export default function Prods({products}: { product: SanityDocument }) {
                     {products?.map((prod) => {
                         if (Array.isArray(prod.variants)) {
                             prod.variantsImages = []
-                            prod.variantsImages.push({"url": prod.imageUrl})
+
+                            prod.variantsImages.push({"url": prod.imageUrl, "alt":stegaClean(prod.title)})
 
                             prod.variants.map((vrnt) => {
                                 vrnt.images?.map((image) => {
-
+                                    image.alt?image.alt:image.alt=stegaClean(vrnt.title)
+                                    image.sku?image.sku:image.sku=vrnt.sku
                                     prod.variantsImages.push(image)
                                 })
                             })
                         }
-//console.log(prod)
                         let taxonomy=prod.taxonomies?prod.taxonomies[0]:prod.taxonomy
 
                         return (
                             <>
 
-                                <div className="group relative">
-                                    <div
-                                        className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48">
-
-                                   {/* <Carousel autoSlide={false} >
-                                            {[...prod.variantsImages.map((s) => (
-                                                <img src={s.url} width={250} alt={stegaClean(prod.title)} />
-                                            ))]}
-                                        </Carousel>*/}
-
-                                        <img src={prod.imageUrl} width={75} alt={prod.title}
-                                             className="h-full w-full object-contain object-center lg:h-full lg:w-full"/>
-
-                                    </div>
-
-                                    <div className="">
+                                    <div className="container mx-auto prose prose-lg p-8 border">
+                                        <div className="overflow-auto m-2">
+                                            <Link
+                                                to={stegaClean(`/${language}/${stegaClean(taxonomy)}/${stegaClean(prod.taxons)}/${stegaClean(prod.title)}`)}> {stegaClean(prod.title)} </Link>
+                                        </div>
+                                        <EmblaCarousel slides={prod.variantsImages} options={OPTIONS} />
                                         <div>
-
-                                                <Link
-                                                    to={stegaClean(`/${language}/${stegaClean(taxonomy)}/${stegaClean(prod.taxons)}/${stegaClean(prod.title)}`)}> {stegaClean(prod.title)} </Link>
 
 
                                             <Attributes product={prod}></Attributes>
                                         </div>
                                         <Variants product={prod}></Variants>
                                     </div>
-                                </div>
                             </>
                         )
                     })}

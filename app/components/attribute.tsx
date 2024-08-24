@@ -34,15 +34,15 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
     }
     if (attribute[0].visualPresentation && stegaClean(attribute[0].visualPresentation.visualization) === "InputToggleColorButton") {
         return (
-        attribute.map((attr) => {
-            return (
-                <div>
-                <AttributeVisualization attribute={attr}></AttributeVisualization>
-                    <ToBuyVariant attribute={attr}></ToBuyVariant>
-                </div>
-            )
+            attribute.map((attr) => {
+                return (
+                    <div>
+                        <AttributeVisualization attribute={attr}></AttributeVisualization>
+                        <ToBuyVariant attribute={attr}></ToBuyVariant>
+                    </div>
+                )
 
-        })
+            })
 
         )
 
@@ -50,15 +50,15 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
 
     if (attribute[0].visualPresentation && stegaClean(attribute[0].visualPresentation.visualization) === "InputToggleColor") {
         return (
-        attribute.map((attr) => {
-            return (
-                <div>
-                <AttributeVisualization attribute={attr}></AttributeVisualization>
-                    <ToBuyVariant attribute={attr}></ToBuyVariant>
+            attribute.map((attr) => {
+                return (
+                    <div>
+                        <AttributeVisualization attribute={attr}></AttributeVisualization>
+                        <ToBuyVariant attribute={attr}></ToBuyVariant>
 
-                </div>
-            )
-        })
+                    </div>
+                )
+            })
 
         )
 

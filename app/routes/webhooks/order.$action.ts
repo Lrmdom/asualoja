@@ -1,3 +1,4 @@
+/*
 // This example is for Typescript-node
 
 var SibApiV3Sdk = require('sib-api-v3-typescript');
@@ -34,4 +35,6 @@ apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
     console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
     console.error(error);
-});
+});*/
+
+console.log("order.$action route")

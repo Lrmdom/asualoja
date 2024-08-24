@@ -44,6 +44,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dotenv-cli": "^7.4.2",
+    "embla-carousel-react": "^8.2.0",
+    "embla-carousel": "8.2.0",
     "fuse.js": "^7.0.0",
     "groq": "^3.53.0",
     "i18next": "^23.12.2",

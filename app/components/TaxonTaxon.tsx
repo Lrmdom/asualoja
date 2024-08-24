@@ -26,7 +26,7 @@ export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
 
                     {taxon.taxons.map((tx) => {
                         return (
-                            <Tab name={tx.title} key={tx._id}>
+                            <Tab name={`${tx.title}(${tx.products.length})`} key={tx._id}>
 
                                     <div>
                                         <Taxons taxon={tx}></Taxons>
