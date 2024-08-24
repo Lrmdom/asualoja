@@ -32,7 +32,7 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
                 </Tab>
                 {taxon.taxons.map((tx) => {
                     return (
-                        <Tab name={tx.title} key={tx._id}>
+                        <Tab name={`${tx.title}(${tx.products.length})`} key={tx._id}>
                             <div>
                                 <TaxonTaxon taxon={tx}></TaxonTaxon>
                             </div>

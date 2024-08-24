@@ -50,7 +50,7 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
                 }}
             >
                 < Tab
-                    name={t('All products')}
+                    name={`${t('All products')} (${allTaxonomyProducts.length})`}
                     key={t('All products')}>
 
                     <Prods products={uniqueProductArray}></Prods>
@@ -61,7 +61,7 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
 
 
                         < Tab
-                            name={taxon.title}
+                            name={`${taxon.title} (${taxon.products.length})`}
                             key={taxon._id}>
                             < div>
                                 <Taxons taxon={taxon}></Taxons>
