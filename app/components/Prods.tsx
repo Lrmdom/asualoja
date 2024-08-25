@@ -38,7 +38,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                         return (
                             <>
 
-                                    <div className="container mx-auto prose prose-lg p-8 border">
+                                    <div className="container mx-auto prose prose-lg p-8 border rounded">
                                         <div className="overflow-auto m-2">
                                             <Link
                                                 to={stegaClean(`/${language}/${stegaClean(taxonomy)}/${stegaClean(prod.taxons)}/${stegaClean(prod.title)}`)}> {stegaClean(prod.title)} </Link>
