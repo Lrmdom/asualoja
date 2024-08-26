@@ -15,8 +15,9 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
         return null
     }
 
-    let allTaxonProducts = []
+
     {
+        taxon["allTaxonProducts"]=[]
         taxon?.taxons?.map((taxo) => {
             taxon["allTaxonProducts"] = taxon["allTaxonProducts"] || []
             taxo.products ? taxon["allTaxonProducts"].push(...taxo.products) : null

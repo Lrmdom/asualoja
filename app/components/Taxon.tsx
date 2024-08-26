@@ -11,20 +11,20 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
     const language = i18n.resolvedLanguage
     const {t} = useTranslation()
 
-    let allTaxonProducts = []
     {
+        taxon["allTaxonProducts"]=[]
         taxon?.taxons?.map((taxo) => {
-
-            taxo.products ? allTaxonProducts.push(...taxo.products) : null
+            taxon["allTaxonProducts"] = taxon["allTaxonProducts"] || []
+            taxo.products ? taxon["allTaxonProducts"].push(...taxo.products) : null
             {
                 taxo.taxons?.map((tx) => {
                     if (tx.products) {
-                        tx.products ? allTaxonProducts.push(...tx.products) : null
+                        tx.products ? taxon["allTaxonProducts"].push(...tx.products) : null
                     }
                     {
                         tx.taxons?.map((txn) => {
                             if (txn.products) {
-                                txn.products ? allTaxonProducts.push(...txn.products) : null
+                                txn.products ? taxon["allTaxonProducts"].push(...txn.products) : null
                             }
                         })
                     }
@@ -44,7 +44,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                     }}
                 >
                     < Tab
-                        name={`${t('All products')} (${allTaxonProducts.length})`}
+                        name={`${t('All products')} (${taxon["allTaxonProducts"].length})`}
                         key="...">
 
                         <Prods products={taxon.products}></Prods>
