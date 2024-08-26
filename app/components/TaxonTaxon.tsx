@@ -25,8 +25,16 @@ export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
                     </Tab>
 
                     {taxon.taxons.map((tx) => {
+                        if (Array.isArray(tx.taxons)) {
+                            let allTaxonProducts
+
+                            taxon.taxons.map((tx) => {
+                                taxon["allTaxonProducts"] = taxon["allTaxonProducts"] || []
+                                taxon.products ? taxon["allTaxonProducts"].push(...tx.products) : null
+                            })
+                        }
                         return (
-                            <Tab name={`${tx.title}(${tx.products.length})`} key={tx._id}>
+                            <Tab name={`${tx.title}(${tx.products?.length || taxon["allTaxonProducts"] })`} key={tx._id}>
 
                                     <div>
                                         <Taxons taxon={tx}></Taxons>

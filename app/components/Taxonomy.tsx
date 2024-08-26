@@ -16,16 +16,16 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
     {
         taxons?.map((taxon) => {
 
-            taxon.products? allTaxonomyProducts.push(...taxon.products): null
+            taxon.products ? allTaxonomyProducts.push(...taxon.products) : null
             {
                 taxon.taxons?.map((tx) => {
                     if (tx.products) {
-                        tx.products? allTaxonomyProducts.push(...tx.products): null
+                        tx.products ? allTaxonomyProducts.push(...tx.products) : null
                     }
                     {
                         tx.taxons?.map((txn) => {
                             if (txn.products) {
-                                txn.products? allTaxonomyProducts.push(...txn.products): null
+                                txn.products ? allTaxonomyProducts.push(...txn.products) : null
                             }
                         })
                     }
@@ -56,17 +56,27 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
                     <Prods products={uniqueProductArray}></Prods>
                 </Tab>
 
-                {taxons?.map((taxon) => {
+                {taxons?.map((taxonn) => {
+
+                    if (Array.isArray(taxonn.taxons)) {
+                        let allTaxonProducts
+
+                        taxonn.taxons.map((tx) => {
+                            taxonn["allTaxonProducts"] = taxonn["allTaxonProducts"] || []
+                            taxonn.products ? taxonn["allTaxonProducts"].push(...tx.products) : null
+                        })
+                    }
+
                     return (
 
 
                         < Tab
-                            name={`${taxon.title} (${taxon.products.length})`}
-                            key={taxon._id}>
+                            name={`${taxonn.title} (${taxonn.products?.length || taxonn.allTaxonProducts?.length})`}
+                            key={taxonn._id}>
                             < div>
-                                <Taxons taxon={taxon}></Taxons>
+                                <Taxons taxon={taxonn}></Taxons>
                             </div>
-                            <Prods products={taxon.products}></Prods>
+                            <Prods products={taxonn.products}></Prods>
                         </Tab>
                     )
                 })}
