@@ -48,7 +48,7 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
                 }}
             >
                 < Tab
-                    name={`${t('All products')} (${taxon["allTaxonProducts"].length })`}
+                    name={`${t('All products')} (${taxon["allTaxonProducts"]?.length })`}
                     key={t('All products')}>
 
                     <Prods products={taxon.products}></Prods>
@@ -75,7 +75,7 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
                     return (
 
                         <Tab
-                            name={`${tx.title} (${tx.products?.length || tx["allTaxonProducts"].length})`}
+                            name={`${tx.title} (${tx.products?.length || tx["allTaxonProducts"]?.length})`}
                             key={tx._id}>
                             <div>
                                 <TaxonTaxon taxon={tx}></TaxonTaxon>
