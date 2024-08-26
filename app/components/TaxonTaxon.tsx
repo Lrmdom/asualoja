@@ -25,8 +25,8 @@ export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
                     </Tab>
 
                     {taxon.taxons.map((tx) => {
+                        taxon["allTaxonProducts"]=[]
                         if (Array.isArray(tx.taxons)) {
-                            let allTaxonProducts
 
                             tx.taxons.map((txx) => {
                                 tx["allTaxonProducts"] = tx["allTaxonProducts"] || []
