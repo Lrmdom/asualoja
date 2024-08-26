@@ -18,17 +18,17 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
     let allTaxonProducts = []
     {
         taxon?.taxons?.map((taxo) => {
-
-            taxo.products ? allTaxonProducts.push(...taxo.products) : null
+            taxon["allTaxonProducts"] = taxon["allTaxonProducts"] || []
+            taxo.products ? taxon["allTaxonProducts"].push(...taxo.products) : null
             {
                 taxo.taxons?.map((tx) => {
                     if (tx.products) {
-                        tx.products ? allTaxonProducts.push(...tx.products) : null
+                        tx.products ? taxon["allTaxonProducts"].push(...tx.products) : null
                     }
                     {
                         tx.taxons?.map((txn) => {
                             if (txn.products) {
-                                txn.products ? allTaxonProducts.push(...txn.products) : null
+                                txn.products ? taxon["allTaxonProducts"].push(...txn.products) : null
                             }
                         })
                     }
@@ -36,7 +36,7 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
             }
         })
     }
-    const uniqueProductArray = [...new Set(allTaxonProducts)]
+    const uniqueProductArray = [...new Set(taxon["allTaxonProducts"])]
 
     return (
         <main className="container mx-auto prose prose-lg p-4">
@@ -47,7 +47,7 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
                 }}
             >
                 < Tab
-                    name={`${t('All products')} (${allTaxonProducts.length })`}
+                    name={`${t('All products')} (${taxon["allTaxonProducts"].length })`}
                     key={t('All products')}>
 
                     <Prods products={taxon.products}></Prods>
@@ -55,25 +55,26 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
                 {taxon.taxons.map((tx) => {
 
                     if (Array.isArray(tx.taxons)) {
-                        let allTaxonProducts
 
                         tx.taxons.map((tax) => {
-                            taxon["allTaxonProducts"] = taxon["allTaxonProducts"] || []
+                            tx["allTaxonProducts"] = tx["allTaxonProducts"] || []
                             if (tax.products) {
-                                taxon.products ? taxon["allTaxonProducts"].push(...tax.products) : null
+                                tx.products ? tx["allTaxonProducts"].push(...tax.products) : null
                             }
-                            tax.taxons?.map((txn) => {
-                                if (txn.products) {
-                                    txn.products ? taxon["allTaxonProducts"].push(...txn.products) : null
-                                }
-                            })
+                            if (Array.isArray(tax.taxons)) {
+                                tax.taxons?.map((txn) => {
+                                    if (txn.products) {
+                                        tx.products ? tx["allTaxonProducts"].push(...txn.products) : null
+                                    }
+                                })
+                            }
                         })
 
                     }
                     return (
 
                         <Tab
-                            name={`${tx.title} (${tx.products?.length || taxon["allTaxonProducts"]})`}
+                            name={`${tx.title} (${tx.products?.length || tx["allTaxonProducts"].length})`}
                             key={tx._id}>
                             <div>
                                 <TaxonTaxon taxon={tx}></TaxonTaxon>
