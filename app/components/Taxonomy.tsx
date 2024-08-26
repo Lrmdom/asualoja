@@ -66,7 +66,6 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
                             }
                         })
                     }
-                    debugger
                     return (
 
                         < Tab
