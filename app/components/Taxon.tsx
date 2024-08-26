@@ -9,7 +9,29 @@ import {useTranslation} from "react-i18next";
 export default function Taxon({taxon}: { taxon: SanityDocument }) {
     const { i18n } = useTranslation()
     const language = i18n.resolvedLanguage
+    const {t} = useTranslation()
 
+    let allTaxonProducts = []
+    {
+        taxon?.taxons?.map((taxo) => {
+
+            taxo.products ? allTaxonProducts.push(...taxo.products) : null
+            {
+                taxo.taxons?.map((tx) => {
+                    if (tx.products) {
+                        tx.products ? allTaxonProducts.push(...tx.products) : null
+                    }
+                    {
+                        tx.taxons?.map((txn) => {
+                            if (txn.products) {
+                                txn.products ? allTaxonProducts.push(...txn.products) : null
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
 
     if (Array.isArray(taxon.taxons)) {
         return (
@@ -22,7 +44,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                     }}
                 >
                     < Tab
-                        name="..."
+                        name={`${t('All products')} (${allTaxonProducts.length})`}
                         key="...">
 
                         <Prods products={taxon.products}></Prods>
@@ -30,7 +52,6 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
                     {taxon.taxons.map((tx) => {
                         return (
                             <Tab name={tx.title} key={tx._id}>
-
                                     <div>
                                         <Taxons taxon={tx}></Taxons>
                                     </div>
