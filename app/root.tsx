@@ -21,7 +21,7 @@ import {MyNavMenu} from '~/components/myNavMenu'
 import {TAXONOMIES_QUERY_LOCALIZED} from '~/sanity/queries'
 import {loadQuery} from '~/sanity/loader.server'
 import type {SanityDocument} from '@sanity/client'
-import { useTranslation } from 'react-i18next'
+import {useTranslation} from 'react-i18next'
 import Breadcrumb from "~/components/breadcrumb";
 import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
@@ -55,9 +55,16 @@ export let loader = async ({request, params}) => {
         SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
     }
 
+
     return json(
         {data, locale, ENV, user},
-        {headers: {'Set-Cookie': await localeCookie.serialize(locale)}}
+        {
+            headers: {
+                'Set-Cookie': await localeCookie.serialize(locale),
+                "Cache-Control": "public, max-age=0, must-revalidate",
+                "CDN-Cache-Control": "public, s-maxage=3600, stale-while-revalidate=82800"
+            }
+        }
     )
 }
 
@@ -78,14 +85,14 @@ export function Layout({children}: { children: React.ReactNode }) {
     const {data, locale, ENV, user} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
 
-    const { i18n } = useTranslation()
-    i18n.language=locale
+    const {i18n} = useTranslation()
+    i18n.language = locale
 
 
-       setTimeout(function() {
-            i18n.changeLanguage(locale, (error) => {
-            })
-        }, 100);
+    setTimeout(function () {
+        i18n.changeLanguage(locale, (error) => {
+        })
+    }, 100);
 
     return (
 
@@ -145,21 +152,21 @@ export function Layout({children}: { children: React.ReactNode }) {
               `,
             }}
         />
-            {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
-                    <LiveVisualEditing
-                        //todo check this to setup corretly the refres on sanity studio
-                        //https://github.com/sanity-io/visual-editing/blob/main/packages/visual-editing/README.md#remix
-                        /*refresh={(payload, refreshDefault) => {
-                            if (payload.source === 'manual') {
-                                return refreshDefault()
-                            }
-                            // Always revalidate on mutations for document types that are used for MetaFunctions that render in <head />
-                            if (payload.source === 'mutation' && payload.document._type === 'settings') {
-                                return refreshDefault()
-                            }
-                        }}*/
-                    />
-            ) : null}
+        {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
+            <LiveVisualEditing
+                //todo check this to setup corretly the refres on sanity studio
+                //https://github.com/sanity-io/visual-editing/blob/main/packages/visual-editing/README.md#remix
+                /*refresh={(payload, refreshDefault) => {
+                    if (payload.source === 'manual') {
+                        return refreshDefault()
+                    }
+                    // Always revalidate on mutations for document types that are used for MetaFunctions that render in <head />
+                    if (payload.source === 'mutation' && payload.document._type === 'settings') {
+                        return refreshDefault()
+                    }
+                }}*/
+            />
+        ) : null}
 
         <SubscribeNews/>
         <Footer/>
