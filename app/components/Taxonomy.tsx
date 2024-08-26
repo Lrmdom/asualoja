@@ -42,7 +42,6 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
                 </h1>
             ) : null}
 
-
             <Tabs
 
                 keepAlive
@@ -59,16 +58,16 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
                 {taxons?.map((taxonn) => {
 
                     if (Array.isArray(taxonn.taxons)) {
-                        let allTaxonProducts
 
                         taxonn.taxons.map((tx) => {
-                            taxonn["allTaxonProducts"] = taxonn["allTaxonProducts"] || []
-                            taxonn.products ? taxonn["allTaxonProducts"].push(...tx.products) : null
+                            if (tx.products) {
+                                taxonn["allTaxonProducts"] = taxonn["allTaxonProducts"] || []
+                                taxonn.products ? taxonn["allTaxonProducts"].push(...tx.products) : null
+                            }
                         })
                     }
-
+                    debugger
                     return (
-
 
                         < Tab
                             name={`${taxonn.title} (${taxonn.products?.length || taxonn.allTaxonProducts?.length})`}

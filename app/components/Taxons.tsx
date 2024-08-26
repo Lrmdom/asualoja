@@ -59,7 +59,9 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
 
                         tx.taxons.map((tax) => {
                             taxon["allTaxonProducts"] = taxon["allTaxonProducts"] || []
-                            taxon.products ? taxon["allTaxonProducts"].push(...tax.products) : null
+                            if (tax.products) {
+                                taxon.products ? taxon["allTaxonProducts"].push(...tax.products) : null
+                            }
                             tax.taxons?.map((txn) => {
                                 if (txn.products) {
                                     txn.products ? taxon["allTaxonProducts"].push(...txn.products) : null
