@@ -33,7 +33,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     <section className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((s, index) => (
+          {slides?.map((s, index) => (
               <div className="embla__slide" key={index}>
                 <img src={s.url} width={300}   alt={s.alt} />
               </div>
