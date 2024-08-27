@@ -14,6 +14,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                 return (
                     <div>
                         <input type="radio" value={attr.value} name="size"/> {attr.value}
+                        <div className="container p-4 bg-black text-white">{attr.description?attr.description : null}</div>
                         <ToBuyVariant attribute={attr}></ToBuyVariant>
                     </div>
                 )
@@ -38,6 +39,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                 return (
                     <div>
                         <AttributeVisualization attribute={attr}></AttributeVisualization>
+                        <div>{attr.description ? attr.description : null}</div>
                         <ToBuyVariant attribute={attr}></ToBuyVariant>
                     </div>
                 )
@@ -54,6 +56,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                 return (
                     <div>
                         <AttributeVisualization attribute={attr}></AttributeVisualization>
+                        <div>{attr.description ? attr.description : null}</div>
                         <ToBuyVariant attribute={attr}></ToBuyVariant>
 
                     </div>
