@@ -61,7 +61,7 @@ export default function Variants({product}: { variants: SanityDocument }) {
                                          alt={variant.title}/>
                                     <span>{variant.title}</span>*/}
 
-                    <span><VariantAttributes attributes={groupedVariantsAttrs}></VariantAttributes></span>
+                   <VariantAttributes attributes={groupedVariantsAttrs}></VariantAttributes>
 
                 </div>
             </>

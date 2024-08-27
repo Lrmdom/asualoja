@@ -65,8 +65,8 @@ export let loader = async ({request, params}) => {
         {
             headers: {
                 'Set-Cookie': await localeCookie.serialize(locale),
-                "Cache-Control": "public, max-age=0, must-revalidate",
-                "CDN-Cache-Control": "public, s-maxage=3600, stale-while-revalidate=82800"
+                /*"Cache-Control": "public, max-age=0, must-revalidate",
+                "CDN-Cache-Control": "public, s-maxage=3600, stale-while-revalidate=82800"*/
             }
         }
     )
