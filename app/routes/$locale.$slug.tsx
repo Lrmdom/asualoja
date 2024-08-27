@@ -27,6 +27,11 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     params
   )
   //TODO is new Headers() working ok?
+  //https://sergiodxa.com/tutorials/load-only-the-data-you-need-in-remix
+  //TODO is new Headers() working ok?  https://pyk.sh/remix-set-stale-while-revalidate-cache-control-to-improve-performance#heading-implementing-in-remix
+//https://sergiodxa.com/articles/http-vs-server-side-cache-in-remix
+//https://remix.run/docs/en/main/discussion/state-management
+
   data.headers=new Headers()
   const realtimeCaches: { [key: string]: string } = {
     "Cache-Control": "public, max-age=0, must-revalidate",
