@@ -55,6 +55,10 @@ export let loader = async ({request, params}) => {
         SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
     }
 
+//https://sergiodxa.com/tutorials/load-only-the-data-you-need-in-remix
+    //TODO is new Headers() working ok?  https://pyk.sh/remix-set-stale-while-revalidate-cache-control-to-improve-performance#heading-implementing-in-remix
+//https://sergiodxa.com/articles/http-vs-server-side-cache-in-remix
+    //https://remix.run/docs/en/main/discussion/state-management
 
     return json(
         {data, locale, ENV, user},
