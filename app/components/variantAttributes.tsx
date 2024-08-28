@@ -9,7 +9,7 @@ export default function VariantAttributes({attributes}: { attribute: SanityDocum
         <main className="">
             {Object.entries(attributes).map((attribute) => {
                 //atribute[0] is name and attribute[1] is array of value/s
-
+console.log(attribute)
                 return (
                     <>
                         {attribute[1].length > 0 ?
