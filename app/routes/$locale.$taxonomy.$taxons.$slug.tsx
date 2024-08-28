@@ -52,10 +52,10 @@ export default function ProductRoute() {
                 <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
 
             <span className="border-2 border-primary p-4 rounded text-primary">
-              <Link to={`/${language}/${stegaClean(data.taxonomies[0])}`}>{stegaClean(data.taxonomies[0])}</Link>
+              <Link to={`/${language}/${encodeURI(stegaClean(data.taxonomies[0]))}`}>{stegaClean(data.taxonomies[0])}</Link>
               -
               <Link
-                  to={`/${language}/${stegaClean(data.taxonomies[0])}/${stegaClean(data.product.taxon)}`}>{stegaClean(data.product.taxon)}</Link>
+                  to={`/${language}/${encodeURI(stegaClean(data.taxonomies[0]))}/${encodeURI(stegaClean(data.product.taxon))}`}>{stegaClean(data.product.taxon)}</Link>
               -
              {stegaClean(data.product.title)}</span>
                 </div>

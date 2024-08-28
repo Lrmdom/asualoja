@@ -8,20 +8,10 @@ import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@comme
 export default function AttributeVisualization({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
 
-
-
     return (
-
-        <input className="rounded-full" type="color" id="head" name="head" value={stegaClean(attribute.value)} disabled/>
+        <input type="color" id="head" name="head" value={stegaClean(attribute.value)}
+               disabled/>
 
     )
 
 }
-
-
-
-
-
-
-
-

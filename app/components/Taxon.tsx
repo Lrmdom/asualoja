@@ -70,9 +70,9 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
 
                 <div key={taxon._id}>
                           <span className="border-2 border-primary p-4 rounded text-primary">
-              <Link to={`/${language}/${stegaClean(taxon.taxonomies[0])}`}>{stegaClean(taxon.taxonomies[0])}</Link>
+              <Link to={`/${language}/${encodeURI(stegaClean(taxon.taxonomies[0]))}`}>{encodeURI(stegaClean(taxon.taxonomies[0]))}</Link>
                               -
-                                            <Link to={`/${language}/${stegaClean(taxon.title)}`}>{stegaClean(taxon.title)}</Link>
+                                            <Link to={`/${language}/${encodeURI(stegaClean(taxon.title))}`}>{stegaClean(taxon.title)}</Link>
 
               </span>
                     <Prods products={taxon.products}></Prods>
