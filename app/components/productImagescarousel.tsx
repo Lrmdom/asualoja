@@ -6,7 +6,7 @@ export default function Component(props) {
     const [selectedImage, setSelectedImage] = useState(0)
     let imgs= props.images?.map((element) => element["url"])
     const images = imgs
-   console.log(props.images)
+   //console.log(props.images)
     return (
         <div className="container grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 items-start">
             <div className="grid grid-cols-2 gap-4 container">
