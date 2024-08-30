@@ -14,13 +14,13 @@ import {ClientOnly} from "remix-utils/client-only"
 export default function Component(props) {
     const [selectedColor, setSelectedColor] = useState("")
     const [selectedSize, setSelectedSize] = useState("")
-
+const product = props.product
     return (
         <Card className="overflow-hidden">
             <div className="grid md:grid-cols-2 gap-6">
                 <div>
 
-                    {props.product?.map((prod) => {
+                    {product?.map((prod) => {
                         if (Array.isArray(prod.variants)) {
                             prod.variantsImages = []
 
@@ -46,15 +46,13 @@ export default function Component(props) {
                             </>
                         )
                     })}
-
-
                 </div>
 
                 <div className="grid gap-6">
                     <div>
-                        <CardTitle className="text-2xl font-bold">Cozy Autumn Sweater</CardTitle>
+                        <CardTitle className="text-2xl font-bold">{product[0].title}</CardTitle>
                         <CardDescription className="text-muted-foreground">
-                            Soft and warm knit sweater for the fall season.
+                            {product[0].description}
                         </CardDescription>
                     </div>
                     <div className="grid gap-4">
