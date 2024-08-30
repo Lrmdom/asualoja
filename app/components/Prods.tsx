@@ -34,7 +34,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                 prod.variants.map((vrnt) => {
                                     vrnt.images?.map((image) => {
                                         image.alt ? image.alt : image.alt = stegaClean(vrnt.title)
-                                        image.sku ? image.sku : image.sku = vrnt.sku
+                                        image.sku ? image.sku : image.sku = stegaClean(vrnt.sku)
                                         prod.variantsImages.push(image)
                                     })
                                 })
@@ -46,6 +46,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                             return (
                                 <>
                                     <div className="container mx-auto prose prose-lg border rounded">
+
                                         <div className="overflow-auto m-2 ">
                                             <Link
                                                 to={stegaClean(`/${language}/${ encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}> {stegaClean(prod.title)} </Link>

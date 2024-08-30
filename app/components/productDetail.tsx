@@ -1,29 +1,55 @@
-
-
-import { useState } from "react"
-import { Card, CardTitle, CardDescription } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
+import {Suspense, useState} from "react"
+import {Card, CardTitle, CardDescription} from "@/components/ui/card"
+import {Label} from "@/components/ui/label"
+import {Button} from "@/components/ui/button"
 import ProductImagescarousel from "~/components/productImagescarousel";
+import type {SanityDocument} from "@sanity/client";
+import {stegaClean} from "@sanity/client/stega";
+import {Link} from "@remix-run/react";
+import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
+import Attributes from "~/components/Attributes";
+import Variants from "~/components/Variants";
+import {ClientOnly} from "remix-utils/client-only"
 
 export default function Component(props) {
     const [selectedColor, setSelectedColor] = useState("")
     const [selectedSize, setSelectedSize] = useState("")
+
     return (
         <Card className="overflow-hidden">
             <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                    <ProductImagescarousel images={props.product.variantsImages}/>
+
+                    {props.product?.map((prod) => {
+                        if (Array.isArray(prod.variants)) {
+                            prod.variantsImages = []
+
+                            prod.variantsImages.push({"url": prod.imageUrl, "alt": stegaClean(prod.title)})
+
+                            prod.variants.map((vrnt) => {
+                                vrnt.images?.map((image) => {
+                                    image.alt ? image.alt : image.alt = stegaClean(vrnt.title)
+                                    image.sku ? image.sku : image.sku = stegaClean(vrnt.sku)
+                                    prod.variantsImages.push(image)
+                                })
+                            })
+                        } else {
+                            prod.variantsImages = [{"url": prod.imageUrl, "alt": stegaClean(prod.title)}]
+                        }
+                        return (
+                            <>
+                                <div className="container mx-auto prose prose-lg border rounded">
+                                    <ProductImagescarousel images={prod.variantsImages}/>
+
+
+                                </div>
+                            </>
+                        )
+                    })}
+
+
                 </div>
-                {/*<div>
-                    <img
-                        src="/placeholder.svg"
-                        alt="Product Image"
-                        width={600}
-                        height={600}
-                        className="aspect-square object-cover w-full rounded-lg"
-                    />
-                </div>*/}
+
                 <div className="grid gap-6">
                     <div>
                         <CardTitle className="text-2xl font-bold">Cozy Autumn Sweater</CardTitle>

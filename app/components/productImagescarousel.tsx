@@ -2,16 +2,16 @@
 
 import { useState } from "react"
 
-export default function ProductImagescarousel(props) {
+export default function Component(props) {
     const [selectedImage, setSelectedImage] = useState(0)
-debugger
     let imgs= props.images?.map((element) => element["url"])
-    debugger
     const images = imgs
+   console.log(props.images)
     return (
         <div className="container grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 items-start">
             <div className="grid grid-cols-2 gap-4 container">
                 {images.map((image, index) => (
+
                     <button
                         key={index}
                         onClick={() => setSelectedImage(index)}
