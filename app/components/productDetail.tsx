@@ -10,17 +10,23 @@ import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import Attributes from "~/components/Attributes";
 import Variants from "~/components/Variants";
 import {ClientOnly} from "remix-utils/client-only"
+import ProductAttributes from "~/components/productAttributes"
 
 export default function Component(props) {
-    const [selectedColor, setSelectedColor] = useState("")
-    const [selectedSize, setSelectedSize] = useState("")
-const product = props.product[0]
+
+    const product = props.product[0]
+
+
+
     return (
+
         <Card className="overflow-hidden">
             <div className="grid md:grid-cols-2 gap-6">
                 <div>
 
                     {props.product?.map((prod) => {
+
+                        //console.log(prod)
                         if (Array.isArray(prod.variants)) {
                             prod.variantsImages = []
 
@@ -45,7 +51,9 @@ const product = props.product[0]
                                 </div>
                             </>
                         )
-                    })}
+                    })
+
+                    }
                 </div>
 
                 <div className="grid gap-6">
@@ -55,43 +63,9 @@ const product = props.product[0]
                             {product.description}
                         </CardDescription>
                     </div>
-                    <div className="grid gap-4">
-                        <div>
-                            <Label htmlFor="color" className="text-base font-medium">
-                                Color
-                            </Label>
-                            <div className="flex items-center gap-2">
-                                {/*TODO if is valid color */}
-                                <button
-                                    type="button"
-                                    className={`h-8 w-8 rounded-full border-2 border-muted ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-                                        selectedColor === "#333" ? "ring-2 ring-primary" : ""
-                                    }`}
-                                    style={{backgroundColor: "#333"}}
-                                    onClick={() => setSelectedColor("#333")}
-                                />
 
-                            </div>
-                        </div>
-                        <div>
-                            <Label htmlFor="size" className="text-base font-medium">
-                                Size
-                            </Label>
-                            <div className="flex items-center gap-2">
-                                {/*TODO if is valid color*/}
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className={selectedSize === "S" ? "bg-primary text-primary-foreground" : ""}
-                                    onClick={() => setSelectedSize("S")}
-                                >
-                                    S
-                                </Button>
+                    <ProductAttributes product={product}></ProductAttributes>
 
-
-                            </div>
-                        </div>
-                    </div>
                     <div>
                         <Button size="lg" className="w-full">
                             Add to Cart
