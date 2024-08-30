@@ -14,13 +14,13 @@ import {ClientOnly} from "remix-utils/client-only"
 export default function Component(props) {
     const [selectedColor, setSelectedColor] = useState("")
     const [selectedSize, setSelectedSize] = useState("")
-const product = props.product
+const product = props.product[0]
     return (
         <Card className="overflow-hidden">
             <div className="grid md:grid-cols-2 gap-6">
                 <div>
 
-                    {product?.map((prod) => {
+                    {props.product?.map((prod) => {
                         if (Array.isArray(prod.variants)) {
                             prod.variantsImages = []
 
@@ -50,9 +50,9 @@ const product = props.product
 
                 <div className="grid gap-6">
                     <div>
-                        <CardTitle className="text-2xl font-bold">{product[0].title}</CardTitle>
+                        <CardTitle className="text-2xl font-bold">{product.title}</CardTitle>
                         <CardDescription className="text-muted-foreground">
-                            {product[0].description}
+                            {product.description}
                         </CardDescription>
                     </div>
                     <div className="grid gap-4">
@@ -61,6 +61,7 @@ const product = props.product
                                 Color
                             </Label>
                             <div className="flex items-center gap-2">
+                                {/*TODO if is valid color */}
                                 <button
                                     type="button"
                                     className={`h-8 w-8 rounded-full border-2 border-muted ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
@@ -69,30 +70,7 @@ const product = props.product
                                     style={{backgroundColor: "#333"}}
                                     onClick={() => setSelectedColor("#333")}
                                 />
-                                <button
-                                    type="button"
-                                    className={`h-8 w-8 rounded-full border-2 border-muted ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-                                        selectedColor === "#f44336" ? "ring-2 ring-primary" : ""
-                                    }`}
-                                    style={{backgroundColor: "#f44336"}}
-                                    onClick={() => setSelectedColor("#f44336")}
-                                />
-                                <button
-                                    type="button"
-                                    className={`h-8 w-8 rounded-full border-2 border-muted ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-                                        selectedColor === "#4caf50" ? "ring-2 ring-primary" : ""
-                                    }`}
-                                    style={{backgroundColor: "#4caf50"}}
-                                    onClick={() => setSelectedColor("#4caf50")}
-                                />
-                                <button
-                                    type="button"
-                                    className={`h-8 w-8 rounded-full border-2 border-muted ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-                                        selectedColor === "#2196f3" ? "ring-2 ring-primary" : ""
-                                    }`}
-                                    style={{backgroundColor: "#2196f3"}}
-                                    onClick={() => setSelectedColor("#2196f3")}
-                                />
+
                             </div>
                         </div>
                         <div>
@@ -100,6 +78,7 @@ const product = props.product
                                 Size
                             </Label>
                             <div className="flex items-center gap-2">
+                                {/*TODO if is valid color*/}
                                 <Button
                                     variant="outline"
                                     size="sm"
@@ -108,30 +87,8 @@ const product = props.product
                                 >
                                     S
                                 </Button>
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className={selectedSize === "M" ? "bg-primary text-primary-foreground" : ""}
-                                    onClick={() => setSelectedSize("M")}
-                                >
-                                    M
-                                </Button>
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className={selectedSize === "L" ? "bg-primary text-primary-foreground" : ""}
-                                    onClick={() => setSelectedSize("L")}
-                                >
-                                    L
-                                </Button>
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className={selectedSize === "XL" ? "bg-primary text-primary-foreground" : ""}
-                                    onClick={() => setSelectedSize("XL")}
-                                >
-                                    XL
-                                </Button>
+
+
                             </div>
                         </div>
                     </div>

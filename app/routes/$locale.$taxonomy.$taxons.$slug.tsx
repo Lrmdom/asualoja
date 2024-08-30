@@ -62,7 +62,6 @@ export default function ProductRoute() {
              {stegaClean(data.product.title)}</span>
                 </div>
             </div>
-            {/*TODO develop a prod component ...not prods section. only one prod...*/}
             <ClientOnly fallback={null}>
                 {() => <ProductDetail product={[data.product]} />}
             </ClientOnly>
