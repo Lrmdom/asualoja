@@ -8,6 +8,8 @@ import {useTranslation} from "react-i18next";
 import EmblaCarousel from '~/components/emblaCarousel/EmblaCarousel'
 import {EmblaOptionsType} from 'embla-carousel'
 import {Suspense} from "react";
+import {InputRadioGroup} from "@commercelayer/app-elements";
+import { ClientOnly } from "remix-utils/client-only"
 
 export default function Prods({products}: { product: SanityDocument }) {
     //console.log(products)
@@ -47,7 +49,10 @@ export default function Prods({products}: { product: SanityDocument }) {
                                                 to={stegaClean(`/${language}/${ encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}> {stegaClean(prod.title)} </Link>
                                         </div>
                                         <Suspense>
-                                            <EmblaCarousel slides={prod.variantsImages} options={OPTIONS}/>
+                                            <ClientOnly fallback={null}>
+                                                {() => <EmblaCarousel slides={prod.variantsImages} options={OPTIONS}/>}
+                                            </ClientOnly>
+
                                         </Suspense>
                                         <div>
 
