@@ -14,7 +14,7 @@ import {stegaClean} from "@sanity/client/stega";
 import Attributes from "~/components/Attributes";
 import {useTranslation} from "react-i18next";
 import Prods from "~/components/Prods";
-
+import ProductDetail from "~/components/productDetail"
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
     const {data} = await loadQuery<SanityDocument>(
         PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE,
@@ -61,6 +61,9 @@ export default function ProductRoute() {
                 </div>
             </div>
             {/*TODO develop a prod component ...not prods section. only one prod...*/}
+
+            <ProductDetail product={data.product}></ProductDetail>
+
             <Prods products={[data.product]}></Prods>
 
             <div className="group relative">
@@ -87,6 +90,8 @@ export default function ProductRoute() {
                     </div>
                 </div>
             </div>
+
+
         </>
     )
 }

@@ -7,7 +7,9 @@ import {SanityDocument} from "@sanity/client";
 import VariantAttributes from "~/components/variantAttributes";
 import {InputRadioGroup} from "@commercelayer/app-elements";
 import {Suspense} from "react";
-import { ClientOnly } from "remix-utils/client-only"
+import {ClientOnly} from "remix-utils/client-only"
+import {RadioGroup, RadioGroupItem} from "../../@/components/ui/radio-group";
+import {Label} from "../../@/components/ui/label";
 
 /*const auth = await authenticate('client_credentials', {
     clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
@@ -22,8 +24,6 @@ export default function Variants({product}: { variants: SanityDocument }) {
     if (Array.isArray(product.variants)) {
 
 
-
-
         let variantsAttrs: any[] = []
         product.variants.map((variant) => {
             if (Array.isArray(variant.attributes)) {
@@ -33,8 +33,8 @@ export default function Variants({product}: { variants: SanityDocument }) {
                     element.sku = stegaClean(variant.sku)
                     element.images = variant.images
                     element.label = stegaClean(element.value.toUpperCase())
-                    element.content=<div className="text-xs">{element.label}</div>
-                    Reg_Exp.test(stegaClean(element.value)) ? element.className=`bg-[${stegaClean(element.value)}]` :null
+                    element.content = <div className="text-xs">{element.label}</div>
+                    Reg_Exp.test(stegaClean(element.value)) ? element.className = `bg-[${stegaClean(element.value)}]` : null
 
                 });
 
@@ -52,7 +52,6 @@ export default function Variants({product}: { variants: SanityDocument }) {
             return current;
         }, {});
 
-        console.log(groupedVariantsAttrs)
 
         return (
             <>
@@ -69,19 +68,22 @@ export default function Variants({product}: { variants: SanityDocument }) {
                                 {attribute[1].length > 0 ?
 
                                     <div>
-                                        {<Suspense>
-                                    <ClientOnly fallback={null}>
-                                        {() => <InputRadioGroup
-                                            name={attribute[0] + attribute[1][0].sku}
-                                            options={attribute[1]}
-                                            title={attribute[0]}
-                                            viewMode="inline"
-                                        />}
-                                    </ClientOnly>
 
-                                </Suspense>}
-                                        {/*<span
-                                className="text-lg text-bold border-2 border-primary rounded p-2">{attribute[0]}</span>*/}
+
+
+
+                                        {<Suspense>
+                                            <ClientOnly fallback={null}>
+                                                {() => <InputRadioGroup
+                                                    name={attribute[0] + attribute[1][0].sku}
+                                                    options={attribute[1]}
+                                                    title={attribute[0]}
+                                                    viewMode="grid"
+                                                />}
+                                            </ClientOnly>
+
+                                        </Suspense>}
+
                                     </div>
                                     : null}
 
@@ -89,7 +91,14 @@ export default function Variants({product}: { variants: SanityDocument }) {
                             </>
                         )
                     })}
+
+
+
+
                    <VariantAttributes attributes={groupedVariantsAttrs}></VariantAttributes>
+
+
+
 
                 </div>
             </>

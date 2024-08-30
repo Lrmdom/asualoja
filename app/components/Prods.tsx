@@ -10,6 +10,8 @@ import {EmblaOptionsType} from 'embla-carousel'
 import {Suspense} from "react";
 import {InputRadioGroup} from "@commercelayer/app-elements";
 import { ClientOnly } from "remix-utils/client-only"
+import ProductImagescarousel from "~/components/productImagescarousel";
+import ProductDetail from "~/components/productDetail";
 
 export default function Prods({products}: { product: SanityDocument }) {
     //console.log(products)
@@ -54,6 +56,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                             </ClientOnly>
 
                                         </Suspense>
+
                                         <div>
 
 
