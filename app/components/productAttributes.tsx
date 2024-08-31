@@ -10,7 +10,7 @@ import ProductAttr from "~/components/productAttr";
 export default function ProductAttributes({product}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
 
-    const [selectedSize, setSelectedSize] = useState("")
+
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
     let groupedVariantsAttrs
     if (Array.isArray(product.variants)) {
@@ -44,14 +44,11 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
             return current;
         }, {});
     }
-    return (
-        <main className="">
+    return (<main className="">
 
             <div className="grid gap-4">
                 <div>
-                    <Label htmlFor="color" className="text-base font-medium">
-                        Color
-                    </Label>
+
 
                     <div className="flex items-center gap-2">
                         {Object.entries(groupedVariantsAttrs).map((attribute) => {
@@ -59,24 +56,25 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
 
                             return (
                                 <>
+                                    {/*<Label htmlFor="color" className="text-base font-medium">
+                                        {attribute[0]}
+                                    </Label>*/}
                                     {attribute[1].length > 0 ?
 
                                         <div>
 
                                             {attribute[1].map((attr) => {
                                                 return (
-
                                                     <ProductAttr attr={attr}></ProductAttr>
+
                                                 )
+
                                             })}
 
-
-                                        </div>
-                                        : null}
+                                        </div> : null}
 
 
-                                </>
-                            )
+                                </>)
                         })}
 
 
@@ -85,8 +83,7 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
                 </div>
             </div>
 
-        </main>
-    )
+        </main>)
     /*  } else {
           return null
       }

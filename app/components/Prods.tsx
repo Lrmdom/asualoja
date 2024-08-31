@@ -12,6 +12,7 @@ import {InputRadioGroup} from "@commercelayer/app-elements";
 import { ClientOnly } from "remix-utils/client-only"
 import ProductImagescarousel from "~/components/productImagescarousel";
 import ProductDetail from "~/components/productDetail";
+import ProductAttributes from "~/components/productAttributes";
 
 export default function Prods({products}: { product: SanityDocument }) {
     //console.log(products)
@@ -51,6 +52,10 @@ export default function Prods({products}: { product: SanityDocument }) {
                                             <Link
                                                 to={stegaClean(`/${language}/${ encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}> {stegaClean(prod.title)} </Link>
                                         </div>
+{/*
+                                        <ProductImagescarousel images={prod.variantsImages}/>
+*/}
+
                                         <Suspense>
                                             <ClientOnly fallback={null}>
                                                 {() => <EmblaCarousel slides={prod.variantsImages} options={OPTIONS}/>}
@@ -63,7 +68,8 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                                             <Attributes product={prod}></Attributes>
                                         </div>
-                                        <Variants product={prod}></Variants>
+                                        {/*<Variants product={prod}></Variants>*/}
+                                        <ProductAttributes product={prod}></ProductAttributes>
                                     </div>
                                 </>
                             )

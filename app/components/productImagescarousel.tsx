@@ -4,6 +4,7 @@ import { useState } from "react"
 
 export default function Component(props) {
     const [selectedImage, setSelectedImage] = useState(0)
+
     let imgs= props.images?.map((element) => element["url"])
     const images = imgs
    //console.log(props.images)
@@ -22,8 +23,8 @@ export default function Component(props) {
                         <img
                             src={image} // Replace with your image
                             alt={`Thumbnail ${index + 1}`}
-                            width={120}
-                            height={120}
+                            width={100}
+                            height={100}
                             className="object-cover w-full aspect-square"
                         />
                     </button>
