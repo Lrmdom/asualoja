@@ -69,7 +69,8 @@ export default function Prods({products}: { product: SanityDocument }) {
                                             <Attributes product={prod}></Attributes>
                                         </div>
                                         {/*<Variants product={prod}></Variants>*/}
-                                        <ProductAttributes product={prod}></ProductAttributes>
+                                        {Array.isArray(prod.variants)? <ProductAttributes product={prod}></ProductAttributes>:null}
+
                                     </div>
                                 </>
                             )

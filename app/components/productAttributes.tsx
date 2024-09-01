@@ -10,11 +10,6 @@ import {RadioGroup} from "../../@/components/ui/radio-group";
 import ToBuyVariant from "~/components/toBuyVariant";
 
 
-function setSelectedColorSku( sku,color){
-    setSelectedSku(sku)
-    setSelectedColor(color)
-}
-
 export default function ProductAttributes({product}: { attribute: SanityDocument }) {
 
     const {t} = useTranslation('')
@@ -24,7 +19,9 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
 
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
     let groupedVariantsAttrs
-    if (Array.isArray(product.variants)) {
+/*
+    if (Array.isArray(product.variants)) {  //logic moved up parent component
+*/
 
 
         let variantsAttrs: any[] = []
@@ -54,7 +51,7 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
 
             return current;
         }, {});
-    }
+    /*}*/
     return (<main className="">
 
         <div className="grid gap-4">
@@ -62,7 +59,7 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
 
 
                 <div className="flex items-center gap-2">
-                    {Object.entries(groupedVariantsAttrs).map((attribute) => {
+                    {Object.entries(groupedVariantsAttrs)?.map((attribute) => {
                         //atribute[0] is name and attribute[1] is array of value/s
 
                         return (
@@ -83,7 +80,11 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
                                                     {attribute[1].map((attr) => {
                                                         return (
 
-                                                            <ProductAttr setSelectedSku={setSelectedSku} setSelectedSize={setSelectedSize} selectedSku={selectedSku} selectedSize={selectedSize} attr={attr}></ProductAttr>
+                                                            <ProductAttr setSelectedSku={setSelectedSku}
+                                                                         setSelectedSize={setSelectedSize}
+                                                                         selectedSku={selectedSku}
+                                                                         selectedSize={selectedSize}
+                                                                         attr={attr}></ProductAttr>
 
                                                         )
 
@@ -103,7 +104,10 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
                                             attribute[1].map((attr) => {
                                                 return (
 
-                                                    <ProductAttr setSelectedSku={setSelectedSku} setSelectedSize={setSelectedSize} selectedSku={selectedSku} selectedSize={selectedSize} attr={attr}></ProductAttr>
+                                                    <ProductAttr setSelectedSku={setSelectedSku}
+                                                                 setSelectedSize={setSelectedSize}
+                                                                 selectedSku={selectedSku} selectedSize={selectedSize}
+                                                                 attr={attr}></ProductAttr>
 
                                                 )
 
@@ -120,7 +124,7 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
 
 
                 </div>
-                <ToBuyVariant selectedSku={selectedSku} ></ToBuyVariant>
+                <ToBuyVariant selectedSku={selectedSku}></ToBuyVariant>
             </div>
         </div>
 

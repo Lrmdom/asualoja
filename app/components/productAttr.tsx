@@ -15,10 +15,10 @@ export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
 
     function setSkuButton( sku,size){
-        console.log("leonl" +sku)
+        //console.log("leonl" +sku)
         setSelectedSku(sku)
         setSelectedSize(size)
-        console.log(selectedSku)
+        //console.log(selectedSku)
     }
 
     return (
