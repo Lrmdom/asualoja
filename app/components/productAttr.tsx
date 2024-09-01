@@ -11,42 +11,53 @@ function getTheColorCode(attribute) {
     return stegaClean(attribute.value.toString())
 }
 
-export default function ProductAttr({attr}: { attribute: SanityDocument }) {
-    const [selectedColor, setSelectedColor] = useState("")
-    const [selectedSize, setSelectedSize] = useState("")
+export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku,selectedSize,attr}: { attribute: SanityDocument }) {
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
+
+    function setSkuButton( sku,size){
+        console.log("leonl" +sku)
+        setSelectedSku(sku)
+        setSelectedSize(size)
+        console.log(selectedSku)
+    }
 
     return (
 // TODO replace button for Radio and radiogroup
 
         Reg_Exp.test(stegaClean(attr.value)) ?
             <>
-            <button
-                type="button"
-                className={` h-8 w-8 rounded-full border-2 border-muted ring-offset-background 
-                focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-                    selectedColor === getTheColorCode(attr) ? "ring-2 ring-primary" : ""
-                }`}
-                style={{backgroundColor: getTheColorCode(attr)}}
-                onClick={() => setSelectedColor(getTheColorCode(attr))}
-            >
-
-
-            </button>
-            <div className="text-xs">{attr.description ? attr.description : null}</div>
+                <div key={attr.value} className="flex items-center">
+                    <RadioGroupItem
+                        value={attr.value}
+                        id={attr.value}
+                        className="peer sr-only"
+                    />
+                    <Label
+                        htmlFor={attr.value}
+                        className="w-12 h-12 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 flex items-center justify-center"
+                        style={{backgroundColor: getTheColorCode(attr)}}
+                        onClick={() =>setSelectedSku(stegaClean(attr.sku))}
+                    >
+                        <span className="sr-only">{attr.value}</span>
+                        <div
+                            className="w-11 h-11 rounded-full border-2 border-white opacity-0 transition-opacity duration-300 peer-checked:opacity-100"></div>
+                    </Label>
+                </div>
+                <div className="text-xs">{attr.description ? attr.description : null}</div>
             </>
-:
+            :
             <>
                 <Button
                     variant="outline"
-                    size="sm"
-                    className={selectedSize === "S" ? "bg-primary text-primary-foreground" : ""}
-                    onClick={() => setSelectedSize("S")}
+                    size={stegaClean(attr.value)}
+                    className={selectedSize === stegaClean(attr.value) ? "bg-primary text-primary-foreground" : ""}
+                    /*onClick={() =>setSkuButton(stegaClean(attr.sku),stegaClean(attr.value))}*/
+                    onClick={() =>setSelectedSku(stegaClean(attr.sku))}
                 >
                     {attr.value.toUpperCase()}
-
+                    {attr.description && attr.description }
                 </Button>
-                <div className="text-xs">{attr.description ? attr.description : null}</div>
+                <span>{selectedSize}</span>
 
             </>
     )
