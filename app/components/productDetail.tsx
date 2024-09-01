@@ -64,7 +64,7 @@ export default function Component(props) {
                         </CardDescription>
                     </div>
 
-                    <ProductAttributes product={product}></ProductAttributes>
+                    {Array.isArray(product.variants)? <ProductAttributes product={product}></ProductAttributes>:null}
 
                     <div>
                         <Button size="lg" className="w-full">
