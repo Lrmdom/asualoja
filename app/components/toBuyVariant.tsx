@@ -3,21 +3,61 @@ import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
 import {ClientOnly} from "remix-utils/client-only"
 import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@commercelayer/app-elements'
+import {authenticate} from "@commercelayer/js-auth"
+import {
+    CommerceLayer,
+    PricesContainer,
+    Price,
+    AvailabilityContainer,
+    AvailabilityTemplate, SkusContainer, Skus, SkuField
+} from "@commercelayer/react-components";
+
+const auth = await authenticate('client_credentials', {
+    clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+    scope: 'market:id:vlkaZhkGNj'
+})
 
 
-export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
+export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
-
+    /*const auth = await authenticate('client_credentials', {
+        clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+        scope: 'market:id:vlkaZhkGNj'
+    })*/
     //console.log(attribute)
 
     return (
         <>
-        <span className="container p-4">
-                                <cl-price code={stegaClean(selectedSku)}>
-                                    <cl-price-amount type="compare-at"></cl-price-amount>
-                                    <cl-price-amount type="price"></cl-price-amount>
-                                </cl-price>
-                            </span>
+            <CommerceLayer accessToken={auth.accessToken} endpoint="https://execlog.commercelayer.io">
+                <SkusContainer
+                    skus={[
+                        "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
+                    ]}
+                >
+                    <Skus>
+                        <SkuField
+                            attribute="code"
+                            tagElement="div"
+                        />
+                    </Skus>
+                </SkusContainer>
+                <PricesContainer>
+                    <Price
+                        className="font-bold text-primary"
+                        compareClassName="line-through ml-2 text-xl"
+                        skuCode={stegaClean(selectedSku)}
+                    />
+                </PricesContainer>
+                <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
+                    <AvailabilityTemplate
+                        showShippingMethodName
+                        showShippingMethodPrice
+                        timeFormat="days"
+                        className="text-gray-600 text-3xl"
+                    />
+                </AvailabilityContainer>
+            </CommerceLayer>
+
             <div>
                 <cl-availability code={stegaClean(selectedSku)}>
                     <cl-availability-status type="available" style={{color: "green"}}>
@@ -37,6 +77,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                     </cl-availability-status>
                 </cl-availability>
             </div>
+
             <cl-price code={stegaClean(selectedSku)}>
                 <cl-price-amount type="compare-at"></cl-price-amount>
                 <cl-price-amount type="price"></cl-price-amount>
