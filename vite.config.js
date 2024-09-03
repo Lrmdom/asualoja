@@ -11,9 +11,12 @@ import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 installGlobals();
 
 export default defineConfig({
-
+    ssr: {
+        noExternal: ["@commercelayer/react-components","lodash"]
+    },
     plugins: [
         viteCommonjs(),
+        //viteCommonjs(),
         VitePWA(),
         remixDevTools(),
         remix({
