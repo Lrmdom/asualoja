@@ -2,14 +2,14 @@ import { Authenticator } from 'remix-auth'
 import { sessionStorage } from '~/services/session.server'
 // Create an instance of the authenticator, pass a generic with what
 // strategies will return and will store in the session
-import { FormStrategy } from 'remix-auth-form'
+/*import { FormStrategy } from 'remix-auth-form'
 import { GitHubStrategy } from 'remix-auth-github'
 import { GoogleStrategy } from 'remix-auth-google'
 import { FacebookStrategy } from 'remix-auth-facebook'
 import { LinkedinStrategy } from 'remix-auth-linkedin'
 import { Twitter2Strategy } from 'remix-auth-twitter'
 import { MicrosoftStrategy } from 'remix-auth-microsoft'
-import TwitterApi from 'twitter-api-v2'
+import TwitterApi from 'twitter-api-v2'*/
 
 export let authenticator = new Authenticator(sessionStorage)
 
