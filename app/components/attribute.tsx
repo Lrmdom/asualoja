@@ -90,11 +90,13 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
         let Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
         return (
             attribute.map((attr) => {
-                let output
+                let output = `rounded border border-primary p-2 ${attr.sku}`
                 Reg_Exp.test(stegaClean(attr.value)) ?   //is valid color?
                     output = <AttributeVisualization attribute={attr}/>
                     :
-                    output = <button className="rounded border border-primary p-2" value={attr.value} name="size"> {stegaClean(attr.value.toUpperCase())}</button>
+                    output =
+                        <button className={output} value={stegaClean(attr.value)}
+                                name="size"> {stegaClean(attr.value.toUpperCase())}</button>
                 return (
                     <div>
                         {output}
