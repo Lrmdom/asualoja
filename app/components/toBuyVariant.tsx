@@ -28,7 +28,7 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
 
     return (
         <>
-            {/*<CommerceLayer accessToken={auth.accessToken} endpoint="https://execlog.commercelayer.io">
+            <CommerceLayer accessToken={auth.accessToken} endpoint="https://execlog.commercelayer.io">
                 <SkusContainer
                     skus={[
                         "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
@@ -43,7 +43,7 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
                 </SkusContainer>
                 <PricesContainer>
                     <Price
-                        className="font-bold"
+                        className="font-bold text-primary"
                         compareClassName="line-through ml-2 text-xl"
                         skuCode={stegaClean(selectedSku)}
                     />
@@ -53,9 +53,10 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
                         showShippingMethodName
                         showShippingMethodPrice
                         timeFormat="days"
+                        className="text-gray-600 text-3xl"
                     />
                 </AvailabilityContainer>
-            </CommerceLayer>*/}
+            </CommerceLayer>
 
             <div>
                 <cl-availability code={stegaClean(selectedSku)}>
@@ -76,12 +77,7 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
                     </cl-availability-status>
                 </cl-availability>
             </div>
-            <span className="container p-4">
-                                <cl-price code={stegaClean(selectedSku)}>
-                                    <cl-price-amount type="compare-at"></cl-price-amount>
-                                    <cl-price-amount type="price"></cl-price-amount>
-                                </cl-price>
-                            </span>
+
             <cl-price code={stegaClean(selectedSku)}>
                 <cl-price-amount type="compare-at"></cl-price-amount>
                 <cl-price-amount type="price"></cl-price-amount>
