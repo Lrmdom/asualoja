@@ -13,9 +13,15 @@ import { ClientOnly } from "remix-utils/client-only"
 import ProductImagescarousel from "~/components/productImagescarousel";
 import ProductDetail from "~/components/productDetail";
 import ProductAttributes from "~/components/productAttributes";
+// import {authenticate} from '@commercelayer/js-auth'
 
 export default function Prods({products}: { product: SanityDocument }) {
     //console.log(products)
+    /*const auth = await authenticate('client_credentials', {
+        clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+        scope: 'market:id:vlkaZhkGNj'
+    })*/
+
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
     const OPTIONS: EmblaOptionsType = {}
@@ -56,12 +62,10 @@ export default function Prods({products}: { product: SanityDocument }) {
                                         <ProductImagescarousel images={prod.variantsImages}/>
 */}
 
-                                        <Suspense>
                                             <ClientOnly fallback={null}>
                                                 {() => <EmblaCarousel slides={prod.variantsImages} options={OPTIONS}/>}
                                             </ClientOnly>
 
-                                        </Suspense>
 
                                         <div>
 
