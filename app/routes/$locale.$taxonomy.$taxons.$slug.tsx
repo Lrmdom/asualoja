@@ -14,6 +14,9 @@ import {stegaClean} from "@sanity/client/stega";
 import Attributes from "~/components/Attributes";
 import {useTranslation} from "react-i18next";
 import Prods from "~/components/Prods";
+import ProductDetail from "~/components/productDetail";
+import {ClientOnly} from "remix-utils/client-only"
+import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
     const {data} = await loadQuery<SanityDocument>(
@@ -44,7 +47,6 @@ export default function ProductRoute() {
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
 
-
     return (
 
         <>
@@ -60,10 +62,14 @@ export default function ProductRoute() {
              {stegaClean(data.product.title)}</span>
                 </div>
             </div>
-            {/*TODO develop a prod component ...not prods section. only one prod...*/}
-            <Prods products={[data.product]}></Prods>
+            <ClientOnly fallback={null}>
+                {() => <ProductDetail product={[data.product]} />}
+            </ClientOnly>
 
-            <div className="group relative">
+
+            {/*<Prods products={[data.product]}></Prods>*/}
+
+            {/*<div className="group relative">
                 <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
 
                     <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -86,7 +92,9 @@ export default function ProductRoute() {
                         <Variants product={data.product}></Variants>
                     </div>
                 </div>
-            </div>
+            </div>*/}
+
+
         </>
     )
 }

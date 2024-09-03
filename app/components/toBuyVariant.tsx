@@ -5,7 +5,7 @@ import {ClientOnly} from "remix-utils/client-only"
 import {Avatar, InputRadioGroup, InputToggleButton, ListItem, Text} from '@commercelayer/app-elements'
 
 
-export default function ToBuyVariant({attribute}: { attribute: SanityDocument }) {
+export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
 
     //console.log(attribute)
@@ -13,13 +13,13 @@ export default function ToBuyVariant({attribute}: { attribute: SanityDocument })
     return (
         <>
         <span className="container p-4">
-                                <cl-price code={stegaClean(attribute.sku)}>
+                                <cl-price code={stegaClean(selectedSku)}>
                                     <cl-price-amount type="compare-at"></cl-price-amount>
                                     <cl-price-amount type="price"></cl-price-amount>
                                 </cl-price>
                             </span>
             <div>
-                <cl-availability code={stegaClean(attribute.sku)}>
+                <cl-availability code={stegaClean(selectedSku)}>
                     <cl-availability-status type="available" style={{color: "green"}}>
                         {t("• available")}
                     </cl-availability-status>
@@ -37,11 +37,11 @@ export default function ToBuyVariant({attribute}: { attribute: SanityDocument })
                     </cl-availability-status>
                 </cl-availability>
             </div>
-            <cl-price code={stegaClean(attribute.sku)}>
+            <cl-price code={stegaClean(selectedSku)}>
                 <cl-price-amount type="compare-at"></cl-price-amount>
                 <cl-price-amount type="price"></cl-price-amount>
             </cl-price>
-            <cl-add-to-cart code={stegaClean(attribute.sku)} quantity="1" kind="sku">
+            <cl-add-to-cart code={stegaClean(selectedSku)} quantity="1" kind="sku">
                 {t('Add to cart')}
             </cl-add-to-cart>
         </>
