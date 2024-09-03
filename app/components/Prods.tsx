@@ -14,6 +14,7 @@ export default function Prods({products}: { product: SanityDocument }) {
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
     const OPTIONS: EmblaOptionsType = {}
+
     return (
         <>
             <div className="bg-white">
@@ -41,7 +42,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                             return (
                                 <>
                                     <div className="container mx-auto prose prose-lg border rounded">
-                                        <div className="overflow-auto m-2">
+                                        <div className="overflow-auto m-2 ">
                                             <Link
                                                 to={stegaClean(`/${language}/${ encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}> {stegaClean(prod.title)} </Link>
                                         </div>
