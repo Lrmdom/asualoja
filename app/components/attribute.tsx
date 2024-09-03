@@ -13,9 +13,11 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
     if (stegaClean(attribute[0].visualPresentation?.visualization) === "InputToggleButton") {
         return (
             attribute.map((attr) => {
+                const output = `rounded border border-primary p-2 ${attr.sku}`
+
                 return (
                     <div>
-                        <button className="rounded border border-primary p-2" value={attr.value}
+                        <button className={output} value={stegaClean(attr.value)}
                                 name="size"> {stegaClean(attr.value.toUpperCase())}</button>
                         {attr.description ?
 

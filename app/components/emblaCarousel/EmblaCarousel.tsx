@@ -6,6 +6,9 @@ import {
   NextButton,
   usePrevNextButtons
 } from './js/EmblaCarouselArrowButtons'
+import { useCallback, useEffect } from 'react'
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+
 import useEmblaCarousel from 'embla-carousel-react'
 
 
@@ -28,6 +31,23 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     onPrevButtonClick,
     onNextButtonClick
   } = usePrevNextButtons(emblaApi)
+
+
+  const logEmblaEvent = useCallback(
+      (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
+          const sku = props.slides[emblaApi.slidesInView()[1]].sku
+        console.log(sku)
+
+        let elements = document.getElementsByClassName(sku)
+        console.log(elements)
+        console.log(`Embla just triggered ${eventName}!`)
+      },
+      []
+  )
+
+  useEffect(() => {
+    if (emblaApi) emblaApi.on('select', logEmblaEvent)
+  }, [emblaApi, logEmblaEvent])
 
   return (
     <section className="embla">

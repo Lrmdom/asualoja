@@ -13,7 +13,7 @@ import TwitterApi from 'twitter-api-v2'
 
 export let authenticator = new Authenticator(sessionStorage)
 
-authenticator.use(
+/*authenticator.use(
   new MicrosoftStrategy(
     {
       clientId: 'db21c78b-1f73-4c45-a8f0-982a2f49f287',
@@ -70,11 +70,11 @@ authenticator.use(
       return result.data
       // Return a user object to store in sessionStorage.
       // You can also throw Error to reject the login
-      /*return await registerUser(
+      /!*return await registerUser(
                                             accessToken,
                                             id,
                                             username
-                                          );*/
+                                          );*!/
     }
   ),
   'twitter'
@@ -144,7 +144,7 @@ authenticator.use(
     }
   ),
   'github'
-)
+)*/
 
 
 /*// Tell the Authenticator to use the form strategy
