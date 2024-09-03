@@ -36,10 +36,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const logEmblaEvent = useCallback(
       (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
           const sku = props.slides[emblaApi.slidesInView()[1]].sku
-        console.log(sku)
 
         let elements = document.getElementsByClassName(sku)
-        console.log(elements)
         console.log(`Embla just triggered ${eventName}!`)
       },
       []
@@ -62,10 +60,10 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       </div>
 
       <div className="embla__controls">
-        <div className="embla__buttons">
+        {/*<div className="embla__buttons">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
+        </div>*/}
 
         <div className="embla__dots">
           {scrollSnaps.map((_, index) => (

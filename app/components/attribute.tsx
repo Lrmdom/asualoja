@@ -9,7 +9,6 @@ import ToBuyVariant from "~/components/toBuyVariant";
 export default function Attribute({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
 //console.log(attribute[0].visualPresentation)
-    debugger
     if (stegaClean(attribute[0].visualPresentation?.visualization) === "InputToggleButton") {
         return (
             attribute.map((attr) => {
