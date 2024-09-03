@@ -11,9 +11,12 @@ import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 installGlobals();
 
 export default defineConfig({
-
+    ssr: {
+        noExternal: ["@commercelayer/react-components","lodash"]
+    },
     plugins: [
         viteCommonjs(),
+        //viteCommonjs(),
         VitePWA(),
         remixDevTools(),
         remix({
@@ -29,19 +32,11 @@ export default defineConfig({
     define: {
         'process.env': {}
     },
-    /*build: {
-        sourcemap: true, // Enables source maps
+    build: {
         commonjsOptions: {
             transformMixedEsModules: true,
         },
-
-    },*/
-   /* optimizeDeps: {
-        include: [],
-        exclude: ["@commercelayer/react-components","remix-auth-github" ,"@commercelayer/sdk"]
+        target: 'esnext' //browsers can handle the latest ES features
     },
 
-    ssr: {
-        noExternal: ["remix-auth-github","@commercelayer/app-elements","@commercelayer/react-components", "lodash"]
-    },*/
 })
