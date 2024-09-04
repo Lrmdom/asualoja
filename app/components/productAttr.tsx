@@ -1,11 +1,11 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
-import {Label} from "../../@/components/ui/label";
-import {Button} from "../../@/components/ui/button"
+import {Label} from "@/components/ui/label";
+import {Button} from "@/components/ui/button"
 import {Suspense, useState} from "react";
 import {InputRadioGroup} from "@commercelayer/app-elements";
-import {RadioGroupItem} from "../../@/components/ui/radio-group";
+import {RadioGroupItem} from "@/components/ui/radio-group";
 
 function getTheColorCode(attribute) {
     return stegaClean(attribute.value.toString())

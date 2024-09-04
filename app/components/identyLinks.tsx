@@ -1,6 +1,5 @@
-import {NavigationMenuItem} from "../../@/components/ui/navigation-menu";
+import {NavigationMenuItem} from "@/components/ui/navigation-menu";
 import * as React from "react";
-import {Avatar, AvatarFallback, AvatarImage} from "../../@/components/ui/avatar";
 import { useTranslation } from 'react-i18next'
 
 export default function IdentityLinks(props) {
