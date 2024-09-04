@@ -6,6 +6,7 @@ import {Label} from "@/components/ui/label";
 import ProductAttr from "~/components/productAttr";
 import {RadioGroup} from "@/components/ui/radio-group";
 import ToBuyVariant from "~/components/toBuyVariant";
+import {useState} from "react";
 
 
 export default function ProductAttributes({product}: { attribute: SanityDocument }) {
