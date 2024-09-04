@@ -34,13 +34,13 @@ export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku
                     />
                     <Label
                         htmlFor={attr.value}
-                        className="w-12 h-12 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 flex items-center justify-center"
+                        className="w-12 h-12 rounded-full ring-2 ring-black  focus:ring-4 focus:ring-primary cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 flex items-center justify-center"
                         style={{backgroundColor: getTheColorCode(attr)}}
                         onClick={() =>setSelectedSku(stegaClean(attr.sku))}
                     >
                         <span className="sr-only">{attr.value}</span>
                         <div
-                            className="w-11 h-11 rounded-full border-2 border-white opacity-0 transition-opacity duration-300 peer-checked:opacity-100"></div>
+                            className="w-11 h-11 rounded-full border-2 border-white opacity-0 transition-opacity duration-300 peer-checked:opacity-100 "></div>
                     </Label>
                 </div>
                 <div className="text-xs">{attr.description ? attr.description : null}</div>

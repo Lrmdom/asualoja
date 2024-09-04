@@ -44,7 +44,7 @@ export default function Component(props) {
                         }
                         return (
                             <>
-                                <div className="container mx-auto prose prose-lg border rounded">
+                                <div className="container mx-auto prose prose-lg ">
                                     <ProductImagescarousel images={prod.variantsImages}/>
 
 
@@ -66,11 +66,7 @@ export default function Component(props) {
 
                     {Array.isArray(product.variants)? <ProductAttributes product={product}></ProductAttributes>:null}
 
-                    <div>
-                        <Button size="lg" className="w-full">
-                            Add to Cart
-                        </Button>
-                    </div>
+
                 </div>
             </div>
         </Card>
