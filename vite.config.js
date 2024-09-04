@@ -3,7 +3,7 @@ import {installGlobals} from "@remix-run/node";
 import {defineConfig,loadEnv } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import {remixDevTools} from 'remix-development-tools'
-import { VitePWA } from 'vite-plugin-pwa'
+/*import { VitePWA } from 'vite-plugin-pwa'*/
 //import commonjs from 'vite-plugin-commonjs';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
@@ -16,8 +16,7 @@ export default defineConfig({
     },
     plugins: [
         viteCommonjs(),
-        //viteCommonjs(),
-        VitePWA(),
+        // VitePWA(),
         remixDevTools(),
         remix({
             future: {
