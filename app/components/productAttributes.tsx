@@ -1,12 +1,10 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
-import {Label} from "../../@/components/ui/label";
-import {Button} from "../../@/components/ui/button"
-import {Suspense, useState} from "react";
-import {InputRadioGroup} from "@commercelayer/app-elements";
+import {Label} from "@/components/ui/label";
+
 import ProductAttr from "~/components/productAttr";
-import {RadioGroup} from "../../@/components/ui/radio-group";
+import {RadioGroup} from "@/components/ui/radio-group";
 import ToBuyVariant from "~/components/toBuyVariant";
 
 
