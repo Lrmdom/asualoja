@@ -16,8 +16,7 @@ export default defineConfig({
     },
     plugins: [
         viteCommonjs(),
-        //viteCommonjs(),
-        VitePWA(),
+        // VitePWA(),
         remixDevTools(),
         remix({
             future: {
