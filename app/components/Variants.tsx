@@ -8,8 +8,7 @@ import VariantAttributes from "~/components/variantAttributes";
 import {InputRadioGroup} from "@commercelayer/app-elements";
 import {Suspense} from "react";
 import {ClientOnly} from "remix-utils/client-only"
-import {RadioGroup, RadioGroupItem} from "../../@/components/ui/radio-group";
-import {Label} from "../../@/components/ui/label";
+
 
 /*const auth = await authenticate('client_credentials', {
     clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',

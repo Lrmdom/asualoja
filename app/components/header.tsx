@@ -10,9 +10,9 @@ import {
     NavigationMenuItem,
     NavigationMenuList,
     NavigationMenuTrigger
-} from "../../@/components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu";
 import IdentityLinks from "~/components/identyLinks";
-import {Avatar, AvatarFallback, AvatarImage} from "../../@/components/ui/avatar";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import SearchForm from "~/components/searchForm";
 
 export default function Header(props) {
