@@ -78,8 +78,7 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
                             name={`${tx.title} (${tx.products?.length || tx["allTaxonProducts"]?.length})`}
                             key={tx._id}>
                             <div>
-                                //todo create component SubTaxon
-                                {/*<TaxonTaxon taxon={tx}></TaxonTaxon>*/}
+                                <TaxonTaxon taxon={tx}></TaxonTaxon>
                             </div>
                             <Prods products={tx.products}></Prods>
                         </Tab>
