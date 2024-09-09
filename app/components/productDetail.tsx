@@ -57,8 +57,8 @@ export default function Component(props) {
                 </div>
 
                 <div className="grid gap-6">
-                    <div>
-                        <CardTitle className="text-2xl font-bold">{product.title}</CardTitle>
+                    <div >
+                        <CardTitle className="text-2xl font-bold first-line:uppercase" >{product.title}</CardTitle>
                         <CardDescription className="text-muted-foreground">
                             {product.description}
                         </CardDescription>

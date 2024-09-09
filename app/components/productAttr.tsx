@@ -1,24 +1,23 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import {useTranslation} from 'react-i18next'
 import {Label} from "@/components/ui/label";
 import {Button} from "@/components/ui/button"
-import {Suspense, useState} from "react";
-import {InputRadioGroup} from "@commercelayer/app-elements";
+
 import {RadioGroupItem} from "@/components/ui/radio-group";
 
 function getTheColorCode(attribute) {
     return stegaClean(attribute.value.toString())
 }
 
-export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku,selectedSize,attr}: { attribute: SanityDocument }) {
+
+
+export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku,selectedSize,setSelectedColor , selectedColor,attr}: { attribute: SanityDocument }) {
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
 
     function setSkuButton( sku,size){
-        //console.log("leonl" +sku)
-        setSelectedSku(sku)
-        setSelectedSize(size)
-        //console.log(selectedSku)
+        setSelectedSku(stegaClean(sku))
+        setSelectedSize(stegaClean(size))
+
     }
 
     return (
@@ -28,38 +27,41 @@ export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku
             <>
                 <div key={attr.value} className="flex items-center">
                     <RadioGroupItem
-                        value={attr.value}
-                        id={attr.value}
-                        className="peer sr-only"
+                        value={stegaClean(attr.value)}
+                        id={stegaClean(attr.value)}
+                        className="sr-only peer"
                     />
                     <Label
-                        htmlFor={attr.value}
-                        className="w-12 h-12 rounded-full ring-2 ring-black  focus:ring-4 focus:ring-primary cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 flex items-center justify-center"
+                        htmlFor={stegaClean(attr.value)}
+                        /*
+                                                className={selectedColor === stegaClean(attr.value) ? "bg-primary text-white px-4 py-1 text-sm  font-semibold rounded border border-black hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 hover:text-base" : "px-4 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none hover:text-base"}
+                        */
+                        className={stegaClean(selectedColor) === stegaClean(attr.value) ? "w-8 h-8 rounded-full ring-4 ring-black    cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 flex items-center justify-center " : "w-10 h-10 rounded-full  ring-1 ring-black cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 flex items-center justify-center "}
+
                         style={{backgroundColor: getTheColorCode(attr)}}
-                        onClick={() =>setSelectedSku(stegaClean(attr.sku))}
+                        onClick={() => setSelectedSku(stegaClean(attr.sku))}
                     >
-                        <span className="sr-only">{attr.value}</span>
                         <div
-                            className="w-11 h-11 rounded-full border-2 border-white opacity-0 transition-opacity duration-300 peer-checked:opacity-100 "></div>
+                            className="h-11 w-11 rounded-full border-2 border-white opacity-0 peer-checked:opacity-100 transition-opacity duration-300"></div>
                     </Label>
+                    {attr.description ?<div className="rounded border p-2 text-xs border-primary"> {attr.description}</div> : null}
                 </div>
-                <div className="text-xs">{attr.description ? attr.description : null}</div>
+
             </>
             :
-            <>
+            <div className="rounded border text-center border-primary-light p-0.5">
                 <Button
                     variant="outline"
                     size={stegaClean(attr.value)}
-                    className={selectedSize === stegaClean(attr.value) ? "bg-primary text-primary-foreground" : ""}
+                    className={selectedSize === stegaClean(attr.value) ? "bg-primary text-white px-4 py-1 text-sm  font-semibold rounded border border-black hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 hover:text-base" : "px-4 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none hover:text-base"}
                     /*onClick={() =>setSkuButton(stegaClean(attr.sku),stegaClean(attr.value))}*/
-                    onClick={() =>setSelectedSku(stegaClean(attr.sku))}
+                    onClick={() =>setSkuButton(stegaClean(attr.sku),stegaClean(attr.value))}
                 >
                     {attr.value.toUpperCase()}
-                    {attr.description && attr.description }
                 </Button>
-                <span>{selectedSize}</span>
+            <div className="text-xs">{attr.description ? attr.description : null}</div>
 
-            </>
+            </div>
     )
 
 

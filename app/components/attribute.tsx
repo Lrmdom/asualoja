@@ -120,7 +120,6 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
     /*return (
         <main className="">
             {attribute.map((attr) => {
-                debugger;
                 return (
                     <>
                         <AttributeVisualization attribute={attr}></AttributeVisualization>

@@ -3,7 +3,7 @@
 import type { Config } from "tailwindcss"
 
 const config = {
-  presets: [require('@commercelayer/app-elements/tailwind.config')],
+  presets: [require('@commercelayer/app-elements/dist/tailwind.config')],
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',

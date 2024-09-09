@@ -86,8 +86,8 @@ export const handle = {
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
 
-    // const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
-    const {data, locale, ENV, user} = useLoaderData<typeof loader>()
+     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
+    //const {data, locale, ENV, user} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
 
     const {i18n} = useTranslation()
@@ -121,10 +121,10 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        <Suspense fallback={null}>
+        <Suspense fallback={<p>Loading...</p>}>
             <Header taxonomies={data} user={user}></Header>
         </Suspense>
-        <Suspense fallback={null}>
+        <Suspense fallback={<p>Loading...</p>}>
             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
         </Suspense>
         {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
@@ -142,7 +142,9 @@ export function Layout({children}: { children: React.ReactNode }) {
                     ))}
             </ol>
         </header>*/}
+        <Suspense fallback={<p>Loading...</p>}>
         {children}
+        </Suspense>
         <ScrollRestoration/>
         <script
             dangerouslySetInnerHTML={{
