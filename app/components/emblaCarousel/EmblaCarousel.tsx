@@ -44,13 +44,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             props.setSelectedSku(sku)
             debugger
             props.slides[emblaApi.slidesInView()[1]].attributes?.map((attr) => {
-
                 Reg_Exp.test(stegaClean(attr.value)) ? props.setSelectedColor(stegaClean(attr.value)) : props.setSelectedSize(stegaClean(attr.value))
-
-
             })
-
-
             console.log(`Embla just triggered ${eventName}!`)
         },
         []

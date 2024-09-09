@@ -32,10 +32,11 @@ export default function Prods({products}: { product: SanityDocument }) {
                                 prod.variantsImages.push({"url": prod.imageUrl, "alt": stegaClean(prod.title)})
 
                                 prod.variants.map((vrnt) => {
+                                    const vAttrs = vrnt.attributes.filter(attr => attr._type === 'attribute')
                                     vrnt.images?.map((image) => {
                                         image.alt ? image.alt : image.alt = stegaClean(vrnt.title)
                                         image.sku ? image.sku : image.sku = stegaClean(vrnt.sku)
-                                        image.attributes ? image.attributes : image.attributes = stegaClean(vrnt.attributes)
+                                        image.attributes ? image.attributes : image.attributes = stegaClean(vAttrs)
                                         prod.variantsImages.push(image)
                                     })
                                 })

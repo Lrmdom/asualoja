@@ -27,7 +27,6 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
     let variantsAttrs: any[] = []
     product.variants.map((variant) => {
         if (Array.isArray(variant.attributes)) {
-
             let vAttrs = variant.attributes.filter(attr => attr._type === 'attribute')
             vAttrs.forEach(function (element) {
                 element.sku = stegaClean(variant.sku)
@@ -35,9 +34,7 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                 element.label = stegaClean(element.value.toUpperCase())
                 element.content = <div className="text-xs">{element.label}</div>
                 Reg_Exp.test(stegaClean(element.value)) ? element.className = `bg-[${stegaClean(element.value)}]` : null
-
             });
-
             variantsAttrs = variantsAttrs.concat(vAttrs)
             variantsAttrs = variantsAttrs.sort((a, b) => a.name.localeCompare(b.name))
         }
@@ -52,22 +49,21 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
         return current;
     }, {});
     /*}*/
+    const emblaCarousel =<EmblaCarousel slides={product.variantsImages}
+                                        setSelectedSku={setSelectedSku}
+                                        setSelectedSize={setSelectedSize}
+                                        selectedSku={selectedSku}
+                                        selectedSize={selectedSize}
+                                        setSelectedColor={setSelectedColor}
+                                        selectedColor={selectedColor}
+                                        options={OPTIONS}/>
     return (<main className="">
         <ClientOnly fallback={null}>
-            {() => <EmblaCarousel slides={product.variantsImages}
-                                  setSelectedSku={setSelectedSku}
-                                  setSelectedSize={setSelectedSize}
-                                  selectedSku={selectedSku}
-                                  selectedSize={selectedSize}
-                                  setSelectedColor={setSelectedColor}
-                                  selectedColor={selectedColor}
-                                  options={OPTIONS}/>}
+            {() => emblaCarousel}
         </ClientOnly>
         <div className="grid">
             <div>
                 <div>
-
-
                     <ProductAttributes product={product}></ProductAttributes>
                 </div>
 
@@ -136,16 +132,12 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                             )
 
                                         })
-
-
                                     }
-
                                 </div> : null}
 
                         </>
                     )
                 })}
-
 
                 <ToBuyVariant selectedSku={selectedSku}></ToBuyVariant>
             </div>

@@ -51,7 +51,7 @@ export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku
             </>
             :
 
-            <span className="rounded border-2 border-primary-light p-2 px-1.5 mx-1 max-w-24">
+            <span className="rounded border-1 border-primary-light p-2 px-1.5 mx-1 max-w-24">
                 <Button
                     variant="outline"
                     size={stegaClean(attr.value)}
