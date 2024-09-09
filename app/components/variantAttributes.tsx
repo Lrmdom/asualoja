@@ -1,37 +1,158 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import Attribute from "~/components/attribute";
-import {Avatar, Dropdown, InputRadioGroup, InputToggleButton, ListItem, Text} from '@commercelayer/app-elements'
-import {Suspense} from "react";
+import {useTranslation} from 'react-i18next'
+import {Label} from "@/components/ui/label";
+
+import ProductAttr from "~/components/productAttr";
+import {RadioGroup} from "@/components/ui/radio-group";
+import ToBuyVariant from "~/components/toBuyVariant";
+import {useState} from "react";
+import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
+
+import EmblaCarousel from '~/components/emblaCarousel/EmblaCarousel'
+import {EmblaOptionsType} from 'embla-carousel'
+
 import { ClientOnly } from "remix-utils/client-only"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import ProductAttributes from "~/components/productAttributes";
+export default function VariantAttributes({product}: { attribute: SanityDocument }) {
 
-export default function VariantAttributes({attributes}: { attribute: SanityDocument }) {
+    const {t} = useTranslation('')
+    const [selectedSize, setSelectedSize] = useState("")
+    const [selectedColor, setSelectedColor] = useState("")
+    const [selectedSku, setSelectedSku] = useState("")
+    const OPTIONS: EmblaOptionsType = {}
+    const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
+    let groupedVariantsAttrs
 
-    //todo , group and display by attribute name. On select attributes, apply sku code data to <cl-price> and <cl-add-to-cart>
-    return (
-        <main className="">
+    let variantsAttrs: any[] = []
+    product.variants.map((variant) => {
+        if (Array.isArray(variant.attributes)) {
 
-            {Object.entries(attributes).map((attribute) => {
-                //atribute[0] is name and attribute[1] is array of value/s
+            let vAttrs = variant.attributes.filter(attr => attr._type === 'attribute')
+            vAttrs.forEach(function (element) {
+                element.sku = stegaClean(variant.sku)
+                element.images = variant.images
+                element.label = stegaClean(element.value.toUpperCase())
+                element.content = <div className="text-xs">{element.label}</div>
+                Reg_Exp.test(stegaClean(element.value)) ? element.className = `bg-[${stegaClean(element.value)}]` : null
 
-                return (
-                    <>
+            });
 
-                        {attribute[1].length > 0 ?
+            variantsAttrs = variantsAttrs.concat(vAttrs)
+            variantsAttrs = variantsAttrs.sort((a, b) => a.name.localeCompare(b.name))
+        }
+    })
+
+    groupedVariantsAttrs = variantsAttrs.reduce((current, item) => {
+        if (!current[stegaClean(item.name.trim())]) {
+            current[stegaClean(item.name.trim())] = [];
+        }
+        current[stegaClean(item.name.trim())].push(item);
+
+        return current;
+    }, {});
+    /*}*/
+    return (<main className="">
+        <ClientOnly fallback={null}>
+            {() => <EmblaCarousel slides={product.variantsImages}
+                                  setSelectedSku={setSelectedSku}
+                                  setSelectedSize={setSelectedSize}
+                                  selectedSku={selectedSku}
+                                  selectedSize={selectedSize}
+                                  setSelectedColor={setSelectedColor}
+                                  selectedColor={selectedColor}
+                                  options={OPTIONS}/>}
+        </ClientOnly>
+        <div className="grid">
+            <div>
+                <div>
 
 
-                                <Attribute attribute={attribute[1]}></Attribute>
-                            : null}
+                    <ProductAttributes product={product}></ProductAttributes>
+                </div>
+
+                {Object.entries(groupedVariantsAttrs)?.map((attribute) => {
+                    //atribute[0] is name and attribute[1] is array of value/s
+
+                    return (
+                        <>
+                            {/*<Label htmlFor="color" className="text-base font-medium ">
+                                    {attribute[0]}
+                                </Label>*/}
+                            {attribute[1].length > 0 ?
+
+                                <div className="p-4">
+                                    {Reg_Exp.test(stegaClean(attribute[1][0].value)) ?
+                                        <>
+                                            <RadioGroup
+                                                value={selectedColor}
+                                                onValueChange={setSelectedColor}
+                                                className="flex flex-wrap gap-4 "
+                                            >
+                                                {attribute[1].map((attr) => {
+                                                    return (
+
+                                                        <ProductAttr setSelectedSku={setSelectedSku}
+                                                                     setSelectedSize={setSelectedSize}
+                                                                     selectedSku={selectedSku}
+                                                                     selectedSize={selectedSize}
+                                                                     setSelectedColor={setSelectedColor}
+                                                                     selectedColor={selectedColor}
+                                                                     attr={attr}></ProductAttr>
+
+                                                    )
+
+                                                })}
+                                            </RadioGroup>
+                                            {/*<div className="mt-6 text-center">
+                                                    <span
+                                                        className="text-sm text-muted-foreground">Selected color: </span>
+                                                    <span className="font-semibold"
+                                                          style={{color: stegaClean(selectedColor)}}>
+                                                        {selectedColor}
 
 
+                                                     </span>
+                                                    <span className="font-semibold text-xs">{selectedSku}</span>
+                                                    <span
+                                                        className="text-sm text-muted-foreground">Selected size: </span>
+                                                    <span
+                                                        className="font-semibold text-lg text-primary">{selectedSize}</span>
+                                                </div>*/}
+                                        </>
+                                        :
 
-                    </>
-                )
-            })}
-        </main>
-    )
+                                        attribute[1].map((attr) => {
+                                            return (
+
+                                                <ProductAttr setSelectedSku={setSelectedSku}
+                                                             setSelectedSize={setSelectedSize}
+                                                             selectedSku={selectedSku}
+                                                             selectedSize={selectedSize}
+                                                             setSelectedColor={setSelectedColor}
+                                                             selectedColor={selectedColor}
+                                                             attr={attr}></ProductAttr>
+
+                                            )
+
+                                        })
+
+
+                                    }
+
+                                </div> : null}
+
+                        </>
+                    )
+                })}
+
+
+                <ToBuyVariant selectedSku={selectedSku}></ToBuyVariant>
+            </div>
+        </div>
+
+    </main>)
+
 }
 
 

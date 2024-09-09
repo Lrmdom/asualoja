@@ -16,7 +16,7 @@ export default function Component(props) {
                     <button
                         key={index}
                         onClick={() => setSelectedImage(index)}
-                        className={`rounded-lg overflow-hidden border transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary ${
+                        className={`rounded-lg border transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary ${
                             index === selectedImage ? "border-primary ring-2 ring-primary" : "border-muted"
                         }`}
                     >
@@ -30,7 +30,7 @@ export default function Component(props) {
                     </button>
                 ))}
             </div>
-            <div className="relative rounded-lg overflow-hidden">
+            <div className="relative rounded-lg">
                 <img
                     src={images[selectedImage]}
                     alt="Main Product Image"

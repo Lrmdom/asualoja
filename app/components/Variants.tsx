@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next'
 
 //import {authenticate} from '@commercelayer/js-auth'
 import {SanityDocument} from "@sanity/client";
-import VariantAttributes from "~/components/variantAttributes";
+import VariantAttributes_OLD from "~/components/variantAttributes_OLD";
 import {InputRadioGroup} from "@commercelayer/app-elements";
 import {Suspense} from "react";
 import {ClientOnly} from "remix-utils/client-only"
@@ -94,7 +94,7 @@ export default function Variants({product}: { variants: SanityDocument }) {
 
 
 
-                   <VariantAttributes attributes={groupedVariantsAttrs}></VariantAttributes>
+                   <VariantAttributes_OLD attributes={groupedVariantsAttrs}></VariantAttributes_OLD>
 
 
 

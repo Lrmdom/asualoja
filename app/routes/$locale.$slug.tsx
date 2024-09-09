@@ -27,7 +27,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
       TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED,
     params
   )
-  console.log(data)
+  //console.log(data)
   //TODO is new Headers() working ok?
   //https://sergiodxa.com/tutorials/load-only-the-data-you-need-in-remix
   //TODO is new Headers() working ok?  https://pyk.sh/remix-set-stale-while-revalidate-cache-control-to-improve-performance#heading-implementing-in-remix

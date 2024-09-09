@@ -1,16 +1,10 @@
-import {Suspense, useState} from "react"
+
 import {Card, CardTitle, CardDescription} from "@/components/ui/card"
-import {Label} from "@/components/ui/label"
-import {Button} from "@/components/ui/button"
+
 import ProductImagescarousel from "~/components/productImagescarousel";
-import type {SanityDocument} from "@sanity/client";
 import {stegaClean} from "@sanity/client/stega";
-import {Link} from "@remix-run/react";
-import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
-import Attributes from "~/components/Attributes";
-import Variants from "~/components/Variants";
-import {ClientOnly} from "remix-utils/client-only"
-import ProductAttributes from "~/components/productAttributes"
+
+import ProductAttributes from "~/components/variantAttributes"
 
 export default function Component(props) {
 
@@ -36,6 +30,7 @@ export default function Component(props) {
                                 vrnt.images?.map((image) => {
                                     image.alt ? image.alt : image.alt = stegaClean(vrnt.title)
                                     image.sku ? image.sku : image.sku = stegaClean(vrnt.sku)
+                                    image.attributes ? image.attributes : image.attributes = stegaClean(vrnt.attributes)
                                     prod.variantsImages.push(image)
                                 })
                             })
@@ -44,11 +39,9 @@ export default function Component(props) {
                         }
                         return (
                             <>
-                                <div className="container mx-auto prose prose-lg ">
                                     <ProductImagescarousel images={prod.variantsImages}/>
 
 
-                                </div>
                             </>
                         )
                     })
@@ -58,8 +51,8 @@ export default function Component(props) {
 
                 <div className="grid gap-6">
                     <div >
-                        <CardTitle className="text-2xl font-bold first-line:uppercase" >{product.title}</CardTitle>
-                        <CardDescription className="text-muted-foreground">
+                        <CardTitle className="text-xl font-semibold first-line:uppercase " >{product.title}</CardTitle>
+                        <CardDescription className="text-muted-foreground px-8 p-5">
                             {product.description}
                         </CardDescription>
                     </div>

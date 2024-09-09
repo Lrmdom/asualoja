@@ -11,7 +11,7 @@ import {
 } from '~/sanity/queries'
 import Variants from "~/components/Variants";
 import {stegaClean} from "@sanity/client/stega";
-import Attributes from "~/components/Attributes";
+import ProductAttributes from "~/components/productAttributes";
 import {useTranslation} from "react-i18next";
 import Prods from "~/components/Prods";
 import ProductDetail from "~/components/productDetail";
