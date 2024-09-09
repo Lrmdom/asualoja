@@ -56,7 +56,7 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                                         <div className="overflow-auto m-2 ">
                                             <Link
-                                                to={stegaClean(`/${language}/${ encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}> {stegaClean(prod.title)} </Link>
+                                                to={stegaClean(`/${language}/${ encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}> <p className="first-line:uppercase"> {stegaClean(prod.title)}</p> </Link>
                                         </div>
 {/*
                                         <ProductImagescarousel images={prod.variantsImages}/>

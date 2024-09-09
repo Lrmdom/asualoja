@@ -63,7 +63,7 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
 
                         return (
                             <>
-                                <Label htmlFor="color" className="text-base font-medium">
+                                <Label htmlFor="color" className="text-base font-medium ">
                                     {attribute[0]}
                                 </Label>
                                 {attribute[1].length > 0 ?
@@ -83,6 +83,8 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
                                                                          setSelectedSize={setSelectedSize}
                                                                          selectedSku={selectedSku}
                                                                          selectedSize={selectedSize}
+                                                                         setSelectedColor={setSelectedColor}
+                                                                         selectedColor={selectedColor}
                                                                          attr={attr}></ProductAttr>
 
                                                         )
@@ -94,9 +96,14 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
                                                         className="text-sm text-muted-foreground">Selected color: </span>
                                                     <span className="font-semibold"
                                                           style={{color: stegaClean(selectedColor)}}>
-                                            {selectedColor}
-                                                        {selectedSku}
-                                            </span>
+                                                        {selectedColor}
+
+
+                                                     </span>
+                                                    <span className="font-semibold text-xs">{selectedSku}</span>
+                                                    <span
+                                                        className="text-sm text-muted-foreground">Selected size: </span>
+                                                    <span className="font-semibold text-lg text-primary">{selectedSize}</span>
                                                 </div>
                                             </>
                                             :
@@ -105,7 +112,10 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
 
                                                     <ProductAttr setSelectedSku={setSelectedSku}
                                                                  setSelectedSize={setSelectedSize}
-                                                                 selectedSku={selectedSku} selectedSize={selectedSize}
+                                                                 selectedSku={selectedSku}
+                                                                 selectedSize={selectedSize}
+                                                                 setSelectedColor={setSelectedColor}
+                                                                 selectedColor={selectedColor}
                                                                  attr={attr}></ProductAttr>
 
                                                 )

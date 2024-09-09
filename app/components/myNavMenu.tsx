@@ -64,7 +64,7 @@ export function MyNavMenu(props) {
     const language = i18n.resolvedLanguage
     let nprods
     return (
-        <div className="container p-2 bg-purple-200">
+        <div className="container bg-purple-200 p-2">
             <NavigationMenu className="hidden lg:flex">
                 <NavigationMenuList>
 
@@ -89,7 +89,7 @@ export function MyNavMenu(props) {
                             {t('Products')}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <ul className=" grid bg-white w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-3 lg:w-[600px] ">
+                            <ul className="grid gap-3 bg-white p-4 w-[400px] md:w-[500px] md:grid-cols-3 lg:w-[600px]">
                                 {props.taxonomies.map((taxonomy) => (
                                     <ListItem
                                         className=""
@@ -105,7 +105,7 @@ export function MyNavMenu(props) {
                                                     title={taxon.title + "(" + taxon.products?.length+")"}
                                                     href={stegaClean(`/${language}/${taxonomy.title}/${taxon.title}`)}
                                                 >
-                                                    <ul className=" ">
+                                                    <ul className="">
                                                         {taxon.taxons?.map((tx) => (
 
                                                             <ListItem
@@ -145,15 +145,15 @@ export function MyNavMenu(props) {
                             {t('Outlet')}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] ">
                                 <li className="row-span-3">
                                     <NavigationMenuLink asChild>
                                         <a
-                                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none from-muted/50 to-muted focus:shadow-md"
                                             href="/"
                                         >
                                             <Icons.logo className="h-6 w-6"/>
-                                            <div className="mb-2 mt-4 text-lg font-medium">
+                                            <div className="mt-4 mb-2 text-lg font-medium">
                                                 shadcn/ui
                                             </div>
                                             <p className="text-sm leading-tight text-muted-foreground">
@@ -205,8 +205,8 @@ const ListItem = React.forwardRef<
                 >
                     <img className="" src={media} alt="" width={75}/>
 
-                    <div className="text-sm font-medium leading-none   ">{title}</div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground ">
+                    <div className="text-sm font-medium leading-none">{title}</div>
+                    <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
                         {children}
                     </p>
                 </a>

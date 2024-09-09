@@ -11,6 +11,7 @@ import {
     AvailabilityContainer,
     AvailabilityTemplate, SkusContainer, Skus, SkuField
 } from "@commercelayer/react-components";
+import {Suspense} from "react";
 
 const auth = await authenticate('client_credentials', {
     clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
@@ -28,7 +29,8 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
 
     return (
         <>
-            <CommerceLayer accessToken={auth.accessToken} endpoint="https://execlog.commercelayer.io">
+           {/* <CommerceLayer accessToken={auth.accessToken} endpoint="https://execlog.commercelayer.io">
+                <Suspense fallback={null}>
                 <SkusContainer
                     skus={[
                         "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
@@ -41,6 +43,7 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
                         />
                     </Skus>
                 </SkusContainer>
+
                 <PricesContainer>
                     <Price
                         className="font-bold text-primary"
@@ -56,35 +59,38 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
                         className="text-gray-600 text-3xl"
                     />
                 </AvailabilityContainer>
-            </CommerceLayer>
+                </Suspense>
+            </CommerceLayer>*/}
 
-            <div>
                 <cl-availability code={stegaClean(selectedSku)}>
                     <cl-availability-status type="available" style={{color: "green"}}>
                         {t("• available")}
                     </cl-availability-status>
+                    <div>
                     <cl-availability-status type="available">
-                        ready to be shipped in
+                        {t("Ready to be shipped in " )}
                         <cl-availability-info type="min-days"></cl-availability-info>-
                         <cl-availability-info type="max-days"></cl-availability-info>
-                        days
-                        with <cl-availability-info type="shipping-method-name"></cl-availability-info> (
+                        {t(" days ")}
+                        {t("with ")} <cl-availability-info type="shipping-method-name"></cl-availability-info> (
                         <cl-availability-info type="shipping-method-price"></cl-availability-info>
                         )
                     </cl-availability-status>
                     <cl-availability-status type="unavailable" style={{color: "red"}}>
-                        • out of stock
+                        {t("• out of stock")}
                     </cl-availability-status>
+                    </div>
                 </cl-availability>
-            </div>
 
             <cl-price code={stegaClean(selectedSku)}>
                 <cl-price-amount type="compare-at"></cl-price-amount>
                 <cl-price-amount type="price"></cl-price-amount>
             </cl-price>
+            <div>
             <cl-add-to-cart code={stegaClean(selectedSku)} quantity="1" kind="sku">
                 {t('Add to cart')}
             </cl-add-to-cart>
+            </div>
         </>
     )
 

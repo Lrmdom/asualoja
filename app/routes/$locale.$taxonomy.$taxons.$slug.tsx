@@ -28,7 +28,7 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
     //https://sergiodxa.com/articles/http-vs-server-side-cache-in-remix
 //https://remix.run/docs/en/main/discussion/state-management
 
-    data.headers = new Headers()
+    /*data.headers = new Headers()
     const realtimeCaches: { [key: string]: string } = {
         "Cache-Control": "public, max-age=0, must-revalidate",
         "CDN-Cache-Control": "public, s-maxage=3600, stale-while-revalidate=82800"
@@ -37,7 +37,7 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
     // Apply the cache settings to the response
     for (const key of Object.keys(realtimeCaches)) {
         data.headers.append(key, realtimeCaches[key]);
-    }
+    }*/
 
     return {data}
 }
