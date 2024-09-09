@@ -35,18 +35,18 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
 
-
     const logEmblaEvent = useCallback(
         (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
             const sku = props.slides[emblaApi.slidesInView()[1]].sku
-            console.log(props.slides[emblaApi.slidesInView()[1]])
             let elements = document.getElementsByClassName(sku)
             props.setSelectedSku(sku)
-            debugger
+            props.setEmblaImage(props.slides[emblaApi.slidesInView()[1]].url)
+debugger
+            console.log(props.emblaImage)
+
             props.slides[emblaApi.slidesInView()[1]].attributes?.map((attr) => {
                 Reg_Exp.test(stegaClean(attr.value)) ? props.setSelectedColor(stegaClean(attr.value)) : props.setSelectedSize(stegaClean(attr.value))
             })
-            console.log(`Embla just triggered ${eventName}!`)
         },
         []
     )

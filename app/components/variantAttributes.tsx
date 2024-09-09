@@ -12,14 +12,29 @@ import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import EmblaCarousel from '~/components/emblaCarousel/EmblaCarousel'
 import {EmblaOptionsType} from 'embla-carousel'
 
-import { ClientOnly } from "remix-utils/client-only"
+import {ClientOnly} from "remix-utils/client-only"
 import ProductAttributes from "~/components/productAttributes";
+
+/*function setSkuImage( attrValue,attr){
+    debugger;
+    let sku = attr[1][0].sku
+    //sku is not correct must do a find attr[0].find({value:attrValue}).sku
+    //let sku2=attr[0].find({value:attrValue}).sku
+    //attrValue?setSelectedSku(stegaClean(sku)):null
+
+    //attrValue?setSelectedColor(stegaClean(attrValue)):null
+    attrValue
+
+}*/
+
 export default function VariantAttributes({product}: { attribute: SanityDocument }) {
 
     const {t} = useTranslation('')
     const [selectedSize, setSelectedSize] = useState("")
     const [selectedColor, setSelectedColor] = useState("")
     const [selectedSku, setSelectedSku] = useState("")
+    const [emblaImage, setEmblaImage] = useState()
+
     const OPTIONS: EmblaOptionsType = {}
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
     let groupedVariantsAttrs
@@ -39,37 +54,37 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
             variantsAttrs = variantsAttrs.sort((a, b) => a.name.localeCompare(b.name))
         }
     })
-
     groupedVariantsAttrs = variantsAttrs.reduce((current, item) => {
         if (!current[stegaClean(item.name.trim())]) {
             current[stegaClean(item.name.trim())] = [];
         }
         current[stegaClean(item.name.trim())].push(item);
-
         return current;
     }, {});
-    /*}*/
-    const emblaCarousel =<EmblaCarousel slides={product.variantsImages}
-                                        setSelectedSku={setSelectedSku}
-                                        setSelectedSize={setSelectedSize}
-                                        selectedSku={selectedSku}
-                                        selectedSize={selectedSize}
-                                        setSelectedColor={setSelectedColor}
-                                        selectedColor={selectedColor}
-                                        options={OPTIONS}/>
+
+
+
     return (<main className="">
+
         <ClientOnly fallback={null}>
-            {() => emblaCarousel}
+            {() => <EmblaCarousel slides={product.variantsImages}
+                                  setSelectedSku={setSelectedSku}
+                                  setSelectedSize={setSelectedSize}
+                                  selectedSku={selectedSku}
+                                  selectedSize={selectedSize}
+                                  setSelectedColor={setSelectedColor}
+                                  selectedColor={selectedColor}
+                                  setEmblaImage={setEmblaImage}
+                                  emblaImage={emblaImage}
+                                  options={OPTIONS}/>}
         </ClientOnly>
         <div className="grid">
             <div>
                 <div>
                     <ProductAttributes product={product}></ProductAttributes>
                 </div>
-
                 {Object.entries(groupedVariantsAttrs)?.map((attribute) => {
                     //atribute[0] is name and attribute[1] is array of value/s
-
                     return (
                         <>
                             {/*<Label htmlFor="color" className="text-base font-medium ">
@@ -94,7 +109,12 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                                                      selectedSize={selectedSize}
                                                                      setSelectedColor={setSelectedColor}
                                                                      selectedColor={selectedColor}
-                                                                     attr={attr}></ProductAttr>
+                                                                     setEmblaImage={setEmblaImage}
+                                                                     emblaImage={emblaImage}
+                                                                     emblaOptions={OPTIONS}
+                                                                     attr={attr}
+
+                                                        ></ProductAttr>
 
                                                     )
 
@@ -127,7 +147,12 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                                              selectedSize={selectedSize}
                                                              setSelectedColor={setSelectedColor}
                                                              selectedColor={selectedColor}
-                                                             attr={attr}></ProductAttr>
+                                                             setEmblaImage={setEmblaImage}
+                                                             emblaImage={emblaImage}
+                                                             emblaOptions={OPTIONS}
+                                                             attr={attr}
+
+                                                ></ProductAttr>
 
                                             )
 
