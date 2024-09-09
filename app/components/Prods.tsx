@@ -1,18 +1,11 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import Variants from "~/components/Variants";
-import Attributes from "~/components/Attributes";
+import ProductAttributes from "~/components/productAttributes";
 import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
-//import  Carousel from "~/components/Carousel"
-import EmblaCarousel from '~/components/emblaCarousel/EmblaCarousel'
-import {EmblaOptionsType} from 'embla-carousel'
-import {Suspense} from "react";
-import {InputRadioGroup} from "@commercelayer/app-elements";
-import { ClientOnly } from "remix-utils/client-only"
-import ProductImagescarousel from "~/components/productImagescarousel";
-import ProductDetail from "~/components/productDetail";
-import ProductAttributes from "~/components/productAttributes";
+
+
+import VariantAttributes from "~/components/variantAttributes";
 // import {authenticate} from '@commercelayer/js-auth'
 
 export default function Prods({products}: { product: SanityDocument }) {
@@ -24,7 +17,7 @@ export default function Prods({products}: { product: SanityDocument }) {
 
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-    const OPTIONS: EmblaOptionsType = {}
+
 
     return (
         <>
@@ -42,6 +35,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                     vrnt.images?.map((image) => {
                                         image.alt ? image.alt : image.alt = stegaClean(vrnt.title)
                                         image.sku ? image.sku : image.sku = stegaClean(vrnt.sku)
+                                        image.attributes ? image.attributes : image.attributes = stegaClean(vrnt.attributes)
                                         prod.variantsImages.push(image)
                                     })
                                 })
@@ -56,24 +50,12 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                                         <div className="overflow-auto m-2 ">
                                             <Link
-                                                to={stegaClean(`/${language}/${ encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}> <p className="first-line:uppercase"> {stegaClean(prod.title)}</p> </Link>
+                                                to={stegaClean(`/${language}/${encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}>
+                                                <p className="first-line:uppercase"> {stegaClean(prod.title)}</p></Link>
                                         </div>
-{/*
-                                        <ProductImagescarousel images={prod.variantsImages}/>
-*/}
 
-                                            <ClientOnly fallback={null}>
-                                                {() => <EmblaCarousel slides={prod.variantsImages} options={OPTIONS}/>}
-                                            </ClientOnly>
-
-
-                                        <div>
-
-
-                                            <Attributes product={prod}></Attributes>
-                                        </div>
-                                        {/*<Variants product={prod}></Variants>*/}
-                                        {Array.isArray(prod.variants)? <ProductAttributes product={prod}></ProductAttributes>:null}
+                                        {Array.isArray(prod.variants) ?
+                                            <VariantAttributes product={prod}></VariantAttributes> : null}
 
                                     </div>
                                 </>
