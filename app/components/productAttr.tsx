@@ -5,23 +5,24 @@ import {Button} from "@/components/ui/button"
 
 import {RadioGroupItem} from "@/components/ui/radio-group";
 
+
 function getTheColorCode(attribute) {
     return stegaClean(attribute.value.toString())
 }
 
 
 
-export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku,selectedSize,setSelectedColor , selectedColor,attr}: { attribute: SanityDocument }) {
+export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku,selectedSize,setSelectedColor , selectedColor,setEmblaImage,emblaImage,emblaOptions,attr}: { attribute: SanityDocument }) {
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
 
-    function setSkuButton( sku,size){
+    function setSkuButton( sku, size, emblaOptions){
         setSelectedSku(stegaClean(sku))
         setSelectedSize(stegaClean(size))
+        debugger
+        setEmblaImage(3)
 
     }
-
     return (
-// TODO replace button for Radio and radiogroup
 
         Reg_Exp.test(stegaClean(attr.value)) ?
             <>
@@ -56,14 +57,13 @@ export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku
                     variant="outline"
                     size={stegaClean(attr.value)}
                     className={selectedSize === stegaClean(attr.value) ? "bg-primary text-white px-4 py-1 text-sm  font-semibold rounded border border-black hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 hover:text-base" : "px-4 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none hover:text-base"}
-                    /*onClick={() =>setSkuButton(stegaClean(attr.sku),stegaClean(attr.value))}*/
-                    onClick={() => setSkuButton(stegaClean(attr.sku), stegaClean(attr.value))}
+                    onClick={() => setSkuButton(stegaClean(attr.sku), stegaClean(attr.value),emblaOptions)}
                 >
                     {attr.value.toUpperCase()}
                 </Button>
 
                 {attr.description ?<div className="text-xs"> {attr.description} </div>: null}
-
+                {emblaImage}
             </span>
     )
 
