@@ -16,8 +16,8 @@ export default function Component(props) {
                     <button
                         key={index}
                         onClick={() => setSelectedImage(index)}
-                        className={`rounded-lg border transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary ${
-                            index === selectedImage ? "border-primary ring-2 ring-primary" : "border-muted"
+                        className={`rounded-lg border transition-all hover:scale-105  ${
+                            index === selectedImage ? "border-2 opacity-50" : "border-muted opacity-80"
                         }`}
                     >
                         <img

@@ -40,7 +40,7 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
     let groupedVariantsAttrs
 
     let variantsAttrs: any[] = []
-    product.variants.map((variant) => {
+    product.variants?.map((variant) => {
         if (Array.isArray(variant.attributes)) {
             let vAttrs = variant.attributes.filter(attr => attr._type === 'attribute')
             vAttrs.forEach(function (element) {
@@ -63,9 +63,8 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
     }, {});
 
 
-
     return (<main className="">
-
+        {product.variantsImages.length > 1 ?
         <ClientOnly fallback={null}>
             {() => <EmblaCarousel slides={product.variantsImages}
                                   setSelectedSku={setSelectedSku}
@@ -78,6 +77,7 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                   emblaImage={emblaImage}
                                   options={OPTIONS}/>}
         </ClientOnly>
+            : <img src={product.imageUrl} />}
         <div className="grid">
             <div>
                 <div>

@@ -9,7 +9,7 @@ import {
     PricesContainer,
     Price,
     AvailabilityContainer,
-    AvailabilityTemplate, SkusContainer, Skus, SkuField
+    AvailabilityTemplate, SkusContainer, Skus, SkuField, OrderStorage, AddToCartButton, OrderContainer
 } from "@commercelayer/react-components";
 import {Suspense} from "react";
 
@@ -25,12 +25,10 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
         clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
         scope: 'market:id:vlkaZhkGNj'
     })*/
-    //console.log(attribute)
 
     return (
         <>
-           {/* <CommerceLayer accessToken={auth.accessToken} endpoint="https://execlog.commercelayer.io">
-                <Suspense fallback={null}>
+            <CommerceLayer accessToken={auth.accessToken} endpoint="https://execlog.commercelayer.io">
                 <SkusContainer
                     skus={[
                         "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
@@ -59,8 +57,20 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
                         className="text-gray-600 text-3xl"
                     />
                 </AvailabilityContainer>
-                </Suspense>
-            </CommerceLayer>*/}
+                <OrderStorage persistKey="cl-examples-addToCart">
+                    <OrderContainer>
+                    <p>
+                        <AddToCartButton
+                            className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-70"
+                            label="Add SKU to cart"
+                            quantity="1"
+                            disabled={!selectedSku}
+                            skuCode={stegaClean(selectedSku)}
+                        />
+                    </p>
+                    </OrderContainer>
+                </OrderStorage>
+            </CommerceLayer>
 
                 <cl-availability code={stegaClean(selectedSku)}>
                     <cl-availability-status type="available" style={{color: "green"}}>

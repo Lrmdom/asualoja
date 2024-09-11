@@ -120,7 +120,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Meta/>
             <Links/>
         </head>
-        <body>
+        <body className="*:text-muted-foreground">
         <Suspense fallback={<p>Loading...</p>}>
             <Header taxonomies={data} user={user}></Header>
         </Suspense>
