@@ -40,17 +40,15 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             const sku = props.slides[emblaApi.slidesInView()[1]].sku
             let elements = document.getElementsByClassName(sku)
             props.setSelectedSku(sku)
-            props.setEmblaImage(props.slides[emblaApi.slidesInView()[1]].url)
-debugger
-            console.log(props.emblaImage)
-
+            /*
+                        props.setEmblaImage(props.slides[emblaApi.slidesInView()[1]].url)
+            */
             props.slides[emblaApi.slidesInView()[1]].attributes?.map((attr) => {
                 Reg_Exp.test(stegaClean(attr.value)) ? props.setSelectedColor(stegaClean(attr.value)) : props.setSelectedSize(stegaClean(attr.value))
             })
         },
         []
     )
-
     useEffect(() => {
         if (emblaApi) emblaApi.on('select', logEmblaEvent)
     }, [emblaApi, logEmblaEvent])
@@ -68,10 +66,11 @@ debugger
             </div>
 
             <div className="embla__controls">
-                {/*<div className="embla__buttons">
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>*/}
+                <div className="embla__buttons">
+                    <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled}/>
+                    <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled}/>
+                </div>
+
 
                 <div className="embla__dots">
                     {scrollSnaps.map((_, index) => (

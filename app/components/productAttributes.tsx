@@ -28,9 +28,9 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
                     {prodAttrs.map((attribute) => {
                         return (
                             <>
-                                <div key={attribute._key} className="">
-                                    <b className="text-primary text-lg">{attribute.name}</b> :
-                                    {attribute.value}
+                                <div key={attribute._key} className="*:text-gray-600 *:uppercase">
+                                    <span className="text-xs font-bold text-primary">{attribute.name}</span> : <span className="text-xs">{attribute.value}</span>
+
                                 </div>
                             </>
                         )

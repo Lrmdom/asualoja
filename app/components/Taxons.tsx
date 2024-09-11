@@ -40,9 +40,8 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
     const uniqueProductArray = [...new Set(taxon["allTaxonProducts"])]
 
     return (
-        <main className="container mx-auto prose prose-lg p-4">
+        <main className="container mx-auto prose prose-lg p-4 ">
             <Tabs
-
                 keepAlive
                 onTabSwitch={function zs() {
                 }}

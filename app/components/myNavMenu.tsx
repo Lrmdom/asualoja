@@ -62,9 +62,8 @@ export function MyNavMenu(props) {
     const {i18n, t} = useTranslation()
 
     const language = i18n.resolvedLanguage
-    let nprods
     return (
-        <div className="container bg-purple-200 p-2">
+        <div className="container border-2 rounded p-2">
             <NavigationMenu className="hidden lg:flex">
                 <NavigationMenuList>
 
@@ -215,3 +214,50 @@ const ListItem = React.forwardRef<
     )
 })
 ListItem.displayName = 'ListItem'
+
+/*
+"use client"
+
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
+
+export default function Navbar() {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen)
+    }
+
+    return (
+        <nav className="bg-white shadow-lg">
+            <div className="max-w-6xl mx-auto px-4">
+                <div className="flex justify-between">
+                    <div className="flex space-x-7">
+                        <div>
+                            <a href="#" className="flex items-center py-4 px-2">
+                                <span className="font-semibold text-gray-500 text-lg">Logo</span>
+                            </a>
+                        </div>
+                        <div className="hidden md:flex items-center space-x-1">
+                            <a href="#" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Home</a>
+                            <a href="#" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>
+                            <a href="#" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</a>
+                            <a href="#" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</a>
+                        </div>
+                    </div>
+                    <div className="md:hidden flex items-center">
+                        <button className="outline-none mobile-menu-button" onClick={toggleMenu}>
+                            {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className={`md:hidden ${isOpen ? "block" : "hidden"} transition-all duration-300 ease-in-out`}>
+                <a href="#" className="block py-2 px-4 text-sm hover:bg-green-500 hover:text-white transition duration-300">Home</a>
+                <a href="#" className="block py-2 px-4 text-sm hover:bg-green-500 hover:text-white transition duration-300">Services</a>
+                <a href="#" className="block py-2 px-4 text-sm hover:bg-green-500 hover:text-white transition duration-300">About</a>
+                <a href="#" className="block py-2 px-4 text-sm hover:bg-green-500 hover:text-white transition duration-300">Contact Us</a>
+            </div>
+        </nav>
+    )
+}*/

@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 
 
 import VariantAttributes from "~/components/variantAttributes";
+import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 // import {authenticate} from '@commercelayer/js-auth'
 
 export default function Prods({products}: { product: SanityDocument }) {
@@ -32,7 +33,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                 prod.variantsImages.push({"url": prod.imageUrl, "alt": stegaClean(prod.title)})
 
                                 prod.variants.map((vrnt) => {
-                                    const vAttrs = vrnt.attributes.filter(attr => attr._type === 'attribute')
+                                    const vAttrs = vrnt.attributes?.filter(attr => attr._type === 'attribute')
                                     vrnt.images?.map((image) => {
                                         image.alt ? image.alt : image.alt = stegaClean(vrnt.title)
                                         image.sku ? image.sku : image.sku = stegaClean(vrnt.sku)
@@ -47,16 +48,17 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                             return (
                                 <>
-                                    <div className="container mx-auto prose prose-lg border rounded">
+                                    <div className="container mx-auto rounded border prose prose-lg">
 
-                                        <div className="overflow-auto m-2 ">
-                                            <Link
+                                        <div className="m-2 overflow-auto">
+                                            <Link className="overflow-x-auto text-xs font-semibold uppercase hover:text-primary hover:underline text-muted-foreground"
                                                 to={stegaClean(`/${language}/${encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}>
-                                                <p className="first-line:uppercase"> {stegaClean(prod.title)}</p></Link>
+                                                {stegaClean(prod.title)}</Link>
                                         </div>
 
-                                        {Array.isArray(prod.variants) ?
-                                            <VariantAttributes product={prod}></VariantAttributes> : null}
+                                        {/*{Array.isArray(prod.variants) ?*/}
+                                            <VariantAttributes product={prod}></VariantAttributes>
+                                            {/*: null}*/}
 
                                     </div>
                                 </>
