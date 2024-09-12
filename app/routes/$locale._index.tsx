@@ -28,25 +28,24 @@ export default function Index() {
     return (
         <>
             {/*todo add taxonomies images and link to taxons/produts  ex:shop by categorie*/}
-            <div className="container p-8">
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+            <div className="container grid p-8  grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
                 {data.map((tx) => {
 
                 return (
                     <div
-                        className="container  p-4 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48 m-2">
+                        className="container m-2 w-full overflow-hidden rounded-md p-4 aspect-h-1 aspect-w-1 group-hover:opacity-75 lg:aspect-none lg:h-48">
 
                         <div className="">
-                            <div className="flex justify-center hover:opacity-70 ">
-                                    <Link className="absolute flex bg-white text-primary shadow-2xl font-bold rounded  m-2.5 p-2 "
+                            <div className="flex justify-center hover:opacity-70">
+                                    <Link className="absolute flex rounded bg-white p-2 font-bold shadow-2xl text-primary m-2.5"
                                           to={`/${language}/${stegaClean(tx.title)}`}>
                                         {tx.title}
                                     </Link>
                                 <Link className="" to={`/${language}/${stegaClean(tx.title)}`}>
                                     <img src={stegaClean(tx.imageUrl)} width={250} height={175}
                                          alt={stegaClean(tx.title)}
-                                         className="container p-1 border rounded m-1 overflow-hidden"
+                                         className="container m-1 overflow-hidden rounded border p-1"
                                     />
                                 </Link>
                             </div>
@@ -55,7 +54,6 @@ export default function Index() {
                 )
 
                 })}
-            </div>
                 </div>
             <Hero/>
         </>

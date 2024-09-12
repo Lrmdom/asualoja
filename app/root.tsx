@@ -121,9 +121,9 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body className="">
-        <Suspense fallback={<p>Loading...</p>}>
+        {/*<Suspense fallback={<p>Loading...</p>}>
             <Header taxonomies={data} user={user}></Header>
-        </Suspense>
+        </Suspense>*/}
         <Suspense fallback={<p>Loading...</p>}>
             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
         </Suspense>

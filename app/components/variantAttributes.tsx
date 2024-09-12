@@ -63,7 +63,8 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
     }, {});
 
 
-    return (<main className="">
+    return (
+        <main className="">
         {product.variantsImages.length > 1 ?
         <EmblaCarousel slides={product.variantsImages}
                                   setSelectedSku={setSelectedSku}
