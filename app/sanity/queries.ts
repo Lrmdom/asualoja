@@ -3,7 +3,7 @@ import groq from 'groq'
 export const SERVICES_QUERY = groq`*[_type == "execlogService"] | order(title asc)
  
 {
-'serviceImage':image.asset->url,
+'serviceImage':image.asset->url + "?w=300",
 code,
   name,
   description,
@@ -14,14 +14,14 @@ code,
     "Missing translation"
   ),
   "relatedCustomerNeeds": *[_type=='execlogCustomerNeed' && references(^._id)] | order(title asc)
-  { 'serviceImage':image.asset->url,code,description, image_url, name,
+  { 'serviceImage':image.asset->url + "?w=300",code,description, image_url, name,
     "title": coalesce(
     title[_key == 'pt'][0].value,
     title[_key == 'pt'][0].value,
     "Missing translation"
   ),
     "relatedCustomerNeedsDetails": *[_type=='execlogCustomerNeedDetail' && references(^._id)] | order(title asc)
-    { 'serviceImage':image.asset->url,code,name,
+    { 'serviceImage':image.asset->url + "?w=300",code,name,
       "title": coalesce(
     title[_key == 'pt'][0].value,
     title[_key == 'pt'][0].value,
@@ -45,7 +45,7 @@ export const SERVICES_QUERY_LOCALIZED = groq`*[_type == "execlogService"] | orde
     "Missing translation"
   ),
                          },
-'serviceImage':image.asset->url,
+'serviceImage':image.asset->url + "?w=300",
   code,
   name,
   "title": coalesce(
@@ -57,7 +57,7 @@ export const SERVICES_QUERY_LOCALIZED = groq`*[_type == "execlogService"] | orde
   image_url,
   
   "relatedCustomerNeeds": *[_type=='execlogCustomerNeed' && references(^._id)] | order(title asc)
-  { 'serviceImage':image.asset->url,code,description, image_url, name,
+  { 'serviceImage':image.asset->url + "?w=300",code,description, image_url, name,
     "title": coalesce(
     title[_key == $locale][0].value,
     title[_key == 'pt'][0].value,
@@ -65,7 +65,7 @@ export const SERVICES_QUERY_LOCALIZED = groq`*[_type == "execlogService"] | orde
   ),
     "relatedCustomerNeedsDetails": *[_type=='execlogCustomerNeedDetail' && references(^._id)] | order(title asc)
     { 
-    'serviceImage':image.asset->url,
+    'serviceImage':image.asset->url + "?w=300",
     code,
     name,
       "title": coalesce(
@@ -80,7 +80,7 @@ export const SERVICE_QUERY = groq`*[_type == "execlogService"
 && title[_key == $locale][0].value == $slug][0] | order(title asc)
  
 {
-'serviceImage':image.asset->url,
+'serviceImage':image.asset->url + "?w=300",
 code,
   name,
   description,
@@ -91,7 +91,7 @@ code,
     "Missing translation"
   ),
   "relatedCustomerNeeds": *[_type=='execlogCustomerNeed' && references(^._id)] | order(title asc)
-  { 'serviceImage':image.asset->url,code,description, image_url, name,
+  { 'serviceImage':image.asset->url + "?w=300",code,description, image_url, name,
     "title": coalesce(
     title[_key == 'pt'][0].value,
     title[_key == 'pt'][0].value,
@@ -99,7 +99,7 @@ code,
   ),
     "relatedCustomerNeedsDetails": *[_type=='execlogCustomerNeedDetail' && references(^._id)] | order(title asc)
     { 
-    'serviceImage':image.asset->url,
+    'serviceImage':image.asset->url + "?w=300",
     code,
     name,
       "title": coalesce(
@@ -139,7 +139,7 @@ execlogServicePriceModel{priceModel->{
  
  }}                         
 },
-'serviceImage':image.asset->url,
+'serviceImage':image.asset->url + "?w=300",
 code,
   name,
   "title": coalesce(
@@ -150,14 +150,14 @@ code,
   description,
   image_url,
   "relatedCustomerNeeds": *[_type=='execlogCustomerNeed' && references(^._id)] | order(title asc)
-  { 'serviceImage':image.asset->url, code,description, image_url, name,
+  { 'serviceImage':image.asset->url + "?w=300", code,description, image_url, name,
     "title": coalesce(
     title[_key == $locale][0].value,
     title[_key == 'pt'][0].value,
     "Missing translation"
   ),
     "relatedCustomerNeedsDetails": *[_type=='execlogCustomerNeedDetail' && references(^._id)] | order(title asc)
-    { 'serviceImage':image.asset->url,code,name,description,
+    { 'serviceImage':image.asset->url + "?w=300",code,name,description,
       "title": coalesce(
     title[_key == $locale][0].value,
     title[_key == 'pt'][0].value,
@@ -175,7 +175,7 @@ export const TAXONOMIES_QUERY_LOCALIZED = groq`*[_type == "taxonomy"]
         title[_key == 'pt'][0].value,
         "Missing translation"
     ),
-    "imageUrl": image.asset->url,
+    "imageUrl": image.asset->url + "?w=250",
     taxons[]->{
         "title": coalesce(
         title[_key == $locale][0].value,
@@ -188,7 +188,7 @@ export const TAXONOMIES_QUERY_LOCALIZED = groq`*[_type == "taxonomy"]
             title[_key == 'pt'][0].value,
             "Missing translation"
             ),
-            products[]->{"imageUrl": image.asset->url,
+            products[]->{"imageUrl": image.asset->url + "?w=250",
             "title": coalesce(
                 title[_key == $locale][0].value,
                 title[_key == 'pt'][0].value,
@@ -202,7 +202,7 @@ export const TAXONOMIES_QUERY_LOCALIZED = groq`*[_type == "taxonomy"]
                 variants[]->{ 
                 sku,
                 "images": images[]{
-                          'url': asset->url,
+                          'url': asset->url + "?w=250",
                           },
                     "title": coalesce(
                     title[_key == $locale][0].value,
@@ -223,7 +223,7 @@ export const TAXONOMIES_QUERY_LOCALIZED = groq`*[_type == "taxonomy"]
                 }   
             } 
         },
-        products[]->{"imageUrl": image.asset->url,
+        products[]->{"imageUrl": image.asset->url + "?w=250",
             "title": coalesce(
             title[_key == $locale][0].value,
             title[_key == 'pt'][0].value,
@@ -237,7 +237,7 @@ export const TAXONOMIES_QUERY_LOCALIZED = groq`*[_type == "taxonomy"]
                         ) ,
             variants[]->{ sku,
             "images": images[]{
-                    'url': asset->url,
+                    'url': asset->url + "?w=250",
                     },
                     "title": coalesce(
                     title[_key == $locale][0].value,
@@ -314,7 +314,7 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
             title[_key == 'pt'][0].value,
             "Missing translation"
             ),
-            products[]->{"imageUrl": image.asset->url,
+            products[]->{"imageUrl": image.asset->url + "?w=300",
             "title": coalesce(
                 title[_key == $locale][0].value,
                 title[_key == 'pt'][0].value,
@@ -338,7 +338,7 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
                 variants[]->{ 
                 sku,
                 "images": images[]{
-                          'url': asset->url,
+                          'url': asset->url + "?w=300",
                           },
                     "title": coalesce(
                     title[_key == $locale][0].value,
@@ -359,7 +359,7 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
             title[_key == 'pt'][0].value,
             "Missing translation"
             ),
-            products[]->{"imageUrl": image.asset->url,
+            products[]->{"imageUrl": image.asset->url + "?w=300",
             "title": coalesce(
                 title[_key == $locale][0].value,
                 title[_key == 'pt'][0].value,
@@ -383,7 +383,7 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
                 variants[]->{ 
                 sku,
                 "images": images[]{
-                          'url': asset->url,
+                          'url': asset->url + "?w=300",
                           },
                     "title": coalesce(
                     title[_key == $locale][0].value,
@@ -404,7 +404,7 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
                 }   
             } 
         },
-        products[]->{"imageUrl": image.asset->url,
+        products[]->{"imageUrl": image.asset->url + "?w=300",
             "title": coalesce(
             title[_key == $locale][0].value,
             title[_key == 'pt'][0].value,
@@ -429,7 +429,7 @@ export const TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED = groq`
                         ) ,
             variants[]->{ sku,
             "images": images[]{
-                    'url': asset->url,
+                    'url': asset->url + "?w=300",
                     },
                     "title": coalesce(
                     title[_key == $locale][0].value,
@@ -469,7 +469,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
                   && references(^._id)].title[_key == $locale].value,
   
         "product": *[_type == "product" && title[_key == $locale].value match $slug][0]
-            { "imageUrl": image.asset->url,
+            { "imageUrl": image.asset->url + "?w=300",
                 "title": coalesce(
                 title[_key == $locale][0].value,
                 "Missing translation " + $locale + " " + title[_key == 'pt'][0].value,
@@ -498,7 +498,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
                         ) ,           
                 variants[]->{ sku,
                     "images": images[]{
-                        'url': asset->url,
+                        'url': asset->url + "?w=300",
                     },
                     "title": coalesce(
                     title[_key == $locale][0].value,
@@ -548,7 +548,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
             title[_key == 'pt'][0].value,
             "Missing translation"
             ),
-      products[]->{"imageUrl": image.asset->url,
+      products[]->{"imageUrl": image.asset->url + "?w=300",
             "title": coalesce(
             title[_key == $locale][0].value,
             title[_key == 'pt'][0].value,
@@ -571,7 +571,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
                         title[_key == 'pt'][0].value,
                         "Missing translation"
                         ),
-                products[]->{"imageUrl": image.asset->url,
+                products[]->{"imageUrl": image.asset->url + "?w=300",
                         "title": coalesce(
                         title[_key == $locale][0].value,
                         title[_key == 'pt'][0].value,
@@ -591,7 +591,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
             }
             
     },
-         products[]->{"imageUrl": image.asset->url,
+         products[]->{"imageUrl": image.asset->url + "?w=300",
             "title": coalesce(
             title[_key == $locale][0].value,
             title[_key == 'pt'][0].value,
@@ -615,7 +615,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
                         ) ,
             variants[]->{ sku,
                     "images": images[]{
-                    'url': asset->url,
+                    'url': asset->url + "?w=300",
                     },
                     "title": coalesce(
                     title[_key == $locale][0].value,
@@ -649,7 +649,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
                 title[_key == 'pt'][0].value,
                 "Missing translation"
             ),
-  products[]->{"imageUrl": image.asset->url,
+  products[]->{"imageUrl": image.asset->url + "?w=300",
             "title": coalesce(
                 title[_key == $locale][0].value,
                 title[_key == 'pt'][0].value,

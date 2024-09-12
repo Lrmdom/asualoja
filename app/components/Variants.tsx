@@ -71,17 +71,15 @@ export default function Variants({product}: { variants: SanityDocument }) {
 
 
 
-                                        {<Suspense>
-                                            <ClientOnly fallback={null}>
-                                                {() => <InputRadioGroup
+                                        <Suspense>
+                                            <InputRadioGroup
                                                     name={attribute[0] + attribute[1][0].sku}
                                                     options={attribute[1]}
                                                     title={attribute[0]}
                                                     viewMode="grid"
-                                                />}
-                                            </ClientOnly>
+                                                />
 
-                                        </Suspense>}
+                                        </Suspense>
 
                                     </div>
                                     : null}
