@@ -28,6 +28,7 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
 
     return (
         <>
+{/*
             <CommerceLayer accessToken={auth.accessToken} endpoint="https://execlog.commercelayer.io">
                 <SkusContainer
                     skus={[
@@ -71,6 +72,7 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
                     </OrderContainer>
                 </OrderStorage>
             </CommerceLayer>
+*/}
 
                 <cl-availability code={stegaClean(selectedSku)}>
                     <cl-availability-status type="available" style={{color: "green"}}>

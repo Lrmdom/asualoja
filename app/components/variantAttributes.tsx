@@ -65,8 +65,7 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
 
     return (<main className="">
         {product.variantsImages.length > 1 ?
-        <ClientOnly fallback={null}>
-            {() => <EmblaCarousel slides={product.variantsImages}
+        <EmblaCarousel slides={product.variantsImages}
                                   setSelectedSku={setSelectedSku}
                                   setSelectedSize={setSelectedSize}
                                   selectedSku={selectedSku}
@@ -75,8 +74,8 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                   selectedColor={selectedColor}
                                   setEmblaImage={setEmblaImage}
                                   emblaImage={emblaImage}
-                                  options={OPTIONS}/>}
-        </ClientOnly>
+                                  options={OPTIONS}/>
+
             : <img src={product.imageUrl} />}
         <div className="grid">
             <div>

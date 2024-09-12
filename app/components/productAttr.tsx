@@ -18,7 +18,6 @@ export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku
     function setSkuButton( sku, size, emblaOptions){
         setSelectedSku(stegaClean(sku))
         setSelectedSize(stegaClean(size))
-        debugger
         setEmblaImage(3)
 
     }

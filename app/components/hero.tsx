@@ -27,7 +27,7 @@ export default function Component() {
             </Link>
           </div>
           <img
-            src="/placeholder.svg"
+            src="https://cdn.sanity.io/images/ho1tf79n/production/73a8744dba8caefcccd161575f07eb453bf58dba-604x524.svg"
             width="550"
             height="550"
             alt="Hero"
