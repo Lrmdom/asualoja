@@ -11,9 +11,7 @@ import { loadQuery } from '~/sanity/loader.server'
 import {
   TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED
 } from '~/sanity/queries'
-import i18next from '~/i18next.server'
 
-import { BreadcrumbsItem } from "~/components/BreadcrumbsItem"
 
 export const handle = {
   breadcrumb: () => (

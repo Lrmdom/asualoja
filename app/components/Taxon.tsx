@@ -67,7 +67,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
         )
     } else {
         return (
-            <main className="container mx-auto p-4 prose prose-lg">
+            <main className="container mx-auto  gap-4 p-4 prose prose-lg ">
 
 
                 <div key={taxon._id}>
