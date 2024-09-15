@@ -157,7 +157,7 @@ export default function Component() {
                 </cl-my-account-link>
                         */}
                         <Link to="#" className="mx-1">
-                        <cl-cart-link>
+                        <cl-cart-link target="_self">
                             <svg
                                 width="35"
                                 height="35"
