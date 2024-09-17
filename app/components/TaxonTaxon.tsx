@@ -7,7 +7,7 @@ import {useTranslation} from "react-i18next";
 
 export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
     const {t} = useTranslation()
-    if (Array.isArray(taxon.taxons)) {
+    if (Array.isArray(taxon.taxons) && taxon.taxons.length > 0) {
         return (
             <>
             <main className="container mx-auto prose prose-lg p-4 ">
@@ -26,7 +26,7 @@ export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
 
                     {taxon.taxons.map((tx) => {
                         taxon["allTaxonProducts"]=[]
-                        if (Array.isArray(tx.taxons)) {
+                        if (Array.isArray(tx.taxons) && tx.taxons.length > 0) {
 
                             tx.taxons.map((txx) => {
                                 tx["allTaxonProducts"] = tx["allTaxonProducts"] || []
