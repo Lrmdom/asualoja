@@ -2,8 +2,8 @@
 import * as React from 'react'
 
 
-import {cn} from '@/lib/utils'
-import {Icons} from '@/components/ui/icons'
+import {cn} from '../../@/lib/utils'
+import {Icons} from '../../@/components/ui/icons'
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -11,7 +11,7 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu'
+} from '../../@/components/ui/navigation-menu'
 import {stegaClean} from '@sanity/client/stega'
 import {useTranslation} from 'react-i18next'
 import SearchForm from "~/components/searchForm";

@@ -1,5 +1,5 @@
 
-import {Card, CardTitle, CardDescription} from "@/components/ui/card"
+import {Card, CardTitle, CardDescription} from "../../@/components/ui/card"
 
 import ProductImagescarousel from "~/components/productImagescarousel";
 import {stegaClean} from "@sanity/client/stega";
