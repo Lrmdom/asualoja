@@ -21,7 +21,7 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
     }*/
     if(Array.isArray(product.attributes)) {
         let prodAttrs = product.attributes.filter(attr => attr._type === 'attribute')
-        if (Array.isArray(prodAttrs)) {
+        if (Array.isArray(prodAttrs) && prodAttrs.length > 0) {
 
             return (
                 <main className="">
