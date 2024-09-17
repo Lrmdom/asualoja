@@ -125,7 +125,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Header taxonomies={data} user={user}></Header>
         </Suspense>
         <Suspense fallback={<p>Loading...</p>}>
-            <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
+            {/*<MyNavMenu taxonomies={data} user={user}></MyNavMenu>*/}
         </Suspense>
         {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
         {/*<header>

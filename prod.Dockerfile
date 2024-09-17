@@ -8,4 +8,6 @@ RUN npm run build
 EXPOSE 3000
 CMD [ "npm", "run", "start" ]
 
-#  docker build  -f dev.Dockerfile -t execlog/execlogdemo_dev . && docker run -p 80:3000 -it execlog/execlogdemo_dev
+#  docker build  -f dev.Dockerfile -t execlog/execlogdemo . && docker run -p 80:3000 -it execlog/execlogdemo
+
+#  docker build  -f dev.Dockerfile -t execlog/execlogdemo . && docker push execlog/execlogdemo
