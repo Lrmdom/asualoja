@@ -4,8 +4,8 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import {Link} from "@remix-run/react";
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
+import { Sheet, SheetTrigger, SheetContent } from "../../@/components/ui/sheet"
+import { Button } from "../../@/components/ui/button"
 import * as React from "react";
 import MylaguageSwitcher from "~/components/myLanguageSwitcher";
 
