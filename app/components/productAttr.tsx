@@ -1,10 +1,10 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import {Label} from "../../@/components/ui/label"
-import {Label} from "../../@/components/ui/label";
-import {Button} from "../../@/components/ui/button"
+import {Label} from "@/components/ui/label"
+import {Label} from "@/components/ui/label";
+import {Button} from "@/components/ui/button"
 
-import {RadioGroupItem} from "../../@/components/ui/radio-group";
+import {RadioGroupItem} from "@/components/ui/radio-group";
 
 
 function getTheColorCode(attribute) {
