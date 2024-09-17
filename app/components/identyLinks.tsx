@@ -1,4 +1,4 @@
-import {li} from "../../@/components/ui/navigation-menu";
+import {li} from "@/components/ui/navigation-menu";
 import * as React from "react";
 import { useTranslation } from 'react-i18next'
 

@@ -5,7 +5,7 @@
  */
 
 import { useState } from 'react'
-import { Input } from '../../@/components/ui/input'
+import { Input } from '@/components/ui/input'
 import Fuse from 'fuse.js'
 import { stegaClean } from '@sanity/client/stega'
 import { Link } from '@remix-run/react'

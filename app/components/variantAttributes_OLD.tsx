@@ -4,8 +4,8 @@ import Attribute from "~/components/attribute";
 import {Avatar, Dropdown, InputRadioGroup, InputToggleButton, ListItem, Text} from '@commercelayer/app-elements'
 import {Suspense} from "react";
 import { ClientOnly } from "remix-utils/client-only"
-import { Label } from "../../@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "../../@/components/ui/radio-group"
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 export default function VariantAttributes_OLD({attributes}: { attribute: SanityDocument }) {
 

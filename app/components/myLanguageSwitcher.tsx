@@ -10,8 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuItem,
-} from '../../@/components/ui/dropdown-menu'
-import { Button } from '../../@/components/ui/button'
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
 import {useChangeLanguage} from 'remix-i18next/react'
 export default function Component() {
   const location = useLocation()
