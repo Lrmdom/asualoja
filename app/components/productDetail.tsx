@@ -50,14 +50,14 @@ export default function Component(props) {
                 </div>
 
                 <div className="grid gap-6">
-                    <div >
+                    <div >npm run dev
                         <CardTitle className="text-xl font-semibold first-line:uppercase " >{product.title}</CardTitle>
                         <CardDescription className="text-muted-foreground px-8 p-5">
                             {product.description}
                         </CardDescription>
                     </div>
 
-                    {Array.isArray(product.variants)? <ProductAttributes product={product}></ProductAttributes>:null}
+                    {Array.isArray(product.variants) && product.variants.length > 0 ? <ProductAttributes product={product}></ProductAttributes>:null}
 
 
                 </div>

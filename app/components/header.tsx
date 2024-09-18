@@ -3,6 +3,7 @@ import MylaguageSwitcher from "~/components/myLanguageSwitcher";
 import * as React from "react";
 
 import SocialLogins from '~/routes/login'
+import {ClientOnly} from "remix-utils/client-only"
 
 import MylaguageSwitcher from '~/components/myLanguageSwitcher'
 import {
@@ -48,7 +49,8 @@ export default function Header(props) {
                 </li>*/}
 
                 <li>
-                    <IdentityLinks></IdentityLinks></li>
+                    <IdentityLinks></IdentityLinks>
+            </li>
 
                 <li>
                     <cl-cart-link>

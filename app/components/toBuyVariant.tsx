@@ -73,7 +73,6 @@ export default  function ToBuyVariant({selectedSku}: { attribute: SanityDocument
                 </OrderStorage>
             </CommerceLayer>
 */}
-
                 <cl-availability code={stegaClean(selectedSku)}>
                     <cl-availability-status type="available" style={{color: "green"}}>
                         {t("• available")}
