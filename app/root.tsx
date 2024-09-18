@@ -182,10 +182,11 @@ export default function App() {
     const {locale} = useLoaderData<typeof loader>()
     const navigation = useNavigation();
     useChangeLanguage(locale)
-    return (
+    /*return <Outlet />*/
+   return (
        <div className={
             navigation.state === "loading" ? "loading" : ""
-        } id="detail"
+        }
         >
         <Outlet/>
         </div>
