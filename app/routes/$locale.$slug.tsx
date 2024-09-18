@@ -51,5 +51,9 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 export default function TaxonomyRoute() {
   const { data } = useLoaderData<typeof loader>()
 
-  return <Taxonomy taxonomies={data}/>
+  return (
+      <Suspense>
+        <Taxonomy taxonomies={data}/>
+      </Suspense>
+  )
 }
