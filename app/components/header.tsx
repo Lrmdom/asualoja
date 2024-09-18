@@ -20,8 +20,8 @@ export default function Header(props) {
 
     let identity
     if (props.user) {
-        identity =
-            <IdentityLinks></IdentityLinks>
+        /*identity =
+            <IdentityLinks></IdentityLinks>*/
     } else {
         identity = null
     }
@@ -49,11 +49,11 @@ export default function Header(props) {
                 </li>*/}
 
                 <li>
-                    <IdentityLinks></IdentityLinks>
+                    {/*<IdentityLinks></IdentityLinks>*/}
             </li>
 
                 <li>
-                    <cl-cart-link>
+                   {/* <cl-cart-link>
                         <svg
                             width="32"
                             height="32"
@@ -85,7 +85,7 @@ export default function Header(props) {
                         </svg>
                         <cl-cart-count></cl-cart-count>
                         <cl-cart></cl-cart>
-                    </cl-cart-link>
+                    </cl-cart-link>*/}
                 </li>
 
             </ul>
