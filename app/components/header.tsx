@@ -42,18 +42,18 @@ export default function Header(props) {
     return (
         <div className="container bg-purple-50 place-content-end">
             <ul className="ml-10 flex items-baseline space-x-2 place-content-end">
-                {/*<li>
+                <li>
                     <MylaguageSwitcher
                         onClick={() => handleLanguageChange()}
                     ></MylaguageSwitcher>
-                </li>*/}
+                </li>
 
                 <li>
-                    {/*<IdentityLinks></IdentityLinks>*/}
+                    <IdentityLinks></IdentityLinks>
             </li>
 
                 <li>
-                   {/* <cl-cart-link>
+                   <cl-cart-link>
                         <svg
                             width="32"
                             height="32"
@@ -85,7 +85,7 @@ export default function Header(props) {
                         </svg>
                         <cl-cart-count></cl-cart-count>
                         <cl-cart></cl-cart>
-                    </cl-cart-link>*/}
+                    </cl-cart-link>
                 </li>
 
             </ul>

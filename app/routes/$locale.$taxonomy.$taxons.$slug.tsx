@@ -62,7 +62,7 @@ export default function ProductRoute() {
              {stegaClean(data.product.title)}</span>
                 </div>
             </div>
-                {() => <ProductDetail product={[data.product]} />}
+               <ProductDetail product={[data.product]} />
 
 
             {/*<Prods products={[data.product]}></Prods>*/}

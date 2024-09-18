@@ -9,6 +9,7 @@ import {
     useLoaderData, useMatches,
     useRevalidator, useRouteError,
     useRouteLoaderData,
+    useNavigation,
 } from '@remix-run/react'
 import type {LinksFunction} from '@remix-run/node'
 
@@ -179,9 +180,16 @@ export function Layout({children}: { children: React.ReactNode }) {
 
 export default function App() {
     const {locale} = useLoaderData<typeof loader>()
-
+    const navigation = useNavigation();
     useChangeLanguage(locale)
-    return <Outlet/>
+    return (
+       <div className={
+            navigation.state === "loading" ? "loading" : ""
+        } id="detail"
+        >
+        <Outlet/>
+        </div>
+    )
 }
 /*export function ErrorBoundary() {
 
