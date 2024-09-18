@@ -24,7 +24,6 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                                 className="container p-4 bg-black text-white">{attr.description ? attr.description : null}</div>
 
                             : null}
-
                         <ToBuyVariant attribute={attr}></ToBuyVariant>
                     </div>
                 )
@@ -46,7 +45,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
 
                             : null}
                         <ToBuyVariant attribute={attr}></ToBuyVariant>
-                    </div>
+            </div>
                 )
 
             })
@@ -68,7 +67,6 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
 
                             : null}
                         <ToBuyVariant attribute={attr}></ToBuyVariant>
-
                     </div>
                 )
             })
@@ -105,7 +103,6 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                                 className="container p-4 bg-black text-white">{attr.description ? attr.description : null}</div>
 
                             : null}
-
                         <ToBuyVariant attribute={attr}></ToBuyVariant>
                     </div>
                 )

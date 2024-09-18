@@ -62,9 +62,7 @@ export default function ProductRoute() {
              {stegaClean(data.product.title)}</span>
                 </div>
             </div>
-            <ClientOnly fallback={null}>
                 {() => <ProductDetail product={[data.product]} />}
-            </ClientOnly>
 
 
             {/*<Prods products={[data.product]}></Prods>*/}
