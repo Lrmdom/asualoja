@@ -24,7 +24,7 @@ export default function Component(props) {
     // findAllMatches: false,
     // minMatchCharLength: 1,
     // location: 0,
-    threshold: 0.6,
+    threshold: 0.3,
     // distance: 100,
     // useExtendedSearch: false,
     // ignoreLocation: false,
@@ -61,6 +61,7 @@ export default function Component(props) {
     setSearchTerm(e.target.value)
   }
   let filteredResults = fuse.search(searchTerm)
+  console.log(filteredResults)
   return (
     <div className="relative max-w-md">
       <Input
@@ -72,6 +73,7 @@ export default function Component(props) {
       />
 
       {filteredResults.length > 0 && (
+
         // filter unique
         //todo if match reference, write downthe refrence text, ex: customerneed or customerNeedDetail name or title or description
         <div className="absolute z-10 mt-2 w-full rounded-md border border-input bg-background shadow-lg">
