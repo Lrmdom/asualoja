@@ -50,7 +50,7 @@ export default function Component(props) {
                 </div>
 
                 <div className="grid gap-6">
-                    <div >npm run dev
+                    <div >
                         <CardTitle className="text-xl font-semibold first-line:uppercase " >{product.title}</CardTitle>
                         <CardDescription className="text-muted-foreground px-8 p-5">
                             {product.description}
