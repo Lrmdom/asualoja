@@ -7,13 +7,13 @@ import { loadQuery } from '~/sanity/loader.server'
 import Taxonomy from '~/components/Taxonomy'
 import { useQuery } from '~/sanity/loader'
 import { loadQuery } from '~/sanity/loader.server'
-
 import {
   TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED
 } from '~/sanity/queries'
 import i18next from '~/i18next.server'
 
 import { BreadcrumbsItem } from "~/components/BreadcrumbsItem"
+import {Suspense} from "react";
 
 export const handle = {
   breadcrumb: () => (
@@ -51,5 +51,9 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 export default function TaxonomyRoute() {
   const { data } = useLoaderData<typeof loader>()
 
-  return <Taxonomy taxonomies={data}/>
+  return (
+      <Suspense>
+      <Taxonomy taxonomies={data}/>
+      </Suspense>
+  )
 }
