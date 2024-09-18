@@ -82,14 +82,17 @@ export default function Component(props) {
                 className="cursor-pointer px-4 py-2 hover:bg-muted"
               >
                 <div className="font-medium">
-                  <Link to={`${language}/${result.item.title}`}>
+                  <Link to={`${language}/${stegaClean(result.item.title)}`}>
                     {result.item.title}
                   </Link>
                 </div>
 
                 {result.matches.map((match) => (
                   <div className="truncate-to-2-lines text-sm text-muted-foreground">
-                    {match.value}
+                    <Link to={`${language}/${stegaClean(result.item.title)}/${stegaClean(match.value)}`}>
+                      {match.value}
+                    </Link>
+
                   </div>
                 ))}
               </li>
