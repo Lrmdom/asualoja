@@ -32,7 +32,7 @@ import SiteError from "~/components/404";
 import MyNavMenu from '~/components/responsiveNavbar'
 import '@commercelayer/app-elements/style.css'
 
-
+import Loading from "~/components/loading"
 //import '@commercelayer/app-elements/vendor.css'
 import * as process from "node:process";
 //import '@commercelayer/app-elements/vendor.css'
@@ -182,15 +182,16 @@ export default function App() {
     const {locale} = useLoaderData<typeof loader>()
     const navigation = useNavigation();
     useChangeLanguage(locale)
-    /*return <Outlet />*/
+
    return (
-       <div className={
-            navigation.state === "loading" ? "loading" : ""
-        }
-        >
-        <Outlet/>
-        </div>
-    )
+           <div className={
+               navigation.state === "loading" ? "loading" : ""
+           }
+           >
+               <Outlet/>
+           </div>
+
+   )
 }
 /*export function ErrorBoundary() {
 

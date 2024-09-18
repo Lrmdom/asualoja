@@ -30,7 +30,6 @@ export default function Index() {
             {/*todo add taxonomies images and link to taxons/produts  ex:shop by categorie*/}
             <div className="container p-8">
                 <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-
                     {data.map((tx) => {
 
                         return (
@@ -53,9 +52,7 @@ export default function Index() {
                                     </div>
                                 </div>
                             </div>
-
                         )
-
                     })}
                 </div>
             </div>
