@@ -20,8 +20,8 @@ export default function Header(props) {
 
     let identity
     if (props.user) {
-        /*identity =
-            <IdentityLinks></IdentityLinks>*/
+        identity =
+            <IdentityLinks></IdentityLinks>
     } else {
         identity = null
     }
@@ -42,6 +42,9 @@ export default function Header(props) {
     return (
         <div className="container bg-purple-50 place-content-end">
             <ul className="ml-10 flex items-baseline space-x-2 place-content-end">
+                <li>
+                    <SearchForm taxonomies={props.taxonomies}></SearchForm>
+                </li>
                 <li>
                     <MylaguageSwitcher
                         onClick={() => handleLanguageChange()}
