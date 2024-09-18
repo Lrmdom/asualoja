@@ -15,11 +15,7 @@ import i18next from '~/i18next.server'
 import { BreadcrumbsItem } from "~/components/BreadcrumbsItem"
 import {Suspense} from "react";
 
-export const handle = {
-  breadcrumb: () => (
-      <Link to="/parent/child">Child Route</Link>
-  ),
-};
+
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
@@ -52,8 +48,6 @@ export default function TaxonomyRoute() {
   const { data } = useLoaderData<typeof loader>()
 
   return (
-      <Suspense>
         <Taxonomy taxonomies={data}/>
-      </Suspense>
   )
 }

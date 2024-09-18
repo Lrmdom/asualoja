@@ -1,5 +1,5 @@
 // 'use client'
-
+import { redirectDocument } from "@remix-run/node"
 import {Link, Params, useLocation, useParams} from '@remix-run/react'
 import {useTranslation} from 'react-i18next'
 import {
@@ -12,7 +12,6 @@ import {
     DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
 import {Button} from '@/components/ui/button'
-import {useChangeLanguage} from 'remix-i18next/react'
 
 export default function Component() {
     const location = useLocation()
@@ -36,19 +35,16 @@ export default function Component() {
                      }*/
 
     const handleLanguageChange = (data) => {
-        window.location.href = `/${data.language}/?lng=${data.language}`
+        //window.location.href = `/${data.language}/?lng=${data.language}`
         i18n.changeLanguage(data.language, (error) => {
             let re = new RegExp('/' + language, 'g')
             const pthn = location.pathname.replace(re, data.language)
             //todo use current url and just change the language parameters path and querystring
-
             setTimeout(function () {
-                window.location.href = `/${data.language}/?lng=${data.language}`
-
-            }, 500);
-
+                //window.location.href = `/${data.language}/?lng=${data.language}`
+                window.location.replace(`/${data.language}/?lng=${data.language}`)
+            }, 100);
         })
-
     }
     const {pathname} = useLocation();
     const {t} = useTranslation('')
