@@ -78,9 +78,9 @@ export default function Login() {
           <SocialButton provider={SocialsProvider.MICROSOFT} label=" Microsoft"/>
           <SocialButton provider="LINKEDIN" label=" LinkedIn"/>*/}
           <li>
-            <cl-identity-link type="login" target="_self">
+            {/*<cl-identity-link type="login" target="_self">
               <button className="">Email </button>
-            </cl-identity-link>
+            </cl-identity-link>*/}
           </li>
         </ul>
 

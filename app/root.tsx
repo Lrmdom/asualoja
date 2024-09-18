@@ -138,9 +138,7 @@ export function Layout({children}: { children: React.ReactNode }) {
                     ))}
             </ol>
         </header>*/}
-        <Suspense fallback={<p>Loading...</p>}>
         {children}
-        </Suspense>
         <ScrollRestoration/>
         <script
             dangerouslySetInnerHTML={{
