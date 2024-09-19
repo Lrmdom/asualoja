@@ -1,6 +1,4 @@
-// 'use client'
-import { redirectDocument } from "@remix-run/node"
-import {Link, Params, useLocation, useParams} from '@remix-run/react'
+import {Form,Link, Params, useLocation, useParams} from '@remix-run/react'
 import {useTranslation} from 'react-i18next'
 import {
     DropdownMenu,
@@ -35,7 +33,6 @@ export default function Component() {
                      }*/
 
     const handleLanguageChange = (data) => {
-        //window.location.href = `/${data.language}/?lng=${data.language}`
         i18n.changeLanguage(data.language, (error) => {
             let re = new RegExp('/' + language, 'g')
             const pthn = location.pathname.replace(re, data.language)
@@ -50,6 +47,15 @@ export default function Component() {
     const {t} = useTranslation('')
 
     return (
+        <div>
+        {/*<Form>
+            <button type="submit" name="lng" value="es">
+                Español
+            </button>
+            <button type="submit" name="lng" value="en">
+                English
+            </button>
+        </Form>*/}
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="link" className="flex items-center gap-2">
@@ -83,10 +89,9 @@ export default function Component() {
                         }
                     >
 
-                        {/*
-            <Link to={`/en${pathname}`}>🇯🇵</Link>
-*/}
-                        <Link to={pathname.replace(`/${language}/`, `/es${pathname}`)}>🇺🇸</Link>
+
+            <Link to={`/en${pathname}`}>🇪🇸</Link>
+
 
                         Español
                     </DropdownMenuItem>
@@ -98,11 +103,13 @@ export default function Component() {
                             })
                         }
                     >
+                        <Link to={`/en${pathname}`}>🇵🇹</Link>
                         Português
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>
+        </div>
     )
 }
 

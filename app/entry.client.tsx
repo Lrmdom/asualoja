@@ -33,9 +33,17 @@ async function main() {
 				<StrictMode>
 					<RemixBrowser />
 				</StrictMode>
-			</I18nextProvider>,
+			</I18nextProvider>
 		);
 	});
+}
+
+if (window.requestIdleCallback) {
+	window.requestIdleCallback(main);
+} else {
+	// Safari doesn't support requestIdleCallback
+	// https://caniuse.com/requestidlecallback
+	window.setTimeout(main, 1);
 }
 
 main().catch((error) => console.error(error));
