@@ -25,17 +25,13 @@ import type {SanityDocument} from '@sanity/client'
 import {useTranslation} from 'react-i18next'
 import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
-import {ClientOnly} from "remix-utils/client-only"
-
 import SiteError from "~/components/404";
-// import {MyNavMenu} from '~/components/myNavMenu'
 import MyNavMenu from '~/components/responsiveNavbar'
 import '@commercelayer/app-elements/style.css'
+//import '@commercelayer/app-elements/vendor.css'
 
 import Loading from "~/components/loading"
-//import '@commercelayer/app-elements/vendor.css'
 import * as process from "node:process";
-//import '@commercelayer/app-elements/vendor.css'
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
@@ -95,14 +91,10 @@ export function Layout({children}: { children: React.ReactNode }) {
     i18n.language = locale
 
 
-    setTimeout(function () {
-        i18n.changeLanguage(locale, (error) => {
-        })
-    }, 100);
 
     return (
 
-        <html lang={locale?.locale ?? 'pt'}>
+        <html lang={locale ?? 'pt'}>
         <head title="titulo">
             <meta charSet="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
