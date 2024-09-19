@@ -27,6 +27,9 @@ export default function ProductAttr({setSelectedSku,setSelectedSize, selectedSku
         Reg_Exp.test(stegaClean(attr.value)) ?
             <>
                 <div key={attr.value} className="flex">
+{/*
+                    //TODO if allready exists with id=attr.value , dont render but sku must be available to button somehow diferent way. Clicking another attr related?
+*/}
                     <RadioGroupItem
                         value={stegaClean(attr.value)}
                         id={stegaClean(attr.value)}
