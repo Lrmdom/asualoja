@@ -55,10 +55,10 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
         }
     })
     groupedVariantsAttrs = variantsAttrs.reduce((current, item) => {
-        if (!current[stegaClean(item.name.trim())]) {
-            current[stegaClean(item.name.trim())] = [];
+        if (!current[stegaClean(item.name.trim().toUpperCase())] ) {
+            current[stegaClean(item.name.trim().toUpperCase())] = [];
         }
-        current[stegaClean(item.name.trim())].push(item);
+        current[stegaClean(item.name.trim().toUpperCase())].push(item);
         return current;
     }, {});
 
@@ -86,18 +86,19 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                     //atribute[0] is name and attribute[1] is array of value/s
                     return (
                         <>
-                            {/*<Label htmlFor="color" className="text-base font-medium ">
-                                    {attribute[0]}
-                                </Label>*/}
+                            <hr className="m-2"/>
+                            <Label htmlFor="color" className="text-xs">
+                                {attribute[0]}
+                            </Label>
                             {attribute[1].length > 0 ?
 
-                                <div className="p-4">
+                                <div className="flex flex-wrap gap-1 m-2">
                                     {Reg_Exp.test(stegaClean(attribute[1][0].value)) ?
                                         <>
                                             <RadioGroup
                                                 value={selectedColor}
                                                 onValueChange={setSelectedColor}
-                                                className="flex flex-wrap gap-4 "
+                                                className="flex flex-wrap gap-8 m-2"
                                             >
                                                 {attribute[1].map((attr) => {
                                                     return (
@@ -128,11 +129,11 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
 
 
                                                      </span>
-                                                    <span className="font-semibold text-xs">{selectedSku}</span>
+                                                    <span className="text-xs font-semibold">{selectedSku}</span>
                                                     <span
                                                         className="text-sm text-muted-foreground">Selected size: </span>
                                                     <span
-                                                        className="font-semibold text-lg text-primary">{selectedSize}</span>
+                                                        className="text-lg font-semibold text-primary">{selectedSize}</span>
                                                 </div>*/}
                                         </>
                                         :

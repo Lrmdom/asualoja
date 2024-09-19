@@ -8,9 +8,7 @@ import {Tab} from "@commercelayer/app-elements";
 import Prods from "~/components/Prods";
 import {stegaClean} from "@sanity/client/stega";
 
-export const handle = {
-    breadcrumb: () => <Link to="/parent">Some Route</Link>,
-};
+
 
 export const meta: MetaFunction = () => {
     return [
@@ -22,9 +20,12 @@ export const meta: MetaFunction = () => {
 export default function Index() {
     const {t} = useTranslation('')
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
+
+
+
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-    //console.log(data)
+    console.log(data)
     return (
         <>
             {/*todo add taxonomies images and link to taxons/produts  ex:shop by categorie*/}

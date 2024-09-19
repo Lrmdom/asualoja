@@ -122,23 +122,9 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body className="">
-            <Header taxonomies={data} user={user}></Header>
+           <Header taxonomies={data} user={user}></Header>
             <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
-        {/*<Breadcrumb navigationData={data}></Breadcrumb>*/}
-        {/*<header>
-            <ol>
-                {matches
-                    .filter(
-                        (match) =>
-                            match.handle && match.handle.breadcrumb
-                    )
-                    .map((match, index) => (
-                        <li key={index}>
-                            {match.handle.breadcrumb(match)}
-                        </li>
-                    ))}
-            </ol>
-        </header>*/}
+
         {children}
         <ScrollRestoration/>
         <script
@@ -155,23 +141,14 @@ export function Layout({children}: { children: React.ReactNode }) {
             }}
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
+            <Suspense fallback={<Loading/>}>
             <LiveVisualEditing
-                //todo check this to setup corretly the refres on sanity studio
-                //https://github.com/sanity-io/visual-editing/blob/main/packages/visual-editing/README.md#remix
-                /*refresh={(payload, refreshDefault) => {
-                    if (payload.source === 'manual') {
-                        return refreshDefault()
-                    }
-                    // Always revalidate on mutations for document types that are used for MetaFunctions that render in <head />
-                    if (payload.source === 'mutation' && payload.document._type === 'settings') {
-                        return refreshDefault()
-                    }
-                }}*/
             />
+            </Suspense>
         ) : null}
 
-        {/*<SubscribeNews/>
-        <Footer/>*/}
+        <SubscribeNews/>
+        <Footer/>
         <Scripts/>
         </body>
         </html>
@@ -193,7 +170,7 @@ export default function App() {
 
    )
 }
-/*export function ErrorBoundary() {
+export function ErrorBoundary() {
 
     const error = useRouteError();
     console.error(error);
@@ -210,4 +187,4 @@ export default function App() {
         </body>
         </html>
     );
-}*/
+}
