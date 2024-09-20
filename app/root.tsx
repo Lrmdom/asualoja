@@ -154,7 +154,7 @@ export default function App() {
 
    return (
            <div className={
-               navigation.state === "loading" ? "loading" : ""
+               navigation.state === "loading" ? <Loading /> : ""
            }
            >
                <Outlet/>
