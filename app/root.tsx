@@ -162,7 +162,7 @@ export default function App() {
 
    )
 }
-export function ErrorBoundary() {
+/*export function ErrorBoundary() {
 
     const error = useRouteError();
     console.error(error);
@@ -179,4 +179,4 @@ export function ErrorBoundary() {
         </body>
         </html>
     );
-}
+}*/

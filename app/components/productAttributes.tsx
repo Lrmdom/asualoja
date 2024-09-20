@@ -1,6 +1,7 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
+import Tooltip from "~/components/attrTooltip";
 export default function ProductAttributes({product}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
 
@@ -29,7 +30,22 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
                         return (
                             <>
                                 <div key={attribute._key} className="*:text-gray-600 *:uppercase">
-                                    <span className="text-xs font-bold text-primary">{attribute.name}</span> : <span className="text-xs">{attribute.value}</span>
+                                    <span className="text-xs font-bold text-primary">{attribute.name}</span> :
+                                    {attribute.description ?
+                                        <Tooltip content={attribute.description} position="right">
+                                            <div className="relative inline-block">
+
+                                                <span className="text-xs">{attribute.value}</span>
+                                                <div
+                                                    className="absolute -top-1.5 -right-1.5 bg-blue-400 rounded-full ">
+                                                    <div
+                                                        className="h-1.5 w-1.5 -top-2 -right-2 text-blue text-xs font-bold">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Tooltip> : <span className="text-xs">{attribute.value}</span>
+                                    }
 
                                 </div>
                             </>
