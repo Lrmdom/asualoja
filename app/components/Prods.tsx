@@ -56,10 +56,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                                 {stegaClean(prod.title)}</Link>
                                         </div>
 
-                                        {/*{Array.isArray(prod.variants) ?*/}
                                             <VariantAttributes product={prod}></VariantAttributes>
-                                            {/*: null}*/}
-
                                     </div>
                                 </>
                             )

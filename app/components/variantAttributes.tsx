@@ -12,7 +12,6 @@ import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import EmblaCarousel from '~/components/emblaCarousel/EmblaCarousel'
 import {EmblaOptionsType} from 'embla-carousel'
 
-import {ClientOnly} from "remix-utils/client-only"
 import ProductAttributes from "~/components/productAttributes";
 
 /*function setSkuImage( attrValue,attr){
@@ -63,6 +62,7 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
     }, {});
 
 
+
     return (<main className="">
         {product.variantsImages.length > 1 ?
         <EmblaCarousel slides={product.variantsImages}
@@ -82,15 +82,23 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                 <div>
                     <ProductAttributes product={product}></ProductAttributes>
                 </div>
-                {Object.entries(groupedVariantsAttrs)?.map((attribute) => {
+                {Object.entries(groupedVariantsAttrs)?.map((attribute, i,groupedVariantsAttrs) => {
                     //atribute[0] is name and attribute[1] is array of value/s
+                    Object.keys(attribute[1]).forEach(k => attribute[1][k].value = typeof attribute[1][k].value == 'string' ? attribute[1][k].value.trim().toUpperCase() : attribute[1][k].value)
+
+                    attribute[1].sort((a, b) => a.value.localeCompare(b.name))
+
+                    console.log(groupedVariantsAttrs)
+                    console.log(variantsAttrs)
+                    debugger
                     return (
                         <>
                             <hr className="m-2"/>
                             <Label htmlFor="color" className="text-xs">
                                 {attribute[0]}
                             </Label>
-                            {attribute[1].length > 0 ?
+                            {
+                                attribute[1].length > 0 ?
 
                                 <div className="flex flex-wrap gap-1 m-2">
                                     {Reg_Exp.test(stegaClean(attribute[1][0].value)) ?
@@ -100,23 +108,27 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                                 onValueChange={setSelectedColor}
                                                 className="flex flex-wrap gap-8 m-2"
                                             >
-                                                {attribute[1].map((attr) => {
-                                                    return (
+                                                {attribute[1].map((attr,i) => {
+                                                    if(stegaClean(attribute[1][i+1]?.value.toUpperCase())==stegaClean(attribute[1][i].value.toUpperCase())){
+                                                        null
+                                                    }else {
+                                                        return (
 
-                                                        <ProductAttr setSelectedSku={setSelectedSku}
-                                                                     setSelectedSize={setSelectedSize}
-                                                                     selectedSku={selectedSku}
-                                                                     selectedSize={selectedSize}
-                                                                     setSelectedColor={setSelectedColor}
-                                                                     selectedColor={selectedColor}
-                                                                     setEmblaImage={setEmblaImage}
-                                                                     emblaImage={emblaImage}
-                                                                     emblaOptions={OPTIONS}
-                                                                     attr={attr}
+                                                            <ProductAttr setSelectedSku={setSelectedSku}
+                                                                         setSelectedSize={setSelectedSize}
+                                                                         selectedSku={selectedSku}
+                                                                         selectedSize={selectedSize}
+                                                                         setSelectedColor={setSelectedColor}
+                                                                         selectedColor={selectedColor}
+                                                                         setEmblaImage={setEmblaImage}
+                                                                         emblaImage={emblaImage}
+                                                                         emblaOptions={OPTIONS}
+                                                                         attr={attr}
 
-                                                        ></ProductAttr>
+                                                            ></ProductAttr>
 
-                                                    )
+                                                        )
+                                                    }
 
                                                 })}
                                             </RadioGroup>
@@ -138,23 +150,26 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                         </>
                                         :
 
-                                        attribute[1].map((attr) => {
-                                            return (
+                                        attribute[1].map((attr,i) => {
 
-                                                <ProductAttr setSelectedSku={setSelectedSku}
-                                                             setSelectedSize={setSelectedSize}
-                                                             selectedSku={selectedSku}
-                                                             selectedSize={selectedSize}
-                                                             setSelectedColor={setSelectedColor}
-                                                             selectedColor={selectedColor}
-                                                             setEmblaImage={setEmblaImage}
-                                                             emblaImage={emblaImage}
-                                                             emblaOptions={OPTIONS}
-                                                             attr={attr}
+                                            if(stegaClean(attribute[1][i+1]?.value.toUpperCase())==stegaClean(attribute[1][i].value.toUpperCase())){
+                                                 null
+                                            }else {
+                                                return (
+                                                    <ProductAttr setSelectedSku={setSelectedSku}
+                                                                 setSelectedSize={setSelectedSize}
+                                                                 selectedSku={selectedSku}
+                                                                 selectedSize={selectedSize}
+                                                                 setSelectedColor={setSelectedColor}
+                                                                 selectedColor={selectedColor}
+                                                                 setEmblaImage={setEmblaImage}
+                                                                 emblaImage={emblaImage}
+                                                                 emblaOptions={OPTIONS}
+                                                                 attr={attr}
 
-                                                ></ProductAttr>
-
-                                            )
+                                                    ></ProductAttr>
+                                                )
+                                            }
 
                                         })
                                     }
