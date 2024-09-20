@@ -5,7 +5,7 @@ const Tooltip = ({ children, content, position = 'top' }) => {
 
     return (
         <div
-            className="relative inline-block "
+            className="relative inline-block"
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
         >
@@ -13,8 +13,8 @@ const Tooltip = ({ children, content, position = 'top' }) => {
             {isVisible && (
                 <div
                     className={`
-            tooltip-container absolute z-10 p-2 text-gray-600 text-xs rounded-md 
-            opacity-100 transition-opacity duration-300 lowercase bg-background text-muted-foreground capitalize
+            tooltip absolute z-10 p-2 text-gray-600 text-xs rounded  shadow-lg
+            opacity-100 transition-opacity duration-300  bg-background text-muted-foreground capitalize
             ${position === 'top' && 'bottom-full left-1/2 -translate-x-1/2'}
             ${position === 'bottom' && 'top-full left-1/2 -translate-x-1/2'}
             ${position === 'left' && 'right-full top-1/2 -translate-y-1/2'}
