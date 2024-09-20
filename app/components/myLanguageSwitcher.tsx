@@ -1,5 +1,6 @@
-import {Form,Link, Params, useLocation, useParams} from '@remix-run/react'
+import { useNavigation,Link, useLocation} from '@remix-run/react'
 import {useTranslation} from 'react-i18next'
+import { redirect } from "@remix-run/node"
 import {
     DropdownMenu,
     DropdownMenuTrigger,
@@ -12,6 +13,7 @@ import {
 import {Button} from '@/components/ui/button'
 
 export default function Component() {
+    const navigation = useNavigation();
     const location = useLocation()
     //const pathname = location.pathname.replace(/\/$/, '')
     const {i18n} = useTranslation()
@@ -37,10 +39,10 @@ export default function Component() {
             let re = new RegExp('/' + language, 'g')
             const pthn = location.pathname.replace(re, data.language)
             //todo use current url and just change the language parameters path and querystring
-            setTimeout(function () {
-                //window.location.href = `/${data.language}/?lng=${data.language}`
-                window.location.replace(`/${data.language}/?lng=${data.language}`)
-            }, 100);
+                window.location.href = `/${data.language}/?lng=${data.language}`
+                // navigation.state
+
+
         })
     }
     const {pathname} = useLocation();
@@ -59,7 +61,6 @@ export default function Component() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="link" className="flex items-center gap-2">
-                    <FlagIcon className="h-5 w-5"/>
                     <span>{i18n.language}</span>
                     <ChevronDownIcon className="h-4 w-4"/>
                 </Button>
