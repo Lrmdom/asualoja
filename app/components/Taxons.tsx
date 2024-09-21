@@ -68,7 +68,6 @@ export default function Taxons({taxon}: { taxon: SanityDocument }) {
                                     }
                                     if (Array.isArray(txn.taxons)&& txn.taxons.length > 0) {
                                         txn.taxons?.map((txn2) => {
-                                            console.log(txn2)
                                             if (txn2.products) {
                                                 tx.products ? tx["allTaxonProducts"].push(...txn2.products) : null
                                                 txn2.products ? txn2["allTaxonProducts"].push(...txn2.products) : null
