@@ -33,24 +33,31 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         onNextButtonClick
     } = usePrevNextButtons(emblaApi)
 
-    const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
 
+
+    props.emblaImage ? emblaApi.scrollTo(props.emblaImage, true) : null
+    debugger;
     const logEmblaEvent = useCallback(
         (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
-            const sku = props.slides[emblaApi.slidesInView()[1]].sku
-            let elements = document.getElementsByClassName(sku)
+            let index=emblaApi.selectedScrollSnap()
+            const sku = props.slides[index].sku
+            debugger
             props.setSelectedSku(sku)
-            /*
-                        props.setEmblaImage(props.slides[emblaApi.slidesInView()[1]].url)
-            */
-            props.slides[emblaApi.slidesInView()[1]].attributes?.map((attr) => {
-                Reg_Exp.test(stegaClean(attr.value)) ? props.setSelectedColor(stegaClean(attr.value)) : props.setSelectedSize(stegaClean(attr.value))
-            })
+            props.setEmblaImage(index)
+
+                props.slides[index].attributes?.map((attr) => {
+                    props.handleAttributeChange(stegaClean(attr.name.toUpperCase()), stegaClean(attr.value.toUpperCase()))
+                })
+
         },
         []
     )
     useEffect(() => {
-        if (emblaApi) emblaApi.on('select', logEmblaEvent)
+        if (emblaApi) {
+            emblaApi.on('select', logEmblaEvent)
+            //props.setEmblaImage(emblaApi.slidesInView()[0])
+            props.emblaImage ? emblaApi.scrollTo(props.emblaImage, true) : null
+        }
     }, [emblaApi, logEmblaEvent])
 
     return (
@@ -64,7 +71,20 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     ))}
                 </div>
             </div>
-
+            {/*<div className="embla-thumbs">
+                <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
+                    <div className="embla-thumbs__container">
+                        {slides.map((index) => (
+                            <Thumb
+                                key={index}
+                                onClick={() => onThumbClick(index)}
+                                selected={index === selectedIndex}
+                                index={index}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </div>*/}
             <div className="embla__controls">
                 <div className="embla__buttons">
                     <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled}/>

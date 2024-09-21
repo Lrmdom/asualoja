@@ -6,7 +6,6 @@ import {Button} from "@/components/ui/button"
 
 import {RadioGroupItem} from "@/components/ui/radio-group";
 import Tooltip from "~/components/attrTooltip"
-import {InfoIcon} from "lucide-react";
 
 function getTheColorCode(attribute) {
     return stegaClean(attribute.value.toString())
@@ -14,15 +13,21 @@ function getTheColorCode(attribute) {
 
 
 
-export default function ProductAttr({setSelectedSku,selectedSku,setEmblaImage,emblaImage,emblaOptions,attr, groupedVariantsAttrs,variantsAttrs,handleAttributeChange,dynamicAttributes,setDynamicAttributes}: { attribute: SanityDocument }) {
+export default function ProductAttr({setSelectedSku,selectedSku,setEmblaImage,emblaImage,emblaOptions,attr, groupedVariantsAttrs,variantsAttrs,handleAttributeChange,dynamicAttributes,setDynamicAttributes, variantsImages}: { attribute: SanityDocument }) {
 
+
+function setSkuImage(attr,variantsImages){
+
+    debugger
+    let index = variantsImages.findIndex(x => x.sku ===attr.sku)
+    setEmblaImage(index)
+}
 
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
 
-    function setSkuButton( sku, size, emblaOptions){
-        setSelectedSku(stegaClean(sku))
-        setSelectedSize(stegaClean(size))
-        setEmblaImage(3)
+    function setSkuButton( attr, stateSet,setSkuImage){
+
+        setSelectedSku(stegaClean(attr.sku))
 
     }
     return (
@@ -50,7 +55,7 @@ export default function ProductAttr({setSelectedSku,selectedSku,setEmblaImage,em
 
                                     style={{backgroundColor: getTheColorCode(attr)}}
                                     // onClick={() => setSelectedSku(stegaClean(attr.sku))}
-                                    onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name),stegaClean(attr.value)),emblaOptions)}
+                                    onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name),stegaClean(attr.value)),setSkuImage(attr, variantsImages))}
                                 >
                                     <div
                                         className="h-11 w-11 rounded-full border-2 border-white opacity-0 peer-checked:opacity-100 transition-opacity duration-300"></div>
@@ -83,7 +88,7 @@ export default function ProductAttr({setSelectedSku,selectedSku,setEmblaImage,em
 
                             style={{backgroundColor: getTheColorCode(attr)}}
                             /*onClick={() => setSelectedSku(stegaClean(attr.sku))}*/
-                            onClick={() =>  setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name),stegaClean(attr.value)),emblaOptions)}
+                            onClick={() =>  setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name.toUpperCase()),stegaClean(attr.value)),setSkuImage(attr, variantsImages))}
                         >
                             <div
                                 className="h-11 w-11 rounded-full border-2 border-white opacity-0 peer-checked:opacity-100 transition-opacity duration-300"></div>
@@ -106,7 +111,7 @@ export default function ProductAttr({setSelectedSku,selectedSku,setEmblaImage,em
                                 size={stegaClean(attr.value)}
                                 className={dynamicAttributes[stegaClean(attr.name.toUpperCase())] === stegaClean(attr.value) ? "bg-primary text-white px-1 py-1 text-sm  font-semibold rounded border border-black hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 " : "px-2 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-300 focus:outline-none "}
                                /* onClick={() => setSkuButton(stegaClean(attr.sku), stegaClean(attr.value), emblaOptions)}*/
-                                onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name),stegaClean(attr.value)),emblaOptions)}
+                                onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name.toUpperCase()),stegaClean(attr.value)),setSkuImage(attr, variantsImages))}
                             >
                                 {attr.value.toUpperCase()}
                             </Button>
@@ -125,7 +130,7 @@ export default function ProductAttr({setSelectedSku,selectedSku,setEmblaImage,em
                         size={stegaClean(attr.value)}
                         className={dynamicAttributes[stegaClean(attr.name.toUpperCase())] === stegaClean(attr.value) ? "bg-primary text-white px-1 py-1 text-sm  font-semibold rounded border border-black hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 " : "px-2 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-300 focus:outline-none "}
                         /*onClick={() => setSkuButton(stegaClean(attr.sku), stegaClean(attr.value),emblaOptions)}*/
-                        onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name),stegaClean(attr.value)),emblaOptions)}
+                        onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name.toUpperCase()),stegaClean(attr.value)),setSkuImage(attr, variantsImages))}
                     >
                         {attr.value.toUpperCase()}
                     </Button>}
