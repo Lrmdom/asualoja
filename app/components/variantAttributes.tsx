@@ -11,29 +11,18 @@ import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 
 import EmblaCarousel from '~/components/emblaCarousel/EmblaCarousel'
 import {EmblaOptionsType} from 'embla-carousel'
-import {ClientOnly} from "remix-utils/client-only"
 
 import ProductAttributes from "~/components/productAttributes";
 
-/*function setSkuImage( attrValue,attr){
-    debugger;
-    let sku = attr[1][0].sku
-    //sku is not correct must do a find attr[0].find({value:attrValue}).sku
-    //let sku2=attr[0].find({value:attrValue}).sku
-    //attrValue?setSelectedSku(stegaClean(sku)):null
 
-    //attrValue?setSelectedColor(stegaClean(attrValue)):null
-    attrValue
 
-}*/
 
 export default function VariantAttributes({product}: { attribute: SanityDocument }) {
 
     const {t} = useTranslation('')
-    const [selectedSize, setSelectedSize] = useState("")
-    const [selectedColor, setSelectedColor] = useState("")
+
     const [selectedSku, setSelectedSku] = useState("")
-    const [emblaImage, setEmblaImage] = useState()
+    const [emblaImage, setEmblaImage] = useState("")
 
     const OPTIONS: EmblaOptionsType = {}
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
@@ -55,7 +44,7 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
         }
     })
     groupedVariantsAttrs = variantsAttrs.reduce((current, item) => {
-        if (!current[stegaClean(item.name.trim().toUpperCase())] ) {
+        if (!current[stegaClean(item.name.trim().toUpperCase())]) {
             current[stegaClean(item.name.trim().toUpperCase())] = [];
         }
         current[stegaClean(item.name.trim().toUpperCase())].push(item);
@@ -66,6 +55,7 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
     const [dynamicAttributes, setDynamicAttributes] = useState({});
 
     const handleAttributeChange = (attributeName, attributeValue) => {
+
         setDynamicAttributes((prevState) => ({
             ...prevState,
             [attributeName.toUpperCase()]: attributeValue,
@@ -75,31 +65,33 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
 
     return (<main className="">
         {product.variantsImages.length > 1 ?
-        <EmblaCarousel slides={product.variantsImages}
-                                  setSelectedSku={setSelectedSku}
-                                  setSelectedSize={setSelectedSize}
-                                  selectedSku={selectedSku}
-                                  selectedSize={selectedSize}
-                                  setSelectedColor={setSelectedColor}
-                                  selectedColor={selectedColor}
-                                  setEmblaImage={setEmblaImage}
-                                  emblaImage={emblaImage}
-                                  options={OPTIONS}/>
+            <EmblaCarousel slides={product.variantsImages}
+                           setSelectedSku={setSelectedSku}
+                           selectedSku={selectedSku}
+                           setEmblaImage={setEmblaImage}
+                           emblaImage={emblaImage}
+                           options={OPTIONS}
+                           groupedVariantsAttrs={groupedVariantsAttrs}
+                           variantsAttrs={variantsAttrs}
+                           handleAttributeChange={handleAttributeChange}
+                           dynamicAttributes={dynamicAttributes}
+                           setDynamicAttributes={setDynamicAttributes}
 
-            : <img src={product.imageUrl} />}
+            />
+
+            : <img src={product.imageUrl}/>}
         <div className="grid">
             <div>
                 <div>
                     <ProductAttributes product={product}></ProductAttributes>
                 </div>
-                {Object.entries(groupedVariantsAttrs)?.map((attribute, i,groupedVariantsAttrs) => {
+                {Object.entries(groupedVariantsAttrs)?.map((attribute, i, groupedVariantsAttrs) => {
                     //atribute[0] is name and attribute[1] is array of value/s
                     Object.keys(attribute[1]).forEach(k => attribute[1][k].value = typeof attribute[1][k].value == 'string' ? attribute[1][k].value.trim().toUpperCase() : attribute[1][k].value)
 
                     attribute[1].sort((a, b) => a.value.localeCompare(b.name))
 
-                    console.log(groupedVariantsAttrs)
-                    console.log(variantsAttrs)
+
                     return (
                         <>
                             <hr className="m-2"/>
@@ -109,38 +101,38 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                             {
                                 attribute[1].length > 0 ?
 
-                                <div className="flex flex-wrap gap-1 m-2">
-                                    {Reg_Exp.test(stegaClean(attribute[1][0].value)) ?
-                                        <>
-                                            <RadioGroup
-                                                value={dynamicAttributes[attribute[0]]}
-                                                //onValueChange={handleAttributeChange(stegaClean(attribute[0]),stegaClean(attribute[1][0].value))}
-                                                className="flex flex-wrap gap-8 m-2"
-                                            >
-                                                {attribute[1].map((attr,i) => {
-                                                    if(stegaClean(attribute[1][i+1]?.value.toUpperCase())==stegaClean(attribute[1][i].value.toUpperCase())){
-                                                        null
-                                                    }else {
-                                                        return (
-                                                            <ProductAttr setSelectedSku={setSelectedSku}
-                                                                         selectedSku={selectedSku}
+                                    <div className="flex flex-wrap gap-1 m-2">
+                                        {Reg_Exp.test(stegaClean(attribute[1][0].value)) ?
+                                            <>
+                                                <RadioGroup
+                                                    value={dynamicAttributes[attribute[0]]}
+                                                    //onValueChange={handleAttributeChange(stegaClean(attribute[0]),stegaClean(attribute[1][0].value))}
+                                                    className="flex flex-wrap gap-8 m-2"
+                                                >
+                                                    {attribute[1].map((attr, i) => {
+                                                        if (stegaClean(attribute[1][i + 1]?.value.toUpperCase()) == stegaClean(attribute[1][i].value.toUpperCase())) {
+                                                            null
+                                                        } else {
+                                                            return (
+                                                                <ProductAttr setSelectedSku={setSelectedSku}
+                                                                             selectedSku={selectedSku}
+                                                                             setEmblaImage={setEmblaImage}
+                                                                             emblaImage={emblaImage}
+                                                                             emblaOptions={OPTIONS}
+                                                                             groupedVariantsAttrs={groupedVariantsAttrs}
+                                                                             attr={attr}
+                                                                             variantsAttrs={variantsAttrs}
+                                                                             handleAttributeChange={handleAttributeChange}
+                                                                             dynamicAttributes={dynamicAttributes}
+                                                                             setDynamicAttributes={setDynamicAttributes}
+                                                                             variantsImages={product.variantsImages}
+                                                                ></ProductAttr>
+                                                            )
+                                                        }
 
-                                                                         setEmblaImage={setEmblaImage}
-                                                                         emblaImage={emblaImage}
-                                                                         emblaOptions={OPTIONS}
-                                                                         attr={attr}
-                                                                         groupedVariantsAttrs={groupedVariantsAttrs}
-                                                                         variantsAttrs={variantsAttrs}
-                                                                         handleAttributeChange={handleAttributeChange}
-                                                                         dynamicAttributes={dynamicAttributes}
-                                                                         setDynamicAttributes={setDynamicAttributes}
-                                                            ></ProductAttr>
-                                                        )
-                                                    }
-
-                                                })}
-                                            </RadioGroup>
-                                            {/*<div className="mt-6 text-center">
+                                                    })}
+                                                </RadioGroup>
+                                                {/*<div className="mt-6 text-center">
                                                     <span
                                                         className="text-sm text-muted-foreground">Selected color: </span>
                                                     <span className="font-semibold"
@@ -155,34 +147,34 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                                     <span
                                                         className="text-lg font-semibold text-primary">{selectedSize}</span>
                                                 </div>*/}
-                                        </>
-                                        :
+                                            </>
+                                            :
 
-                                        attribute[1].map((attr,i) => {
+                                            attribute[1].map((attr, i) => {
 
-                                            if(stegaClean(attribute[1][i+1]?.value.toUpperCase())==stegaClean(attribute[1][i].value.toUpperCase())){
-                                                 null
-                                            }else {
-                                                return (
-                                                    <ProductAttr setSelectedSku={setSelectedSku}
-                                                                 selectedSku={selectedSku}
+                                                if (stegaClean(attribute[1][i + 1]?.value.toUpperCase()) == stegaClean(attribute[1][i].value.toUpperCase())) {
+                                                    null
+                                                } else {
+                                                    return (
+                                                        <ProductAttr setSelectedSku={setSelectedSku}
+                                                                     selectedSku={selectedSku}
+                                                                     setEmblaImage={setEmblaImage}
+                                                                     emblaImage={emblaImage}
+                                                                     emblaOptions={OPTIONS}
+                                                                     attr={attr}
+                                                                     groupedVariantsAttrs={groupedVariantsAttrs}
+                                                                     variantsAttrs={variantsAttrs}
+                                                                     handleAttributeChange={handleAttributeChange}
+                                                                     dynamicAttributes={dynamicAttributes}
+                                                                     setDynamicAttributes={setDynamicAttributes}
+                                                                     variantsImages={product.variantsImages}
+                                                        ></ProductAttr>
+                                                    )
+                                                }
 
-                                                                 setEmblaImage={setEmblaImage}
-                                                                 emblaImage={emblaImage}
-                                                                 emblaOptions={OPTIONS}
-                                                                 attr={attr}
-                                                                 groupedVariantsAttrs={groupedVariantsAttrs}
-                                                                 variantsAttrs={variantsAttrs}
-                                                                 handleAttributeChange={handleAttributeChange}
-                                                                 dynamicAttributes={dynamicAttributes}
-                                                                 setDynamicAttributes={setDynamicAttributes}
-                                                    ></ProductAttr>
-                                                )
-                                            }
-
-                                        })
-                                    }
-                                </div> : null}
+                                            })
+                                        }
+                                    </div> : null}
 
                         </>
                     )
