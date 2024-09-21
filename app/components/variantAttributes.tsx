@@ -11,6 +11,7 @@ import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 
 import EmblaCarousel from '~/components/emblaCarousel/EmblaCarousel'
 import {EmblaOptionsType} from 'embla-carousel'
+import {ClientOnly} from "remix-utils/client-only"
 
 import ProductAttributes from "~/components/productAttributes";
 
@@ -62,6 +63,15 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
     }, {});
 
 
+    const [dynamicAttributes, setDynamicAttributes] = useState({});
+
+    const handleAttributeChange = (attributeName, attributeValue) => {
+        setDynamicAttributes((prevState) => ({
+            ...prevState,
+            [attributeName.toUpperCase()]: attributeValue,
+        }));
+    };
+
 
     return (<main className="">
         {product.variantsImages.length > 1 ?
@@ -90,7 +100,6 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
 
                     console.log(groupedVariantsAttrs)
                     console.log(variantsAttrs)
-                    debugger
                     return (
                         <>
                             <hr className="m-2"/>
@@ -104,8 +113,8 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                     {Reg_Exp.test(stegaClean(attribute[1][0].value)) ?
                                         <>
                                             <RadioGroup
-                                                value={selectedColor}
-                                                onValueChange={setSelectedColor}
+                                                value={dynamicAttributes[attribute[0]]}
+                                                //onValueChange={handleAttributeChange(stegaClean(attribute[0]),stegaClean(attribute[1][0].value))}
                                                 className="flex flex-wrap gap-8 m-2"
                                             >
                                                 {attribute[1].map((attr,i) => {
@@ -113,20 +122,19 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                                         null
                                                     }else {
                                                         return (
-
                                                             <ProductAttr setSelectedSku={setSelectedSku}
-                                                                         setSelectedSize={setSelectedSize}
                                                                          selectedSku={selectedSku}
-                                                                         selectedSize={selectedSize}
-                                                                         setSelectedColor={setSelectedColor}
-                                                                         selectedColor={selectedColor}
+
                                                                          setEmblaImage={setEmblaImage}
                                                                          emblaImage={emblaImage}
                                                                          emblaOptions={OPTIONS}
                                                                          attr={attr}
-
+                                                                         groupedVariantsAttrs={groupedVariantsAttrs}
+                                                                         variantsAttrs={variantsAttrs}
+                                                                         handleAttributeChange={handleAttributeChange}
+                                                                         dynamicAttributes={dynamicAttributes}
+                                                                         setDynamicAttributes={setDynamicAttributes}
                                                             ></ProductAttr>
-
                                                         )
                                                     }
 
@@ -157,16 +165,17 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                             }else {
                                                 return (
                                                     <ProductAttr setSelectedSku={setSelectedSku}
-                                                                 setSelectedSize={setSelectedSize}
                                                                  selectedSku={selectedSku}
-                                                                 selectedSize={selectedSize}
-                                                                 setSelectedColor={setSelectedColor}
-                                                                 selectedColor={selectedColor}
+
                                                                  setEmblaImage={setEmblaImage}
                                                                  emblaImage={emblaImage}
                                                                  emblaOptions={OPTIONS}
                                                                  attr={attr}
-
+                                                                 groupedVariantsAttrs={groupedVariantsAttrs}
+                                                                 variantsAttrs={variantsAttrs}
+                                                                 handleAttributeChange={handleAttributeChange}
+                                                                 dynamicAttributes={dynamicAttributes}
+                                                                 setDynamicAttributes={setDynamicAttributes}
                                                     ></ProductAttr>
                                                 )
                                             }

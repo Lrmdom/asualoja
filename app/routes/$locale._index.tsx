@@ -26,7 +26,6 @@ export default function Index() {
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
 
-    console.log(data)
 
     i18n.language = locale
 
