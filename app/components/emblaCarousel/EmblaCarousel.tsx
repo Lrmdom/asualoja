@@ -55,7 +55,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     useEffect(() => {
         if (emblaApi) {
             emblaApi.on('select', logEmblaEvent)
-            //props.setEmblaImage(emblaApi.slidesInView()[0])
             props.emblaImage ? emblaApi.scrollTo(props.emblaImage, true) : null
         }
     }, [emblaApi, logEmblaEvent])
