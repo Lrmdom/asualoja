@@ -135,7 +135,6 @@ function setSkuImage(attr,variantsImages){
                         {attr.value.toUpperCase()}
                     </Button>}
 
-                {emblaImage}
             </span>
     )
 
