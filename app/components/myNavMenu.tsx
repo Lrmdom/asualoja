@@ -1,4 +1,3 @@
-
 import * as React from 'react'
 
 
@@ -14,7 +13,6 @@ import {
 } from '@/components/ui/navigation-menu'
 import {stegaClean} from '@sanity/client/stega'
 import {useTranslation} from 'react-i18next'
-import SearchForm from "~/components/searchForm";
 
 
 const components: { title: string; to: string; description: string }[] = [
@@ -101,7 +99,7 @@ export function MyNavMenu(props) {
                                                 <ListItem
                                                     className=""
                                                     key={taxon._id}
-                                                    title={taxon.title + "(" + taxon.products?.length+")"}
+                                                    title={taxon.title + "(" + taxon.products?.length + ")"}
                                                     href={stegaClean(`/${language}/${taxonomy.title}/${taxon.title}`)}
                                                 >
                                                     <ul className="">
@@ -110,7 +108,7 @@ export function MyNavMenu(props) {
                                                             <ListItem
                                                                 className=""
                                                                 key={tx._id}
-                                                                title={tx.title + "(" + tx.products?.length+")"}
+                                                                title={tx.title + "(" + tx.products?.length + ")"}
                                                                 href={stegaClean(`/${language}/${taxonomy.title}/${tx.title}`)}
                                                             >
                                                             </ListItem>

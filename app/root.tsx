@@ -1,21 +1,22 @@
 import stylesheet from './tailwind.css?url'
-import {Suspense, lazy} from 'react'
+import {lazy, Suspense} from 'react'
 import {
     Links,
     Meta,
     Outlet,
     Scripts,
     ScrollRestoration,
-    useLoaderData, useMatches,
-    useRevalidator, useRouteError,
-    useRouteLoaderData,
+    useLoaderData,
+    useMatches,
     useNavigation,
+    useRevalidator,
+    useRouteLoaderData,
 } from '@remix-run/react'
 import type {LinksFunction} from '@remix-run/node'
+import {json} from '@remix-run/node'
 
 import Footer from '~/components/footer'
 import SubscribeNews from '~/components/subscribeNews'
-import {json} from '@remix-run/node'
 import {useChangeLanguage} from 'remix-i18next/react'
 import i18next, {localeCookie} from '~/i18next.server'
 
@@ -25,11 +26,9 @@ import type {SanityDocument} from '@sanity/client'
 import {useTranslation} from 'react-i18next'
 import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
-import SiteError from "~/components/404";
 import MyNavMenu from '~/components/responsiveNavbar'
 import '@commercelayer/app-elements/style.css'
 //import '@commercelayer/app-elements/vendor.css'
-
 import Loading from "~/components/loading"
 import * as process from "node:process";
 
@@ -83,13 +82,12 @@ export const handle = {
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
 
-     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
+    const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV, user} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
 
     const {i18n} = useTranslation()
     i18n.language = locale
-
 
 
     return (
@@ -114,8 +112,8 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body className="">
-           <Header taxonomies={data} user={user}></Header>
-            <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
+        <Header taxonomies={data} user={user}></Header>
+        <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
 
         {children}
         <ScrollRestoration/>
@@ -134,8 +132,8 @@ export function Layout({children}: { children: React.ReactNode }) {
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
             <Suspense fallback={<Loading/>}>
-            <LiveVisualEditing
-            />
+                <LiveVisualEditing
+                />
             </Suspense>
         ) : null}
 
@@ -152,15 +150,15 @@ export default function App() {
     const navigation = useNavigation();
     useChangeLanguage(locale)
 
-   return (
-           <div className={
-               navigation.state === "loading" ? <Loading /> : ""
-           }
-           >
-               <Outlet/>
-           </div>
+    return (
+        <div className={
+            navigation.state === "loading" ? <Loading/> : ""
+        }
+        >
+            <Outlet/>
+        </div>
 
-   )
+    )
 }
 /*export function ErrorBoundary() {
 

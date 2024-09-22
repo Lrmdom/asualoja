@@ -1,22 +1,12 @@
 import type {LoaderFunctionArgs} from '@remix-run/node'
-import {Link, useLoaderData, useRouteLoaderData} from '@remix-run/react'
+import {Link, useLoaderData} from '@remix-run/react'
 import type {SanityDocument} from '@sanity/client'
 
 import {loadQuery} from '~/sanity/loader.server'
-
-import {useQuery} from '~/sanity/loader'
-import {loadQuery} from '~/sanity/loader.server'
-import {
-    PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE,
-} from '~/sanity/queries'
-import Variants from "~/components/Variants";
+import {PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE,} from '~/sanity/queries'
 import {stegaClean} from "@sanity/client/stega";
-import ProductAttributes from "~/components/productAttributes";
 import {useTranslation} from "react-i18next";
-import Prods from "~/components/Prods";
 import ProductDetail from "~/components/productDetail";
-import {ClientOnly} from "remix-utils/client-only"
-import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
     const {data} = await loadQuery<SanityDocument>(
@@ -54,15 +44,16 @@ export default function ProductRoute() {
                 <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
 
             <span className="border-2 border-primary p-4 rounded text-primary">
-              <Link to={`/${language}/${encodeURI(stegaClean(data.taxonomies[0]))}`}>{stegaClean(data.taxonomies[0])}</Link>
+              <Link
+                  to={`/${language}/${encodeURI(stegaClean(data.taxonomies[0]))}`}>{stegaClean(data.taxonomies[0])}</Link>
               -
               <Link
                   to={`/${language}/${encodeURI(stegaClean(data.taxonomies[0]))}/${encodeURI(stegaClean(data.product.taxon))}`}>{stegaClean(data.product.taxon)}</Link>
               -
-             {stegaClean(data.product.title)}</span>
+                {stegaClean(data.product.title)}</span>
                 </div>
             </div>
-               <ProductDetail product={[data.product]} />
+            <ProductDetail product={[data.product]}/>
 
 
             {/*<Prods products={[data.product]}></Prods>*/}

@@ -1,17 +1,6 @@
-import {Link} from '@remix-run/react'
 import MylaguageSwitcher from "~/components/myLanguageSwitcher";
 import * as React from "react";
-
-import SocialLogins from '~/routes/login'
-import {ClientOnly} from "remix-utils/client-only"
-
-import MylaguageSwitcher from '~/components/myLanguageSwitcher'
-import {
-    NavigationMenu, NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuList,
-    NavigationMenuTrigger
-} from "@/components/ui/navigation-menu";
+import {NavigationMenuItem} from "@/components/ui/navigation-menu";
 import IdentityLinks from "~/components/identyLinks";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import SearchForm from "~/components/searchForm";
@@ -145,7 +134,7 @@ export default function Header(props) {
                     </span>*/}
 
 
-                {/*
+            {/*
                     <NavigationMenu className="  hidden lg:flex">
                         <NavigationMenuList>
                             <NavigationMenuItem>
@@ -206,7 +195,7 @@ export default function Header(props) {
                         </NavigationMenuList>
                     </NavigationMenu>
 */}
-            </div>
+        </div>
 
 
     )

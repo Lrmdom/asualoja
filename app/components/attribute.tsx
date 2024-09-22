@@ -1,8 +1,7 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
-import {ClientOnly} from "remix-utils/client-only"
-import {Avatar, Dropdown, InputRadioGroup, InputToggleButton, ListItem, Text} from '@commercelayer/app-elements'
+import {Dropdown} from '@commercelayer/app-elements'
 import AttributeVisualization from "~/components/attributeVisualization";
 import ToBuyVariant from "~/components/toBuyVariant";
 
@@ -45,7 +44,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
 
                             : null}
                         <ToBuyVariant attribute={attr}></ToBuyVariant>
-            </div>
+                    </div>
                 )
 
             })

@@ -1,8 +1,7 @@
 import type {SanityDocument} from '@sanity/client'
 import Prods from '~/components/Prods'
-import {stegaClean} from "@sanity/client/stega";
 import Taxons from "~/components/Taxons";
-import {Tabs, Tab} from '@commercelayer/app-elements'
+import {Tab, Tabs} from '@commercelayer/app-elements'
 import {useTranslation} from "react-i18next";
 
 export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
@@ -10,41 +9,42 @@ export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
     if (Array.isArray(taxon.taxons) && taxon.taxons.length > 0) {
         return (
             <>
-            <main className="container mx-auto prose prose-lg p-4 ">
-                <Tabs
+                <main className="container mx-auto prose prose-lg p-4 ">
+                    <Tabs
 
-                    keepAlive
-                    onTabSwitch={function zs() {
-                    }}
-                >
-                    < Tab
-                        name={t('All products')}
-                        key={t('All products')}>
+                        keepAlive
+                        onTabSwitch={function zs() {
+                        }}
+                    >
+                        < Tab
+                            name={t('All products')}
+                            key={t('All products')}>
 
-                        <Prods products={taxon.products}></Prods>
-                    </Tab>
+                            <Prods products={taxon.products}></Prods>
+                        </Tab>
 
-                    {taxon.taxons.map((tx) => {
-                        taxon["allTaxonProducts"]=[]
-                        if (Array.isArray(tx.taxons) && tx.taxons.length > 0) {
+                        {taxon.taxons.map((tx) => {
+                            taxon["allTaxonProducts"] = []
+                            if (Array.isArray(tx.taxons) && tx.taxons.length > 0) {
 
-                            tx.taxons.map((txx) => {
-                                tx["allTaxonProducts"] = tx["allTaxonProducts"] || []
-                                txx.products ? tx["allTaxonProducts"].push(...txx.products) : null
-                            })
-                        }
-                        return (
-                            <Tab name={`${tx.title}(${tx.products?.length || tx["allTaxonProducts"] })`} key={tx._id}>
+                                tx.taxons.map((txx) => {
+                                    tx["allTaxonProducts"] = tx["allTaxonProducts"] || []
+                                    txx.products ? tx["allTaxonProducts"].push(...txx.products) : null
+                                })
+                            }
+                            return (
+                                <Tab name={`${tx.title}(${tx.products?.length || tx["allTaxonProducts"]})`}
+                                     key={tx._id}>
 
                                     <div>
                                         <Taxons taxon={tx}></Taxons>
                                     </div>
                                     <Prods products={tx.products}></Prods>
-                            </Tab>
-                        )
-                    })}
-                </Tabs>
-            </main>
+                                </Tab>
+                            )
+                        })}
+                    </Tabs>
+                </main>
             </>
         )
     } else {
@@ -53,7 +53,7 @@ export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
 
 
                 <div key={taxon._id}>
-                          {/*<span className="bg-primary p-4 rounded text-white">
+                    {/*<span className="bg-primary p-4 rounded text-white">
                            {stegaClean(taxon.title)}
                           </span>*/}
                     <Prods products={taxon.products}></Prods>

@@ -639,44 +639,44 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
 `
 
 
-   /* *[_type == "taxon" &&
-  products[taxonomy].title[_key == $locale][0].value match $taxonomy
-  &&   products[title[_key == $locale]][0].value match $slug
- ][0]
+/* *[_type == "taxon" &&
+products[taxonomy].title[_key == $locale][0].value match $taxonomy
+&&   products[title[_key == $locale]][0].value match $slug
+][0]
 {
-  "title": coalesce(
-                title[_key == $locale][0].value,
-                title[_key == 'pt'][0].value,
-                "Missing translation"
-            ),
-  products[]->{"imageUrl": image.asset->url + "?w=300",
-            "title": coalesce(
-                title[_key == $locale][0].value,
-                title[_key == 'pt'][0].value,
-                "Missing translation"
-            ),
-              "taxonomy":coalesce(
-            ^.title[_key == $locale][0].value,
-            ^.title[_key == 'pt'][0].value,
-            "Missing translation"
-            ),
-    }
+"title": coalesce(
+             title[_key == $locale][0].value,
+             title[_key == 'pt'][0].value,
+             "Missing translation"
+         ),
+products[]->{"imageUrl": image.asset->url + "?w=300",
+         "title": coalesce(
+             title[_key == $locale][0].value,
+             title[_key == 'pt'][0].value,
+             "Missing translation"
+         ),
+           "taxonomy":coalesce(
+         ^.title[_key == $locale][0].value,
+         ^.title[_key == 'pt'][0].value,
+         "Missing translation"
+         ),
+ }
 }
 
 
 *[_type == "taxon"
-  && title[_key == $locale][0].value == $taxons]
+&& title[_key == $locale][0].value == $taxons]
 {
-  "title": coalesce(
-                title[_key == $locale][0].value,
-                title[_key == 'pt'][0].value,
-                "Missing translation"
-            ),
+"title": coalesce(
+             title[_key == $locale][0].value,
+             title[_key == 'pt'][0].value,
+             "Missing translation"
+         ),
 
-  "taxonomies": *[_type == "taxonomy"
-                  && title[_key == $locale][0].value == $taxonomy
-                  && references(^._id)].title[_key == $locale][0].value
-  ,
-   "product": *[_type == "product" && title[_key == $locale].value match $slug][0]
-  }
+"taxonomies": *[_type == "taxonomy"
+               && title[_key == $locale][0].value == $taxonomy
+               && references(^._id)].title[_key == $locale][0].value
+,
+"product": *[_type == "product" && title[_key == $locale].value match $slug][0]
+}
 */

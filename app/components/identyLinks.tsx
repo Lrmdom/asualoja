@@ -1,11 +1,9 @@
 import {li} from "@/components/ui/navigation-menu";
 import * as React from "react";
-import { useTranslation } from 'react-i18next'
-import {ClientOnly} from "remix-utils/client-only"
+import {useTranslation} from 'react-i18next'
 
 export default function IdentityLinks(props) {
     const {t} = useTranslation('')
-
 
 
     return (

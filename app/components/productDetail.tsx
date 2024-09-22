@@ -1,5 +1,4 @@
-
-import {Card, CardTitle, CardDescription} from "@/components/ui/card"
+import {Card, CardDescription, CardTitle} from "@/components/ui/card"
 
 import ProductImagescarousel from "~/components/productImagescarousel";
 import {stegaClean} from "@sanity/client/stega";
@@ -9,7 +8,6 @@ import ProductAttributes from "~/components/variantAttributes"
 export default function Component(props) {
 
     const product = props.product[0]
-
 
 
     return (
@@ -39,7 +37,7 @@ export default function Component(props) {
                         }
                         return (
                             <>
-                                    <ProductImagescarousel images={prod.variantsImages}/>
+                                <ProductImagescarousel images={prod.variantsImages}/>
 
 
                             </>
@@ -50,14 +48,15 @@ export default function Component(props) {
                 </div>
 
                 <div className="grid gap-6">
-                    <div >
-                        <CardTitle className="text-xl font-semibold first-line:uppercase " >{product.title}</CardTitle>
+                    <div>
+                        <CardTitle className="text-xl font-semibold first-line:uppercase ">{product.title}</CardTitle>
                         <CardDescription className="text-muted-foreground px-8 p-5">
                             {product.description}
                         </CardDescription>
                     </div>
 
-                    {Array.isArray(product.variants) && product.variants.length > 0 ? <ProductAttributes product={product}></ProductAttributes>:null}
+                    {Array.isArray(product.variants) && product.variants.length > 0 ?
+                        <ProductAttributes product={product}></ProductAttributes> : null}
 
 
                 </div>

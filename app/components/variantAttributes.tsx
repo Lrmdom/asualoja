@@ -8,13 +8,9 @@ import {RadioGroup} from "@/components/ui/radio-group";
 import ToBuyVariant from "~/components/toBuyVariant";
 import {useState} from "react";
 import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
-
-import EmblaCarousel from '~/components/emblaCarousel/EmblaCarousel'
 import {EmblaOptionsType} from 'embla-carousel'
 
 import ProductAttributes from "~/components/productAttributes";
-
-
 
 
 export default function VariantAttributes({product}: { attribute: SanityDocument }) {

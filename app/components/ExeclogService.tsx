@@ -1,8 +1,7 @@
 import type {SanityDocument} from '@sanity/client'
 import Taxons from '~/components/Taxons'
 import Prods from "~/components/Prods";
-import {stegaClean} from "@sanity/client/stega";
-import {Tabs, Tab} from '@commercelayer/app-elements'
+import {Tab, Tabs} from '@commercelayer/app-elements'
 
 export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
     const {
@@ -52,7 +51,7 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
                     <Prods products={taxons[0].products}></Prods>
                 </Tab>
 
-             {taxons?.map((taxon) => {
+                {taxons?.map((taxon) => {
                     return (
 
 
