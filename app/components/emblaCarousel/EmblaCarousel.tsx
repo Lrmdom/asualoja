@@ -29,12 +29,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
 
     props.emblaImage ? emblaApi.scrollTo(props.emblaImage, true) : null
-    debugger;
+    //debugger;
     const logEmblaEvent = useCallback(
         (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
             let index = emblaApi.selectedScrollSnap()
             const sku = props.slides[index].sku
-            debugger
+            //debugger
             props.setSelectedSku(sku)
             props.setEmblaImage(index)
 

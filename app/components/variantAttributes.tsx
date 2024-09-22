@@ -85,7 +85,7 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                     //atribute[0] is name and attribute[1] is array of value/s
                     Object.keys(attribute[1]).forEach(k => attribute[1][k].value = typeof attribute[1][k].value == 'string' ? attribute[1][k].value.trim().toUpperCase() : attribute[1][k].value)
 
-                    attribute[1].sort((a, b) => a.value.localeCompare(b.name))
+                    attribute[1].sort((a, b) => a.value.localeCompare(b.value))
 
 
                     return (
@@ -105,8 +105,11 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
                                                     //onValueChange={handleAttributeChange(stegaClean(attribute[0]),stegaClean(attribute[1][0].value))}
                                                     className="flex flex-wrap gap-8 m-2"
                                                 >
-                                                    {attribute[1].map((attr, i) => {
-                                                        if (stegaClean(attribute[1][i + 1]?.value.toUpperCase()) == stegaClean(attribute[1][i].value.toUpperCase())) {
+                                                    {attribute[1].map((attr, index) => {
+                                                        //debugger
+                                                        let nIndex = index + 1
+                                                        let cIndex=index
+                                                        if (stegaClean(attribute[1][nIndex]?.value.toUpperCase()) == stegaClean(attribute[1][cIndex].value.toUpperCase())) {
                                                             null
                                                         } else {
                                                             return (
