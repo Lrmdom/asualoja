@@ -21,7 +21,7 @@ export default function LoadingSpinner({
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
                 className={`animate-spin`}
-                style={{ animationDuration: `${1 / speed}s` }}
+                style={{animationDuration: `${1 / speed}s`}}
             >
                 <circle
                     className="opacity-25"
@@ -47,7 +47,7 @@ export default function LoadingSpinner({
 function Loading() {
     return (
         <div className="flex flex-col items-center space-y-4">
-            <LoadingSpinner size={64} color="#ef4444" strokeWidth={6} speed={1.5} />
+            <LoadingSpinner size={64} color="#ef4444" strokeWidth={6} speed={1.5}/>
         </div>
     )
 }

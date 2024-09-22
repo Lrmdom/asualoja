@@ -1,13 +1,7 @@
-import React from 'react'
-import {EmblaOptionsType} from 'embla-carousel'
+import React, {useCallback, useEffect} from 'react'
+import {EmblaCarouselType, EmblaEventType, EmblaOptionsType} from 'embla-carousel'
 import {DotButton, useDotButton} from './js/EmblaCarouselDotButton'
-import {
-    PrevButton,
-    NextButton,
-    usePrevNextButtons
-} from './js/EmblaCarouselArrowButtons'
-import {useCallback, useEffect} from 'react'
-import {EmblaCarouselType, EmblaEventType} from 'embla-carousel'
+import {NextButton, PrevButton, usePrevNextButtons} from './js/EmblaCarouselArrowButtons'
 
 import useEmblaCarousel from 'embla-carousel-react'
 
@@ -34,20 +28,19 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     } = usePrevNextButtons(emblaApi)
 
 
-
     props.emblaImage ? emblaApi.scrollTo(props.emblaImage, true) : null
     debugger;
     const logEmblaEvent = useCallback(
         (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
-            let index=emblaApi.selectedScrollSnap()
+            let index = emblaApi.selectedScrollSnap()
             const sku = props.slides[index].sku
             debugger
             props.setSelectedSku(sku)
             props.setEmblaImage(index)
 
-                props.slides[index].attributes?.map((attr) => {
-                    props.handleAttributeChange(stegaClean(attr.name.toUpperCase()), stegaClean(attr.value.toUpperCase()))
-                })
+            props.slides[index].attributes?.map((attr) => {
+                props.handleAttributeChange(stegaClean(attr.name.toUpperCase()), stegaClean(attr.value.toUpperCase()))
+            })
 
         },
         []

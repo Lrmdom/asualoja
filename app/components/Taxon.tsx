@@ -2,7 +2,7 @@ import type {SanityDocument} from '@sanity/client'
 import Prods from '~/components/Prods'
 import {stegaClean} from "@sanity/client/stega";
 import Taxons from "~/components/Taxons";
-import {Tabs, Tab} from '@commercelayer/app-elements'
+import {Tab, Tabs} from '@commercelayer/app-elements'
 import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
 

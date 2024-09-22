@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { ChevronLeft, ChevronRight } from "react-feather"
+import React, {useEffect, useState} from 'react'
+import {ChevronLeft, ChevronRight} from "react-feather"
 
-const Carousel = ({ children: slides, autoSlide = false, autoSlideInterval = 3000 }) => {
+const Carousel = ({children: slides, autoSlide = false, autoSlideInterval = 3000}) => {
     const [curr, setCurr] = useState(0)
 
     const prev = () => setCurr((curr) => (curr === 0 ? slides.length - 1 : curr - 1))
@@ -17,21 +17,23 @@ const Carousel = ({ children: slides, autoSlide = false, autoSlideInterval = 300
 
     return (
         <div className='overflow-hidden relative'>
-            <div className='flex transition-transform ease-out duration-500' style={{ transform: `translateX(-${curr * 100}%)` }}>
+            <div className='flex transition-transform ease-out duration-500'
+                 style={{transform: `translateX(-${curr * 100}%)`}}>
                 {slides}
             </div>
             <div className="absolute inset-0 flex items-center justify-between p-4">
                 <button onClick={prev} className='p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white'>
-                    <ChevronLeft />
+                    <ChevronLeft/>
                 </button>
                 <button onClick={next} className='p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white'>
-                    <ChevronRight />
+                    <ChevronRight/>
                 </button>
             </div>
             <div className="h-full w-full object-contain object-center lg:h-full lg:w-full">
                 <div className="h-full w-full object-contain object-center lg:h-full lg:w-full">
                     {slides.map((s, i) => (
-                        <div key={i} className={`transition-all w-1.5 h-1.5 bg-white rounded-full  ${curr === i ? "p-0.5" : "bg-opacity-50"}`} />
+                        <div key={i}
+                             className={`transition-all w-1.5 h-1.5 bg-white rounded-full  ${curr === i ? "p-0.5" : "bg-opacity-50"}`}/>
                     ))}
                 </div>
             </div>

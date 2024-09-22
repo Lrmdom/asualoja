@@ -1,5 +1,5 @@
-import { Authenticator } from 'remix-auth'
-import { sessionStorage } from '~/services/session.server'
+import {Authenticator} from 'remix-auth'
+import {sessionStorage} from '~/services/session.server'
 // Create an instance of the authenticator, pass a generic with what
 // strategies will return and will store in the session
 /*import { FormStrategy } from 'remix-auth-form'

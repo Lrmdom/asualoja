@@ -4,10 +4,9 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import {Link} from "@remix-run/react";
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
+import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet"
+import {Button} from "@/components/ui/button"
 import * as React from "react";
-import MylaguageSwitcher from "~/components/myLanguageSwitcher";
 
 export default function Component() {
     return (
@@ -37,25 +36,25 @@ export default function Component() {
             <Sheet>
                 <SheetTrigger asChild>
                     <Button variant="outline" size="icon" className="lg:hidden">
-                        <MenuIcon className="h-6 w-6" />
+                        <MenuIcon className="h-6 w-6"/>
                         <span className="sr-only">Toggle navigation menu</span>
                     </Button>
                 </SheetTrigger>
                 <SheetContent side="left">
                     <div className="grid w-[200px] p-4">
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4" >
+                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
                             Home
                         </Link>
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4" >
+                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
                             About
                         </Link>
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4" >
+                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
                             Services
                         </Link>
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4" >
+                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
                             Portfolio
                         </Link>
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4" >
+                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
                             Contact
                         </Link>
                     </div>
@@ -79,9 +78,9 @@ function MenuIcon(props) {
             strokeLinecap="round"
             strokeLinejoin="round"
         >
-            <line x1="4" x2="20" y1="12" y2="12" />
-            <line x1="4" x2="20" y1="6" y2="6" />
-            <line x1="4" x2="20" y1="18" y2="18" />
+            <line x1="4" x2="20" y1="12" y2="12"/>
+            <line x1="4" x2="20" y1="6" y2="6"/>
+            <line x1="4" x2="20" y1="18" y2="18"/>
         </svg>
     )
 }
@@ -101,7 +100,7 @@ function MountainIcon(props) {
             strokeLinecap="round"
             strokeLinejoin="round"
         >
-            <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+            <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
         </svg>
     )
 }

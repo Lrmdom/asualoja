@@ -14,12 +14,9 @@ export const fallbackLng = 'pt'
 export const defaultNS = 'translation'
 
 export const resources = {
-  en: { translation: en },
-  es: { translation: es },
-  pt: { translation: pt },
+    en: {translation: en},
+    es: {translation: es},
+    pt: {translation: pt},
 };
 
-export default ({
-
-
-})
+export default ({})

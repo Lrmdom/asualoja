@@ -1,12 +1,10 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import ProductAttributes from "~/components/productAttributes";
 import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
 
 
 import VariantAttributes from "~/components/variantAttributes";
-import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 // import {authenticate} from '@commercelayer/js-auth'
 
 export default function Prods({products}: { product: SanityDocument }) {
@@ -51,12 +49,13 @@ export default function Prods({products}: { product: SanityDocument }) {
                                     <div className="container mx-auto rounded border prose prose-lg">
 
                                         <div className="m-2 overflow-auto">
-                                            <Link className="overflow-x-auto text-xs font-semibold uppercase hover:text-primary hover:underline text-muted-foreground"
+                                            <Link
+                                                className="overflow-x-auto text-xs font-semibold uppercase hover:text-primary hover:underline text-muted-foreground"
                                                 to={stegaClean(`/${language}/${encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}>
                                                 {stegaClean(prod.title)}</Link>
                                         </div>
 
-                                            <VariantAttributes product={prod}></VariantAttributes>
+                                        <VariantAttributes product={prod}></VariantAttributes>
                                     </div>
                                 </>
                             )

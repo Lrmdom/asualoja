@@ -1,7 +1,7 @@
 import type {SanityDocument} from '@sanity/client'
-import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
 import Tooltip from "~/components/attrTooltip";
+
 export default function ProductAttributes({product}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
 
@@ -20,7 +20,7 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
     } else {
 
     }*/
-    if(Array.isArray(product.attributes)) {
+    if (Array.isArray(product.attributes)) {
         let prodAttrs = product.attributes.filter(attr => attr._type === 'attribute')
         if (Array.isArray(prodAttrs) && prodAttrs.length > 0) {
 

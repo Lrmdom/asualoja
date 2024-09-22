@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const Thumb = (props) => {
-    const { selected, index, onClick } = props
+    const {selected, index, onClick} = props
 
     return (
         <div

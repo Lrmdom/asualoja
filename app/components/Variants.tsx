@@ -7,7 +7,6 @@ import {SanityDocument} from "@sanity/client";
 import VariantAttributes_OLD from "~/components/variantAttributes_OLD";
 import {InputRadioGroup} from "@commercelayer/app-elements";
 import {Suspense} from "react";
-import {ClientOnly} from "remix-utils/client-only"
 
 
 /*const auth = await authenticate('client_credentials', {
@@ -69,15 +68,13 @@ export default function Variants({product}: { variants: SanityDocument }) {
                                     <div>
 
 
-
-
                                         <Suspense>
                                             <InputRadioGroup
-                                                    name={attribute[0] + attribute[1][0].sku}
-                                                    options={attribute[1]}
-                                                    title={attribute[0]}
-                                                    viewMode="grid"
-                                                />
+                                                name={attribute[0] + attribute[1][0].sku}
+                                                options={attribute[1]}
+                                                title={attribute[0]}
+                                                viewMode="grid"
+                                            />
 
                                         </Suspense>
 
@@ -90,11 +87,7 @@ export default function Variants({product}: { variants: SanityDocument }) {
                     })}
 
 
-
-
-                   <VariantAttributes_OLD attributes={groupedVariantsAttrs}></VariantAttributes_OLD>
-
-
+                    <VariantAttributes_OLD attributes={groupedVariantsAttrs}></VariantAttributes_OLD>
 
 
                 </div>

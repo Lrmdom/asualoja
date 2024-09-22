@@ -1,8 +1,7 @@
 import type {SanityDocument} from '@sanity/client'
 import Taxons from '~/components/Taxons'
 import Prods from "~/components/Prods";
-import {stegaClean} from "@sanity/client/stega";
-import {Tabs, Tab} from '@commercelayer/app-elements'
+import {Tab, Tabs} from '@commercelayer/app-elements'
 import {useTranslation} from "react-i18next";
 
 export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
