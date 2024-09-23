@@ -29,10 +29,14 @@ export default function VariantAttributes({product}: { attribute: SanityDocument
         if (Array.isArray(variant.attributes)) {
             let vAttrs = variant.attributes.filter(attr => attr._type === 'attribute')
             vAttrs.forEach(function (element) {
+                delete element["visualPresentation"]
                 element.sku = stegaClean(variant.sku)
+                element.value = stegaClean(element.value.toUpperCase())
+                element.description = stegaClean(element.description)
                 element.images = variant.images
-                element.label = stegaClean(element.value.toUpperCase())
-                element.content = <div className="text-xs">{element.label}</div>
+                element.name = stegaClean(element.name.toUpperCase())
+                element.label = stegaClean(element.name.toUpperCase())
+                //element.content = <div className="text-xs">{element.label}</div>
                 Reg_Exp.test(stegaClean(element.value)) ? element.className = `bg-[${stegaClean(element.value)}]` : null
             });
             variantsAttrs = variantsAttrs.concat(vAttrs)
