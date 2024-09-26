@@ -18,10 +18,8 @@ export default function Index() {
     const {t} = useTranslation('')
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
 
-
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-
 
     i18n.language = locale
 
@@ -37,9 +35,6 @@ export default function Index() {
 
                             <div key={tx._id}
                                  className="container m-2 w-full overflow-hidden rounded-md p-4 aspect-h-1 aspect-w-1 group-hover:opacity-75 lg:aspect-none lg:h-48">
-
-
-
                                         <Link className="" to={`/${language}/${stegaClean(tx.title)}`}>
                                             <div className="relative">
                                                 <img className="h-64 w-full rounded-md object-cover"
@@ -53,8 +48,6 @@ export default function Index() {
                                             </div>
 
                                         </Link>
-
-
                             </div>
                         )
                     })}
