@@ -50,7 +50,6 @@ export default function Prods({products}: { product: SanityDocument }) {
                                 <>
                                     <div className="container mx-auto rounded border prose prose-lg">
 
-                                        <div className="m-2 overflow-auto">
                                             <Link
                                                 className="overflow-x-auto text-xs font-semibold uppercase text-muted-foreground hover:text-primary hover:underline"
                                                  to={stegaClean(`/${language}/${encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}>
@@ -58,7 +57,6 @@ export default function Prods({products}: { product: SanityDocument }) {
 
 
                                                 {stegaClean(prod.title)}</Link>
-                                        </div>
 
                                         <Variants product={prod}></Variants>
                                     </div>
