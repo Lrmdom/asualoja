@@ -57,10 +57,8 @@ export default function ProductAttr({
     }
 
     const attrExists = dynamicAttributes?.FINALATTRS?.finalAttrs.includes(attr)
-    if (attrExists === false) {
-        debugger
-        //return false
-    }
+
+
     return (
 
         Reg_Exp.test(stegaClean(attr.value)) ?
@@ -83,7 +81,7 @@ export default function ProductAttr({
                                     htmlFor={stegaClean(attr.value)}
                                     className={dynamicAttributes[stegaClean(attr.name.toUpperCase())] === stegaClean(attr.value) ? "drop-shadow-md w-7 h-7 rounded-full ring-4 ring-black cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 flex " : attrExists === false ? "opacity-30 line-through drop-shadow-2xl w-7 h-7 rounded-full  ring-4 ring-gray-300 cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 flex" : "drop-shadow-2xl w-7 h-7 rounded-full ring-4 ring-gray-300 cursor-pointer transition-all duration-300 ease-in-out hover:scale-110 flex "}
                                     style={{backgroundColor: getTheColorCode(attr)}}
-                                    onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name), stegaClean(attr.value)), setSkuImage(attr, variantsImages), enabledAttrs(attr, variantsAttrs))}
+                                    onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name), stegaClean(attr.value)), setSkuImage(attr, variantsImages), enabledAttrs(attr, variantsAttrs, dynamicAttributes))}
                                 >
                                     <div
                                         className="h-11 w-11 rounded-full border-2 border-white opacity-0 peer-checked:opacity-100 transition-opacity duration-300"></div>
@@ -114,7 +112,7 @@ export default function ProductAttr({
 
                             style={{backgroundColor: getTheColorCode(attr)}}
 
-                            onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name.toUpperCase()), stegaClean(attr.value)), setSkuImage(attr, variantsImages), enabledAttrs(attr, variantsAttrs))}
+                            onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name.toUpperCase()), stegaClean(attr.value)), setSkuImage(attr, variantsImages), enabledAttrs(attr, variantsAttrs, dynamicAttributes))}
                         >
                             <div
                                 className="h-11 w-11 rounded-full border-2 border-white opacity-0 peer-checked:opacity-100 transition-opacity duration-300"></div>
@@ -135,9 +133,9 @@ export default function ProductAttr({
                                 value={stegaClean(attr.value)}
                                 variant="outline"
                                 size={stegaClean(attr.value)}
-                                className={dynamicAttributes[stegaClean(attr.name.toUpperCase())] === stegaClean(attr.value) ? "drop-shadow-md bg-primary text-white px-2 py-1 text-sm  font-semibold rounded border border-black hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 " : attrExists == false ? "opacity-70 line-through drop-shadow-2xl px-2 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-300 focus:outline-none " : " drop-shadow-2xl px-2 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-300 focus:outline-none "}
+                                className={dynamicAttributes[stegaClean(attr.name.toUpperCase())] === stegaClean(attr.value) ? "drop-shadow-md bg-primary text-white px-2 py-1 text-sm  font-semibold rounded border border-black hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 " : attrExists == false ? "opacity-70 line-through font-bold drop-shadow-2xl px-1 py-1 text-xs text-muted-foreground rounded border  hover:text-white hover:bg-purple-300 focus:outline-none " : " drop-shadow-2xl px-2 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-300 focus:outline-none "}
                                 /* onClick={() => setSkuButton(stegaClean(attr.sku), stegaClean(attr.value), emblaOptions)}*/
-                                onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name.toUpperCase()), stegaClean(attr.value)), setSkuImage(attr, variantsImages), enabledAttrs(attr, variantsAttrs))}
+                                onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name.toUpperCase()), stegaClean(attr.value)), setSkuImage(attr, variantsImages), enabledAttrs(attr, variantsAttrs, dynamicAttributes))}
                             >
                                 {attr.value.toUpperCase()}
                             </Button>
@@ -154,9 +152,9 @@ export default function ProductAttr({
                         value={stegaClean(attr.value)}
                         variant="outline"
                         size={stegaClean(attr.value)}
-                        className={dynamicAttributes[stegaClean(attr.name.toUpperCase())] === stegaClean(attr.value) ? "drop-shadow-md bg-primary text-white px-2 py-1 text-sm  font-semibold rounded border border-black hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 " : attrExists === false ? "opacity-70 line-through drop-shadow-2xl px-2 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-300 focus:outline-none " : " drop-shadow-2xl px-2 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-300 focus:outline-none "}
+                        className={dynamicAttributes[stegaClean(attr.name.toUpperCase())] === stegaClean(attr.value) ? "drop-shadow-md bg-primary text-white px-2 py-1 text-sm  font-semibold rounded border border-black hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 " : attrExists === false ? "opacity-70 line-through font-bold drop-shadow-2xl px-1 py-1 text-xs text-muted-foreground rounded border  hover:text-white hover:bg-purple-300 focus:outline-none " : " drop-shadow-2xl px-2 py-1 text-sm text-purple-600 font-semibold rounded border border-purple-200 hover:text-white hover:bg-purple-300 focus:outline-none "}
                         /*onClick={() => setSkuButton(stegaClean(attr.sku), stegaClean(attr.value),emblaOptions)}*/
-                        onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name.toUpperCase()), stegaClean(attr.value)), setSkuImage(attr, variantsImages), enabledAttrs(attr, variantsAttrs))}
+                        onClick={() => setSkuButton(stegaClean(attr.sku), handleAttributeChange(stegaClean(attr.name.toUpperCase()), stegaClean(attr.value)), setSkuImage(attr, variantsImages), enabledAttrs(attr, variantsAttrs, dynamicAttributes))}
                     >
                         {attr.value.toUpperCase()}
                     </Button>}
