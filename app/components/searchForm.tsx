@@ -68,15 +68,15 @@ export default function Component(props) {
                 placeholder="Search..."
                 value={searchTerm}
                 onChange={handleSearch}
-                className="w-full rounded-md border border-input bg-background px-4 py-2 text-sm"
+                className="w-full rounded-md border px-4 py-2 text-sm border-input bg-background"
             />
 
             {filteredResults.length > 0 && (
 
                 // filter unique
                 //todo if match reference, write downthe refrence text, ex: customerneed or customerNeedDetail name or title or description
-                <div className="absolute z-10 mt-2 w-full rounded-md border border-input bg-background shadow-lg">
-                    <ul className="max-h-[300px] overflow-y-auto">
+                <div className="absolute z-10 mt-2 w-full rounded-md border shadow-lg border-input bg-background">
+                    <ul className="overflow-y-auto max-h-[300px]">
                         {filteredResults.map((result) => (
                             <li
                                 key={result.item.code}
@@ -89,7 +89,7 @@ export default function Component(props) {
                                 </div>
 
                                 {result.matches.map((match) => (
-                                    <div className="truncate-to-2-lines text-sm text-muted-foreground">
+                                    <div className="text-sm truncate-to-2-lines text-muted-foreground">
                                         <Link
                                             to={`${language}/${stegaClean(result.item.title)}/${stegaClean(match.value)}`}>
                                             {match.value}

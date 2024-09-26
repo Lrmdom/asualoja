@@ -29,8 +29,8 @@ export default function Header(props) {
     }
 
     return (
-        <div className="container bg-purple-50 place-content-end">
-            <ul className="ml-10 flex items-baseline space-x-2 place-content-end">
+        <div className="container place-content-end bg-purple-50">
+            <ul className="ml-10 flex place-content-end items-baseline space-x-2">
                 <li>
                     <SearchForm taxonomies={props.taxonomies}></SearchForm>
                 </li>
@@ -135,7 +135,7 @@ export default function Header(props) {
 
 
             {/*
-                    <NavigationMenu className="  hidden lg:flex">
+                    <NavigationMenu className="hidden lg:flex">
                         <NavigationMenuList>
                             <NavigationMenuItem>
                                 <SearchForm taxonomies={props.taxonomies}></SearchForm>

@@ -7,8 +7,8 @@ import {Link} from '@remix-run/react'
 
 export default function Component() {
     return (
-        <footer className=" py-12">
-            <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <footer className="py-12">
+            <div className="container mx-auto grid grid-cols-1 gap-8 md:grid-cols-3">
                 <div className="flex flex-col items-start gap-4">
                     <Link to="#" className="flex items-center gap-2">
                         <MountainIcon className="h-8 w-8"/>
@@ -21,16 +21,16 @@ export default function Component() {
                     </p>
                     <div className="flex items-center gap-4">
                         <Link to="#" aria-label="Twitter">
-                            <TwitterIcon className="h-6 w-6 hover:text-primary transition-colors"/>
+                            <TwitterIcon className="h-6 w-6 transition-colors hover:text-primary"/>
                         </Link>
                         <Link to="#" aria-label="Facebook">
-                            <FacebookIcon className="h-6 w-6 hover:text-primary transition-colors"/>
+                            <FacebookIcon className="h-6 w-6 transition-colors hover:text-primary"/>
                         </Link>
                         <Link to="#" aria-label="LinkedIn">
-                            <LinkedinIcon className="h-6 w-6 hover:text-primary transition-colors"/>
+                            <LinkedinIcon className="h-6 w-6 transition-colors hover:text-primary"/>
                         </Link>
                         <Link to="#" aria-label="Instagram">
-                            <InstagramIcon className="h-6 w-6 hover:text-primary transition-colors"/>
+                            <InstagramIcon className="h-6 w-6 transition-colors hover:text-primary"/>
                         </Link>
                     </div>
                 </div>
@@ -39,31 +39,31 @@ export default function Component() {
                     <nav className="flex flex-col gap-2">
                         <Link
                             to="#"
-                            className="text-muted-foreground hover:text-primary transition-colors"
+                            className="transition-colors text-muted-foreground hover:text-primary"
                         >
                             Home
                         </Link>
                         <Link
                             to="#"
-                            className="text-muted-foreground hover:text-primary transition-colors"
+                            className="transition-colors text-muted-foreground hover:text-primary"
                         >
                             Services
                         </Link>
                         <Link
                             to="#"
-                            className="text-muted-foreground hover:text-primary transition-colors"
+                            className="transition-colors text-muted-foreground hover:text-primary"
                         >
                             Portfolio
                         </Link>
                         <Link
                             to="#"
-                            className="text-muted-foreground hover:text-primary transition-colors"
+                            className="transition-colors text-muted-foreground hover:text-primary"
                         >
                             About
                         </Link>
                         <Link
                             to="#"
-                            className="text-muted-foreground hover:text-primary transition-colors"
+                            className="transition-colors text-muted-foreground hover:text-primary"
                         >
                             Contact
                         </Link>
@@ -80,7 +80,7 @@ export default function Component() {
                     </p>
                     <Link
                         href="#"
-                        className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                        className="inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
                     >
                         Contact Us
                     </Link>

@@ -40,10 +40,10 @@ export default function ProductRoute() {
     return (
 
         <>
-            <div className="group relative">
+            <div className="relative group">
                 <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
 
-            <span className="border-2 border-primary p-4 rounded text-primary">
+            <span className="rounded border-2 p-4 border-primary text-primary">
               <Link
                   to={`/${language}/${encodeURI(stegaClean(data.taxonomies[0]))}`}>{stegaClean(data.taxonomies[0])}</Link>
               -
@@ -55,33 +55,6 @@ export default function ProductRoute() {
             </div>
             <ProductDetail product={[data.product]}/>
 
-
-            {/*<Prods products={[data.product]}></Prods>*/}
-
-            {/*<div className="group relative">
-                <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
-
-                    <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                        <div
-                            className="border rounded p-1 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-48">
-                            <img src={data.product.imageUrl} width={75} alt={data.product.title}
-                                 className="bg-gray-50 border-2 rounded h-full w-full object-contain object-center lg:h-full lg:w-full"/>
-                        </div>
-                    </div>
-                    <div className="">
-                        {data.product.title}
-                    </div>
-                    <div className="">
-                        {data.product.description}
-                    </div>
-                    <div className="mt-4 flex justify-between">
-                        <Attributes product={data.product}></Attributes>
-                    </div>
-                    <div className="mt-4 flex justify-between">
-                        <Variants product={data.product}></Variants>
-                    </div>
-                </div>
-            </div>*/}
 
 
         </>

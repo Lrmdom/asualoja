@@ -4,7 +4,7 @@ import {Button} from "@/components/ui/button"
 export default function Component() {
     return (
         <div
-            className=" container flex w-full max-w-5xl flex-col items-center justify-center gap-8 px-4 py-12 md:flex-row md:gap-16 md:px-6 lg:py-16 xl:py-24">
+            className="container flex w-full max-w-5xl flex-col items-center justify-center gap-8 px-4 py-12 md:flex-row md:gap-16 md:px-6 lg:py-16 xl:py-24">
             <div className="flex flex-col items-start gap-4 text-center md:text-left">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                     Stay up to date with our newsletter

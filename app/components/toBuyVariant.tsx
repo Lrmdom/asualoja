@@ -45,14 +45,14 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                         showShippingMethodName
                         showShippingMethodPrice
                         timeFormat="days"
-                        className="text-gray-600 text-3xl"
+                        className="text-3xl text-gray-600"
                     />
                 </AvailabilityContainer>
                 <OrderStorage persistKey="cl-examples-addToCart">
                     <OrderContainer>
                     <p>
                         <AddToCartButton
-                            className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-70"
+                            className="rounded bg-black px-3 py-2 text-white hover:opacity-70 disabled:opacity-50"
                             label="Add SKU to cart"
                             quantity="1"
                             disabled={!selectedSku}

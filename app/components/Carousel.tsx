@@ -16,16 +16,16 @@ const Carousel = ({children: slides, autoSlide = false, autoSlideInterval = 3000
 
 
     return (
-        <div className='overflow-hidden relative'>
-            <div className='flex transition-transform ease-out duration-500'
+        <div className='relative overflow-hidden'>
+            <div className='flex transition-transform duration-500 ease-out'
                  style={{transform: `translateX(-${curr * 100}%)`}}>
                 {slides}
             </div>
             <div className="absolute inset-0 flex items-center justify-between p-4">
-                <button onClick={prev} className='p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white'>
+                <button onClick={prev} className='rounded-full bg-white/80 p-1 text-gray-800 shadow hover:bg-white'>
                     <ChevronLeft/>
                 </button>
-                <button onClick={next} className='p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white'>
+                <button onClick={next} className='rounded-full bg-white/80 p-1 text-gray-800 shadow hover:bg-white'>
                     <ChevronRight/>
                 </button>
             </div>

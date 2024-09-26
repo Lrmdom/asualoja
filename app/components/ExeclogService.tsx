@@ -16,7 +16,7 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
                 <Tab name={taxon.title}
                      key={taxon._id}>
                     <div>
-                        {/!*<span className="bg-primary p-4 rounded text-white">
+                        {/!*<span className="rounded p-4 text-white bg-primary">
                             {taxon.title}-{tx.title}
                           </span>*!/}
                         <Taxons taxon={taxon}></Taxons>
@@ -30,9 +30,9 @@ export default function Service({taxonomies}: { taxonomy: SanityDocument }) {
     }*/
 
     return (
-        <main className="container mx-auto prose prose-lg p-2 ">
+        <main className="container mx-auto p-2 prose prose-lg">
             {title ? (
-                <h1 className='text-xl text-primary p-2 '>
+                <h1 className='p-2 text-xl text-primary'>
                     <b>{title}</b>
                 </h1>
             ) : null}
