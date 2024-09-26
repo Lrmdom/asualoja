@@ -9,7 +9,7 @@ export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
     if (Array.isArray(taxon.taxons) && taxon.taxons.length > 0) {
         return (
             <>
-                <main className="container mx-auto prose prose-lg p-4 ">
+                <main className="container mx-auto p-4 prose prose-lg">
                     <Tabs
 
                         keepAlive
@@ -49,11 +49,11 @@ export default function TaxonTaxon({taxon}: { taxon: SanityDocument }) {
         )
     } else {
         return (
-            <main className="container mx-auto prose prose-lg p-4">
+            <main className="container mx-auto p-4 prose prose-lg">
 
 
                 <div key={taxon._id}>
-                    {/*<span className="bg-primary p-4 rounded text-white">
+                    {/*<span className="rounded p-4 text-white bg-primary">
                            {stegaClean(taxon.title)}
                           </span>*/}
                     <Prods products={taxon.products}></Prods>

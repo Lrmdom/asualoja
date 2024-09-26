@@ -10,25 +10,25 @@ import * as React from "react";
 
 export default function Component() {
     return (
-        <div className="container flex items-center justify-between px-4 py-2 bg-white dark:bg-gray-800">
+        <div className="container flex items-center justify-between bg-white px-4 py-2 dark:bg-gray-800">
             <Link to="/">
                 <img alt=""
                      src="https://cdn.sanity.io/images/ho1tf79n/production/a5ed02e35a637fd2c5c0fa686ac3f79d4c028db5-1362x870.png?fit=max&w=75&h=75"/>
             </Link>
-            <div className="hidden md:flex gap-4">
-                <Link className="text-lg font-medium hover:underline underline-offset-4">
+            <div className="hidden gap-4 md:flex">
+                <Link className="text-lg font-medium underline-offset-4 hover:underline">
                     Home
                 </Link>
-                <Link className="text-lg font-medium hover:underline underline-offset-4">
+                <Link className="text-lg font-medium underline-offset-4 hover:underline">
                     About
                 </Link>
-                <Link className="text-lg font-medium hover:underline underline-offset-4">
+                <Link className="text-lg font-medium underline-offset-4 hover:underline">
                     Services
                 </Link>
-                <Link className="text-lg font-medium hover:underline underline-offset-4">
+                <Link className="text-lg font-medium underline-offset-4 hover:underline">
                     Portfolio
                 </Link>
-                <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
+                <Link href="#" className="text-lg font-medium underline-offset-4 hover:underline">
                     Contact
                 </Link>
 
@@ -41,20 +41,20 @@ export default function Component() {
                     </Button>
                 </SheetTrigger>
                 <SheetContent side="left">
-                    <div className="grid w-[200px] p-4">
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
+                    <div className="grid p-4 w-[200px]">
+                        <Link href="#" className="text-lg font-medium underline-offset-4 hover:underline">
                             Home
                         </Link>
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
+                        <Link href="#" className="text-lg font-medium underline-offset-4 hover:underline">
                             About
                         </Link>
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
+                        <Link href="#" className="text-lg font-medium underline-offset-4 hover:underline">
                             Services
                         </Link>
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
+                        <Link href="#" className="text-lg font-medium underline-offset-4 hover:underline">
                             Portfolio
                         </Link>
-                        <Link href="#" className="text-lg font-medium hover:underline underline-offset-4">
+                        <Link href="#" className="text-lg font-medium underline-offset-4 hover:underline">
                             Contact
                         </Link>
                     </div>

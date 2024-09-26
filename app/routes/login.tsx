@@ -70,7 +70,7 @@ export async function action({request}: ActionFunctionArgs) {
 export default function Login() {
     return (
         <>
-            <ul className=" grid w-[200px] gap-3 p-4 md:w-[200px] md:grid-cols-1 lg:w-[200px] ">
+            <ul className="grid gap-3 p-4 w-[200px] md:w-[200px] md:grid-cols-1 lg:w-[200px]">
                 {/*<SocialButton provider={SocialsProvider.GOOGLE} label=" Google"/>
           <SocialButton provider={SocialsProvider.FACEBOOK} label=" Facebook"/>
           <SocialButton provider={SocialsProvider.MICROSOFT} label=" Microsoft"/>

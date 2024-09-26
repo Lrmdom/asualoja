@@ -21,7 +21,7 @@ function Counter() {
     const decrement = () => setCount(count - 1)
 
     return (
-        <div className=" text-9xl">
+        <div className="text-9xl">
             <span>{count}</span>
             <button onClick={increment}>+</button>
             <button onClick={decrement}>-</button>
@@ -69,7 +69,7 @@ export default function Index() {
     return (
         <>
             <h1>ITS WORKING the Preview</h1>
-            {/* <div className="bg-video max-sm:hidden">
+            {/* <div className="max-sm:hidden bg-video">
         <video className="bg-video__content" autoPlay muted loop>
           <source src="190828_07_MarinaBayatNightDrone_UHD_09.mp4" type="video/mp4" />
         </video>

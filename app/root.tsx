@@ -9,7 +9,7 @@ import {
     useLoaderData,
     useMatches,
     useNavigation,
-    useRevalidator, useRouteError,
+    useRevalidator,
     useRouteLoaderData,
 } from '@remix-run/react'
 import type {LinksFunction} from '@remix-run/node'
@@ -31,6 +31,8 @@ import '@commercelayer/app-elements/style.css'
 //import '@commercelayer/app-elements/vendor.css'
 import Loading from "~/components/loading"
 import * as process from "node:process";
+import Sidebar from "~/components/sideBar";
+import TaxonomySidebar from "~/components/taxonomy-sidebar";
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
@@ -115,6 +117,8 @@ export function Layout({children}: { children: React.ReactNode }) {
         <Header taxonomies={data} user={user}></Header>
         <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
 
+
+
         {children}
         <ScrollRestoration/>
         <script
@@ -160,7 +164,7 @@ export default function App() {
 
     )
 }
-export function ErrorBoundary() {
+/*export function ErrorBoundary() {
 
     const error = useRouteError();
     console.error(error);
@@ -172,9 +176,9 @@ export function ErrorBoundary() {
             <Links />
         </head>
         <body>
-        {/*<SiteError />*/}
+        <SiteError />
         <Scripts />
         </body>
         </html>
     );
-}
+}*/

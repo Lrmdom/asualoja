@@ -6,6 +6,7 @@ import {loadQuery} from '~/sanity/loader.server'
 
 import Taxonomy from '~/components/Taxonomy'
 import {TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED} from '~/sanity/queries'
+import Sidebar from "~/components/sideBar";
 
 
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
@@ -39,6 +40,13 @@ export default function TaxonomyRoute() {
     const {data} = useLoaderData<typeof loader>()
 
     return (
-        <Taxonomy taxonomies={data}/>
+        <>
+            <div className={"grid grid-cols-2"}>
+                <Sidebar></Sidebar>
+                <Taxonomy taxonomies={data}/>
+            </div>
+
+        </>
+
     )
 }

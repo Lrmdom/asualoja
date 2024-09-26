@@ -1,6 +1,5 @@
 import React, {useCallback, useEffect} from 'react'
 import {EmblaCarouselType, EmblaEventType, EmblaOptionsType} from 'embla-carousel'
-import {DotButton, useDotButton} from './js/EmblaCarouselDotButton'
 import {NextButton, PrevButton, usePrevNextButtons} from './js/EmblaCarouselArrowButtons'
 
 import useEmblaCarousel from 'embla-carousel-react'
@@ -8,6 +7,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 
 import './embla.css'
 import {stegaClean} from "@sanity/client/stega";
+import {useLocation} from "@remix-run/react";
 
 type PropType = {
     slides: number[]
@@ -17,8 +17,6 @@ type PropType = {
 const EmblaCarousel: React.FC<PropType> = (props) => {
     const {slides, options} = props
     const [emblaRef, emblaApi] = useEmblaCarousel(options)
-    const {selectedIndex, scrollSnaps, onDotButtonClick} =
-        useDotButton(emblaApi)
 
     const {
         prevBtnDisabled,
@@ -26,15 +24,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         onPrevButtonClick,
         onNextButtonClick
     } = usePrevNextButtons(emblaApi)
-
+    props.setEmblaImage(props.emblaImageDetail)
 
     props.emblaImage ? emblaApi.scrollTo(props.emblaImage, true) : null
-    //debugger;
     const logEmblaEvent = useCallback(
         (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
             let index = emblaApi.selectedScrollSnap()
             const sku = props.slides[index].sku
-            //debugger
             props.setSelectedSku(sku)
             props.setEmblaImage(index)
 
@@ -52,50 +48,33 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         }
     }, [emblaApi, logEmblaEvent])
 
+    let urlParts = useLocation().pathname.split('/').length
+
+    debugger
+
     return (
         <section className="embla">
             <div className="embla__viewport" ref={emblaRef}>
-                <div className="embla__container border  rounded p-1">
+                <div className="rounded border p-1 embla__container">
                     {slides?.map((s, index) => (
                         <div className="embla__slide" key={index}>
-                            <img src={s.url} width={300} alt={s.alt} className="rounded border-2 bg-gray-50"/>
+                            <img src={s.url} width={urlParts >= 5 ? 500 : 300} alt={s.alt}
+                                 className="rounded border-2 bg-gray-50"/>
                         </div>
                     ))}
                 </div>
             </div>
-            {/*<div className="embla-thumbs">
-                <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
-                    <div className="embla-thumbs__container">
-                        {slides.map((index) => (
-                            <Thumb
-                                key={index}
-                                onClick={() => onThumbClick(index)}
-                                selected={index === selectedIndex}
-                                index={index}
-                            />
-                        ))}
+            {
+                urlParts <= 4 ?
+
+                    <div className="embla__controls">
+                        <div className="embla__buttons">
+                            <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled}/>
+                            <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled}/>
+                        </div>
+
                     </div>
-                </div>
-            </div>*/}
-            <div className="embla__controls">
-                <div className="embla__buttons">
-                    <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled}/>
-                    <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled}/>
-                </div>
-
-
-                <div className="embla__dots">
-                    {scrollSnaps.map((_, index) => (
-                        <DotButton
-                            key={index}
-                            onClick={() => onDotButtonClick(index)}
-                            className={'embla__dot'.concat(
-                                index === selectedIndex ? ' embla__dot--selected' : ''
-                            )}
-                        />
-                    ))}
-                </div>
-            </div>
+                    : null}
         </section>
     )
 }

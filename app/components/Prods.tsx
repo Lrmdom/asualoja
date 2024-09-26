@@ -4,7 +4,9 @@ import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
 
 
-import VariantAttributes from "~/components/variantAttributes";
+import Variants from "~/components/variants";
+import {useState} from "react";
+import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 // import {authenticate} from '@commercelayer/js-auth'
 
 export default function Prods({products}: { product: SanityDocument }) {
@@ -16,7 +18,7 @@ export default function Prods({products}: { product: SanityDocument }) {
 
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-
+    const [varianDetailLink, setVariantDetailLink] = useState("")
 
     return (
         <>
@@ -50,12 +52,15 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                                         <div className="m-2 overflow-auto">
                                             <Link
-                                                className="overflow-x-auto text-xs font-semibold uppercase hover:text-primary hover:underline text-muted-foreground"
-                                                to={stegaClean(`/${language}/${encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}>
+                                                className="overflow-x-auto text-xs font-semibold uppercase text-muted-foreground hover:text-primary hover:underline"
+                                                 to={stegaClean(`/${language}/${encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}>
+                                                {/*to={varianDetailLink}*/}
+
+
                                                 {stegaClean(prod.title)}</Link>
                                         </div>
 
-                                        <VariantAttributes product={prod}></VariantAttributes>
+                                        <Variants product={prod}></Variants>
                                     </div>
                                 </>
                             )

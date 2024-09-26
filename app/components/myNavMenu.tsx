@@ -61,7 +61,7 @@ export function MyNavMenu(props) {
 
     const language = i18n.resolvedLanguage
     return (
-        <div className="container border-2 rounded p-2">
+        <div className="container rounded border-2 p-2">
             <NavigationMenu className="hidden lg:flex">
                 <NavigationMenuList>
 
@@ -142,7 +142,7 @@ export function MyNavMenu(props) {
                             {t('Outlet')}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] ">
+                            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                 <li className="row-span-3">
                                     <NavigationMenuLink asChild>
                                         <a
@@ -228,22 +228,22 @@ export default function Navbar() {
 
     return (
         <nav className="bg-white shadow-lg">
-            <div className="max-w-6xl mx-auto px-4">
+            <div className="mx-auto max-w-6xl px-4">
                 <div className="flex justify-between">
                     <div className="flex space-x-7">
                         <div>
-                            <a href="#" className="flex items-center py-4 px-2">
-                                <span className="font-semibold text-gray-500 text-lg">Logo</span>
+                            <a href="#" className="flex items-center px-2 py-4">
+                                <span className="text-lg font-semibold text-gray-500">Logo</span>
                             </a>
                         </div>
-                        <div className="hidden md:flex items-center space-x-1">
-                            <a href="#" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Home</a>
-                            <a href="#" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>
-                            <a href="#" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</a>
-                            <a href="#" className="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</a>
+                        <div className="hidden items-center space-x-1 md:flex">
+                            <a href="#" className="px-2 py-4 font-semibold text-gray-500 transition duration-300 hover:text-green-500">Home</a>
+                            <a href="#" className="px-2 py-4 font-semibold text-gray-500 transition duration-300 hover:text-green-500">Services</a>
+                            <a href="#" className="px-2 py-4 font-semibold text-gray-500 transition duration-300 hover:text-green-500">About</a>
+                            <a href="#" className="px-2 py-4 font-semibold text-gray-500 transition duration-300 hover:text-green-500">Contact Us</a>
                         </div>
                     </div>
-                    <div className="md:hidden flex items-center">
+                    <div className="flex items-center md:hidden">
                         <button className="outline-none mobile-menu-button" onClick={toggleMenu}>
                             {isOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
@@ -251,10 +251,10 @@ export default function Navbar() {
                 </div>
             </div>
             <div className={`md:hidden ${isOpen ? "block" : "hidden"} transition-all duration-300 ease-in-out`}>
-                <a href="#" className="block py-2 px-4 text-sm hover:bg-green-500 hover:text-white transition duration-300">Home</a>
-                <a href="#" className="block py-2 px-4 text-sm hover:bg-green-500 hover:text-white transition duration-300">Services</a>
-                <a href="#" className="block py-2 px-4 text-sm hover:bg-green-500 hover:text-white transition duration-300">About</a>
-                <a href="#" className="block py-2 px-4 text-sm hover:bg-green-500 hover:text-white transition duration-300">Contact Us</a>
+                <a href="#" className="block px-4 py-2 text-sm transition duration-300 hover:bg-green-500 hover:text-white">Home</a>
+                <a href="#" className="block px-4 py-2 text-sm transition duration-300 hover:bg-green-500 hover:text-white">Services</a>
+                <a href="#" className="block px-4 py-2 text-sm transition duration-300 hover:bg-green-500 hover:text-white">About</a>
+                <a href="#" className="block px-4 py-2 text-sm transition duration-300 hover:bg-green-500 hover:text-white">Contact Us</a>
             </div>
         </nav>
     )
