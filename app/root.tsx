@@ -9,7 +9,7 @@ import {
     useLoaderData,
     useMatches,
     useNavigation,
-    useRevalidator,
+    useRevalidator, useRouteError,
     useRouteLoaderData,
 } from '@remix-run/react'
 import type {LinksFunction} from '@remix-run/node'
@@ -164,7 +164,7 @@ export default function App() {
 
     )
 }
-/*export function ErrorBoundary() {
+export function ErrorBoundary() {
 
     const error = useRouteError();
     console.error(error);
@@ -181,4 +181,4 @@ export default function App() {
         </body>
         </html>
     );
-}*/
+}
