@@ -27,8 +27,8 @@ import {useTranslation} from 'react-i18next'
 import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
 import MyNavMenu from '~/components/responsiveNavbar'
-import '@commercelayer/app-elements/style.css'
-//import '@commercelayer/app-elements/vendor.css'
+//import '@commercelayer/app-elements/style.css'
+import '@commercelayer/app-elements/vendor.css'
 import Loading from "~/components/loading"
 import * as process from "node:process";
 import Sidebar from "~/components/sideBar";
@@ -164,7 +164,7 @@ export default function App() {
 
     )
 }
-export function ErrorBoundary() {
+/*export function ErrorBoundary() {
 
     const error = useRouteError();
     console.error(error);
@@ -181,4 +181,4 @@ export function ErrorBoundary() {
         </body>
         </html>
     );
-}
+}*/

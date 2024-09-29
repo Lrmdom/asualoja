@@ -38,7 +38,7 @@ async function main() {
     });
 }
 
-if (window.requestIdleCallback) {
+/*if (window.requestIdleCallback) {
     window.requestIdleCallback(main);
 } else {
     // Safari doesn't support requestIdleCallback
@@ -46,4 +46,4 @@ if (window.requestIdleCallback) {
     window.setTimeout(main, 1);
 }
 
-main().catch((error) => console.error(error));
+main().catch((error) => console.error(error));*/

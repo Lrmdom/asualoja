@@ -73,6 +73,7 @@
     "tailwindcss-animate": "^1.0.7",
     "twitter-api-v2": "^1.17.2",
     "vite-plugin-commonjs": "^0.10.3",
+    "vite-plugin-pwa": "^0.20.5",
     "vite-plugin-require": "^1.2.14",
     "wouter": "^3.3.5"
   },
