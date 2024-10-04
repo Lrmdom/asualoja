@@ -3,13 +3,13 @@ import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
 
 import ToBuyVariant from "~/components/toBuyVariant";
-import {useState} from "react";
+import {Suspense, useState} from "react";
 import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import {EmblaOptionsType} from 'embla-carousel'
 
 import ProductAttributes from "~/components/productAttributes";
 import VariantsAttributes from "~/components/variantAttributes";
-
+import { ClientOnly } from "remix-utils/client-only"
 
 export default function Variants({product, emblaImageDetail, setEmblaImageDetail}: {
     variant: SanityDocument
@@ -63,21 +63,23 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
     return (<main className="">
 
                     {product.variantsImages.length > 1 ?
-                        <EmblaCarousel slides={product.variantsImages}
-                                       setSelectedSku={setSelectedSku}
-                                       selectedSku={selectedSku}
-                                       setEmblaImage={setEmblaImage || setEmblaImageDetail}
-                                       emblaImage={emblaImage || emblaImageDetail}
-                                       setEmblaImageDetail={setEmblaImageDetail}
-                                       emblaImageDetail={emblaImageDetail}
-                                       options={OPTIONS}
-                                       groupedVariantsAttrs={groupedVariantsAttrs}
-                                       variantsAttrs={variantsAttrs}
-                                       handleAttributeChange={handleAttributeChange}
-                                       dynamicAttributes={dynamicAttributes}
-                                       setDynamicAttributes={setDynamicAttributes}
+                                <EmblaCarousel slides={product.variantsImages}
+                                               setSelectedSku={setSelectedSku}
+                                               selectedSku={selectedSku}
+                                               setEmblaImage={setEmblaImage || setEmblaImageDetail}
+                                               emblaImage={emblaImage || emblaImageDetail}
+                                               setEmblaImageDetail={setEmblaImageDetail}
+                                               emblaImageDetail={emblaImageDetail}
+                                               options={OPTIONS}
+                                               groupedVariantsAttrs={groupedVariantsAttrs}
+                                               variantsAttrs={variantsAttrs}
+                                               handleAttributeChange={handleAttributeChange}
+                                               dynamicAttributes={dynamicAttributes}
+                                               setDynamicAttributes={setDynamicAttributes}
 
-                        />
+                                />
+
+
 
                         : <img src={product.imageUrl}/>}
                 <div>
@@ -100,7 +102,9 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
                     OPTIONS
                 }}/>
 
+
                 <ToBuyVariant selectedSku={selectedSku}></ToBuyVariant>
+
 
     </main>)
 
