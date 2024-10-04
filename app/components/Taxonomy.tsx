@@ -34,9 +34,9 @@ export default function Taxonomy({taxonomies}: { taxonomy: SanityDocument }) {
     }
     const uniqueProductArray = [...new Set(allTaxonomyProducts)]
     return (
-        <main className="container mx-auto prose prose-lg p-2 ">
+        <main className="container mx-auto p-2 prose prose-lg">
             {title ? (
-                <h1 className='text-xl text-primary p-2 '>
+                <h1 className='p-2 text-xl text-primary'>
                     <b>{title}</b>
                 </h1>
             ) : null}

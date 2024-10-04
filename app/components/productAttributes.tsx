@@ -37,9 +37,9 @@ export default function ProductAttributes({product}: { attribute: SanityDocument
 
                                                 <span className="text-xs">{attribute.value}</span>
                                                 <div
-                                                    className="absolute top-1 -right-2 bg-blue-400 rounded-full ">
+                                                    className="absolute top-1 -right-2 rounded-full bg-blue-400">
                                                     <div
-                                                        className="h-1.5 w-1.5 top-1 -right-2 text-blue text-xs font-bold">
+                                                        className="top-1 -right-2 text-xs font-bold h-1.5 w-1.5 text-blue">
 
                                                     </div>
                                                 </div>

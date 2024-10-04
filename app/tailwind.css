@@ -1,6 +1,8 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 .truncate-to-2-lines {
     display: -webkit-box;

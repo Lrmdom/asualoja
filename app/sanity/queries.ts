@@ -498,7 +498,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
                         ) ,           
                 variants[]->{ sku,
                     "images": images[]{
-                        'url': asset->url + "?w=300",
+                        'url': asset->url + "?w=500",
                     },
                     "title": coalesce(
                     title[_key == $locale][0].value,
@@ -519,7 +519,6 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE = groq`
                         name, 
                         value, 
                         description,
-                        visualPresentation->{visualization}
                     }
                                                           
                     }
@@ -548,7 +547,7 @@ export const PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED = groq`
             title[_key == 'pt'][0].value,
             "Missing translation"
             ),
-      products[]->{"imageUrl": image.asset->url + "?w=300",
+      products[]->{"imageUrl": image.asset->url + "?w=500",
             "title": coalesce(
             title[_key == $locale][0].value,
             title[_key == 'pt'][0].value,
