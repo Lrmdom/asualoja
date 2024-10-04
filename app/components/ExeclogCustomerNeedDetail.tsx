@@ -15,10 +15,10 @@ export default function ExeclogCustomerNeedDetail({
         customerNeedDetail
     return (
         <li key={name}>
-            <main className="container mx-auto prose prose-lg p-4 border-4">
+            <main className="container mx-auto border-4 p-4 prose prose-lg">
                 {serviceImage ? (
                     <img
-                        className="float-left m-0 w-1/3 mr-4 rounded-lg"
+                        className="float-left m-0 mr-4 w-1/3 rounded-lg"
                         src={serviceImage}
                         width={300}
                         height={300}
@@ -32,7 +32,7 @@ export default function ExeclogCustomerNeedDetail({
                 ) : null}
                 {image_url ? (
                     <img
-                        className=" m-0 w-1/3 mr-4 rounded-lg"
+                        className="m-0 mr-4 w-1/3 rounded-lg"
                         src={image_url}
                         width={300}
                         height={300}

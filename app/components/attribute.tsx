@@ -8,81 +8,9 @@ import ToBuyVariant from "~/components/toBuyVariant";
 export default function Attribute({attribute}: { attribute: SanityDocument }) {
     const {t} = useTranslation('')
 //console.log(attribute[0].visualPresentation)
-    if (stegaClean(attribute[0].visualPresentation?.visualization) === "InputToggleButton") {
-        return (
-            attribute.map((attr) => {
-                const output = `rounded border border-primary p-2 ${attr.sku}`
 
-                return (
-                    <div>
-                        <button className={output} value={stegaClean(attr.value)}
-                                name="size"> {stegaClean(attr.value.toUpperCase())}</button>
-                        {attr.description ?
 
-                            <div
-                                className="container p-4 bg-black text-white">{attr.description ? attr.description : null}</div>
 
-                            : null}
-                        <ToBuyVariant attribute={attr}></ToBuyVariant>
-                    </div>
-                )
-
-            })
-
-        )
-    }
-    if (stegaClean(attribute[0].visualPresentation?.visualization) === "InputToggleColorButton") {
-        return (
-            attribute.map((attr) => {
-                return (
-                    <div>
-                        <AttributeVisualization attribute={attr}></AttributeVisualization>
-                        {attr.description ?
-
-                            <div
-                                className="container p-4 bg-black text-white">{attr.description ? attr.description : null}</div>
-
-                            : null}
-                        <ToBuyVariant attribute={attr}></ToBuyVariant>
-                    </div>
-                )
-
-            })
-
-        )
-
-    }
-
-    if (stegaClean(attribute[0].visualPresentation?.visualization) === "InputToggleColor") {
-        return (
-            attribute.map((attr) => {
-                return (
-                    <div>
-                        <AttributeVisualization attribute={attr}></AttributeVisualization>
-                        {attr.description ?
-
-                            <div
-                                className="container p-4 bg-black text-white">{attr.description ? attr.description : null}</div>
-
-                            : null}
-                        <ToBuyVariant attribute={attr}></ToBuyVariant>
-                    </div>
-                )
-            })
-
-        )
-
-    }
-
-    if (stegaClean(attribute[0].visualPresentation?.visualization) === "Dropdown") {
-        return (
-            <div>
-                <Dropdown dropdownItems={attribute}></Dropdown>
-            </div>
-        )
-    }
-
-    if (attribute[0].visualPresentation === null) {
         let Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
         return (
             attribute.map((attr) => {
@@ -99,7 +27,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
                         {attr.description ?
 
                             <div
-                                className="container p-4 bg-black text-white">{attr.description ? attr.description : null}</div>
+                                className="container bg-black p-4 text-white">{attr.description ? attr.description : null}</div>
 
                             : null}
                         <ToBuyVariant attribute={attr}></ToBuyVariant>
@@ -109,7 +37,7 @@ export default function Attribute({attribute}: { attribute: SanityDocument }) {
             })
 
         )
-    }
+
 
 
     //todo if not visualPresentation, check if valid color else visualpresentation=InputToggleButton or dropdown if more than 5 options
