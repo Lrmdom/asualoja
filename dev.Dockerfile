@@ -8,6 +8,4 @@ EXPOSE 5173
 #RUN npm run build
 CMD [ "npm", "run", "dev" ]
 
-#  docker build  -f dev.Dockerfile -t execlog/execlogdemo_dev . && docker run -p 80:5173 -it execlog/execlogdemo_dev
-
-# docker build  -f dev.Dockerfile -t execlog/execlogdemo_dev . && docker push execlog/execlogdemo_dev
+#docker build -t foo . && docker run -p 80:5173 -it foo

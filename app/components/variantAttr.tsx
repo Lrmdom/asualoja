@@ -51,7 +51,6 @@ export default function VariantAttr({
 
 
     function setSkuButton(attr, stateSet, setSkuImage) {
-
         setSelectedSku(stegaClean(attr.sku))
 
     }

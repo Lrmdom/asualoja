@@ -1,18 +1,18 @@
 import {vitePlugin as remix} from '@remix-run/dev'
 import {installGlobals} from "@remix-run/node";
-import {defineConfig, loadEnv} from 'vite'
+import {defineConfig,loadEnv } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import {remixDevTools} from 'remix-development-tools'
 /*import { VitePWA } from 'vite-plugin-pwa'*/
 //import commonjs from 'vite-plugin-commonjs';
-import {viteCommonjs} from '@originjs/vite-plugin-commonjs'
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 
 installGlobals();
 
 export default defineConfig({
     ssr: {
-        noExternal: ["@commercelayer/react-components", "lodash"]
+        noExternal: ["@commercelayer/react-components","lodash"]
     },
     plugins: [
         viteCommonjs(),

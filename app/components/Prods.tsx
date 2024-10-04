@@ -58,7 +58,7 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                                                 {stegaClean(prod.title)}</Link>
 
-                                        <Variants product={prod}></Variants>
+                                        <Variants product={prod} ></Variants>
                                     </div>
                                 </>
                             )
