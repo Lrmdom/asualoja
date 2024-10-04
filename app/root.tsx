@@ -36,6 +36,9 @@ import * as process from "node:process"
 
 import Sidebar from "~/components/sideBar";
 import TaxonomySidebar from "~/components/taxonomy-sidebar";
+import {Price} from "@commercelayer/react-components";
+import {stegaClean} from "@sanity/client/stega";
+import {ClientOnly} from "remix-utils/client-only"
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
@@ -148,8 +151,12 @@ export function Layout({children}: { children: React.ReactNode }) {
             }}
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
-                <LiveVisualEditing
-                />
+
+                <ClientOnly fallback={null}>
+                    {() =>   <LiveVisualEditing /> }
+
+                </ClientOnly>
+
         ) : null}
 
         <SubscribeNews/>
