@@ -151,11 +151,12 @@ export function Layout({children}: { children: React.ReactNode }) {
             }}
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
-
-                <ClientOnly fallback={null}>
+            <LiveVisualEditing
+                />
+            /*<ClientOnly fallback={null}>
                     {() =>   <LiveVisualEditing /> }
 
-                </ClientOnly>
+                </ClientOnly>*/
 
         ) : null}
 
