@@ -1,4 +1,7 @@
+//import '@commercelayer/app-elements/style.css'
+
 import stylesheet from './tailwind.css?url'
+import '@commercelayer/app-elements/vendor.css'
 import {lazy, Suspense} from 'react'
 import {
     Links,
@@ -27,10 +30,10 @@ import {useTranslation} from 'react-i18next'
 import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
 import MyNavMenu from '~/components/responsiveNavbar'
-import '@commercelayer/app-elements/style.css'
-//import '@commercelayer/app-elements/vendor.css'
 import Loading from "~/components/loading"
-import * as process from "node:process";
+//THIS IS NEEDED FOR SANITY VISUAL EDITING
+import * as process from "node:process"
+
 import Sidebar from "~/components/sideBar";
 import TaxonomySidebar from "~/components/taxonomy-sidebar";
 
@@ -41,12 +44,15 @@ export let loader = async ({request, params}) => {
 
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
+/*
     const user = await authenticator.isAuthenticated(request, {})
+*/
 
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMIES_QUERY_LOCALIZED,
         params
     )
+    debugger
     const ENV = {
         SANITY_STUDIO_PROJECT_ID: process.env.SANITY_STUDIO_PROJECT_ID,
         SANITY_STUDIO_DATASET: process.env.SANITY_STUDIO_DATASET,
@@ -60,7 +66,7 @@ export let loader = async ({request, params}) => {
     //https://remix.run/docs/en/main/discussion/state-management
 
     return json(
-        {data, locale, ENV, user},
+        {data, locale, ENV},
         {
             headers: {
                 'Set-Cookie': await localeCookie.serialize(locale),
@@ -71,6 +77,10 @@ export let loader = async ({request, params}) => {
     )
 }
 
+/*export const links: LinksFunction = () => [
+    { rel: "stylesheet", href: stylesheet },
+    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+    ]*/
 export const links: LinksFunction = () => [
     {rel: 'stylesheet', href: stylesheet},
 ]
@@ -84,8 +94,8 @@ export const handle = {
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
 
-    const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
-    //const {data, locale, ENV, user} = useLoaderData<typeof loader>()
+    const {data, locale, ENV} = useRouteLoaderData<typeof loader>('root')
+    //const {data, locale, ENV} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
 
     const {i18n} = useTranslation()
@@ -111,11 +121,14 @@ export function Layout({children}: { children: React.ReactNode }) {
                 rel="stylesheet"
             />
             <Meta/>
+
             <Links/>
         </head>
         <body className="">
-        <Header taxonomies={data} user={user}></Header>
-        <MyNavMenu taxonomies={data} user={user}></MyNavMenu>
+
+        <Header taxonomies={data} ></Header>
+
+        <MyNavMenu taxonomies={data} ></MyNavMenu>
 
 
 
@@ -135,7 +148,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             }}
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
-            <Suspense fallback={<Loading/>}>
+            <Suspense fallback={null}>
                 <LiveVisualEditing
                 />
             </Suspense>
@@ -156,7 +169,7 @@ export default function App() {
 
     return (
         <div className={
-            navigation.state === "loading" ? <Loading/> : ""
+            navigation.state === "loading" ? null : ""
         }
         >
             <Outlet/>
@@ -164,7 +177,7 @@ export default function App() {
 
     )
 }
-export function ErrorBoundary() {
+/*export function ErrorBoundary() {
 
     const error = useRouteError();
     console.error(error);
@@ -181,4 +194,4 @@ export function ErrorBoundary() {
         </body>
         </html>
     );
-}
+}*/

@@ -12,7 +12,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
     const {t} = useTranslation()
 
     {
-        taxon["allTaxonProducts"] = []
+        taxon?taxon["allTaxonProducts"] = []:null
         taxon?.taxons?.map((taxo) => {
             taxon["allTaxonProducts"] = taxon["allTaxonProducts"] || []
             taxo.products ? taxon["allTaxonProducts"].push(...taxo.products) : null
@@ -33,7 +33,7 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
         })
     }
 
-    if (Array.isArray(taxon.taxons)) {
+    if (Array.isArray(taxon?.taxons)) {
         return (
             <>
                 <div class="ml-4 flex h-24 border-2 border-gray-300 p-3 text-gray-700 shadow-md">
@@ -70,16 +70,16 @@ export default function Taxon({taxon}: { taxon: SanityDocument }) {
             <main className="container mx-auto p-4 prose prose-lg">
 
 
-                <div key={taxon._id}>
+                <div key={taxon?._id}>
                           <span className="rounded border-2 p-4 border-primary text-primary">
               <Link
-                  to={`/${language}/${encodeURI(stegaClean(taxon.taxonomies[0]))}`}>{encodeURI(stegaClean(taxon.taxonomies[0]))}</Link>
+                  to={`/${language}/${encodeURI(stegaClean(taxon?.taxonomies[0]))}`}>{encodeURI(stegaClean(taxon?.taxonomies[0]))}</Link>
                               -
                                             <Link
-                                                to={`/${language}/${encodeURI(stegaClean(taxon.title))}`}>{stegaClean(taxon.title)}</Link>
+                                                to={`/${language}/${encodeURI(stegaClean(taxon?.title))}`}>{stegaClean(taxon?.title)}</Link>
 
               </span>
-                    <Prods products={taxon.products}></Prods>
+                    <Prods products={taxon?.products}></Prods>
                 </div>
 
 
