@@ -15,7 +15,7 @@ import * as React from "react";
 
 export async function loader({request}: LoaderFunctionArgs) {
     const session = await getSession(request.headers.get('Cookie'));
-
+console.log(session.get('user'))
     if (session.get('user')) {
         // Redirect to the home page if they are already signed in.
         return redirect('/userdetected')
