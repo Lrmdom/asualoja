@@ -1,7 +1,9 @@
-//import '@commercelayer/app-elements/style.css'
 
 import stylesheet from './tailwind.css?url'
 import '@commercelayer/app-elements/vendor.css'
+/*
+import '@commercelayer/app-elements/style.css'
+*/
 import {lazy, Suspense} from 'react'
 import {
     Links,
@@ -12,7 +14,7 @@ import {
     useLoaderData,
     useMatches,
     useNavigation,
-    useRevalidator, useRouteError,
+    useRevalidator,
     useRouteLoaderData,
 } from '@remix-run/react'
 import type {LinksFunction} from '@remix-run/node'
@@ -27,29 +29,21 @@ import {TAXONOMIES_QUERY_LOCALIZED} from '~/sanity/queries'
 import {loadQuery} from '~/sanity/loader.server'
 import type {SanityDocument} from '@sanity/client'
 import {useTranslation} from 'react-i18next'
-import {authenticator} from "~/services/auth.server";
 import Header from "~/components/header"
 import MyNavMenu from '~/components/responsiveNavbar'
 import Loading from "~/components/loading"
 //THIS IS NEEDED FOR SANITY VISUAL EDITING
 import * as process from "node:process"
 
-import Sidebar from "~/components/sideBar";
-import TaxonomySidebar from "~/components/taxonomy-sidebar";
-import {Price} from "@commercelayer/react-components";
-import {stegaClean} from "@sanity/client/stega";
-import {ClientOnly} from "remix-utils/client-only"
-
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 export let loader = async ({request, params}) => {
-    //todo fix bug when url have 1 lang and switch have another  ex: http://localhost:5173/en  and langswitcher have 'pt'
 
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
-/*
-    const user = await authenticator.isAuthenticated(request, {})
-*/
+    /*
+        const user = await authenticator.isAuthenticated(request, {})
+    */
 
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMIES_QUERY_LOCALIZED,
@@ -129,10 +123,9 @@ export function Layout({children}: { children: React.ReactNode }) {
         </head>
         <body className="">
 
-        <Header taxonomies={data} ></Header>
+        <Header taxonomies={data}></Header>
 
-        <MyNavMenu taxonomies={data} ></MyNavMenu>
-
+        <MyNavMenu taxonomies={data}></MyNavMenu>
 
 
         {children}
@@ -152,7 +145,8 @@ export function Layout({children}: { children: React.ReactNode }) {
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
             <LiveVisualEditing
-                />
+            />
+
             /*<ClientOnly fallback={null}>
                     {() =>   <LiveVisualEditing /> }
 
@@ -175,7 +169,7 @@ export default function App() {
 
     return (
         <div className={
-            navigation.state === "loading" ? null : ""
+            navigation.state === "loading" ? <Loading /> : ""
         }
         >
             <Outlet/>

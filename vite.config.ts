@@ -12,7 +12,7 @@ installGlobals();
 
 export default defineConfig({
   ssr: {
-    noExternal: ["@commercelayer/react-components", "lodash"]
+    noExternal: ["@commercelayer/react-components", "lodash","remix-auth-github"]
   },
   plugins: [
     viteCommonjs(),

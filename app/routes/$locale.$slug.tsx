@@ -41,10 +41,8 @@ export default function TaxonomyRoute() {
 
     return (
         <>
-            <div className={"grid grid-cols-2"}>
                {/* <Sidebar></Sidebar>*/}
                 <Taxonomy taxonomies={data}/>
-            </div>
 
         </>
 

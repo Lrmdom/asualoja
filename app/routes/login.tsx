@@ -2,13 +2,13 @@ import {Form} from '@remix-run/react'
 import type {ActionFunctionArgs, LoaderFunctionArgs} from '@remix-run/node'
 import {json, redirect} from '@remix-run/node' // or cloudflare/deno
 import {commitSession, getSession} from '~/services/session.server'
-import {SocialsProvider} from 'remix-auth-socials'
+
 import * as React from "react";
 
-interface SocialButtonProps {
+/*interface SocialButtonProps {
     provider: SocialsProvider
     label: string
-}
+}*/
 
 
 const SocialButton: React.FC<SocialButtonProps> = ({provider, label}) => (
@@ -16,7 +16,7 @@ const SocialButton: React.FC<SocialButtonProps> = ({provider, label}) => (
         action={provider != 'LINKEDIN' ? `/auth/${provider}` : `/${provider}`}
         method="post"
     >
-        <button className="">{label}</button>
+        <button className="border-primary-500">{label}</button>
     </Form>
 )
 
@@ -71,10 +71,37 @@ export default function Login() {
     return (
         <>
             <ul className="grid gap-3 p-4 w-[200px] md:w-[200px] md:grid-cols-1 lg:w-[200px]">
-                {/*<SocialButton provider={SocialsProvider.GOOGLE} label=" Google"/>
-          <SocialButton provider={SocialsProvider.FACEBOOK} label=" Facebook"/>
-          <SocialButton provider={SocialsProvider.MICROSOFT} label=" Microsoft"/>
-          <SocialButton provider="LINKEDIN" label=" LinkedIn"/>*/}
+                <Form
+                    action={`/auth/google`}
+                    method="post"
+                >
+                    <button className="border-primary-500">Google</button>
+                </Form>
+                <Form
+                    action={`/auth/facebook`}
+                    method="post"
+                >
+                    <button className="border-primary-500">Facebook</button>
+                </Form>
+                <Form
+                    action={`/auth/microsoft`}
+                    method="post"
+                >
+                    <button className="border-primary-500">Microsoft</button>
+                </Form>
+                <Form
+                    action={`/auth/linkedin`}
+                    method="post"
+                >
+                    <button className="border-primary-500">LinkedIn</button>
+                </Form>
+                <Form
+                    action={`/auth/twitter`}
+                    method="post"
+                >
+                    <button className="border-primary-500">Twitter</button>
+                </Form>
+
                 <li>
                     {/*<cl-identity-link type="login" target="_self">
               <button className="">Email </button>
