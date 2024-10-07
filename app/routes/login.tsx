@@ -11,19 +11,12 @@ import * as React from "react";
 }*/
 
 
-const SocialButton: React.FC<SocialButtonProps> = ({provider, label}) => (
-    <Form
-        action={provider != 'LINKEDIN' ? `/auth/${provider}` : `/${provider}`}
-        method="post"
-    >
-        <button className="border-primary-500">{label}</button>
-    </Form>
-)
+
 
 export async function loader({request}: LoaderFunctionArgs) {
-    const session = await getSession(request.headers.get('Cookie'))
+    const session = await getSession(request.headers.get('Cookie'));
 
-    if (session.has('userId')) {
+    if (session.get('user')) {
         // Redirect to the home page if they are already signed in.
         return redirect('/userdetected')
     }
