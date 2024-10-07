@@ -1,7 +1,6 @@
 import {json} from '@remix-run/node'
 import {authenticator} from '~/services/auth.server'
 import {Form, useLoaderData} from '@remix-run/react'
-import {commitSession, getSession} from '~/services/session.server'
 
 
 
