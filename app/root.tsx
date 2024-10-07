@@ -34,6 +34,7 @@ import MyNavMenu from '~/components/responsiveNavbar'
 import Loading from "~/components/loading"
 //THIS IS NEEDED FOR SANITY VISUAL EDITING
 import * as process from "node:process"
+import {authenticator} from "~/services/auth.server";
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
@@ -41,9 +42,9 @@ export let loader = async ({request, params}) => {
 
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
-    /*
+
         const user = await authenticator.isAuthenticated(request, {})
-    */
+
 
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMIES_QUERY_LOCALIZED,
