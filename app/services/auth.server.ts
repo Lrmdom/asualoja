@@ -10,7 +10,7 @@ import {LinkedinStrategy} from 'remix-auth-linkedin'
 
 import {authenticate} from "@commercelayer/js-auth";
 import {CommerceLayer} from '@commercelayer/sdk'
-
+import * as process from "node:process"
 import SibApiV3Sdk from "sib-api-v3-typescript"
 import * as process from "node:process";
 
