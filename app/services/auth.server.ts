@@ -12,6 +12,7 @@ import {authenticate} from "@commercelayer/js-auth";
 import {CommerceLayer} from '@commercelayer/sdk'
 
 import SibApiV3Sdk from "sib-api-v3-typescript"
+import * as process from "node:process";
 
 
 
@@ -38,7 +39,7 @@ async function createUser(attributes) {
 
     let apiKey = apiInstance.authentications['apiKey'];
 
-    apiKey.apiKey = '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';
+    apiKey.apiKey = process.env.BREVO_API_KEY ;
 
     let createContact = new SibApiV3Sdk.CreateContact();
 
