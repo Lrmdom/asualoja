@@ -10,6 +10,6 @@ module.exports = {
         /^remark.*/,
         /^unified.*/,
         "remix-i18next",
-        "accept-language-parser",
+        "accept-language-parser"
     ],
 };

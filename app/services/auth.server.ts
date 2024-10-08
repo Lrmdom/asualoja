@@ -2,15 +2,56 @@ import {Authenticator} from 'remix-auth'
 import {sessionStorage} from '~/services/session.server'
 // Create an instance of the authenticator, pass a generic with what
 // strategies will return and will store in the session
-import {FormStrategy} from 'remix-auth-form'
-import {GitHubStrategy} from 'remix-auth-github'
 import {GoogleStrategy} from 'remix-auth-google'
 import {FacebookStrategy} from 'remix-auth-facebook'
-import {Twitter2Strategy} from 'remix-auth-twitter'
 import {MicrosoftStrategy} from 'remix-auth-microsoft'
-import TwitterApi from 'twitter-api-v2'
 
 import {LinkedinStrategy} from 'remix-auth-linkedin'
+
+import {authenticate} from "@commercelayer/js-auth";
+import {CommerceLayer} from '@commercelayer/sdk'
+
+import SibApiV3Sdk from "sib-api-v3-typescript"
+
+
+
+const clAuth = await authenticate('client_credentials', {
+    clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+    scope: 'market:id:vlkaZhkGNj'
+})
+
+const cl = CommerceLayer({
+    organization: 'Execlog',
+    accessToken: clAuth.accessToken
+})
+
+
+
+
+async function createUser(attributes) {
+    //todo if not exists , create
+    await cl.customers.update(attributes)
+
+
+    //todo if not exists , create, else update
+    let apiInstance = new SibApiV3Sdk.ContactsApi()
+
+    let apiKey = apiInstance.authentications['apiKey'];
+
+    apiKey.apiKey = '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';
+
+    let createContact = new SibApiV3Sdk.CreateContact();
+
+    createContact.email = attributes.email;
+    //createContact.listIds = [2];
+
+    apiInstance.updateContact(createContact.email,createContact).then(function(data) {
+        console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+    }, function(error) {
+        console.error(error);
+    });
+
+}
 
 export let authenticator = new Authenticator(sessionStorage)
 
@@ -24,6 +65,12 @@ authenticator.use(
             callbackURL: 'http://localhost:5173/auth/linkedin/callback',
         },
         async ({accessToken, refreshToken, extraParams, profile, context}) => {
+            const email = profile._json.email
+            const attributes = {
+                email: email
+            }
+            createUser(attributes)
+
             return profile
         }
     ),
@@ -58,60 +105,11 @@ authenticator.use(
             // it opens up a possibility of spoofing users!
 
             //return User.findOrCreate({ id: profile.id });
-
             return profile
         }
     )
 )
 
-authenticator.use(
-    new Twitter2Strategy(
-        {
-            clientID: 'MUpJSU1HcmwxcXQ1Nm45YmFFeGw6MTpjaQ',
-            clientSecret: 'rKuyvkfMDGhSrGtQ_vUWri9xpc8DfPXIBi4nqVNmyc4Q6yRDah',
-            callbackURL: 'http://localhost:5173/auth/twitter/callback',
-            // List of scopes you want to be granted. See
-            scopes: ['users.read', 'tweet.read', 'tweet.write'],
-        },
-        // Define what to do when the user is authenticated
-        async ({accessToken}) => {
-            //return profile
-            // In this example I want to use Twitter as identity provider: so resolve identity from the token
-            const userClient = new TwitterApi(accessToken)
-
-            const result = await userClient.v2.me({
-                'user.fields': ['profile_image_url'],
-            })
-            // should handle errors
-            const {id, username} = result.data
-            return result.data
-            // Return a user object to store in sessionStorage.
-            // You can also throw Error to reject the login
-            return await registerUser(
-                accessToken,
-                id,
-                username
-            );
-        }
-    ),
-    'twitter'
-)
-
-authenticator.use(
-    new LinkedinStrategy(
-        {
-            clientID: '77sukk301f74bf',
-            clientSecret: 'liwPtmOReOVePGKd',
-            // LinkedIn is expecting a full URL here, not a relative path
-            // see: https://learn.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?tabs=HTTPS1#step-1-configure-your-application
-            callbackURL: 'http://localhost:5173/auth/linkedin/callback',
-        },
-        async ({accessToken, refreshToken, extraParams, profile, context}) => {
-            return profile
-        }
-    ),
-    'linkedin'
-)
 
 authenticator.use(
     new GoogleStrategy(
@@ -126,7 +124,25 @@ authenticator.use(
             // here you would find or create a user in your database
             //return User.findOrCreate({ email: profile.emails[0].value })
 
+            const email = profile._json.email
+            const attributes = {
+                email: email
+            }
+
+
+
+            //createUser(attributes)
+           /* try {
+                console.log(await cl.skus.list())
+                //todo Special authorization to reset a password?
+                const linkPwdReset = await cl.customer_password_resets.create({customer_email: email})
+
+            } catch (e) {
+                console.log(e)
+            }*/
+
             return profile
+
         }
     ),
     'google'
@@ -140,6 +156,12 @@ authenticator.use(
             callbackURL: 'http://localhost:5173/auth/facebook/callback',
         },
         async ({profile}) => {
+            const email = profile._json.email
+            const attributes = {
+                email: email
+            }
+            createUser(attributes)
+
             return profile
         }
     ),
@@ -147,21 +169,6 @@ authenticator.use(
 )
 
 //it is an EXECLOG acount
-authenticator.use(
-    new GitHubStrategy(
-        {
-            clientID: 'Ov23liCky8imGJxf1sfQ',
-            clientSecret: '8294ca168ce1aab0bcf50a300d865f40929f6768',
-            callbackURL: 'http://localhost:5173/auth/github/callback',
-        },
-        async ({accessToken, extraParams, profile}) => {
-            // Save/Get the user data from your DB or API using the tokens and profile
-
-            return profile
-        }
-    ),
-    'github'
-)
 
 
 // Tell the Authenticator to use the form strategy

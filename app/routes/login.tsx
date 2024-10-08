@@ -5,17 +5,8 @@ import {commitSession, getSession} from '~/services/session.server'
 
 import * as React from "react";
 
-/*interface SocialButtonProps {
-    provider: SocialsProvider
-    label: string
-}*/
-
-
-
-
 export async function loader({request}: LoaderFunctionArgs) {
     const session = await getSession(request.headers.get('Cookie'));
-console.log(session.get('user'))
     if (session.get('user')) {
         // Redirect to the home page if they are already signed in.
         return redirect('/userdetected')
@@ -76,24 +67,20 @@ export default function Login() {
                 >
                     <button className="border-primary-500">Facebook</button>
                 </Form>
-                <Form
+                {/*<Form
                     action={`/auth/microsoft`}
                     method="post"
                 >
                     <button className="border-primary-500">Microsoft</button>
-                </Form>
+                </Form>*/}
                 <Form
                     action={`/auth/linkedin`}
                     method="post"
                 >
                     <button className="border-primary-500">LinkedIn</button>
                 </Form>
-                <Form
-                    action={`/auth/twitter`}
-                    method="post"
-                >
-                    <button className="border-primary-500">Twitter</button>
-                </Form>
+
+
 
                 <li>
                     {/*<cl-identity-link type="login" target="_self">

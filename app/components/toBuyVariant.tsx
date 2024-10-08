@@ -45,7 +45,6 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             token = getCookieToken || "";
         }
 
-        console.log(token)
         return token;
     })();
 
