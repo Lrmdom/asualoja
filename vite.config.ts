@@ -12,7 +12,7 @@ installGlobals();
 
 export default defineConfig({
   ssr: {
-    noExternal: ["@commercelayer/react-components", "lodash"]
+    noExternal: ["@commercelayer/react-components", "lodash","@commercelayer/sdk"]
   },
   plugins: [
     viteCommonjs(),

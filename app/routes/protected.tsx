@@ -2,6 +2,8 @@ import {json} from '@remix-run/node'
 import {authenticator} from '~/services/auth.server'
 import {Form, useLoaderData} from '@remix-run/react'
 
+
+
 export async function loader({request}) {
     const user = await authenticator.isAuthenticated(request, {
         failureRedirect: '/login',
@@ -11,7 +13,10 @@ export async function loader({request}) {
 }
 
 export default function Index() {
+
+
     const data = useLoaderData()
+
 
     return (
         <div style={{fontFamily: 'system-ui, sans-serif', lineHeight: '1.4'}}>
