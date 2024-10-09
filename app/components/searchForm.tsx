@@ -78,6 +78,7 @@ export default function Component(props) {
                 <div className="absolute z-10 mt-2 w-full rounded-md border shadow-lg border-input bg-background">
                     <ul className="overflow-y-auto max-h-[300px]">
                         {filteredResults.map((result) => (
+
                             <li
                                 key={result.item.code}
                                 className="cursor-pointer px-4 py-2 hover:bg-muted"

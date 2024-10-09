@@ -50,7 +50,6 @@ export let loader = async ({request, params}) => {
         TAXONOMIES_QUERY_LOCALIZED,
         params
     )
-    debugger
     const ENV = {
         SANITY_STUDIO_PROJECT_ID: process.env.SANITY_STUDIO_PROJECT_ID,
         SANITY_STUDIO_DATASET: process.env.SANITY_STUDIO_DATASET,
