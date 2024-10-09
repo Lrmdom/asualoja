@@ -12,45 +12,106 @@ import {authenticate} from "@commercelayer/js-auth";
 import {CommerceLayer} from '@commercelayer/sdk'
 import * as process from "node:process"
 import SibApiV3Sdk from "sib-api-v3-typescript"
-import * as process from "node:process";
-
 
 
 const clAuth = await authenticate('client_credentials', {
-    clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-    scope: 'market:id:vlkaZhkGNj'
+    clientId: 'vuuLuWnTGhUayS4-7LY8AR2mzbak5IxSf2Ts_VgQDTI',
+    clientSecret: '8O9ft8XbknVZZcAqbd0BrxeUjlW7_ixb8pLhcR5f9SY'
+    //scope: 'market:id:vlkaZhkGNj'
 })
-
 const cl = CommerceLayer({
     organization: 'Execlog',
     accessToken: clAuth.accessToken
 })
 
 
-
-
 async function createUser(attributes) {
     //todo if not exists , create
-    await cl.customers.update(attributes)
+
+    /*const response = await fetch("https://execlog.commercelayer.io/api/customers",
+        {
+            method: 'GET',
+            headers: {
+                'accept': 'application/vnd.api+json',
+                'Authorization': `Bearer ${clAuth.accessToken}`
+            }
+        })*/
+    const response = await fetch(`https://api.brevo.com/v3/contacts/${attributes.email}`,
+        {
+            method: 'GET',
+            headers: {
+                'accept': 'application/json',
+                'api-key': process.env.BREVO_API_KEY
+            }
+        })
+    const brevoCustomer = await response.json();
+
+   const customer = await cl.customers.list({filters: {email_eq: attributes.email}})
+
+    customer.length > 0 ? null: await cl.customers.create(attributes)
 
 
-    //todo if not exists , create, else update
-    let apiInstance = new SibApiV3Sdk.ContactsApi()
 
-    let apiKey = apiInstance.authentications['apiKey'];
+    if (brevoCustomer) {
+        null
 
-    apiKey.apiKey = process.env.BREVO_API_KEY ;
+    } else {
 
-    let createContact = new SibApiV3Sdk.CreateContact();
+        let apiInstance = new SibApiV3Sdk.ContactsApi()
 
-    createContact.email = attributes.email;
-    //createContact.listIds = [2];
+        let apiKey = apiInstance.authentications['apiKey'];
 
-    apiInstance.updateContact(createContact.email,createContact).then(function(data) {
-        console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-    }, function(error) {
-        console.error(error);
-    });
+        apiKey.apiKey = process.env.BREVO_API_KEY;
+
+        let createContact = new SibApiV3Sdk.CreateContact();
+
+        createContact.email = attributes.email;
+        //createContact.listIds = [2];
+
+        apiInstance.createContact(createContact).then(function (data) {
+            console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+        }, function (error) {
+            console.error(error);
+        })
+    }
+
+    try {
+                 //console.log(await cl.skus.list())
+                 //todo Special authorization to reset a password? send email with linkpwdreset
+                 const linkPwdReset = await cl.customer_password_resets.create({
+                     customer_email: attributes.email
+                 })
+                console.log(linkPwdReset)
+
+             } catch (e) {
+                 console.log(e)
+             }
+
+
+
+             let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+
+             let apiKey = apiInstance.authentications['apiKey'];
+             apiKey.apiKey = process.env.BREVO_API_KEY;
+             
+             let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); 
+             
+             sendSmtpEmail.subject = "My {{params.subject}}";
+             sendSmtpEmail.htmlContent = "<html><body><h1>This is my first transactional email {{params.parameter}}</h1></body></html>";
+             sendSmtpEmail.sender = {"name":"John Doe","email":"example@example.com"};
+             sendSmtpEmail.to = [{"email":attributes.email,"name":"Jane Doe"}];
+             sendSmtpEmail.cc = [{"email":"example2@example2.com","name":"Janice Doe"}];
+             sendSmtpEmail.bcc = [{"name":"John Doe","email":"example@example.com"}];
+             sendSmtpEmail.replyTo = {"email":"replyto@domain.com","name":"John Doe"};
+             sendSmtpEmail.headers = {"Some-Custom-Name":"unique-id-1234"};
+             sendSmtpEmail.params = {"parameter":"My param value","subject":"New Subject"};
+             
+             apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
+               console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+             }, function(error) {
+               console.error(error);
+             });
+
 
 }
 
@@ -131,16 +192,8 @@ authenticator.use(
             }
 
 
+            createUser(attributes)
 
-            //createUser(attributes)
-           /* try {
-                console.log(await cl.skus.list())
-                //todo Special authorization to reset a password?
-                const linkPwdReset = await cl.customer_password_resets.create({customer_email: email})
-
-            } catch (e) {
-                console.log(e)
-            }*/
 
             return profile
 
