@@ -7,14 +7,12 @@ import {useTranslation} from "react-i18next";
 import Variants from "~/components/variants";
 import {useState} from "react";
 import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
+
+import * as React from "react";
 // import {authenticate} from '@commercelayer/js-auth'
 
 export default function Prods({products}: { product: SanityDocument }) {
-    //console.log(products)
-    /*const auth = await authenticate('client_credentials', {
-        clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-        scope: 'market:id:vlkaZhkGNj'
-    })*/
+
 
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
@@ -48,6 +46,7 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                             return (
                                 <>
+
                                     <div className="container mx-auto rounded border prose prose-lg">
 
                                             <Link

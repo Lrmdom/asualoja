@@ -7,10 +7,11 @@ import {loadQuery} from '~/sanity/loader.server'
 import Taxonomy from '~/components/Taxonomy'
 import {TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED} from '~/sanity/queries'
 import Sidebar from "~/components/sideBar";
+import invariant from "tiny-invariant";
 
 
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
-
+    invariant(params.slug, "Missing Slug param")
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED,
         params
@@ -32,7 +33,9 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
     for (const key of Object.keys(realtimeCaches)) {
       data.headers.append(key, realtimeCaches[key]);
     }*/
-
+    if (!data) {
+        throw new Response("Not Found", { status: 404 });
+    }
     return {data}
 }
 
