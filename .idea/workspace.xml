@@ -5,22 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="merged main branch and updated all package json">
-      <change afterPath="$PROJECT_DIR$/app/routes/$locale.passwordReset.$token.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/auth/newCustomerPwd.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/emblaCarousel/EmblaCarousel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/emblaCarousel/EmblaCarousel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/$locale.$slug.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/$locale.$slug.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/protected.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/protected.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sanity/projectDetails.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/sanity/projectDetails.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/auth.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/auth.server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
