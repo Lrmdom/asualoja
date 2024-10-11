@@ -35,8 +35,15 @@ import Loading from "~/components/loading"
 //THIS IS NEEDED FOR SANITY VISUAL EDITING
 import * as process from "node:process"
 import {authenticator} from "~/services/auth.server";
+import {authenticate} from "@commercelayer/js-auth";
+import {CommerceLayer} from "@commercelayer/react-components";
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
+
+
+
+
+
 
 export let loader = async ({request, params}) => {
 
@@ -63,7 +70,7 @@ export let loader = async ({request, params}) => {
     //https://remix.run/docs/en/main/discussion/state-management
 
     return json(
-        {data, locale, ENV},
+        {data, locale, ENV, user},
         {
             headers: {
                 'Set-Cookie': await localeCookie.serialize(locale),
@@ -74,10 +81,7 @@ export let loader = async ({request, params}) => {
     )
 }
 
-/*export const links: LinksFunction = () => [
-    { rel: "stylesheet", href: stylesheet },
-    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-    ]*/
+
 export const links: LinksFunction = () => [
     {rel: 'stylesheet', href: stylesheet},
 ]
@@ -91,7 +95,7 @@ export const handle = {
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
 
-    const {data, locale, ENV} = useRouteLoaderData<typeof loader>('root')
+    const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
 
@@ -118,16 +122,11 @@ export function Layout({children}: { children: React.ReactNode }) {
                 rel="stylesheet"
             />
             <Meta/>
-
             <Links/>
         </head>
         <body className="">
-
-        <Header taxonomies={data}></Header>
-
+        <Header taxonomies={data} user={user}></Header>
         <MyNavMenu taxonomies={data}></MyNavMenu>
-
-
         {children}
         <ScrollRestoration/>
         <script
@@ -146,12 +145,6 @@ export function Layout({children}: { children: React.ReactNode }) {
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
             <LiveVisualEditing
             />
-
-            /*<ClientOnly fallback={null}>
-                    {() =>   <LiveVisualEditing /> }
-
-                </ClientOnly>*/
-
         ) : null}
 
         <SubscribeNews/>
@@ -168,11 +161,14 @@ export default function App() {
     useChangeLanguage(locale)
 
     return (
+
         <div className={
-            navigation.state === "loading" ? <Loading /> : ""
+            navigation.state === "loading" ? "opacity-70"  : ""
         }
         >
+
             <Outlet/>
+
         </div>
 
     )

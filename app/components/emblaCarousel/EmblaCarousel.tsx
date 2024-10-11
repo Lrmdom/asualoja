@@ -51,7 +51,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
     let urlParts = useLocation().pathname.split('/').length
 
-    debugger
 
     return (
         <section className="embla">
