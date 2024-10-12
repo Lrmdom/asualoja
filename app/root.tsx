@@ -37,11 +37,29 @@ import * as process from "node:process"
 import {authenticator} from "~/services/auth.server";
 import {authenticate} from "@commercelayer/js-auth";
 import {CommerceLayer} from "@commercelayer/react-components";
+import Cookies from "js-cookie";
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 
-
+(async () => {
+    let token = "";
+    const getCookieToken = Cookies.get("clIntegrationToken");
+    if (!getCookieToken || getCookieToken === "undefined") {
+        const auth = await authenticate('client_credentials', {
+            clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+            scope: 'market:id:vlkaZhkGNj'
+        })
+        token = auth.accessToken;
+        Cookies.set("clIntegrationToken", token, {
+            expires: auth.expires
+        });
+    } else {
+        token = getCookieToken || "";
+    }
+    console.log(token)
+    return token;
+})();
 
 
 
