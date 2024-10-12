@@ -48,7 +48,7 @@ const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
     if (!getCookieToken || getCookieToken === "undefined") {
         const auth = await authenticate('client_credentials', {
             clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-            scope: 'market:id:vlkaZhkGNj'
+            scope: 'market:id:aoXOBhenel'
         })
         token = auth.accessToken;
         Cookies.set("clIntegrationToken", token, {
@@ -151,7 +151,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             dangerouslySetInnerHTML={{
                 __html: `window.ENV = ${JSON.stringify(ENV)}
                  window.commercelayerConfig = {
-                 clientId: 'GMt9oCgl_PQGr_XCwhy3l-V3-9eAEPEeWmGhkEQtnoY',
+                 clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
                  slug: 'execlog',
                  scope: 'market:id:vlkaZhkGNj',
                  debug: 'all', // default is 'none'

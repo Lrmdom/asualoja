@@ -23,30 +23,13 @@ export default function VariantAttr({
                                         handleAttributeChange,
                                         dynamicAttributes,
                                         setDynamicAttributes,
-                                        variantsImages
+                                        variantsImages,
+                                        setSkuImage,
+                                        enabledAttrs
                                     }: { attribute: SanityDocument }) {
 
 
-    function enabledAttrs(attr, variantsAttrs) {
 
-        const skusUnicos = new Set(
-            variantsAttrs
-                .filter(e => stegaClean(e.value) === stegaClean(attr.value))
-                .map(obj => obj.sku)
-        );
-
-        const finalAttrs = variantsAttrs
-            .filter(obj => skusUnicos.has(obj.sku))
-            .sort((a, b) => a.sku.localeCompare(b.sku));
-        handleAttributeChange("FINALATTRS", {finalAttrs})
-    }
-
-
-    function setSkuImage(attr, variantsImages) {
-
-        let index = variantsImages.findIndex(x => x.sku === attr.sku)
-        setEmblaImage(index)
-    }
 
 
 
@@ -84,7 +67,7 @@ export default function VariantAttr({
                                         stegaClean(attr.sku),
                                         handleAttributeChange(stegaClean(attr.name), stegaClean(attr.value)),
                                         setSkuImage(attr, variantsImages),
-                                        enabledAttrs(attr, variantsAttrs, dynamicAttributes))
+                                        enabledAttrs(attr, variantsAttrs))
                                     }
                                 >
                                     <div
@@ -120,7 +103,7 @@ export default function VariantAttr({
                                 stegaClean(attr.sku),
                                 handleAttributeChange(stegaClean(attr.name), stegaClean(attr.value)),
                                 setSkuImage(attr, variantsImages),
-                                enabledAttrs(attr, variantsAttrs, dynamicAttributes))
+                                enabledAttrs(attr, variantsAttrs))
                             }
                         >
                             <div
@@ -148,7 +131,7 @@ export default function VariantAttr({
                                     stegaClean(attr.sku),
                                     handleAttributeChange(stegaClean(attr.name), stegaClean(attr.value)),
                                     setSkuImage(attr, variantsImages),
-                                    enabledAttrs(attr, variantsAttrs, dynamicAttributes))
+                                    enabledAttrs(attr, variantsAttrs))
                                 }
                             >
                                 {attr.value.toUpperCase()}
@@ -172,7 +155,7 @@ export default function VariantAttr({
                             stegaClean(attr.sku),
                             handleAttributeChange(stegaClean(attr.name), stegaClean(attr.value)),
                             setSkuImage(attr, variantsImages),
-                            enabledAttrs(attr, variantsAttrs, dynamicAttributes))
+                            enabledAttrs(attr, variantsAttrs))
                         }
                     >
                         {attr.value.toUpperCase()}

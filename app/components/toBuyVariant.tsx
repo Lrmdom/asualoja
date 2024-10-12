@@ -84,20 +84,24 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 </SkusContainer>*/}
 
                 <PricesContainer>
-
-                    <ClientOnly fallback={null}>
-                        {() => <Price
+                    <cl-price code={stegaClean(selectedSku)}>
+                        <cl-price-amount type="compare-at"></cl-price-amount>
+                        <cl-price-amount type="price"></cl-price-amount>
+                    </cl-price>
+                    {/*<ClientOnly fallback={null}>
+                        {selectedSku?() => <Price
                             className="font-bold text-primary"
                             compareClassName="line-through ml-2 text-xl"
-                            skuCode={stegaClean(selectedSku)}
-                        />}
+                            skuCode={stegaClean(selectedSku?selectedSku:"")}
+                        />:null}
 
-                    </ClientOnly>
+                    </ClientOnly>*/}
                 </PricesContainer>
 
-                <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
+                <AvailabilityContainer skuCode={stegaClean(selectedSku ? selectedSku : "")}>
                     <AvailabilityTemplate>
-                        {childrenProps => {
+
+                        {selectedSku ? (childrenProps => {
                             return <div>
                                 <p className='font-bold'>Custom logic:</p>
                                 <p className='mb-8'>
@@ -105,16 +109,18 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                                     {childrenProps.min?.days} - {childrenProps.max?.days} days
                                 </p>
                                 <p className='font-bold'>The delivery_lead_times object</p>
-                                <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
+                                <pre>{JSON.stringify(childrenProps, null, 5)}</pre>
                             </div>;
-                        }}
+                          }) : null
+                        }
+
                     </AvailabilityTemplate>
-                    <AvailabilityTemplate
+                    {/*<AvailabilityTemplate
                         showShippingMethodName
                         showShippingMethodPrice
                         timeFormat="days"
                         className="text-gray-600"
-                    />
+                    />*/}
 
                 </AvailabilityContainer>
                 <OrderStorage persistKey="cl-examples-addToCart">
@@ -135,15 +141,16 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
                             <AddToCartButton
                                 disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
-                                skuCode={stegaClean(selectedSku)}
+                                skuCode={stegaClean(selectedSku?selectedSku:"")}
                                 quantity="1"
 
                                 className="px-3 py-2 bg-black text-white rounded disabled:opacity-50"
                                 label="Add SKU to cart"
-                                /*buyNowMode={true}*/
-                                /*redirectToHostedCart={true}*/
                                 /*buyNowMode={true}
-                                hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app'
+                                redirectToHostedCart={true}*/
+                                hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
+                                protocol="https"
+                                /*buyNowMode={true}
                                 checkoutUrl='brilliant-custard-06fc9a.netlify.app/checkoputhosted'
                                 redirectToHostedCart={true}*/
                             />
@@ -156,6 +163,8 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                     <cl-availability-status type="available" style={{color: "green"}}>
                         {t("• available")}
                     </cl-availability-status>
+
+
                     <div>
                         <cl-availability-status type="available">
 
@@ -169,6 +178,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                             (
                             <cl-availability-info type="shipping-method-price"></cl-availability-info>
                             )
+
                         </cl-availability-status>
                         <cl-availability-status type="unavailable" style={{color: "red"}}>
                             {t("• out of stock")}
@@ -181,7 +191,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                     <cl-price-amount type="price"></cl-price-amount>
                 </cl-price>
                 <div>
-                    <cl-add-to-cart code={stegaClean(selectedSku)} quantity="1" kind="sku">
+                   <cl-add-to-cart code={stegaClean(selectedSku)} quantity="1" kind="sku">
                         {t('Add to cart')}
                     </cl-add-to-cart>
                 </div>

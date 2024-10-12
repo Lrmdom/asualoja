@@ -20,7 +20,28 @@ export default function VariantsAttributes(props) {
         setEmblaImageDetail,
         OPTIONS
     } = {...props.props}
-    //setVariantDetailLink(linkVariantDetail)
+
+    function enabledAttrs(attr, variantsAttrs) {
+
+        const skusUnicos = new Set(
+            variantsAttrs
+                .filter(e => stegaClean(e.value) === stegaClean(attr.value))
+                .map(obj => obj.sku)
+        );
+
+        const finalAttrs = variantsAttrs
+            .filter(obj => skusUnicos.has(obj.sku))
+            .sort((a, b) => a.sku.localeCompare(b.sku));
+        handleAttributeChange("FINALATTRS", {finalAttrs})
+    }
+
+
+    function setSkuImage(attr, variantsImages) {
+
+        let index = variantsImages.findIndex(x => x.sku === attr.sku)
+        setEmblaImage(index)
+    }
+
     return (
 
         <main className="">
@@ -66,6 +87,8 @@ export default function VariantsAttributes(props) {
                                                                      dynamicAttributes={dynamicAttributes}
                                                                      setDynamicAttributes={setDynamicAttributes}
                                                                      variantsImages={product.variantsImages}
+                                                                     setSkuImage={setSkuImage}
+                                                                     enabledAttrs={enabledAttrs}
                                                         />
                                                     )
 
@@ -75,7 +98,15 @@ export default function VariantsAttributes(props) {
                                         </RadioGroup>
                                     </>
                                     :
+
                                     attribute[1].map((attr, i) => {
+                                        //todo this is why need redux or zustand etc,... because components render many many times each time state changes
+                                        /*if (i === 0) {
+                                            setSelectedSku(attr.sku)
+                                            handleAttributeChange(stegaClean(attr.name), stegaClean(attr.value))
+                                            setSkuImage(attr, product.variantsImages)
+                                            enabledAttrs(attr, variantsAttrs)
+                                        }*/
                                         //to check if allready listed or repeated value ...
                                         if (stegaClean(attribute[1][i + 1]?.value.toUpperCase()) == stegaClean(attribute[1][i].value.toUpperCase())) {
                                             null
@@ -93,12 +124,15 @@ export default function VariantsAttributes(props) {
                                                              dynamicAttributes={dynamicAttributes}
                                                              setDynamicAttributes={setDynamicAttributes}
                                                              variantsImages={product.variantsImages}
+                                                             setSkuImage={setSkuImage}
+                                                             enabledAttrs={enabledAttrs}
                                                 />
                                             )
 
                                         }
 
                                     })
+
                                 }
                             </div> : null}
                     </>
