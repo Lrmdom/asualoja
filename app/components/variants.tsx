@@ -106,7 +106,9 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
                 }}/>
 
 
-                <ToBuyVariant selectedSku={selectedSku}></ToBuyVariant>
+                <ToBuyVariant selectedSku={selectedSku} setSelectedSku={setSelectedSku} handleAttributeChange={handleAttributeChange}
+                              dynamicAttributes={dynamicAttributes}
+                              setDynamicAttributes={setDynamicAttributes}></ToBuyVariant>
 
 
     </main>)
