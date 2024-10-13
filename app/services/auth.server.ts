@@ -22,7 +22,7 @@ async function createUser(attributes) {
 
 
     const cl = CommerceLayer({
-        organization: 'Execlog',
+        organization: import.meta.env.VITE_MY_ORGANIZTION,
         accessToken: getCookieToken
     })
 
@@ -31,7 +31,7 @@ async function createUser(attributes) {
             method: 'GET',
             headers: {
                 'accept': 'application/json',
-                'api-key': process.env.BREVO_API_KEY
+                'api-key': import.meta.env.VITE_BREVO_API_KEY
             }
         })
     const brevoCustomer = await response.json();
@@ -52,7 +52,7 @@ async function createUser(attributes) {
 
         let apiKey = apiInstance.authentications['apiKey'];
 
-        apiKey.apiKey = process.env.BREVO_API_KEY;
+        apiKey.apiKey = import.meta.env.VITE_BREVO_API_KEY;
 
         let createContact = new SibApiV3Sdk.CreateContact();
         createContact.email = attributes.email;
@@ -81,7 +81,7 @@ async function createUser(attributes) {
     let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
     let apiKey = apiInstance.authentications['apiKey'];
-    apiKey.apiKey = process.env.BREVO_API_KEY;
+    apiKey.apiKey = import.meta.env.VITE_BREVO_API_KEY;
 
     let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 

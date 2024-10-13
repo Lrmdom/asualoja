@@ -1,4 +1,3 @@
-
 import stylesheet from './tailwind.css?url'
 import '@commercelayer/app-elements/vendor.css'
 /*
@@ -31,15 +30,11 @@ import type {SanityDocument} from '@sanity/client'
 import {useTranslation} from 'react-i18next'
 import Header from "~/components/header"
 import MyNavMenu from '~/components/responsiveNavbar'
-import Loading from "~/components/loading"
 //THIS IS NEEDED FOR SANITY VISUAL EDITING
 import * as process from "node:process"
 import {authenticator} from "~/services/auth.server";
 import {authenticate} from "@commercelayer/js-auth";
-import {CommerceLayer} from "@commercelayer/react-components";
 import Cookies from "js-cookie";
-
-const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 
 (async () => {
@@ -57,18 +52,55 @@ const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
     } else {
         token = getCookieToken || "";
     }
-    console.log(token)
+    return token;
+})()
+
+const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
+
+
+/*const mytoken = await (async () => {
+    let token = "";
+    const getCookieToken = Cookies.get("clIntegrationToken");
+    if (!getCookieToken || getCookieToken === "undefined") {
+        const auth = await authenticate('client_credentials', {
+            clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+            scope: 'market:id:aoXOBhenel'
+        })
+        token = auth.accessToken;
+        Cookies.set("clIntegrationToken", token, {
+            expires: auth.expires
+        });
+    } else {
+        token = getCookieToken || "";
+    }
     return token;
 })();
+console.log(mytoken)*/
 
-
+/*(async () => {
+    let token = "";
+    const getCookieToken = Cookies.get("clIntegrationToken");
+    if (!getCookieToken || getCookieToken === "undefined") {
+        const auth = await authenticate('client_credentials', {
+            clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+            scope: 'market:id:aoXOBhenel'
+        })
+        token = auth.accessToken;
+        Cookies.set("clIntegrationToken", token, {
+            expires: auth.expires
+        });
+    } else {
+        token = getCookieToken || "";
+    }
+    return token;
+})()*/
 
 export let loader = async ({request, params}) => {
 
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
 
-        const user = await authenticator.isAuthenticated(request, {})
+    const user = await authenticator.isAuthenticated(request, {})
 
 
     const {data} = await loadQuery<SanityDocument>(
@@ -143,7 +175,9 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body className="">
-        <Header taxonomies={data} user={user}></Header>
+        <Suspense fallback={null}>
+            <Header taxonomies={data} user={user}></Header>
+        </Suspense>
         <MyNavMenu taxonomies={data}></MyNavMenu>
         {children}
         <ScrollRestoration/>
@@ -181,7 +215,7 @@ export default function App() {
     return (
 
         <div className={
-            navigation.state === "loading" ? "opacity-70"  : ""
+            navigation.state === "loading" ? "opacity-70" : ""
         }
         >
 

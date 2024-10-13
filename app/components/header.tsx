@@ -5,14 +5,14 @@ import IdentityLinks from "~/components/identyLinks";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import SearchForm from "~/components/searchForm";
 import {
-    AddToCartButton,
     CartLink,
     CommerceLayer,
-    LineItemsContainer, LineItemsCount,
+    LineItemsContainer,
+    LineItemsCount,
     OrderContainer,
     OrderStorage
 } from "@commercelayer/react-components";
-import {stegaClean} from "@sanity/client/stega";
+import Cookies from "js-cookie";
 
 
 export default function Header(props) {
@@ -113,8 +113,8 @@ export default function Header(props) {
                 </li>
                 <li>
                     <CommerceLayer
-                        accessToken="eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IjliN2JiZmVlMzQzZDVkNDQ5ZGFkODhmMjg0MGEyZTM3YzhkZWFlZTg5NjM4MGQ1ODA2YTc4NWVkMWQ1OTc5ZjAifQ.eyJvcmdhbml6YXRpb24iOnsiaWQiOiJ4eWVnYkZqUU5uIiwic2x1ZyI6ImV4ZWNsb2ciLCJlbnRlcnByaXNlIjpmYWxzZSwicmVnaW9uIjoiZXUtd2VzdC0xIn0sImFwcGxpY2F0aW9uIjp7ImlkIjoicFJ2RGlyYU9ZcCIsImNsaWVudF9pZCI6IjlCckQ0RlVNelJEVEh4NU1MQklPQ09yczdUVVdsNklJMGw4UTVCTkU2dzgiLCJraW5kIjoic2FsZXNfY2hhbm5lbCIsInB1YmxpYyI6dHJ1ZX0sIm1hcmtldCI6eyJpZCI6WyJhb1hPQmhlbmVsIl0sInN0b2NrX2xvY2F0aW9uX2lkcyI6WyJna1dvbXVWUGJrIiwiQm5EUWd1d2pRRyJdLCJnZW9jb2Rlcl9pZCI6bnVsbCwiYWxsb3dzX2V4dGVybmFsX3ByaWNlcyI6ZmFsc2V9LCJzY29wZSI6Im1hcmtldDppZDphb1hPQmhlbmVsIiwiZXhwIjoxNzI4NzM2NDYxLCJ0ZXN0Ijp0cnVlLCJyYW5kIjowLjQzODExNjQyNDAwMzQ0MzUsImlhdCI6MTcyODcyMjA2MSwiaXNzIjoiaHR0cHM6Ly9hdXRoLmNvbW1lcmNlbGF5ZXIuaW8ifQ.NcYeNA18K4f_c9Jpbzu69HvfPxvUylD-mVfmsseEHdMpDVTrnwk1lLqR-cvQcoNtHK-tjEElFCL5_mWxqo8_J3KBIu7Wr5zHmds2UfeG6y2OXNfgUhlWzGAosOcpIG9uPplK43Rx37fjnFbtV22hFRcqU-RMi_6xW-xO5tUK8ewLaK6uGymjlv0oXzNlWkorZjoRso1P5Vxn9h9LD10_vl0CikcGRsBOr_PX8km8vlyPcOWUYW2jwO5zOlcIYNaQs6Ly_30H63wuhu47dAspTqJgcf8Es3UT_Vp-qlJKMOWxVRDyvSlMfja448glPGZsc9Sf6E2rseC7J6mvpGDTT3ZMKqrKb7V9Kfvs9t1mfSXqnyR7lnuaYVyZrgeawNAyfuTP5PfeRYMdo0fJsQk6doUrUg8h3Y03jOSPjNlsvCuza-Oj2Rr1XPdso_5bCZadIGFhDKoKlcMdUVfiZhw5dndiFs4oyYKKQRDmnTS2Luj-h9nnmv9aDt_3SqABKazAD-we52oWlBf4GqALS1ARLvoY1eFkMdlxBVBKwdsHMwk5bSeJ3xKz5aSx5VNjn2yNWNkZpKQzFrD5yVFQXd9hPbtT7XLesCRS2Z5sWz_-jvHZy-02uhmAjZzTlKsOdbjxCg8b0jhkRCyvZHr1qGZuOFVV2vEgp8g_QOJq9gZCtCs"
-                        endpoint="https://execlog.commercelayer.io" >
+                        accessToken={Cookies.get("clIntegrationToken")}
+                        endpoint="https://execlog.commercelayer.io">
                         {/*<PricesContainer>
                     <ClientOnly fallback={null}>
                         {() => <Price
