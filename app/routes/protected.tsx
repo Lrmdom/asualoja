@@ -7,6 +7,7 @@ import {Form, useLoaderData} from '@remix-run/react'
 export async function loader({request}) {
     const user = await authenticator.isAuthenticated(request, {
         failureRedirect: '/login',
+        successRedirect: `/auth/newCustomerPwd`
     })
 
     return json(user)

@@ -1,7 +1,7 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
-import {authenticate} from "@commercelayer/js-auth"
+
 import {
     AddToCartButton,
     AvailabilityContainer,
@@ -15,9 +15,11 @@ import {
     Price,
     PricesContainer
 } from "@commercelayer/react-components"
+import * as React from "react";
 import {useState} from "react";
 
 import {ClientOnly} from "remix-utils/client-only"
+import {authenticate} from "@commercelayer/js-auth";
 import Cookies from "js-cookie";
 
 
@@ -27,31 +29,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
     const [isLoading, setIsLoading] = useState(true);
 
 
-    const mytoken = (async () => {
-        let token = "";
-        const getCookieToken = Cookies.get("clIntegrationToken");
-        if (!getCookieToken || getCookieToken === "undefined") {
 
-            const auth = await authenticate('client_credentials', {
-                clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-                scope: 'market:id:vlkaZhkGNj'
-            })
-            token = auth.accessToken;
-            Cookies.set("clIntegrationToken", token, {
-                expires: auth.expires
-            });
-
-        } else {
-            token = getCookieToken || "";
-        }
-
-        return token;
-    })();
-
-    /*const cl = CommerceLayer({
-        organization: 'Execlog',
-        accessToken: mytoken
-    })*/
 
 
     const MyCartIcon = () => (
@@ -80,35 +58,27 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
     return (
         <>
-
             <CommerceLayer
-                accessToken={mytoken}
+                accessToken={Cookies.get("clIntegrationToken")}
                 endpoint="https://execlog.commercelayer.io">
-
-
-                {/*<button className="font-bold text-primary" onClick={async () => {
-                    debugger
-                    const skus = sdkClient.skus.list({filters: {code_cont: 'trekMadoneSL7'}})
-                }}
-                >
-                    Fetch specific SKU code
-                </button>*/}
-
-
-                {/*<SkusContainer
+             {/*<SkusContainer
                     skus={[
+                        "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
                         stegaClean(selectedSku?selectedSku:"trekMadoneSL7")
                     ]}
                 >
                     <Skus>
                         <SkuField
+                            attribute="code"
                             attribute="name"
                             tagElement="div"
                         />
                     </Skus>
+                </SkusContainer>
                 </SkusContainer>*/}
 
                 <PricesContainer>
+
                     <ClientOnly fallback={null}>
                         {() => <Price
                             className="font-bold text-primary"
@@ -120,6 +90,19 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 </PricesContainer>
 
                 <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
+                    <AvailabilityTemplate>
+                        {childrenProps => {
+                            return <div>
+                                <p className='font-bold'>Custom logic:</p>
+                                <p className='mb-8'>
+                                    {childrenProps.quantity} items available delivered in{' '}
+                                    {childrenProps.min?.days} - {childrenProps.max?.days} days
+                                </p>
+                                <p className='font-bold'>The delivery_lead_times object</p>
+                                <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
+                            </div>;
+                        }}
+                    </AvailabilityTemplate>
                     <AvailabilityTemplate
                         showShippingMethodName
                         showShippingMethodPrice
@@ -128,70 +111,75 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                     />
 
                 </AvailabilityContainer>
-                <OrderStorage persistKey="cl-examples-addToCart-Leon">
-                    <OrderContainer>
+                <OrderStorage persistKey="cl-examples-addToCart">
 
-                        <CartLink
-                            className="text-blue-500 hover:underline"
-                            label={MyCartIcon()}
-                            onClick={function Fa() {
-                            }}
-                            target="_blank"
-                        />
+                        <OrderContainer>
+
+                            {/*<p>
+                                <AddToCartButton
+                                    className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-70"
+                                    label="Add SKU to cart"
+                                    quantity="1"
+                                    disabled={!selectedSku}
+                                    skuCode={stegaClean(selectedSku)}
+                                />
+                            </p>*/}
 
 
-                        <AddToCartButton
-                            disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
-                            skuCode={stegaClean(selectedSku)}
-                            quantity="1"
 
-                            className="px-3 py-2 bg-black text-white rounded disabled:opacity-50"
-                            label="Add SKU to cart"
-                            /*buyNowMode={true}*/
-                            /*redirectToHostedCart={true}*/
-                            /*buyNowMode={true}
-                            hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app'
-                            checkoutUrl='brilliant-custard-06fc9a.netlify.app/checkoputhosted'
-                            redirectToHostedCart={true}*/
-                        />
-                    </OrderContainer>
-                </OrderStorage>
+                            <AddToCartButton
+                                disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
+                                skuCode={stegaClean(selectedSku)}
+                                quantity="1"
+
+                                className="px-3 py-2 bg-black text-white rounded disabled:opacity-50"
+                                label="Add SKU to cart"
+                                /*buyNowMode={true}*/
+                                /*redirectToHostedCart={true}*/
+                                /*buyNowMode={true}
+                                hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app'
+                                checkoutUrl='brilliant-custard-06fc9a.netlify.app/checkoputhosted'
+                                redirectToHostedCart={true}*/
+                            />
+                        </OrderContainer>
+                    </OrderStorage>
             </CommerceLayer>
 
-
-            <cl-availability code={stegaClean(selectedSku)}>
-                <cl-availability-status type="available" style={{color: "green"}}>
-                    {t("• available")}
-                </cl-availability-status>
-                <div>
-                    <cl-availability-status type="available">
-                        {t("Ready to be shipped in ")}
-                        <cl-availability-info type="min-days"></cl-availability-info>
-                        -
-                        <cl-availability-info type="max-days"></cl-availability-info>
-                        {t(" days ")}
-                        {t("with ")}
-                        <cl-availability-info type="shipping-method-name"></cl-availability-info>
-                        (
-                        <cl-availability-info type="shipping-method-price"></cl-availability-info>
-                        )
-                    </cl-availability-status>
-                    <cl-availability-status type="unavailable" style={{color: "red"}}>
-                        {t("• out of stock")}
-                    </cl-availability-status>
-                </div>
-            </cl-availability>
-
-            <cl-price code={stegaClean(selectedSku)}>
-                <cl-price-amount type="compare-at"></cl-price-amount>
-                <cl-price-amount type="price"></cl-price-amount>
-            </cl-price>
             <div>
-                <cl-add-to-cart code={stegaClean(selectedSku)} quantity="1" kind="sku" buyNowMode>
-                    {t('Add to cart')}
-                </cl-add-to-cart>
-            </div>
+                <cl-availability code={stegaClean(selectedSku)}>
+                    <cl-availability-status type="available" style={{color: "green"}}>
+                        {t("• available")}
+                    </cl-availability-status>
+                    <div>
+                        <cl-availability-status type="available">
 
+                            {t("Ready to be shipped in ")}
+                            <cl-availability-info type="min-days"></cl-availability-info>
+                            -
+                            <cl-availability-info type="max-days"></cl-availability-info>
+                            {t(" days ")}
+                            {t("with ")}
+                            <cl-availability-info type="shipping-method-name"></cl-availability-info>
+                            (
+                            <cl-availability-info type="shipping-method-price"></cl-availability-info>
+                            )
+                        </cl-availability-status>
+                        <cl-availability-status type="unavailable" style={{color: "red"}}>
+                            {t("• out of stock")}
+                        </cl-availability-status>
+                    </div>
+                </cl-availability>
+
+                <cl-price code={stegaClean(selectedSku)}>
+                    <cl-price-amount type="compare-at"></cl-price-amount>
+                    <cl-price-amount type="price"></cl-price-amount>
+                </cl-price>
+                <div>
+                    <cl-add-to-cart code={stegaClean(selectedSku)} quantity="1" kind="sku">
+                        {t('Add to cart')}
+                    </cl-add-to-cart>
+                </div>
+            </div>
         </>
     )
 
