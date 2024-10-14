@@ -33,22 +33,19 @@ import Header from "~/components/header"
 import MyNavMenu from '~/components/responsiveNavbar'
 import Loading from "~/components/loading"
 //THIS IS NEEDED FOR SANITY VISUAL EDITING
-import * as process from "node:process"
+
 import {authenticator} from "~/services/auth.server";
 import {authenticate} from "@commercelayer/js-auth";
 import {CommerceLayer} from "@commercelayer/react-components";
 import Cookies from "js-cookie";
-
-const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
-
-
-(async () => {
+import * as process from "node:process"
+/*const mytoken = await (async () => {
     let token = "";
     const getCookieToken = Cookies.get("clIntegrationToken");
     if (!getCookieToken || getCookieToken === "undefined") {
         const auth = await authenticate('client_credentials', {
             clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-            scope: 'market:id:vlkaZhkGNj'
+            scope: 'market:id:aoXOBhenel'
         })
         token = auth.accessToken;
         Cookies.set("clIntegrationToken", token, {
@@ -57,13 +54,34 @@ const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
     } else {
         token = getCookieToken || "";
     }
-    console.log(token)
     return token;
 })();
+console.log(mytoken)*/
 
 
+const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 export let loader = async ({request, params}) => {
+
+    await (async () => {
+        let token = "";
+        const getCookieToken = Cookies.get("clIntegrationToken");
+        if (!getCookieToken || getCookieToken === "undefined") {
+            const auth = await authenticate('client_credentials', {
+                clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+                scope: 'market:id:vlkaZhkGNj'
+            })
+            token = auth.accessToken;
+            Cookies.set("clIntegrationToken", token, {
+                expires: auth.expires
+            });
+        } else {
+            token = getCookieToken || "";
+        }
+        console.log(token)
+        return token;
+    })();
+
 
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale

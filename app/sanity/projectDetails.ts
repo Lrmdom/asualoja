@@ -13,10 +13,10 @@ declare global {
     }
 }
 const {
-    SANITY_STUDIO_PROJECT_ID = process.env.SANITY_STUDIO_PROJECT_ID,
-    SANITY_STUDIO_DATASET = process.env.SANITY_STUDIO_DATASET,
-    SANITY_STUDIO_URL = process.env.SANITY_STUDIO_URL,
-    SANITY_STUDIO_STEGA_ENABLED = process.env.SANITY_STUDIO_STEGA_ENABLED,
+    SANITY_STUDIO_PROJECT_ID =import.meta.env.VITE_SANITY_STUDIO_PROJECT_ID,
+    SANITY_STUDIO_DATASET = import.meta.env.VITE_SANITY_STUDIO_DATASET,
+    SANITY_STUDIO_URL = import.meta.env.VITE_SANITY_STUDIO_URL,
+    SANITY_STUDIO_STEGA_ENABLED = import.meta.env.VITE_SANITY_STUDIO_STEGA_ENABLED,
 } = typeof document === 'undefined' ? process.env : window.ENV
 
 export const projectId = SANITY_STUDIO_PROJECT_ID!
