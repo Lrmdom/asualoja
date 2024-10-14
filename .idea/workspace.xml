@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sanity/projectDetails.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/sanity/projectDetails.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728456017438</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="merged main branch and updated all package json">
+      <option name="closed" value="true" />
+      <created>1728890398004</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1728890398004</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
