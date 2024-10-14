@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="some fixes commercelayer react components almost ok wiith hosted cart etc...---subsiste problem mini cart dont update quantity">
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="fix env variables with vite production. CLayer authenticate tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/entry.server.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/entry.server.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sanity/projectDetails.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/sanity/projectDetails.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/auth.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/auth.server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +64,8 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241013_0000",
-    "git-widget-placeholder": "b656cba4",
+    "com.google.cloudcode.ide_session_index": "20241014_0000",
+    "git-widget-placeholder": "aaddc6ae",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -137,7 +136,8 @@
       <workItem from="1728738896815" duration="846000" />
       <workItem from="1728740511600" duration="279000" />
       <workItem from="1728760917124" duration="3999000" />
-      <workItem from="1728839333140" duration="8262000" />
+      <workItem from="1728839333140" duration="8455000" />
+      <workItem from="1728885921101" duration="1130000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -299,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728740537306</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix env variables with vite production. CLayer authenticate tests">
+      <option name="closed" value="true" />
+      <created>1728849487732</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1728849487732</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,7 +380,8 @@
     <MESSAGE value="remove .env.local from git" />
     <MESSAGE value="merged main branch and updated all package json" />
     <MESSAGE value="some fixes commercelayer react components almost ok wiith hosted cart etc...---subsiste problem mini cart dont update quantity" />
-    <option name="LAST_COMMIT_MESSAGE" value="some fixes commercelayer react components almost ok wiith hosted cart etc...---subsiste problem mini cart dont update quantity" />
+    <MESSAGE value="fix env variables with vite production. CLayer authenticate tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix env variables with vite production. CLayer authenticate tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
