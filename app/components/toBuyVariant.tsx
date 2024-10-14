@@ -21,16 +21,13 @@ import {useState} from "react";
 import {ClientOnly} from "remix-utils/client-only"
 import {authenticate} from "@commercelayer/js-auth";
 import Cookies from "js-cookie";
+import {HostedCart} from "@commercelayer/react-components/orders/HostedCart";
 
 
 export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
     const [data, setData] = useState(null);
     const {t} = useTranslation('')
     const [isLoading, setIsLoading] = useState(true);
-
-
-
-
 
     const MyCartIcon = () => (
         <div className='relative inline-block cursor-pointer text-xs font-bold'>
@@ -111,7 +108,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                     />
 
                 </AvailabilityContainer>
-                <OrderStorage persistKey="cl-examples-addToCart">
+                <OrderStorage persistKey="execlog-demo-order">
 
                         <OrderContainer>
 
@@ -126,7 +123,6 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                             </p>*/}
 
 
-
                             <AddToCartButton
                                 disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
                                 skuCode={stegaClean(selectedSku)}
@@ -134,6 +130,9 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
                                 className="px-3 py-2 bg-black text-white rounded disabled:opacity-50"
                                 label="Add SKU to cart"
+                                // redirectToHostedCart={true}
+                                /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
+                                checkoutUrl='brilliant-custard-06fc9a.netlify.app'*/
                                 /*buyNowMode={true}*/
                                 /*redirectToHostedCart={true}*/
                                 /*buyNowMode={true}
