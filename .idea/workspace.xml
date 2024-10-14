@@ -68,8 +68,8 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241014_0000",
-    "git-widget-placeholder": "dev",
+    "com.google.cloudcode.ide_session_index": "20241014_0005",
+    "git-widget-placeholder": "cartlink-wont-refresh",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -141,6 +141,7 @@
       <workItem from="1728591307428" duration="703000" />
       <workItem from="1728616639213" duration="23969000" />
       <workItem from="1728902450772" duration="778000" />
+      <workItem from="1728920762953" duration="817000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
