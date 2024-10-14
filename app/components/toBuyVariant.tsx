@@ -58,7 +58,6 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
     return (
         <>
-
             <CommerceLayer
                 accessToken={Cookies.get("clIntegrationToken")}
                 endpoint="https://execlog.commercelayer.io">
