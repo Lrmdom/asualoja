@@ -46,38 +46,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ACTIVE_CLOUD_PROJECT_ACCOUNT": "lmatiasdomingos@gmail.com",
-    "ACTIVE_CLOUD_PROJECT_ID": "avid-infinity-370500",
-    "ACTIVE_CLOUD_PROJECT_NAME": "Axciona Cms and Sql",
-    "ACTIVE_CLOUD_PROJECT_NUMBER": "1091535953121",
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Attach to Node.js/Chrome.Unnamed.executor": "Debug",
-    "JavaScript Debug.cli.js JavaScript.executor": "Run",
-    "JavaScript Debug.node JavaScript.executor": "Run",
-    "Node.js.Unnamed.executor": "Debug",
-    "Node.js.cli.js .executor": "Run",
-    "Node.js.cli.js vite:dev --host.executor": "Run",
-    "Node.js.cli.js.executor": "Run",
-    "Node.js.entry.server.tsx.executor": "Run",
-    "Node.js.node.executor": "Run",
-    "Node.js.remix vite:dev --host.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241014_0000",
-    "git-widget-placeholder": "aaddc6ae",
-    "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/leoneldomingos/Projects/asualoja/node_modules/typescript/lib",
-    "two.files.diff.last.used.folder": "/Users/leoneldomingos/Downloads/asualoja-v.0.0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ACTIVE_CLOUD_PROJECT_ACCOUNT&quot;: &quot;lmatiasdomingos@gmail.com&quot;,
+    &quot;ACTIVE_CLOUD_PROJECT_ID&quot;: &quot;avid-infinity-370500&quot;,
+    &quot;ACTIVE_CLOUD_PROJECT_NAME&quot;: &quot;Axciona Cms and Sql&quot;,
+    &quot;ACTIVE_CLOUD_PROJECT_NUMBER&quot;: &quot;1091535953121&quot;,
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Attach to Node.js/Chrome.Unnamed.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.cli.js JavaScript.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.node JavaScript.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.Unnamed.executor&quot;: &quot;Debug&quot;,
+    &quot;Node.js.cli.js .executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.cli.js vite:dev --host.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.cli.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.entry.server.tsx.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.node.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.remix vite:dev --host.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20241014_0000&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;2d6f532e&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/leoneldomingos/Projects/asualoja&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/leoneldomingos/Projects/asualoja/node_modules/typescript/lib&quot;,
+    &quot;two.files.diff.last.used.folder&quot;: &quot;/Users/leoneldomingos/Downloads/asualoja-v.0.0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -137,7 +137,7 @@
       <workItem from="1728740511600" duration="279000" />
       <workItem from="1728760917124" duration="3999000" />
       <workItem from="1728839333140" duration="8455000" />
-      <workItem from="1728885921101" duration="1130000" />
+      <workItem from="1728885921101" duration="1403000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -307,7 +307,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728849487732</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fix env variables with vite production. CLayer authenticate tests">
+      <option name="closed" value="true" />
+      <created>1728887256647</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1728887256648</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
