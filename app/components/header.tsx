@@ -14,6 +14,7 @@ import {
 } from "@commercelayer/react-components";
 import Cookies from "js-cookie";
 import {authenticate} from "@commercelayer/js-auth";
+import {HostedCart} from "@commercelayer/react-components/orders/HostedCart";
 
 
 export default  function Header(props) {
@@ -141,9 +142,15 @@ export default  function Header(props) {
                     />
                 </AvailabilityContainer>*/}
 
-                        <OrderStorage persistKey="cl-examples-addToCart">
+                        <OrderStorage persistKey="execlog-demo-order">
                             <OrderContainer>
+                                {/*<HostedCart type='mini' /!*customDomain="https://brilliant-custard-06fc9a.netlify.app"*!/ openAdd style={{*/}
 
+                                    <HostedCart type='mini' openAdd style={{
+                                    container: {
+                                        backgroundColor: 'white'
+                                    }
+                                }} />
                                 <CartLink
                                     className="text-blue-500 hover:underline"
                                     label={MyCartIcon()}
