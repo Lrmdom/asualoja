@@ -143,7 +143,7 @@ export default  function Header(props) {
                 </AvailabilityContainer>*/}
 
                         <OrderStorage persistKey="execlog-demo-order">
-                            <OrderContainer>
+                            <OrderContainer language_code="it">
                                 {/*<HostedCart type='mini' /!*customDomain="https://brilliant-custard-06fc9a.netlify.app"*!/ openAdd style={{*/}
 
                                     <HostedCart type='mini' openAdd style={{
