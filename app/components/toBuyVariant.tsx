@@ -84,6 +84,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
             <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
             <AvailabilityTemplate>
+                {/*//TODO id selectedSku?show:hide*/}
                 {
                     childrenProps => {
                     return <div>
@@ -131,7 +132,8 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
                     className="px-3 py-2 bg-black text-white rounded disabled:opacity-50"
                     label="Add SKU to cart"
-                    // redirectToHostedCart={true}
+                    hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
+                    checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
                     /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
                     checkoutUrl='brilliant-custard-06fc9a.netlify.app'*/
                     /*buyNowMode={true}*/

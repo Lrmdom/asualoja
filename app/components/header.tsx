@@ -13,13 +13,10 @@ import {
     OrderStorage
 } from "@commercelayer/react-components";
 import Cookies from "js-cookie";
-import {authenticate} from "@commercelayer/js-auth";
 import {HostedCart} from "@commercelayer/react-components/orders/HostedCart";
 
 
-export default  function Header(props) {
-
-
+export default function Header(props) {
 
 
     let identity
@@ -120,7 +117,7 @@ export default  function Header(props) {
                 <li>
 
                     <CommerceLayer
-                        accessToken={Cookies.get("clIntegrationToken") }
+                        accessToken={Cookies.get("clIntegrationToken")}
                         endpoint="https://execlog.commercelayer.io">
                         {/*<PricesContainer>
                     <ClientOnly fallback={null}>
@@ -143,16 +140,18 @@ export default  function Header(props) {
                 </AvailabilityContainer>*/}
 
                         <OrderStorage persistKey="execlog-demo-order">
-                            <OrderContainer language_code="it">
+                            <OrderContainer>
                                 {/*<HostedCart type='mini' /!*customDomain="https://brilliant-custard-06fc9a.netlify.app"*!/ openAdd style={{*/}
 
-                                    <HostedCart type='mini' openAdd style={{
-                                    container: {
-                                        backgroundColor: 'white'
-                                    }
-                                }} />
+                                <HostedCart type='mini' openAdd
+                                            customDomain="brilliant-custard-06fc9a.netlify.app"
+                                            style={{
+                                                container: {
+                                                    backgroundColor: 'white'
+                                                }
+                                            }}/>
                                 <CartLink
-                                    className="text-blue-500 hover:underline"
+                                    customDomain="brilliant-custard-06fc9a.netlify.app"
                                     label={MyCartIcon()}
                                     onClick={function Fa() {
                                     }}
