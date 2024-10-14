@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="working version of cl ayer components and visual editing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fly.toml" beforeDir="false" afterPath="$PROJECT_DIR$/fly.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,7 @@
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.google.cloudcode.ide_session_index": "20241014_0000",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "cartlink-wont-refresh",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
