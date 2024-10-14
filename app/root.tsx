@@ -63,24 +63,7 @@ const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 export let loader = async ({request, params}) => {
 
-    await (async () => {
-        let token = "";
-        const getCookieToken = Cookies.get("clIntegrationToken");
-        if (!getCookieToken || getCookieToken === "undefined") {
-            const auth = await authenticate('client_credentials', {
-                clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-                scope: 'market:id:vlkaZhkGNj'
-            })
-            token = auth.accessToken;
-            Cookies.set("clIntegrationToken", token, {
-                expires: auth.expires
-            });
-        } else {
-            token = getCookieToken || "";
-        }
-        console.log(token)
-        return token;
-    })();
+
 
 
     const locale = await i18next.getLocale(request)
@@ -130,13 +113,13 @@ export const handle = {
 
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
-
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
 
     const {i18n} = useTranslation()
     i18n.language = locale
+
 
 
     return (
@@ -161,8 +144,8 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body className="">
-        <Header taxonomies={data} user={user}></Header>
-        <MyNavMenu taxonomies={data}></MyNavMenu>
+        <Header taxonomies={data} user={user} ></Header>
+            <MyNavMenu taxonomies={data}></MyNavMenu>
         {children}
         <ScrollRestoration/>
         <script
