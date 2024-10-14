@@ -7,7 +7,6 @@
     <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="working version of cl ayer components and visual editing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +67,7 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241014_0005",
+    "com.google.cloudcode.ide_session_index": "20241014_0007",
     "git-widget-placeholder": "cartlink-wont-refresh",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
@@ -141,7 +140,8 @@
       <workItem from="1728591307428" duration="703000" />
       <workItem from="1728616639213" duration="23969000" />
       <workItem from="1728902450772" duration="778000" />
-      <workItem from="1728920762953" duration="817000" />
+      <workItem from="1728920762953" duration="1303000" />
+      <workItem from="1728922291458" duration="2228000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -335,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728908231601</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="working version of cl ayer components and visual editing">
+      <option name="closed" value="true" />
+      <created>1728921799890</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1728921799890</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,6 +373,7 @@
         <entry key="19284365-6d32-464c-8bbe-0a8a1d12b35b" value="TOOL_WINDOW" />
         <entry key="5ba375f7-0d48-40c6-9536-35eac52b555f" value="TOOL_WINDOW" />
         <entry key="7c14b37e-c12b-4601-9703-8fe02592892b" value="TOOL_WINDOW" />
+        <entry key="ea55683b-2a3f-4146-bc42-fd47ea07b615" value="TOOL_WINDOW" />
       </map>
     </option>
     <option name="TAB_STATES">
@@ -447,6 +456,31 @@
         <entry key="MAIN">
           <value>
             <State />
+          </value>
+        </entry>
+        <entry key="ea55683b-2a3f-4146-bc42-fd47ea07b615">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
           </value>
         </entry>
       </map>
