@@ -21,8 +21,6 @@ export default  function Header(props) {
 
 
 
-
-
     let identity
     if (props.user) {
         identity =
@@ -121,7 +119,7 @@ export default  function Header(props) {
                 <li>
 
                     <CommerceLayer
-                        accessToken={Cookies.get("clIntegrationToken") || props.mytoken}
+                        accessToken={Cookies.get("clIntegrationToken") }
                         endpoint="https://execlog.commercelayer.io">
                         {/*<PricesContainer>
                     <ClientOnly fallback={null}>

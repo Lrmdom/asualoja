@@ -41,9 +41,26 @@ import Cookies from "js-cookie";
 import * as process from "node:process"
 
 
+/*const mytoken = await (async () => {
+    let token = "";
+    const getCookieToken = Cookies.get("clIntegrationToken");
+    if (!getCookieToken || getCookieToken === "undefined") {
+        const auth = await authenticate('client_credentials', {
+            clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+            scope: 'market:id:aoXOBhenel'
+        })
+        token = auth.accessToken;
+        Cookies.set("clIntegrationToken", token, {
+            expires: auth.expires
+        });
+    } else {
+        token = getCookieToken || "";
+    }
+    return token;
+})();
+console.log(mytoken)*/
 
-
-/*async function handleToken() {
+async function handleToken() {
     let token = "";
     const getCookieToken = Cookies.get("clIntegrationToken");
     if (!getCookieToken || getCookieToken === "undefined") {
@@ -62,30 +79,14 @@ import * as process from "node:process"
 }
 
 
-handleToken().then(r => console.log(r))*/
+handleToken().then(r => console.log(r))
 
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 export let loader = async ({request, params}) => {
 
-    const mytoken = await (async () => {
-        let token = "";
-        const getCookieToken = Cookies.get("clIntegrationToken");
-        if (!getCookieToken || getCookieToken === "undefined") {
-            const auth = await authenticate('client_credentials', {
-                clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-                scope: 'market:id:aoXOBhenel'
-            })
-            token = auth.accessToken;
-            Cookies.set("clIntegrationToken", token, {
-                expires: auth.expires
-            });
-        } else {
-            token = getCookieToken || "";
-        }
-        return token;
-    })();
+
 
 
     const locale = await i18next.getLocale(request)
@@ -111,7 +112,7 @@ export let loader = async ({request, params}) => {
     //https://remix.run/docs/en/main/discussion/state-management
 
     return json(
-        {data, locale, ENV, user,mytoken},
+        {data, locale, ENV, user},
         {
             headers: {
                 'Set-Cookie': await localeCookie.serialize(locale),
@@ -135,7 +136,7 @@ export const handle = {
 
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
-    const {data, locale, ENV, user, mytoken} = useRouteLoaderData<typeof loader>('root')
+    const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
 
@@ -166,8 +167,8 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body className="">
-        <Suspense fallback={<Loading/>}>
-        <Header taxonomies={data} user={user} mytoken={mytoken}></Header>
+        <Suspense>
+        <Header taxonomies={data} user={user} ></Header>
         </Suspense>
         <MyNavMenu taxonomies={data}></MyNavMenu>
         {children}
