@@ -71,7 +71,7 @@
     "embla-carousel": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
     "fuse.js": "^7.0.0",
-    "groq": "^3.59.1",
+    "groq": "^3.60.0",
     "i18next": "^23.15.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-fs-backend": "^2.3.2",

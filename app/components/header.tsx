@@ -19,27 +19,8 @@ import {authenticate} from "@commercelayer/js-auth";
 export default  function Header(props) {
 
 
-    async function handleToken() {
-        let token = "";
-        const getCookieToken = Cookies.get("clIntegrationToken");
-        if (!getCookieToken || getCookieToken === "undefined") {
-            const auth = await authenticate('client_credentials', {
-                clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-                scope: 'market:id:vlkaZhkGNj'
-            })
-            token = auth.accessToken;
-            Cookies.set("clIntegrationToken", token, {
-                expires: auth.expires
-            });
-        } else {
-            token = getCookieToken || "";
-        }
-        return token;
-    }
 
-    handleToken().then(r => console.log(r))
-    console.log("token leo" + leo)
-    console.log("cookie leo" + Cookies.get("clIntegrationToken"))
+
 
 
     let identity
@@ -138,9 +119,9 @@ export default  function Header(props) {
                     </cl-cart-link>
                 </li>
                 <li>
-                    { props.token===1 ? (
+
                     <CommerceLayer
-                        accessToken={props.token || props.getCookieToken}
+                        accessToken={Cookies.get("clIntegrationToken") || props.mytoken}
                         endpoint="https://execlog.commercelayer.io">
                         {/*<PricesContainer>
                     <ClientOnly fallback={null}>
@@ -177,7 +158,6 @@ export default  function Header(props) {
                             </OrderContainer>
                         </OrderStorage>
                     </CommerceLayer>
-                ):null}
                 </li>
 
 
