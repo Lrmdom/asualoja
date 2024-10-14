@@ -10,48 +10,98 @@ import {LinkedinStrategy} from 'remix-auth-linkedin'
 
 import {authenticate} from "@commercelayer/js-auth";
 import {CommerceLayer} from '@commercelayer/sdk'
-
+import * as process from "node:process"
 import SibApiV3Sdk from "sib-api-v3-typescript"
-import * as process from "node:process";
-
-
-
-const clAuth = await authenticate('client_credentials', {
-    clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-    scope: 'market:id:vlkaZhkGNj'
-})
-
-const cl = CommerceLayer({
-    organization: 'Execlog',
-    accessToken: clAuth.accessToken
-})
-
-
-
+import {redirect} from "@remix-run/node";
+import {useNavigation} from "@remix-run/react";
+import Cookies from "js-cookie";
 
 async function createUser(attributes) {
-    //todo if not exists , create
-    await cl.customers.update(attributes)
+
+    const getCookieToken = Cookies.get("clIntegrationToken")
 
 
-    //todo if not exists , create, else update
-    let apiInstance = new SibApiV3Sdk.ContactsApi()
+    const cl = CommerceLayer({
+        organization: 'Execlog',
+        accessToken: getCookieToken
+    })
+
+    const response = await fetch(`https://api.brevo.com/v3/contacts/${attributes.email}`,
+        {
+            method: 'GET',
+            headers: {
+                'accept': 'application/json',
+                'api-key': process.env.BREVO_API_KEY
+            }
+        })
+    const brevoCustomer = await response.json();
+
+    const customer = await cl.customers.list({filters: {email_eq: attributes.email}})
+
+    customer.length > 0 ? null :
+        attributes.password=attributes.email
+        await cl.customers.create(attributes)
+
+
+    if (brevoCustomer) {
+        null
+
+    } else {
+
+        let apiInstance = new SibApiV3Sdk.ContactsApi()
+
+        let apiKey = apiInstance.authentications['apiKey'];
+
+        apiKey.apiKey = process.env.BREVO_API_KEY;
+
+        let createContact = new SibApiV3Sdk.CreateContact();
+        createContact.email = attributes.email;
+        //createContact.listIds = [2];
+
+        apiInstance.createContact(createContact).then(function (data) {
+            console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+        }, function (error) {
+            console.error(error);
+        })
+    }
+
+    try {
+        //console.log(await cl.skus.list())
+        //todo Special authorization to reset a password? send email with linkpwdreset
+        const linkPwdReset = await cl.customer_password_resets.create({
+            customer_email: attributes.email
+        })
+        console.log(linkPwdReset)
+
+    } catch (e) {
+        console.log(e)
+    }
+//todo send link pwdreset on email...
+
+    let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
     let apiKey = apiInstance.authentications['apiKey'];
+    apiKey.apiKey = process.env.BREVO_API_KEY;
 
-    apiKey.apiKey = process.env.BREVO_API_KEY ;
+    let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
-    let createContact = new SibApiV3Sdk.CreateContact();
+    sendSmtpEmail.subject = "My {{params.subject}}";
+    sendSmtpEmail.htmlContent = "<html><body><h1>This is my first transactional email {{params.parameter}}</h1></body></html>";
+    sendSmtpEmail.sender = {"name": "John Doe", "email": "example@example.com"};
+    sendSmtpEmail.to = [{"email": attributes.email, "name": "Jane Doe"}];
+    sendSmtpEmail.cc = [{"email": "example2@example2.com", "name": "Janice Doe"}];
+    sendSmtpEmail.bcc = [{"name": "John Doe", "email": "example@example.com"}];
+    sendSmtpEmail.replyTo = {"email": "replyto@domain.com", "name": "John Doe"};
+    sendSmtpEmail.headers = {"Some-Custom-Name": "unique-id-1234"};
+    sendSmtpEmail.params = {"parameter": "My param value", "subject": "New Subject"};
 
-    createContact.email = attributes.email;
-    //createContact.listIds = [2];
-
-    apiInstance.updateContact(createContact.email,createContact).then(function(data) {
+    apiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
         console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-    }, function(error) {
+    }, function (error) {
         console.error(error);
     });
 
+//todo redirect to url passwordUpdate
 }
 
 export let authenticator = new Authenticator(sessionStorage)
@@ -131,16 +181,9 @@ authenticator.use(
             }
 
 
+            createUser(attributes)
+            //window.location.href = `/pwdReset?email=${email}`
 
-            //createUser(attributes)
-           /* try {
-                console.log(await cl.skus.list())
-                //todo Special authorization to reset a password?
-                const linkPwdReset = await cl.customer_password_resets.create({customer_email: email})
-
-            } catch (e) {
-                console.log(e)
-            }*/
 
             return profile
 
@@ -157,11 +200,15 @@ authenticator.use(
             callbackURL: 'http://localhost:5173/auth/facebook/callback',
         },
         async ({profile}) => {
+
             const email = profile._json.email
             const attributes = {
                 email: email
             }
+
+
             createUser(attributes)
+            //window.location.href = `/pwdReset?email=${email}`
 
             return profile
         }

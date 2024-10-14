@@ -9,7 +9,11 @@ import {EmblaOptionsType} from 'embla-carousel'
 
 import ProductAttributes from "~/components/productAttributes";
 import VariantsAttributes from "~/components/variantAttributes";
-import { ClientOnly } from "remix-utils/client-only"
+
+import * as React from "react";
+
+
+
 
 export default function Variants({product, emblaImageDetail, setEmblaImageDetail}: {
     variant: SanityDocument
@@ -21,7 +25,6 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
     const OPTIONS: EmblaOptionsType = {}
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
     let groupedVariantsAttrs
-
     let variantsAttrs: any[] = []
     product.variants?.map((variant) => {
         if (Array.isArray(variant.attributes)) {
@@ -58,7 +61,7 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
         }));
     };
 
-    //setVariantDetailLink(linkVariantDetail)
+
 
     return (<main className="">
 
@@ -102,9 +105,9 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
                     OPTIONS
                 }}/>
 
-
-                <ToBuyVariant selectedSku={selectedSku}></ToBuyVariant>
-
+                <ToBuyVariant selectedSku={selectedSku} setSelectedSku={setSelectedSku} handleAttributeChange={handleAttributeChange}
+                              dynamicAttributes={dynamicAttributes}
+                              setDynamicAttributes={setDynamicAttributes}></ToBuyVariant>
 
     </main>)
 

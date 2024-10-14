@@ -33,12 +33,61 @@ import Header from "~/components/header"
 import MyNavMenu from '~/components/responsiveNavbar'
 import Loading from "~/components/loading"
 //THIS IS NEEDED FOR SANITY VISUAL EDITING
-import * as process from "node:process"
+
 import {authenticator} from "~/services/auth.server";
+import {authenticate} from "@commercelayer/js-auth";
+import {CommerceLayer} from "@commercelayer/react-components";
+import Cookies from "js-cookie";
+import * as process from "node:process"
+
+
+/*const mytoken = await (async () => {
+    let token = "";
+    const getCookieToken = Cookies.get("clIntegrationToken");
+    if (!getCookieToken || getCookieToken === "undefined") {
+        const auth = await authenticate('client_credentials', {
+            clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+            scope: 'market:id:aoXOBhenel'
+        })
+        token = auth.accessToken;
+        Cookies.set("clIntegrationToken", token, {
+            expires: auth.expires
+        });
+    } else {
+        token = getCookieToken || "";
+    }
+    return token;
+})();
+console.log(mytoken)*/
+
+async function handleToken() {
+    let token = "";
+    const getCookieToken = Cookies.get("clIntegrationToken");
+    if (!getCookieToken || getCookieToken === "undefined") {
+        const auth = await authenticate('client_credentials', {
+            clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+            scope: 'market:id:vlkaZhkGNj'
+        })
+        token = auth.accessToken;
+        Cookies.set("clIntegrationToken", token, {
+            expires: auth.expires
+        });
+    } else {
+        token = getCookieToken || "";
+    }
+    return token;
+}
+
+
+handleToken().then(r => console.log(r))
+
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 export let loader = async ({request, params}) => {
+
+
+
 
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
@@ -50,12 +99,11 @@ export let loader = async ({request, params}) => {
         TAXONOMIES_QUERY_LOCALIZED,
         params
     )
-    debugger
     const ENV = {
-        SANITY_STUDIO_PROJECT_ID: process.env.SANITY_STUDIO_PROJECT_ID,
-        SANITY_STUDIO_DATASET: process.env.SANITY_STUDIO_DATASET,
-        SANITY_STUDIO_URL: process.env.SANITY_STUDIO_URL,
-        SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
+        SANITY_STUDIO_PROJECT_ID: import.meta.env.VITE_SANITY_STUDIO_PROJECT_ID,
+        SANITY_STUDIO_DATASET: import.meta.env.VITE_SANITY_STUDIO_DATASET,
+        SANITY_STUDIO_URL: import.meta.env.VITE_SANITY_STUDIO_URL,
+        SANITY_STUDIO_STEGA_ENABLED: import.meta.env.VITE_SANITY_STUDIO_STEGA_ENABLED,
     }
 
 //https://sergiodxa.com/tutorials/load-only-the-data-you-need-in-remix
@@ -64,7 +112,7 @@ export let loader = async ({request, params}) => {
     //https://remix.run/docs/en/main/discussion/state-management
 
     return json(
-        {data, locale, ENV},
+        {data, locale, ENV, user},
         {
             headers: {
                 'Set-Cookie': await localeCookie.serialize(locale),
@@ -75,10 +123,7 @@ export let loader = async ({request, params}) => {
     )
 }
 
-/*export const links: LinksFunction = () => [
-    { rel: "stylesheet", href: stylesheet },
-    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-    ]*/
+
 export const links: LinksFunction = () => [
     {rel: 'stylesheet', href: stylesheet},
 ]
@@ -91,13 +136,13 @@ export const handle = {
 
 export function Layout({children}: { children: React.ReactNode }) {
     const matches = useMatches();
-
-    const {data, locale, ENV} = useRouteLoaderData<typeof loader>('root')
+    const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
 
     const {i18n} = useTranslation()
     i18n.language = locale
+
 
 
     return (
@@ -119,16 +164,13 @@ export function Layout({children}: { children: React.ReactNode }) {
                 rel="stylesheet"
             />
             <Meta/>
-
             <Links/>
         </head>
         <body className="">
-
-        <Header taxonomies={data}></Header>
-
+        <Suspense>
+        <Header taxonomies={data} user={user} ></Header>
+        </Suspense>
         <MyNavMenu taxonomies={data}></MyNavMenu>
-
-
         {children}
         <ScrollRestoration/>
         <script
@@ -147,12 +189,6 @@ export function Layout({children}: { children: React.ReactNode }) {
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
             <LiveVisualEditing
             />
-
-            /*<ClientOnly fallback={null}>
-                    {() =>   <LiveVisualEditing /> }
-
-                </ClientOnly>*/
-
         ) : null}
 
         <SubscribeNews/>
@@ -169,11 +205,14 @@ export default function App() {
     useChangeLanguage(locale)
 
     return (
+
         <div className={
-            navigation.state === "loading" ? <Loading /> : ""
+            navigation.state === "loading" ? "opacity-70"  : ""
         }
         >
+
             <Outlet/>
+
         </div>
 
     )
