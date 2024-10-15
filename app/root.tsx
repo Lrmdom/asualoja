@@ -40,8 +40,7 @@ import {CommerceLayer} from "@commercelayer/react-components";
 import Cookies from "js-cookie";
 import * as process from "node:process"
 
-
-/*const mytoken = await (async () => {
+const token = await (async () => {
     let token = "";
     const getCookieToken = Cookies.get("clIntegrationToken");
     if (!getCookieToken || getCookieToken === "undefined") {
@@ -58,33 +57,19 @@ import * as process from "node:process"
     }
     return token;
 })();
-console.log(mytoken)*/
-
-async function handleToken() {
-    let token = "";
-    const getCookieToken = Cookies.get("clIntegrationToken");
-    if (!getCookieToken || getCookieToken === "undefined") {
-        const auth = await authenticate('client_credentials', {
-            clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-            scope: 'market:id:vlkaZhkGNj'
-        })
-        token = auth.accessToken;
-        Cookies.set("clIntegrationToken", token, {
-            expires: auth.expires
-        });
-    } else {
-        token = getCookieToken || "";
-    }
-    return token;
-}
+console.log(token)
 
 
-handleToken().then(r => console.log(r))
+
+
+
 
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 export let loader = async ({request, params}) => {
+
+
 
 
 

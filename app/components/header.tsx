@@ -80,7 +80,7 @@ export default function Header(props) {
                     <IdentityLinks></IdentityLinks>
                 </li>
                 <li>
-                    <cl-cart-link>
+                   {/* <cl-cart-link>
                         <svg
                             width="32"
                             height="32"
@@ -112,10 +112,9 @@ export default function Header(props) {
                         </svg>
                         <cl-cart-count></cl-cart-count>
                         <cl-cart></cl-cart>
-                    </cl-cart-link>
+                    </cl-cart-link>*/}
                 </li>
                 <li>
-
                     <CommerceLayer
                         accessToken={Cookies.get("clIntegrationToken")}
                         endpoint="https://execlog.commercelayer.io">
@@ -141,7 +140,6 @@ export default function Header(props) {
 
                         <OrderStorage persistKey="execlog-demo-order">
                             <OrderContainer>
-                                {/*<HostedCart type='mini' /!*customDomain="https://brilliant-custard-06fc9a.netlify.app"*!/ openAdd style={{*/}
 
                                 <HostedCart type='mini' openAdd
                                             customDomain="brilliant-custard-06fc9a.netlify.app"
@@ -164,6 +162,7 @@ export default function Header(props) {
                             </OrderContainer>
                         </OrderStorage>
                     </CommerceLayer>
+
                 </li>
 
 
