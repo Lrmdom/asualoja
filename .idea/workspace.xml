@@ -7,6 +7,10 @@
     <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="working version of cl ayer components and visual editing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/entry.server.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/entry.server.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/$locale._index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/$locale._index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/_index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/_index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +71,7 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241014_0007",
+    "com.google.cloudcode.ide_session_index": "20241015_0003",
     "git-widget-placeholder": "cartlink-wont-refresh",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
@@ -141,7 +145,10 @@
       <workItem from="1728616639213" duration="23969000" />
       <workItem from="1728902450772" duration="778000" />
       <workItem from="1728920762953" duration="1303000" />
-      <workItem from="1728922291458" duration="2228000" />
+      <workItem from="1728922291458" duration="2324000" />
+      <workItem from="1728964414858" duration="1768000" />
+      <workItem from="1729001506979" duration="6224000" />
+      <workItem from="1729017225697" duration="6313000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -343,7 +350,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728921799890</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="working version of cl ayer components and visual editing">
+      <option name="closed" value="true" />
+      <created>1728924679613</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1728924679613</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
