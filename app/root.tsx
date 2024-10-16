@@ -157,9 +157,7 @@ myToken?null:navigate('.', { replace: true })
         <body>
 
         <Suspense fallback={<Loading/>}>
-            <Suspense>
         <Header taxonomies={data} user={user} myToken={myToken}></Header>
-            </Suspense>
         </Suspense>
         <MyNavMenu taxonomies={data}></MyNavMenu>
         {children}

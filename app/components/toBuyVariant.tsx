@@ -3,9 +3,9 @@ import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
 
 import {
-    AddToCartButton, AvailabilityContainer,
+    AddToCartButton,
+    AvailabilityContainer,
     AvailabilityTemplate,
-    CommerceLayer,
     LineItemsContainer,
     LineItemsCount,
     OrderContainer,
@@ -17,7 +17,6 @@ import * as React from "react";
 import {useState} from "react";
 
 import {ClientOnly} from "remix-utils/client-only"
-import Cookies from "js-cookie";
 import {useNavigate} from "@remix-run/react";
 
 
@@ -70,7 +69,8 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                     </Skus>
                 </SkusContainer>
                 </SkusContainer>*/}
-
+            {selectedSku ? (
+                <>
             <PricesContainer>
 
                 <ClientOnly fallback={null}>
@@ -83,39 +83,41 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 </ClientOnly>
             </PricesContainer>
 
-            <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
-            <AvailabilityTemplate>
-                {/*//TODO id selectedSku?show:hide*/}
-                {
-                    childrenProps => {
-                    return <div>
-                        <p className='font-bold'>Custom logic:</p>
-                        <p className='mb-8'>
-                            {childrenProps.quantity} items available delivered in{' '}
-                            {childrenProps.min?.days} - {childrenProps.max?.days} days
-                        </p>
-                        <p className='font-bold'>The delivery_lead_times object</p>
-                        <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
-                     </div>;
-                }}
+                    <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
 
-            </AvailabilityTemplate>
-            <AvailabilityTemplate
-                showShippingMethodName
-                showShippingMethodPrice
-                timeFormat="days"
-                className="text-gray-600"
-            />
+                        <AvailabilityTemplate>
+                            {/*//TODO id selectedSku?show:hide*/}
+                            {
+                                childrenProps => {
+                                    return <div>
+                                        <p className='font-bold'>Custom logic:</p>
+                                        <p className='mb-8'>
+                                            {childrenProps.quantity} items available delivered in{' '}
+                                            {childrenProps.min?.days} - {childrenProps.max?.days} days
+                                        </p>
+                                        <p className='font-bold'>The delivery_lead_times object</p>
+                                        <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
+                                    </div>;
+                                }}
 
-        </AvailabilityContainer>
+                        </AvailabilityTemplate>
+                        <AvailabilityTemplate
+                            showShippingMethodName
+                            showShippingMethodPrice
+                            timeFormat="days"
+                            className="text-gray-600"
+                        />
+
+                    </AvailabilityContainer>
+                </>
+            ) : null}
 
 
+            <OrderStorage persistKey="execlogdemoorder">
 
-        <OrderStorage persistKey="execlogdemoorder">
+                <OrderContainer>
 
-            <OrderContainer>
-
-                {/*<p>
+                    {/*<p>
                                 <AddToCartButton
                                     className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-70"
                                     label="Add SKU to cart"
@@ -126,29 +128,40 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                             </p>*/}
 
 
-                <AddToCartButton
-                    disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
-                    skuCode={stegaClean(selectedSku)}
-                    quantity="1"
+                    <AddToCartButton
+                        disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
+                        skuCode={stegaClean(selectedSku)}
+                        quantity="1"
 
-                    className="px-3 py-2 bg-black text-white rounded disabled:opacity-50"
-                    label="Add SKU to cart"
-                    /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
-                    checkoutUrl='resplendent-gnome-8fd84a.netlify.app'*/
-                    /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
-                    checkoutUrl='brilliant-custard-06fc9a.netlify.app'*/
-                    /*buyNowMode={true}*/
-                    /*redirectToHostedCart={true}*/
-                    /*buyNowMode={true}
-                    hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app'
-                    checkoutUrl='brilliant-custard-06fc9a.netlify.app/checkoputhosted'
-                    redirectToHostedCart={true}*/
-                />
-            </OrderContainer>
-        </OrderStorage>
+                        className="px-3 py-2 bg-black text-white rounded disabled:opacity-50"
+                        label="Add SKU to cart"
+                        hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
+                        checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
+                        /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
+                        checkoutUrl='brilliant-custard-06fc9a.netlify.app'*/
+                        /*buyNowMode={true}*/
+                        /*redirectToHostedCart={true}*/
+                        /*buyNowMode={true}
+                        hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app'
+                        checkoutUrl='brilliant-custard-06fc9a.netlify.app/checkoputhosted'
+                        redirectToHostedCart={true}*/
+                    >
+                        {/*{
+                        childrenProps => {
+                            return <div>
+
+                                <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
+                            </div>;
+                        }}*/}
+
+                    </AddToCartButton>
+
+                </OrderContainer>
+
+            </OrderStorage>
 
 
-    {/*<div>
+            {/*<div>
         <cl-availability code={stegaClean(selectedSku)}>
             <cl-availability-status type="available" style={{color: "green"}}>
                 {t("• available")}
@@ -183,8 +196,8 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             </cl-add-to-cart>
         </div>
     </div>*/}
-</>
-)
+        </>
+    )
 
 }
 
