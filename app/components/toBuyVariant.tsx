@@ -117,9 +117,9 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             ) : null}
 
 
-            <OrderStorage persistKey="execlogdemoorder">
+            {/*<OrderStorage persistKey="execlogdemoorder">
 
-                <OrderContainer>
+                <OrderContainer>*/}
 
                     {/*<p>
                                 <AddToCartButton
@@ -161,9 +161,9 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
                     </AddToCartButton>
 
-                </OrderContainer>
+               {/* </OrderContainer>
 
-            </OrderStorage>
+            </OrderStorage>*/}
 
 
             {/*<div>

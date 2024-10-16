@@ -128,11 +128,7 @@ export default function Header(props) {
                     </cl-cart-link>*/}
                 </li>
                 <li>
-                    {props.myToken!=null? (
 
-                    <CommerceLayer
-                        accessToken={props.myToken?props.myToken:Cookies.get("clIntegrationToken")}
-                        endpoint="https://execlog.commercelayer.io">
 
 
                         {/*<PricesContainer>
@@ -155,8 +151,7 @@ export default function Header(props) {
                     />
                 </AvailabilityContainer>*/}
 
-                        <OrderStorage persistKey="execlogdemoorder">
-                            <OrderContainer>
+
 
                                 <HostedCart type='mini' openAdd
                                             customDomain="brilliant-custard-06fc9a.netlify.app"
@@ -176,11 +171,8 @@ export default function Header(props) {
                                 />
 
 
-                            </OrderContainer>
-                        </OrderStorage>
-                    </CommerceLayer>
-                    ):null
-                    }
+
+
                 </li>
 
 
