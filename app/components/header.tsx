@@ -18,8 +18,19 @@ import {useEffect, useState} from "react";
 import {authenticate} from "@commercelayer/js-auth";
 
 
-export default function Header(props) {
 
+export default function Header(props) {
+/*
+    if(props.myToken!=null) {
+        const getCookieToken = Cookies.get("clIntegrationToken")
+        const cl = CommerceLayer({
+            organization: 'Execlog',
+            accessToken: props.myToken ? props.myToken : Cookies.get("clIntegrationToken"),
+            persistKey: 'execlogdemoorder',
+            autoCreateOrder: true
+        })
+        console.log(cl.orders.create())
+    }*/
     let identity
     if (props.user) {
         identity =
@@ -120,8 +131,10 @@ export default function Header(props) {
                     {props.myToken!=null? (
 
                     <CommerceLayer
-                        accessToken={Cookies.get("clIntegrationToken")}
+                        accessToken={props.myToken?props.myToken:Cookies.get("clIntegrationToken")}
                         endpoint="https://execlog.commercelayer.io">
+
+
                         {/*<PricesContainer>
                     <ClientOnly fallback={null}>
                         {() => <Price
@@ -142,11 +155,11 @@ export default function Header(props) {
                     />
                 </AvailabilityContainer>*/}
 
-                        <OrderStorage persistKey="execlog-demo-order">
+                        <OrderStorage persistKey="execlogdemoorder">
                             <OrderContainer>
 
                                 <HostedCart type='mini' openAdd
-                                            customDomain="brilliant-custard-06fc9a.netlify.app"
+                                            /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
 
                                             style={{
                                                 container: {
@@ -154,7 +167,7 @@ export default function Header(props) {
                                                 }
                                             }}/>
                                 <CartLink
-                                    customDomain="brilliant-custard-06fc9a.netlify.app"
+                                    /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
 
                                     label={MyCartIcon()}
                                     onClick={function Fa() {

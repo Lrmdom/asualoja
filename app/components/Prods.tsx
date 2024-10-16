@@ -9,6 +9,8 @@ import {useState} from "react";
 import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 
 import * as React from "react";
+import Cookies from "js-cookie";
+import {CommerceLayer} from "@commercelayer/react-components";
 // import {authenticate} from '@commercelayer/js-auth'
 
 export default function Prods({products}: { product: SanityDocument }) {
@@ -20,6 +22,9 @@ export default function Prods({products}: { product: SanityDocument }) {
 
     return (
         <>
+            <CommerceLayer
+                accessToken={Cookies.get("clIntegrationToken")}
+                endpoint="https://execlog.commercelayer.io">
             <div className="bg-white">
                 <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
                     <div
@@ -43,7 +48,6 @@ export default function Prods({products}: { product: SanityDocument }) {
                                 prod.variantsImages = [{"url": prod.imageUrl, "alt": stegaClean(prod.title)}]
                             }
                             let taxonomy = prod.taxonomies ? prod.taxonomies[0] : prod.taxonomy
-
                             return (
                                 <>
 
@@ -58,6 +62,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                                 {stegaClean(prod.title)}</Link>
 
                                         <Variants product={prod} ></Variants>
+
                                     </div>
                                 </>
                             )
@@ -65,6 +70,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                     </div>
                 </div>
             </div>
+            </CommerceLayer>
         </>
     )
 }

@@ -18,12 +18,15 @@ import {useState} from "react";
 
 import {ClientOnly} from "remix-utils/client-only"
 import Cookies from "js-cookie";
+import {useNavigate} from "@remix-run/react";
 
 
 export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
     const [data, setData] = useState(null);
     const {t} = useTranslation('')
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate()
+
 
     const MyCartIcon = () => (
         <div className='relative inline-block cursor-pointer text-xs font-bold'>
@@ -51,9 +54,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
     return (
         <>
-        <CommerceLayer
-            accessToken={Cookies.get("clIntegrationToken")}
-            endpoint="https://execlog.commercelayer.io" >
+
             {/*<SkusContainer
                     skus={[
                         "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
@@ -95,7 +96,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                         </p>
                         <p className='font-bold'>The delivery_lead_times object</p>
                         <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
-                    </div>;
+                     </div>;
                 }}
 
             </AvailabilityTemplate>
@@ -110,7 +111,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
 
 
-        <OrderStorage persistKey="execlog-demo-order">
+        <OrderStorage persistKey="execlogdemoorder">
 
             <OrderContainer>
 
@@ -132,8 +133,8 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
                     className="px-3 py-2 bg-black text-white rounded disabled:opacity-50"
                     label="Add SKU to cart"
-                    hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
-                    checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
+                    /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
+                    checkoutUrl='resplendent-gnome-8fd84a.netlify.app'*/
                     /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
                     checkoutUrl='brilliant-custard-06fc9a.netlify.app'*/
                     /*buyNowMode={true}*/
@@ -145,9 +146,9 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 />
             </OrderContainer>
         </OrderStorage>
-        </CommerceLayer>
 
-    <div>
+
+    {/*<div>
         <cl-availability code={stegaClean(selectedSku)}>
             <cl-availability-status type="available" style={{color: "green"}}>
                 {t("• available")}
@@ -181,7 +182,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 {t('Add to cart')}
             </cl-add-to-cart>
         </div>
-    </div>
+    </div>*/}
 </>
 )
 
