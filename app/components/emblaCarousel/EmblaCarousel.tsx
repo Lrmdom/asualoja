@@ -25,7 +25,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         onNextButtonClick
     } = usePrevNextButtons(emblaApi)
 
-    props.setEmblaImage(props.emblaImageDetail)
+    //props.setEmblaImage(props.emblaImageDetail)
 
     props.emblaImage ? emblaApi.scrollTo(props.emblaImage, true) : null
     const logEmblaEvent = useCallback(
