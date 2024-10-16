@@ -133,7 +133,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                         skuCode={stegaClean(selectedSku)}
                         quantity="1"
 
-                        className="px-3 py-2 bg-black text-white rounded disabled:opacity-50"
+                        className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
                         label="Add SKU to cart"
                         hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
                         checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
