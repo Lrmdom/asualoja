@@ -1,4 +1,4 @@
-
+import stylesheet from './tailwind.css?url'
 import stylesheet from './tailwind.css?url'
 import '@commercelayer/app-elements/vendor.css'
 /*
@@ -12,7 +12,7 @@ import {
     Scripts,
     ScrollRestoration,
     useLoaderData,
-    useMatches,
+    useMatches, useNavigate,
     useNavigation,
     useRevalidator,
     useRouteLoaderData,
@@ -33,12 +33,10 @@ import Header from "~/components/header"
 import MyNavMenu from '~/components/responsiveNavbar'
 import Loading from "~/components/loading"
 //THIS IS NEEDED FOR SANITY VISUAL EDITING
-
 import {authenticator} from "~/services/auth.server";
 import {authenticate} from "@commercelayer/js-auth";
-import {CommerceLayer} from "@commercelayer/react-components";
 import Cookies from "js-cookie";
-import * as process from "node:process"
+import { CommerceLayer } from '@commercelayer/react-components'
 
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
@@ -48,7 +46,7 @@ export let loader = async ({request, params}) => {
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
 
-        const user = await authenticator.isAuthenticated(request, {})
+    const user = await authenticator.isAuthenticated(request, {})
 
 
     const {data} = await loadQuery<SanityDocument>(
@@ -91,10 +89,9 @@ export const handle = {
 }
 
 
-
 export function Layout({children}: { children: React.ReactNode }) {
 
-
+    const navigate = useNavigate()
     const [myToken,setMyToken] = useState(null)
 
     async function handleToken() {
@@ -119,10 +116,14 @@ export function Layout({children}: { children: React.ReactNode }) {
         handleToken().then(r => {
             setMyToken(r)
 
-        }).catch(e => {console.log(e)})
+        }).catch(e => {
+            console.log(e)
+        })
     }, [])
 
-
+/*
+myToken?null:navigate('.', { replace: true })
+*/
     const matches = useMatches();
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV} = useLoaderData<typeof loader>()
@@ -130,8 +131,6 @@ export function Layout({children}: { children: React.ReactNode }) {
 
     const {i18n} = useTranslation()
     i18n.language = locale
-
-
 
 
     return (
@@ -156,6 +155,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
+
         <Suspense fallback={<Loading/>}>
             <Suspense>
         <Header taxonomies={data} user={user} myToken={myToken}></Header>
@@ -184,7 +184,10 @@ export function Layout({children}: { children: React.ReactNode }) {
 
         <SubscribeNews/>
         <Footer/>
+
+
         <Scripts/>
+
         </body>
         </html>
     )
@@ -198,7 +201,7 @@ export default function App() {
     return (
 
         <div className={
-            navigation.state === "loading" ? "opacity-70"  : ""
+            navigation.state === "loading" ? "opacity-70" : ""
         }
         >
 
