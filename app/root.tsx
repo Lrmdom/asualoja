@@ -4,7 +4,7 @@ import '@commercelayer/app-elements/vendor.css'
 /*
 import '@commercelayer/app-elements/style.css'
 */
-import {lazy, Suspense} from 'react'
+import {lazy, Suspense, useEffect, useState} from 'react'
 import {
     Links,
     Meta,
@@ -40,39 +40,10 @@ import {CommerceLayer} from "@commercelayer/react-components";
 import Cookies from "js-cookie";
 import * as process from "node:process"
 
-const token = await (async () => {
-    let token = "";
-    const getCookieToken = Cookies.get("clIntegrationToken");
-    if (!getCookieToken || getCookieToken === "undefined") {
-        const auth = await authenticate('client_credentials', {
-            clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-            scope: 'market:id:aoXOBhenel'
-        })
-        token = auth.accessToken;
-        Cookies.set("clIntegrationToken", token, {
-            expires: auth.expires
-        });
-    } else {
-        token = getCookieToken || "";
-    }
-    return token;
-})();
-console.log(token)
-
-
-
-
-
-
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
 export let loader = async ({request, params}) => {
-
-
-
-
-
 
     const locale = await i18next.getLocale(request)
     !params.locale ? (params.locale = locale) : params.locale
@@ -119,7 +90,39 @@ export const handle = {
     i18n: 'common',
 }
 
+
+
 export function Layout({children}: { children: React.ReactNode }) {
+
+
+    const [myToken,setMyToken] = useState(null)
+
+    async function handleToken() {
+        let token = "";
+        const getCookieToken = Cookies.get("clIntegrationToken");
+        if (!getCookieToken || getCookieToken === "undefined") {
+            const auth = await authenticate('client_credentials', {
+                clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+                scope: 'market:id:vlkaZhkGNj'
+            })
+            token = auth.accessToken;
+            Cookies.set("clIntegrationToken", token, {
+                expires: auth.expires
+            });
+        } else {
+            token = getCookieToken || "";
+        }
+        return token;
+    }
+
+    useEffect(() => {
+        handleToken().then(r => {
+            setMyToken(r)
+
+        }).catch(e => {console.log(e)})
+    }, [])
+
+
     const matches = useMatches();
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV} = useLoaderData<typeof loader>()
@@ -127,6 +130,7 @@ export function Layout({children}: { children: React.ReactNode }) {
 
     const {i18n} = useTranslation()
     i18n.language = locale
+
 
 
 
@@ -153,7 +157,9 @@ export function Layout({children}: { children: React.ReactNode }) {
         </head>
         <body>
         <Suspense fallback={<Loading/>}>
-        <Header taxonomies={data} user={user} ></Header>
+            <Suspense>
+        <Header taxonomies={data} user={user} myToken={myToken}></Header>
+            </Suspense>
         </Suspense>
         <MyNavMenu taxonomies={data}></MyNavMenu>
         {children}

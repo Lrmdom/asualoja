@@ -14,10 +14,11 @@ import {
 } from "@commercelayer/react-components";
 import Cookies from "js-cookie";
 import {HostedCart} from "@commercelayer/react-components/orders/HostedCart";
+import {useEffect, useState} from "react";
+import {authenticate} from "@commercelayer/js-auth";
 
 
 export default function Header(props) {
-
 
     let identity
     if (props.user) {
@@ -62,6 +63,7 @@ export default function Header(props) {
             </LineItemsContainer>
         </div>
     )
+
 
 
     return (
@@ -115,6 +117,8 @@ export default function Header(props) {
                     </cl-cart-link>*/}
                 </li>
                 <li>
+                    {props.myToken!=null? (
+
                     <CommerceLayer
                         accessToken={Cookies.get("clIntegrationToken")}
                         endpoint="https://execlog.commercelayer.io">
@@ -162,7 +166,8 @@ export default function Header(props) {
                             </OrderContainer>
                         </OrderStorage>
                     </CommerceLayer>
-
+                    ):null
+                    }
                 </li>
 
 
