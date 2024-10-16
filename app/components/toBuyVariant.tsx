@@ -53,7 +53,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
         <>
         <CommerceLayer
             accessToken={Cookies.get("clIntegrationToken")}
-            endpoint="https://execlog.commercelayer.io">
+            endpoint="https://execlog.commercelayer.io" >
             {/*<SkusContainer
                     skus={[
                         "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
