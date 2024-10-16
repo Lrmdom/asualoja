@@ -20,8 +20,8 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
 }) {
 
     const {t} = useTranslation('')
-    const [selectedSku, setSelectedSku] = useState("")
-    const [emblaImage, setEmblaImage] = useState("")
+    const [selectedSku, setSelectedSku] = useState(null)
+    const [emblaImage, setEmblaImage] = useState(null)
     const OPTIONS: EmblaOptionsType = {}
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
     let groupedVariantsAttrs
