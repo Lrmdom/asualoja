@@ -1,5 +1,4 @@
 import stylesheet from './tailwind.css?url'
-import stylesheet from './tailwind.css?url'
 import '@commercelayer/app-elements/vendor.css'
 /*
 import '@commercelayer/app-elements/style.css'
@@ -12,7 +11,8 @@ import {
     Scripts,
     ScrollRestoration,
     useLoaderData,
-    useMatches, useNavigate,
+    useMatches,
+    useNavigate,
     useNavigation,
     useRevalidator,
     useRouteLoaderData,
@@ -36,7 +36,7 @@ import Loading from "~/components/loading"
 import {authenticator} from "~/services/auth.server";
 import {authenticate} from "@commercelayer/js-auth";
 import Cookies from "js-cookie";
-import { CommerceLayer } from '@commercelayer/react-components'
+import {CommerceLayer, OrderContainer, OrderStorage} from '@commercelayer/react-components'
 
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
@@ -92,7 +92,7 @@ export const handle = {
 export function Layout({children}: { children: React.ReactNode }) {
 
     const navigate = useNavigate()
-    const [myToken,setMyToken] = useState(null)
+    const [myToken, setMyToken] = useState(null)
 
     async function handleToken() {
         let token = "";
@@ -121,9 +121,9 @@ export function Layout({children}: { children: React.ReactNode }) {
         })
     }, [])
 
-/*
-myToken?null:navigate('.', { replace: true })
-*/
+    /*
+    myToken?null:navigate('.', { replace: true })
+    */
     const matches = useMatches();
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV} = useLoaderData<typeof loader>()
@@ -155,12 +155,23 @@ myToken?null:navigate('.', { replace: true })
             <Links/>
         </head>
         <body>
+        {myToken != null ? (
 
-        <Suspense fallback={<Loading/>}>
-        <Header taxonomies={data} user={user} myToken={myToken}></Header>
-        </Suspense>
-        <MyNavMenu taxonomies={data}></MyNavMenu>
-        {children}
+            <CommerceLayer
+                accessToken={myToken ? myToken : Cookies.get("clIntegrationToken")}
+                endpoint="https://execlog.commercelayer.io">
+                <OrderStorage persistKey="execlogdemoorder">
+                    <OrderContainer>
+                        <Suspense fallback={<Loading/>}>
+                            <Header taxonomies={data} user={user} myToken={myToken}></Header>
+                        </Suspense>
+                        <MyNavMenu taxonomies={data}></MyNavMenu>
+                        {children}
+                    </OrderContainer>
+                </OrderStorage>
+            </CommerceLayer>
+        ) : null
+        }
         <ScrollRestoration/>
         <script
             dangerouslySetInnerHTML={{
