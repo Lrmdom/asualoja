@@ -18,6 +18,7 @@ import {useState} from "react";
 
 import {ClientOnly} from "remix-utils/client-only"
 import {useNavigate} from "@remix-run/react";
+import {redirect} from "@remix-run/node";
 
 
 export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
@@ -25,7 +26,10 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
     const {t} = useTranslation('')
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate()
-
+    const handleAddToCart = async () => {
+        console.log("clicked, must refresh page")
+        window.location.reload()
+    }
 
     const MyCartIcon = () => (
         <div className='relative inline-block cursor-pointer text-xs font-bold'>
@@ -129,6 +133,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
 
                     <AddToCartButton
+                        onClick={handleAddToCart}
                         disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
                         skuCode={stegaClean(selectedSku)}
                         quantity="1"

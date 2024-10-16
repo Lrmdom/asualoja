@@ -8,6 +8,7 @@ import Taxonomy from '~/components/Taxonomy'
 import {TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED} from '~/sanity/queries'
 import Sidebar from "~/components/sideBar";
 import invariant from "tiny-invariant";
+import {Suspense} from "react";
 
 
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
