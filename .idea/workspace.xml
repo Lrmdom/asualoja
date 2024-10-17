@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dev.Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fly.toml" beforeDir="false" afterPath="$PROJECT_DIR$/fly.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prod.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/prod.Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +70,7 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241017_0000",
+    "com.google.cloudcode.ide_session_index": "20241017_0001",
     "git-widget-placeholder": "sku-price-variants",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
@@ -151,7 +152,8 @@
       <workItem from="1729068354483" duration="9052000" />
       <workItem from="1729091280607" duration="2471000" />
       <workItem from="1729109144522" duration="2205000" />
-      <workItem from="1729144699538" duration="3087000" />
+      <workItem from="1729144699538" duration="3198000" />
+      <workItem from="1729158115799" duration="5509000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -425,7 +427,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729095649625</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue">
+      <option name="closed" value="true" />
+      <created>1729158036630</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1729158036630</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
