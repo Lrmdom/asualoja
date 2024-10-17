@@ -8,4 +8,4 @@ COPY . .
 RUN npm run build
 EXPOSE 3000
 CMD [ "npm", "run", "start" ]
-#docker build -t foo . && docker run -p 80:3000 -it foon
+#docker build -t foo -f prod.Dockerfile .  && docker run -p 80:3000 -it foo
