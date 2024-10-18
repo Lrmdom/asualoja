@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dev.Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fly.toml" beforeDir="false" afterPath="$PROJECT_DIR$/fly.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +148,7 @@
       <workItem from="1729046409229" duration="20056000" />
       <workItem from="1729068354483" duration="9052000" />
       <workItem from="1729091280607" duration="2471000" />
-      <workItem from="1729234644057" duration="4851000" />
+      <workItem from="1729234644057" duration="5846000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -423,7 +422,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729201585331</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue">
+      <option name="closed" value="true" />
+      <created>1729241084800</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1729241084800</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
