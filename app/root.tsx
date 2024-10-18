@@ -158,7 +158,7 @@ export function Layout({children}: { children: React.ReactNode }) {
         {myToken != null ? (
 
             <CommerceLayer
-                accessToken={myToken ? myToken : Cookies.get("clIntegrationToken")}
+                accessToken={Cookies.get("clIntegrationToken") ? Cookies.get("clIntegrationToken") : "" }
                 endpoint="https://execlog.commercelayer.io">
                 <OrderStorage persistKey="execlogdemoorder">
                     <OrderContainer>
