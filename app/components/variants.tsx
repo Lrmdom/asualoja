@@ -3,14 +3,13 @@ import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
 
 import ToBuyVariant from "~/components/toBuyVariant";
-import {Suspense, useState} from "react";
+import * as React from "react";
+import {useState} from "react";
 import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import {EmblaOptionsType} from 'embla-carousel'
 
 import ProductAttributes from "~/components/productAttributes";
 import VariantsAttributes from "~/components/variantAttributes";
-
-import * as React from "react";
 
 
 
@@ -52,6 +51,7 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
         return current;
     }, {});
 
+
     const [dynamicAttributes, setDynamicAttributes] = useState({});
 
     const handleAttributeChange = (attributeName, attributeValue) => {
@@ -62,52 +62,51 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
     };
 
 
-
     return (<main className="">
 
-                    {product.variantsImages.length > 1 ?
-                                <EmblaCarousel slides={product.variantsImages}
-                                               setSelectedSku={setSelectedSku}
-                                               selectedSku={selectedSku}
-                                               setEmblaImage={setEmblaImage || setEmblaImageDetail}
-                                               emblaImage={emblaImage || emblaImageDetail}
-                                               setEmblaImageDetail={setEmblaImageDetail}
-                                               emblaImageDetail={emblaImageDetail}
-                                               options={OPTIONS}
-                                               groupedVariantsAttrs={groupedVariantsAttrs}
-                                               variantsAttrs={variantsAttrs}
-                                               handleAttributeChange={handleAttributeChange}
-                                               dynamicAttributes={dynamicAttributes}
-                                               setDynamicAttributes={setDynamicAttributes}
+        {product.variantsImages.length > 1 ?
+            <EmblaCarousel slides={product.variantsImages}
+                           setSelectedSku={setSelectedSku}
+                           selectedSku={selectedSku}
+                           setEmblaImage={setEmblaImage || setEmblaImageDetail}
+                           emblaImage={emblaImage || emblaImageDetail}
+                           setEmblaImageDetail={setEmblaImageDetail}
+                           emblaImageDetail={emblaImageDetail}
+                           options={OPTIONS}
+                           groupedVariantsAttrs={groupedVariantsAttrs}
+                           variantsAttrs={variantsAttrs}
+                           handleAttributeChange={handleAttributeChange}
+                           dynamicAttributes={dynamicAttributes}
+                           setDynamicAttributes={setDynamicAttributes}
 
-                                />
+            />
 
 
+            : <img src={product.imageUrl}/>}
+        <div>
+            <ProductAttributes product={product}></ProductAttributes>
+        </div>
 
-                        : <img src={product.imageUrl}/>}
-                <div>
-                    <ProductAttributes product={product}></ProductAttributes>
-                </div>
+        <VariantsAttributes props={{
+            product,
+            variantsAttrs,
+            groupedVariantsAttrs,
+            dynamicAttributes,
+            setDynamicAttributes,
+            handleAttributeChange,
+            selectedSku,
+            setSelectedSku,
+            emblaImage,
+            setEmblaImage,
+            emblaImageDetail,
+            setEmblaImageDetail,
+            OPTIONS
+        }}/>
 
-                <VariantsAttributes props={{
-                    product,
-                    variantsAttrs,
-                    groupedVariantsAttrs,
-                    dynamicAttributes,
-                    setDynamicAttributes,
-                    handleAttributeChange,
-                    selectedSku,
-                    setSelectedSku,
-                    emblaImage,
-                    setEmblaImage,
-                    emblaImageDetail,
-                    setEmblaImageDetail,
-                    OPTIONS
-                }}/>
-
-                <ToBuyVariant selectedSku={selectedSku} setSelectedSku={setSelectedSku} handleAttributeChange={handleAttributeChange}
-                              dynamicAttributes={dynamicAttributes}
-                              setDynamicAttributes={setDynamicAttributes}></ToBuyVariant>
+        <ToBuyVariant selectedSku={selectedSku} setSelectedSku={setSelectedSku}
+                      handleAttributeChange={handleAttributeChange}
+                      dynamicAttributes={dynamicAttributes}
+                      setDynamicAttributes={setDynamicAttributes}></ToBuyVariant>
 
     </main>)
 

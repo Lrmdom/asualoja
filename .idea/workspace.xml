@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dev.Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fly.toml" beforeDir="false" afterPath="$PROJECT_DIR$/fly.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prod.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/prod.Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/auth.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/auth.server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +64,7 @@
     "JavaScript Debug.cli.js JavaScript.executor": "Run",
     "JavaScript Debug.node JavaScript.executor": "Run",
     "Node.js.Unnamed.executor": "Debug",
-    "Node.js.cli.js .executor": "Debug",
+    "Node.js.cli.js .executor": "Run",
     "Node.js.cli.js vite:dev --host.executor": "Run",
     "Node.js.cli.js.executor": "Run",
     "Node.js.entry.server.tsx.executor": "Run",
@@ -78,7 +79,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "project.propDebugger",
     "ts.external.directory.path": "/Users/leoneldomingos/Projects/asualoja/node_modules/typescript/lib",
     "two.files.diff.last.used.folder": "/Users/leoneldomingos/Downloads/asualoja-v.0.0.2",
     "vue.rearranger.settings.migration": "true"
@@ -96,7 +97,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="cli.js " type="NodeJSConfigurationType" application-parameters="vite:dev --host" nameIsGenerated="true" path-to-js-file="node_modules/@remix-run/dev/dist/cli.js " working-dir="$PROJECT_DIR$">
+    <configuration name="cli.js " type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="node_modules/@remix-run/dev/dist/cli.js " working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
   </component>
@@ -615,6 +616,30 @@
           <url>file://$PROJECT_DIR$/app/components/variantAttr.tsx</url>
           <line>59</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/components/Prods.tsx</url>
+          <line>53</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/components/Prods.tsx</url>
+          <line>56</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/components/Prods.tsx</url>
+          <line>57</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/components/Prods.tsx</url>
+          <line>59</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
