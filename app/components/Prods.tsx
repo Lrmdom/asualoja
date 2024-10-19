@@ -38,6 +38,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                                 prod.variantsImages.push({"url": prod.imageUrl, "alt": stegaClean(prod.title)})
 
                                 prod.variants.map((vrnt) => {
+
                                     const vAttrs = vrnt.attributes?.filter(attr => attr._type === 'attribute')
                                     vrnt.images?.map((image) => {
                                         image.alt ? image.alt : image.alt = stegaClean(vrnt.title)
@@ -46,18 +47,19 @@ export default function Prods({products}: { product: SanityDocument }) {
                                         prod.variantsImages.push(image)
                                     })
 
-
                                     const prices = async () => {
-/*
-                                        console.log(await cl.skus.list({filters: {code_eq: stegaClean(vrnt.sku)}}))
-*/
-                                        const skuVariantsPrices = await cl.skus.list({include: [ 'prices' ],filters: {code_eq: stegaClean(vrnt.sku)}})
-                                        /*console.log(skuVariantsPrices)*/
-                                        setVariantsPrice(skuVariantsPrices)
+
+                                        const skuVariantsPrices = await cl.skus.list({
+                                            include: ['prices'],
+                                            filters: {code_eq: stegaClean(vrnt.sku)}
+                                        })
+                                        vrnt.prices=[]
+                                        skuVariantsPrices[0]? vrnt.prices.push(skuVariantsPrices[0]["prices"][0].amount_cents,skuVariantsPrices[0]["prices"][0].formatted_amount):null
+
                                     };
 
                                     prices()
-                                    console.log(variantsPrice)
+
 
                                 })
 
@@ -65,7 +67,6 @@ export default function Prods({products}: { product: SanityDocument }) {
                                     return variants.map(x => x[field])
                                 }
                                 prod.variantsSkus = skusArr(prod.variants, 'sku')*/
-                                debugger
 
 
                             } else {
@@ -85,6 +86,8 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                                             {stegaClean(prod.title)}</Link>
 
+                                        {/*{prod.variants.sort((a, b) => a.prices[0] - b.prices[0])}*/}
+                                        {console.log(prod)}
                                         <Variants product={prod}></Variants>
 
                                     </div>
@@ -94,6 +97,8 @@ export default function Prods({products}: { product: SanityDocument }) {
                     </div>
                 </div>
             </div>
+
         </>
+
     )
 }
