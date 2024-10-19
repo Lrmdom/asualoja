@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="start working with cl api">
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="CL.skus api working filtered and with relation PRICES....">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Taxonomy.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Taxonomy.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/$locale.$slug.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/$locale.$slug.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +150,7 @@
       <workItem from="1729091280607" duration="2471000" />
       <workItem from="1729234644057" duration="5846000" />
       <workItem from="1729277186661" duration="308000" />
-      <workItem from="1729280764770" duration="11711000" />
+      <workItem from="1729280764770" duration="20425000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -436,7 +432,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729241084800</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="CL.skus api working filtered and with relation PRICES....">
+      <option name="closed" value="true" />
+      <created>1729327253155</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1729327253155</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,7 +596,8 @@
     <MESSAGE value="working version of cl ayer components and visual editing...ALMOST OK step 3-&#10;also if selected sku, show availability and price" />
     <MESSAGE value="fixed sestate emblacarrousel error" />
     <MESSAGE value="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue" />
+    <MESSAGE value="CL.skus api working filtered and with relation PRICES...." />
+    <option name="LAST_COMMIT_MESSAGE" value="CL.skus api working filtered and with relation PRICES...." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
