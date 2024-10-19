@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue">
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="start working with cl api">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Taxonomy.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Taxonomy.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/auth.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/auth.server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/$locale.$slug.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/$locale.$slug.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,38 +53,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ACTIVE_CLOUD_PROJECT_ACCOUNT&quot;: &quot;lmatiasdomingos@gmail.com&quot;,
-    &quot;ACTIVE_CLOUD_PROJECT_ID&quot;: &quot;avid-infinity-370500&quot;,
-    &quot;ACTIVE_CLOUD_PROJECT_NAME&quot;: &quot;Axciona Cms and Sql&quot;,
-    &quot;ACTIVE_CLOUD_PROJECT_NUMBER&quot;: &quot;1091535953121&quot;,
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Attach to Node.js/Chrome.Unnamed.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.cli.js JavaScript.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.node JavaScript.executor&quot;: &quot;Run&quot;,
-    &quot;Node.js.Unnamed.executor&quot;: &quot;Debug&quot;,
-    &quot;Node.js.cli.js .executor&quot;: &quot;Run&quot;,
-    &quot;Node.js.cli.js vite:dev --host.executor&quot;: &quot;Run&quot;,
-    &quot;Node.js.cli.js.executor&quot;: &quot;Run&quot;,
-    &quot;Node.js.entry.server.tsx.executor&quot;: &quot;Run&quot;,
-    &quot;Node.js.node.executor&quot;: &quot;Run&quot;,
-    &quot;Node.js.remix vite:dev --host.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20241018_0000&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/leoneldomingos/Projects/asualoja/app/locales/dev&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/leoneldomingos/Projects/asualoja/node_modules/typescript/lib&quot;,
-    &quot;two.files.diff.last.used.folder&quot;: &quot;/Users/leoneldomingos/Downloads/asualoja-v.0.0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ACTIVE_CLOUD_PROJECT_ACCOUNT": "lmatiasdomingos@gmail.com",
+    "ACTIVE_CLOUD_PROJECT_ID": "avid-infinity-370500",
+    "ACTIVE_CLOUD_PROJECT_NAME": "Axciona Cms and Sql",
+    "ACTIVE_CLOUD_PROJECT_NUMBER": "1091535953121",
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Attach to Node.js/Chrome.Unnamed.executor": "Debug",
+    "JavaScript Debug.cli.js JavaScript.executor": "Run",
+    "JavaScript Debug.node JavaScript.executor": "Run",
+    "Node.js.Unnamed.executor": "Debug",
+    "Node.js.cli.js .executor": "Run",
+    "Node.js.cli.js vite:dev --host.executor": "Run",
+    "Node.js.cli.js.executor": "Run",
+    "Node.js.entry.server.tsx.executor": "Run",
+    "Node.js.node.executor": "Run",
+    "Node.js.remix vite:dev --host.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.google.cloudcode.ide_session_index": "20241018_0002",
+    "git-widget-placeholder": "sku-price-variants",
+    "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/leoneldomingos/Projects/asualoja/node_modules/typescript/lib",
+    "two.files.diff.last.used.folder": "/Users/leoneldomingos/Downloads/asualoja-v.0.0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/locales/dev" />
@@ -153,6 +153,8 @@
       <workItem from="1729068354483" duration="9052000" />
       <workItem from="1729091280607" duration="2471000" />
       <workItem from="1729234644057" duration="5846000" />
+      <workItem from="1729277186661" duration="308000" />
+      <workItem from="1729280764770" duration="11711000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -614,11 +616,6 @@
           <url>file://$PROJECT_DIR$/app/components/variantAttr.tsx</url>
           <line>59</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/root.tsx</url>
-          <line>160</line>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
