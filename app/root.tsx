@@ -156,19 +156,21 @@ export function Layout({children}: { children: React.ReactNode }) {
         </head>
         <body>
         {myToken != null ? (
-            <Suspense fallback={<Loading/>}>
+
                 <CommerceLayer
                     accessToken={Cookies.get("clIntegrationToken") ? Cookies.get("clIntegrationToken") : ""}
                     endpoint="https://execlog.commercelayer.io">
                     <OrderStorage persistKey="execlogdemoorder">
                         <OrderContainer>
+                            <Suspense fallback={<Loading/>}>
                             <Header taxonomies={data} user={user} myToken={myToken}></Header>
                             <MyNavMenu taxonomies={data}></MyNavMenu>
                             {children}
+                            </Suspense>
                         </OrderContainer>
                     </OrderStorage>
                 </CommerceLayer>
-            </Suspense>
+
         ) : null
         }
 

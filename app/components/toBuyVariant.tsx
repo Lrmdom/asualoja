@@ -14,11 +14,13 @@ import {
     PricesContainer
 } from "@commercelayer/react-components"
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import {ClientOnly} from "remix-utils/client-only"
 import {useNavigate} from "@remix-run/react";
 import {redirect} from "@remix-run/node";
+import {CommerceLayer} from "@commercelayer/sdk";
+import Cookies from "js-cookie";
 
 
 export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
@@ -27,8 +29,17 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate()
     const handleAddToCart = async () => {
-        console.log("clicked, must refresh page")
-        window.location.reload()
+        const getCookieToken = Cookies.get("clIntegrationToken")
+        const cl = CommerceLayer({
+            organization: import.meta.env.VITE_MY_ORGANIZATION,
+            accessToken: getCookieToken,
+        })
+        let orderId=localStorage.getItem("execlogdemoorder")
+        //console.log(orderId)
+        /* = await cl.skus.list({
+            include: ['prices'],
+            filters: {code_eq: stegaClean(vrnt.sku)}
+        })*/
     }
 
     const MyCartIcon = () => (
@@ -53,6 +64,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             </LineItemsContainer>
         </div>
     )
+
 
 
     return (
@@ -142,13 +154,9 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                         label="Add SKU to cart"
                         hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
                         checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
-                        /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
-                        checkoutUrl='brilliant-custard-06fc9a.netlify.app'*/
                         /*buyNowMode={true}*/
                         /*redirectToHostedCart={true}*/
                         /*buyNowMode={true}
-                        hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app'
-                        checkoutUrl='brilliant-custard-06fc9a.netlify.app/checkoputhosted'
                         redirectToHostedCart={true}*/
                     >
                         {/*{

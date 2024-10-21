@@ -12,8 +12,6 @@ import ProductAttributes from "~/components/productAttributes";
 import VariantsAttributes from "~/components/variantAttributes";
 
 
-
-
 export default function Variants({product, emblaImageDetail, setEmblaImageDetail}: {
     variant: SanityDocument
 }) {
@@ -61,6 +59,8 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
         }));
     };
 
+    //const  lastElement= variantsPrices
+
 
     return (<main className="">
 
@@ -83,9 +83,32 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
 
 
             : <img src={product.imageUrl}/>}
+
+        <div>
+            {
+
+                product.variantsPrice?.length >= 1 ?
+
+                    <div>
+                        {product.variantsPrice[0][1]} --- {product.variantsPrice[product.variantsPrice.length - 1][1]}
+                    </div>
+                    : null
+            }
+
+        </div>
+
         <div>
             <ProductAttributes product={product}></ProductAttributes>
         </div>
+
+        {/* {product.variantsPrice[0]?
+                (
+                <div>
+                    {product.variantsPrice[0][0]}--{product.variantsPrice[product.variantsPrice.length - 1][1]}
+                </div>
+            ):null
+            }*/}
+
 
         <VariantsAttributes props={{
             product,
@@ -102,7 +125,9 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
             setEmblaImageDetail,
             OPTIONS
         }}/>
+        {/*  show cheapest and expensive variant price  */}
 
+        {/*<div>{variantsPrices[0][0]} - {variantsPrices[lastElement][0]}</div>*/}
         <ToBuyVariant selectedSku={selectedSku} setSelectedSku={setSelectedSku}
                       handleAttributeChange={handleAttributeChange}
                       dynamicAttributes={dynamicAttributes}
