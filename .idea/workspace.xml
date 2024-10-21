@@ -7,6 +7,13 @@
     <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="CL.skus api working filtered and with relation PRICES....">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/productDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/productDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +74,7 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241018_0002",
+    "com.google.cloudcode.ide_session_index": "20241021_0001",
     "git-widget-placeholder": "sku-price-variants",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
@@ -150,7 +157,11 @@
       <workItem from="1729091280607" duration="2471000" />
       <workItem from="1729234644057" duration="5846000" />
       <workItem from="1729277186661" duration="308000" />
-      <workItem from="1729280764770" duration="20425000" />
+      <workItem from="1729280764770" duration="31170000" />
+      <workItem from="1729410903897" duration="5971000" />
+      <workItem from="1729453224955" duration="11096000" />
+      <workItem from="1729504571125" duration="12000" />
+      <workItem from="1729504701841" duration="10768000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -440,7 +451,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729327253155</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="CL.skus api working filtered and with relation PRICES....">
+      <option name="closed" value="true" />
+      <created>1729374771348</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1729374771348</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

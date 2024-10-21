@@ -172,7 +172,7 @@ export default function Header(props) {
 
 
                                 <HostedCart type='mini' openAdd
-                                            customDomain="brilliant-custard-06fc9a.netlify.app"
+                                            /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
 
                                             style={{
                                                 container: {
@@ -180,7 +180,7 @@ export default function Header(props) {
                                                 }
                                             }}/>
                                 <CartLink
-                                    customDomain="brilliant-custard-06fc9a.netlify.app"
+                                    /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
 
                                     label={MyCartIcon()}
                                     onClick={function Fa() {
