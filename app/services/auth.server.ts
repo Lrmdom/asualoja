@@ -22,7 +22,7 @@ async function createUser(attributes) {
 
 
     const cl = CommerceLayer({
-        organization: 'Execlog',
+        organization: import.meta.env.VITE_MY_ORGANIZATION,
         accessToken: getCookieToken
     })
 

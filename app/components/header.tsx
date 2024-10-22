@@ -20,16 +20,34 @@ import {authenticate} from "@commercelayer/js-auth";
 
 
 export default function Header(props) {
-/*
-    if(props.myToken!=null) {
-        const getCookieToken = Cookies.get("clIntegrationToken")
+   /* if(props.myToken!=null ) {
+        // const getCookieToken = Cookies.get("clIntegrationToken")
         const cl = CommerceLayer({
             organization: 'Execlog',
-            accessToken: props.myToken ? props.myToken : Cookies.get("clIntegrationToken"),
-            persistKey: 'execlogdemoorder',
-            autoCreateOrder: true
+            accessToken: props.myToken ? props.myToken : Cookies.get("clIntegrationToken") ,
         })
-        console.log(cl.orders.create())
+
+        const lists= async () => {
+            const lists2 = await cl.skus.list()
+            console.log(lists2())
+        }
+
+        console.log(lists().then())
+        const createSku = async () => {
+
+            const newSku = await cl.skus.create({
+                shipping_category: cl.shipping_categories.relationship("JNxyxFLOXw"), // assigning the shipping category relationship
+                code: "HOODIEGR0001XLXX",
+                name: "Grey Coding Hoodie",
+                description: "A very beautiful and cozy unisex hoodie",
+                reference: "HOODIEGR0001",
+                weight: "500",
+                unit_of_weight: "gr"
+            }).catch(error => console.log(error.errors));
+
+            console.log(`SKU: ${newSku.id} created succefully`);
+            console.log(createSku); // this will return the created resource object
+        };
     }*/
     let identity
     if (props.user) {
@@ -154,7 +172,7 @@ export default function Header(props) {
 
 
                                 <HostedCart type='mini' openAdd
-                                            customDomain="brilliant-custard-06fc9a.netlify.app"
+                                            /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
 
                                             style={{
                                                 container: {
@@ -162,7 +180,7 @@ export default function Header(props) {
                                                 }
                                             }}/>
                                 <CartLink
-                                    customDomain="brilliant-custard-06fc9a.netlify.app"
+                                    /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
 
                                     label={MyCartIcon()}
                                     onClick={function Fa() {

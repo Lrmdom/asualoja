@@ -3,16 +3,13 @@ import {stegaClean} from "@sanity/client/stega"
 import {useTranslation} from 'react-i18next'
 
 import ToBuyVariant from "~/components/toBuyVariant";
-import {Suspense, useState} from "react";
+import * as React from "react";
+import {useState} from "react";
 import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import {EmblaOptionsType} from 'embla-carousel'
 
 import ProductAttributes from "~/components/productAttributes";
 import VariantsAttributes from "~/components/variantAttributes";
-
-import * as React from "react";
-
-
 
 
 export default function Variants({product, emblaImageDetail, setEmblaImageDetail}: {
@@ -52,6 +49,7 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
         return current;
     }, {});
 
+
     const [dynamicAttributes, setDynamicAttributes] = useState({});
 
     const handleAttributeChange = (attributeName, attributeValue) => {
@@ -61,53 +59,79 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
         }));
     };
 
+    //const  lastElement= variantsPrices
 
 
     return (<main className="">
 
-                    {product.variantsImages.length > 1 ?
-                                <EmblaCarousel slides={product.variantsImages}
-                                               setSelectedSku={setSelectedSku}
-                                               selectedSku={selectedSku}
-                                               setEmblaImage={setEmblaImage || setEmblaImageDetail}
-                                               emblaImage={emblaImage || emblaImageDetail}
-                                               setEmblaImageDetail={setEmblaImageDetail}
-                                               emblaImageDetail={emblaImageDetail}
-                                               options={OPTIONS}
-                                               groupedVariantsAttrs={groupedVariantsAttrs}
-                                               variantsAttrs={variantsAttrs}
-                                               handleAttributeChange={handleAttributeChange}
-                                               dynamicAttributes={dynamicAttributes}
-                                               setDynamicAttributes={setDynamicAttributes}
+        {product.variantsImages.length > 1 ?
+            <EmblaCarousel slides={product.variantsImages}
+                           setSelectedSku={setSelectedSku}
+                           selectedSku={selectedSku}
+                           setEmblaImage={setEmblaImage || setEmblaImageDetail}
+                           emblaImage={emblaImage || emblaImageDetail}
+                           setEmblaImageDetail={setEmblaImageDetail}
+                           emblaImageDetail={emblaImageDetail}
+                           options={OPTIONS}
+                           groupedVariantsAttrs={groupedVariantsAttrs}
+                           variantsAttrs={variantsAttrs}
+                           handleAttributeChange={handleAttributeChange}
+                           dynamicAttributes={dynamicAttributes}
+                           setDynamicAttributes={setDynamicAttributes}
 
-                                />
+            />
 
 
+            : <img src={product.imageUrl}/>}
 
-                        : <img src={product.imageUrl}/>}
+        <div>
+            {
+
+                product.variantsPrice?.length?
+
+                    <div className="font-semibold">
+                        {product.variantsPrice[0][1]} --- {product.variantsPrice[product.variantsPrice.length - 1][1]}
+                    </div>
+                    : null
+            }
+
+        </div>
+
+        <div>
+            <ProductAttributes product={product}></ProductAttributes>
+        </div>
+
+        {/* {product.variantsPrice[0]?
+                (
                 <div>
-                    <ProductAttributes product={product}></ProductAttributes>
+                    {product.variantsPrice[0][0]}--{product.variantsPrice[product.variantsPrice.length - 1][1]}
                 </div>
+            ):null
+            }*/}
 
-                <VariantsAttributes props={{
-                    product,
-                    variantsAttrs,
-                    groupedVariantsAttrs,
-                    dynamicAttributes,
-                    setDynamicAttributes,
-                    handleAttributeChange,
-                    selectedSku,
-                    setSelectedSku,
-                    emblaImage,
-                    setEmblaImage,
-                    emblaImageDetail,
-                    setEmblaImageDetail,
-                    OPTIONS
-                }}/>
 
-                <ToBuyVariant selectedSku={selectedSku} setSelectedSku={setSelectedSku} handleAttributeChange={handleAttributeChange}
-                              dynamicAttributes={dynamicAttributes}
-                              setDynamicAttributes={setDynamicAttributes}></ToBuyVariant>
+        <VariantsAttributes props={{
+            product,
+            variantsAttrs,
+            groupedVariantsAttrs,
+            dynamicAttributes,
+            setDynamicAttributes,
+            handleAttributeChange,
+            selectedSku,
+            setSelectedSku,
+            emblaImage,
+            setEmblaImage,
+            emblaImageDetail,
+            setEmblaImageDetail,
+            OPTIONS
+        }}/>
+        {/*  show cheapest and expensive variant price  */}
+
+        {/*<div>{variantsPrices[0][0]} - {variantsPrices[lastElement][0]}</div>*/}
+        <ToBuyVariant selectedSku={selectedSku} setSelectedSku={setSelectedSku}
+                      handleAttributeChange={handleAttributeChange}
+                      dynamicAttributes={dynamicAttributes}
+                      setDynamicAttributes={setDynamicAttributes}></ToBuyVariant>
 
     </main>)
 
