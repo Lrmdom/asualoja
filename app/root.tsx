@@ -188,8 +188,10 @@ export function Layout({children}: { children: React.ReactNode }) {
             }}
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
+            <Suspense>
             <LiveVisualEditing
             />
+            </Suspense>
         ) : null}
 
 

@@ -22,7 +22,7 @@ async function createUser(attributes) {
 
 
     const cl = CommerceLayer({
-        organization: import.meta.env.VITE_MY_ORGANIZATION,
+        organization: 'Execlog',
         accessToken: getCookieToken
     })
 
@@ -34,6 +34,7 @@ async function createUser(attributes) {
                 'api-key': process.env.BREVO_API_KEY
             }
         })
+
     const brevoCustomer = await response.json();
 
     const customer = await cl.customers.list({filters: {email_eq: attributes.email}})
