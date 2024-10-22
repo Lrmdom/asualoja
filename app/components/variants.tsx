@@ -87,9 +87,9 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
         <div>
             {
 
-                product.variantsPrice?.length >= 1 ?
+                product.variantsPrice?.length?
 
-                    <div>
+                    <div className="font-semibold">
                         {product.variantsPrice[0][1]} --- {product.variantsPrice[product.variantsPrice.length - 1][1]}
                     </div>
                     : null

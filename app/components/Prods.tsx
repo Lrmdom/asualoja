@@ -27,6 +27,7 @@ export default function Prods({products}: { product: SanityDocument }) {
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
 
+
     useEffect(() => {
         const variantsPrices = []
         const orderId = localStorage.getItem("execlogdemoorder")
@@ -76,7 +77,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                         //setVariantsPrices(prod.variantsPrice)
 
                         products[k] = prod
-                        setVariantsPrices(products)
+                       setVariantsPrices(products)
 
                     }
                     prices()
@@ -129,7 +130,6 @@ export default function Prods({products}: { product: SanityDocument }) {
                                     prod.variantsImages = [{"url": prod.imageUrl, "alt": stegaClean(prod.title)}]
                                 }
                                 let taxonomy = prod.taxonomies ? prod.taxonomies[0] : prod.taxonomy
-
                                 return (
                                     <>
 
