@@ -20,18 +20,19 @@ import {authenticate} from "@commercelayer/js-auth";
 
 
 export default function Header(props) {
-
-    if(props.myToken!=null) {
+   /* if(props.myToken!=null ) {
         // const getCookieToken = Cookies.get("clIntegrationToken")
         const cl = CommerceLayer({
             organization: 'Execlog',
-            accessToken: props.myToken ,
+            accessToken: props.myToken ? props.myToken : Cookies.get("clIntegrationToken") ,
         })
 
         const lists= async () => {
-            await cl.skus.list().catch(error => console.log(error.errors))
+            const lists2 = await cl.skus.list()
+            console.log(lists2())
         }
-        console.log(lists)
+
+        console.log(lists().then())
         const createSku = async () => {
 
             const newSku = await cl.skus.create({
@@ -47,7 +48,7 @@ export default function Header(props) {
             console.log(`SKU: ${newSku.id} created succefully`);
             console.log(createSku); // this will return the created resource object
         };
-    }
+    }*/
     let identity
     if (props.user) {
         identity =
@@ -171,7 +172,7 @@ export default function Header(props) {
 
 
                                 <HostedCart type='mini' openAdd
-                                            customDomain="brilliant-custard-06fc9a.netlify.app"
+                                            /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
 
                                             style={{
                                                 container: {
@@ -179,7 +180,7 @@ export default function Header(props) {
                                                 }
                                             }}/>
                                 <CartLink
-                                    customDomain="brilliant-custard-06fc9a.netlify.app"
+                                    /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
 
                                     label={MyCartIcon()}
                                     onClick={function Fa() {
