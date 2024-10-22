@@ -48,7 +48,7 @@ export default function Component(props) {
                     </div>
 
                     {Array.isArray(product.variants) && product.variants.length > 0 ?
-                        <Variants product={product} emblaImageDetail={emblaImage} setEmblaImageDetail={setEmblaImage}></Variants> : null}
+                        <Variants product={product} emblaImageDetail={emblaImage} setEmblaImageDetail={setEmblaImage} ></Variants> : null}
                 </div>
             </div>
         </Card>

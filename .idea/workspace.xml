@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue">
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="more or less price s done , just not by the best way. Not perfoemant, some rerenders">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,8 +68,8 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241018_0000",
-    "git-widget-placeholder": "main",
+    "com.google.cloudcode.ide_session_index": "20241022_0000",
+    "git-widget-placeholder": "sku-price-variants",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -149,6 +150,14 @@
       <workItem from="1729068354483" duration="9052000" />
       <workItem from="1729091280607" duration="2471000" />
       <workItem from="1729234644057" duration="5846000" />
+      <workItem from="1729277186661" duration="308000" />
+      <workItem from="1729280764770" duration="31170000" />
+      <workItem from="1729410903897" duration="5971000" />
+      <workItem from="1729453224955" duration="11096000" />
+      <workItem from="1729504571125" duration="12000" />
+      <workItem from="1729504701841" duration="14244000" />
+      <workItem from="1729538287361" duration="1865000" />
+      <workItem from="1729562370318" duration="628000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -430,7 +439,31 @@
       <option name="project" value="LOCAL" />
       <updated>1729241084800</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="CL.skus api working filtered and with relation PRICES....">
+      <option name="closed" value="true" />
+      <created>1729327253155</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1729327253155</updated>
+    </task>
+    <task id="LOCAL-00037" summary="CL.skus api working filtered and with relation PRICES....">
+      <option name="closed" value="true" />
+      <created>1729374771348</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1729374771348</updated>
+    </task>
+    <task id="LOCAL-00038" summary="more or less price s done , just not by the best way. Not perfoemant, some rerenders">
+      <option name="closed" value="true" />
+      <created>1729521559171</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1729521559171</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,7 +619,9 @@
     <MESSAGE value="working version of cl ayer components and visual editing...ALMOST OK step 3-&#10;also if selected sku, show availability and price" />
     <MESSAGE value="fixed sestate emblacarrousel error" />
     <MESSAGE value="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue" />
+    <MESSAGE value="CL.skus api working filtered and with relation PRICES...." />
+    <MESSAGE value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
+    <option name="LAST_COMMIT_MESSAGE" value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -610,11 +645,6 @@
           <url>file://$PROJECT_DIR$/app/components/variantAttr.tsx</url>
           <line>59</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/root.tsx</url>
-          <line>160</line>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
