@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="CL.skus api working filtered and with relation PRICES....">
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="more or less price s done , just not by the best way. Not perfoemant, some rerenders">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/productDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/productDetail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +68,7 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241021_0001",
+    "com.google.cloudcode.ide_session_index": "20241022_0000",
     "git-widget-placeholder": "sku-price-variants",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
@@ -161,7 +155,9 @@
       <workItem from="1729410903897" duration="5971000" />
       <workItem from="1729453224955" duration="11096000" />
       <workItem from="1729504571125" duration="12000" />
-      <workItem from="1729504701841" duration="10768000" />
+      <workItem from="1729504701841" duration="14244000" />
+      <workItem from="1729538287361" duration="1865000" />
+      <workItem from="1729562370318" duration="628000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -459,7 +455,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729374771348</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="more or less price s done , just not by the best way. Not perfoemant, some rerenders">
+      <option name="closed" value="true" />
+      <created>1729521559171</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1729521559171</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -616,7 +620,8 @@
     <MESSAGE value="fixed sestate emblacarrousel error" />
     <MESSAGE value="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue" />
     <MESSAGE value="CL.skus api working filtered and with relation PRICES...." />
-    <option name="LAST_COMMIT_MESSAGE" value="CL.skus api working filtered and with relation PRICES...." />
+    <MESSAGE value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
+    <option name="LAST_COMMIT_MESSAGE" value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
