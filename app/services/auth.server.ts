@@ -17,7 +17,7 @@ authenticator.use(
             clientSecret: 'liwPtmOReOVePGKd',
             // LinkedIn is expecting a full URL here, not a relative path
             // see: https://learn.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?tabs=HTTPS1#step-1-configure-your-application
-            callbackURL: 'http://localhost:5173/auth/linkedin/callback',
+            callbackURL: 'http://localhost:3000/auth/linkedin/callback',
         },
         async ({accessToken, refreshToken, extraParams, profile, context}) => {
             const email = profile._json.email
@@ -36,7 +36,7 @@ authenticator.use(
         {
             clientId: 'db21c78b-1f73-4c45-a8f0-982a2f49f287',
             clientSecret: 'RPv8Q~i7ViKaN8qbQsoCE2650ELw83U4.XSz6dBD',
-            redirectUri: 'http://localhost:5173/auth/microsoft/callback',
+            redirectUri: 'http://localhost:3000/auth/microsoft/callback',
             tenantId: '9b986352-978e-4025-97a5-2af66c8022de', // optional - necessary for organization without multitenant (see below)
             scope: 'openid profile email', // optional
             prompt: 'login', // optional
@@ -71,8 +71,8 @@ authenticator.use(
             clientID:
                 '1091535953121-mb4b5ap4uij06s5nqmcbpia3mpdo4437.apps.googleusercontent.com',
             clientSecret: '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',
-            //callbackURL: "http://localhost:5173/auth/google/callback"
-            callbackURL: 'http://localhost:5173/auth/google/callback',
+            //callbackURL: "http://localhost:3000/auth/google/callback"
+            callbackURL: 'http://execlog.com/auth/google/callback',
         },
         async ({accessToken, refreshToken, extraParams, profile}) => {
             // here you would find or create a user in your database
@@ -99,7 +99,7 @@ authenticator.use(
         {
             clientID: '1031654645049512',
             clientSecret: 'a47b82c7a365970bca801ebde865adaa',
-            callbackURL: 'http://localhost:5173/auth/facebook/callback',
+            callbackURL: 'http://localhost:3000/auth/facebook/callback',
         },
         async ({profile}) => {
 
