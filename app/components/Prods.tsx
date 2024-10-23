@@ -1,16 +1,17 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import {Link} from "@remix-run/react";
+import {Link, useLocation} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
 
 
 import Variants from "~/components/variants";
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import {CommerceLayer} from "@commercelayer/sdk";
 // import {authenticate} from '@commercelayer/js-auth'
 import {create} from 'zustand'
+import Loading from "~/components/loading"
 
 const usePricesStore = create((set) => ({
     prices: [],
@@ -26,21 +27,28 @@ export default function Prods({products}: { product: SanityDocument }) {
 
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-
-
+    const location = useLocation();
+console.log(location)
     useEffect(() => {
-        const variantsPrices = []
         const orderId = localStorage.getItem("execlogdemoorder")
         const getCookieToken = Cookies.get("clIntegrationToken")
         const cl = CommerceLayer({
             organization: import.meta.env.VITE_MY_ORGANIZATION,
             accessToken: getCookieToken,
         })
+        console.log(window.location.href)
         const order = {
             id: orderId,
-            language_code: language
+            language_code: language,
+            customer_email: "leonel.m.domingos@gmail.com",
+            return_url: window.location.href,
         }
+        const myorder=cl.orders.retrieve(orderId)
+        myorder.then(r=>console.log(r))
+
         cl.orders.update(order)
+        //const customer = cl.customers.list({filters: {email_eq: attributes.email}})
+
         /*cl.orders.retrieve(orderId).then(order => {
             console.log(order)
         })*/
@@ -77,10 +85,15 @@ export default function Prods({products}: { product: SanityDocument }) {
                         //setVariantsPrices(prod.variantsPrice)
 
                         products[k] = prod
-                       setVariantsPrices(products)
+                        //all state must be ready before render
+                        await new Promise(r => setTimeout(r, 500))
+                        setVariantsPrices(products)
+
 
                     }
+
                     prices()
+
                 })
                 /*const skusArr = function extractColumn(variants, field) {
                     return variants.map(x => x[field])
@@ -92,7 +105,7 @@ export default function Prods({products}: { product: SanityDocument }) {
             }
         })
     }, [])
-
+//ZUSTAND code
     /*const prodPrices = usePricesStore((state) => state.prices)
     const updatePrices = usePricesStore((state) => state.updatePrices)
     updatePrices(products)
@@ -140,9 +153,9 @@ export default function Prods({products}: { product: SanityDocument }) {
                                                 to={stegaClean(`/${language}/${encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}>
                                                 {/*to={varianDetailLink}*/}
                                                 {stegaClean(prod.title)}</Link>
-
+                                            <Suspense fallback={<Loading/>}>
                                             <Variants product={variantsPrices[key]}></Variants>
-
+                                            </Suspense>
                                         </div>
                                     </>
                                 )

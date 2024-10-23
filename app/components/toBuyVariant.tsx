@@ -24,48 +24,6 @@ import Cookies from "js-cookie";
 
 
 export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
-    const [data, setData] = useState(null);
-    const {t} = useTranslation('')
-    const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate()
-    const handleAddToCart = async () => {
-        const getCookieToken = Cookies.get("clIntegrationToken")
-        const cl = CommerceLayer({
-            organization: import.meta.env.VITE_MY_ORGANIZATION,
-            accessToken: getCookieToken,
-        })
-        let orderId=localStorage.getItem("execlogdemoorder")
-        //console.log(orderId)
-        /* = await cl.skus.list({
-            include: ['prices'],
-            filters: {code_eq: stegaClean(vrnt.sku)}
-        })*/
-    }
-
-    const MyCartIcon = () => (
-        <div className='relative inline-block cursor-pointer text-xs font-bold'>
-            <LineItemsContainer>
-
-                {/* static icon */}
-                <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='36'
-                    height='36'
-                    fill='currentColor'
-                    viewBox='0 0 256 256'
-                >
-                    <path
-                        d='M216,64H176a48,48,0,0,0-96,0H40A16,16,0,0,0,24,80V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64ZM128,32a32,32,0,0,1,32,32H96A32,32,0,0,1,128,32Zm88,168H40V80H80V96a8,8,0,0,0,16,0V80h64V96a8,8,0,0,0,16,0V80h40Z'/>
-                </svg>
-
-                {/* total number of cart items */}
-                <LineItemsCount className='absolute bottom-2 left-1/2 transform -translate-x-1/2'/>
-
-            </LineItemsContainer>
-        </div>
-    )
-
-
 
     return (
         <>
@@ -145,7 +103,6 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
 
                     <AddToCartButton
-                        onClick={handleAddToCart}
                         disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
                         skuCode={stegaClean(selectedSku)}
                         quantity="1"

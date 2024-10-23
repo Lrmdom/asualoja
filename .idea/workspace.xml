@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="more or less price s done , just not by the best way. Not perfoemant, some rerenders">
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +35,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="sku-price-variants" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -68,8 +67,8 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241022_0000",
-    "git-widget-placeholder": "sku-price-variants",
+    "com.google.cloudcode.ide_session_index": "20241022_0005",
+    "git-widget-placeholder": "authentication-save-customer",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -158,6 +157,11 @@
       <workItem from="1729504701841" duration="14244000" />
       <workItem from="1729538287361" duration="1865000" />
       <workItem from="1729562370318" duration="628000" />
+      <workItem from="1729565784034" duration="264000" />
+      <workItem from="1729582347022" duration="222000" />
+      <workItem from="1729582916382" duration="1806000" />
+      <workItem from="1729591976165" duration="14851000" />
+      <workItem from="1729610954383" duration="21634000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -463,7 +467,23 @@
       <option name="project" value="LOCAL" />
       <updated>1729521559171</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="more or less price s done , just not by the best way. Not perfoemant, some rerenders">
+      <option name="closed" value="true" />
+      <created>1729584325776</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1729584325776</updated>
+    </task>
+    <task id="LOCAL-00040" summary="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent">
+      <option name="closed" value="true" />
+      <created>1729678439958</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1729678439959</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -621,21 +641,12 @@
     <MESSAGE value="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue" />
     <MESSAGE value="CL.skus api working filtered and with relation PRICES...." />
     <MESSAGE value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
-    <option name="LAST_COMMIT_MESSAGE" value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
+    <MESSAGE value="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent" />
+    <option name="LAST_COMMIT_MESSAGE" value="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/services/auth.server.ts</url>
-          <line>45</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/services/auth.server.ts</url>
-          <line>38</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/services/auth.server.ts</url>
           <line>1</line>
