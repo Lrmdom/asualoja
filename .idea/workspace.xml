@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +23,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="sku-price-variants" />
+    <option name="BRANCH" value="authentication-save-customer" />
   </component>
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
@@ -68,7 +67,7 @@
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.google.cloudcode.ide_session_index": "20241022_0005",
-    "git-widget-placeholder": "authentication-save-customer",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
