@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="more or less price s done , just not by the best way. Not perfoemant, some rerenders">
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/logout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/logout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/protected.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/protected.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/auth.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/auth.server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/session.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/session.server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +161,7 @@
       <workItem from="1729582347022" duration="222000" />
       <workItem from="1729582916382" duration="1806000" />
       <workItem from="1729591976165" duration="14851000" />
-      <workItem from="1729610954383" duration="17394000" />
+      <workItem from="1729610954383" duration="21634000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -480,7 +475,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729584325776</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent">
+      <option name="closed" value="true" />
+      <created>1729678439958</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1729678439959</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -638,7 +641,8 @@
     <MESSAGE value="FIXED COMERCELAYER AND ORDER STORAGE ISSUES. IT WORKS: just need to fix the sel hosted checkout url issue" />
     <MESSAGE value="CL.skus api working filtered and with relation PRICES...." />
     <MESSAGE value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
-    <option name="LAST_COMMIT_MESSAGE" value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
+    <MESSAGE value="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent" />
+    <option name="LAST_COMMIT_MESSAGE" value="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

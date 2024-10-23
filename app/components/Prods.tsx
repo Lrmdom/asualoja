@@ -1,6 +1,6 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import {Link} from "@remix-run/react";
+import {Link, useLocation} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
 
 
@@ -27,8 +27,8 @@ export default function Prods({products}: { product: SanityDocument }) {
 
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-
-
+    const location = useLocation();
+console.log(location)
     useEffect(() => {
         const orderId = localStorage.getItem("execlogdemoorder")
         const getCookieToken = Cookies.get("clIntegrationToken")
@@ -36,11 +36,16 @@ export default function Prods({products}: { product: SanityDocument }) {
             organization: import.meta.env.VITE_MY_ORGANIZATION,
             accessToken: getCookieToken,
         })
+        console.log(window.location.href)
         const order = {
             id: orderId,
             language_code: language,
             customer_email: "leonel.m.domingos@gmail.com",
+            return_url: window.location.href,
         }
+        const myorder=cl.orders.retrieve(orderId)
+        myorder.then(r=>console.log(r))
+
         cl.orders.update(order)
         //const customer = cl.customers.list({filters: {email_eq: attributes.email}})
 
@@ -80,6 +85,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                         //setVariantsPrices(prod.variantsPrice)
 
                         products[k] = prod
+                        //all state must be ready before render
                         await new Promise(r => setTimeout(r, 500))
                         setVariantsPrices(products)
 
