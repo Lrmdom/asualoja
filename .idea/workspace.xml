@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="more or less price s done , just not by the best way. Not perfoemant, some rerenders">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/logout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/logout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/protected.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/protected.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/auth.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/auth.server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/session.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/session.server.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +72,7 @@
     "Node.js.node.executor": "Run",
     "Node.js.remix vite:dev --host.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241022_0003",
+    "com.google.cloudcode.ide_session_index": "20241022_0005",
     "git-widget-placeholder": "authentication-save-customer",
     "last_opened_file_path": "/Users/leoneldomingos/Projects/asualoja/app/locales/dev",
     "node.js.detected.package.eslint": "true",
@@ -157,6 +165,8 @@
       <workItem from="1729565784034" duration="264000" />
       <workItem from="1729582347022" duration="222000" />
       <workItem from="1729582916382" duration="1806000" />
+      <workItem from="1729591976165" duration="14851000" />
+      <workItem from="1729610954383" duration="17394000" />
     </task>
     <task id="LOCAL-00001" summary="fixing branches because of commercelayer">
       <option name="closed" value="true" />
@@ -633,16 +643,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/services/auth.server.ts</url>
-          <line>46</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/services/auth.server.ts</url>
-          <line>39</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/services/auth.server.ts</url>
           <line>1</line>
