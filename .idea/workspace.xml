@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="stock items...can i use cart from dropinjs now? maybe yes">
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="dropinjs and order langua etc... in place">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/toBuyVariant.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/protected.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/protected.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/identyLinks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/identyLinks.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -504,7 +502,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729710141993</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="dropinjs and order langua etc... in place">
+      <option name="closed" value="true" />
+      <created>1729788413865</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1729788413865</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,7 +669,8 @@
     <MESSAGE value="CL.skus api working filtered and with relation PRICES...." />
     <MESSAGE value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
     <MESSAGE value="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent" />
-    <option name="LAST_COMMIT_MESSAGE" value="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent" />
+    <MESSAGE value="dropinjs and order langua etc... in place" />
+    <option name="LAST_COMMIT_MESSAGE" value="dropinjs and order langua etc... in place" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
