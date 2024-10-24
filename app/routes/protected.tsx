@@ -98,6 +98,7 @@ const createUser = async (attributes,ENV) => {
 
 export async function loader({request}) {
     const test = request.headers.get("Cookie")
+
     const myArray = test.split("; ");
     const token = myArray[1].split("=")[1]
 

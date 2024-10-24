@@ -12,6 +12,7 @@ import {CommerceLayer} from "@commercelayer/sdk";
 // import {authenticate} from '@commercelayer/js-auth'
 import {create} from 'zustand'
 import Loading from "~/components/loading"
+import {Cookie} from "lucide-react";
 
 const usePricesStore = create((set) => ({
     prices: [],
@@ -29,28 +30,39 @@ export default function Prods({products}: { product: SanityDocument }) {
     const language = i18n.resolvedLanguage
     const location = useLocation();
     useEffect(() => {
-        const orderId = localStorage.getItem("execlogdemoorder")
         const getCookieToken = Cookies.get("clIntegrationToken")
+
         const cl = CommerceLayer({
             organization: import.meta.env.VITE_MY_ORGANIZATION,
             accessToken: getCookieToken,
         })
-        console.log(window.location.href)
-        const order = {
-            id: orderId,
-            language_code: language,
-            customer_email: "leonel.m.domingos@gmail.com",
-            return_url: window.location.href,
+        let orderId;
+        for (const [name, value] of Object.entries(Cookies.get())) {
+            if (name.startsWith('commercelayer_order-id')) {
+                orderId = value;
+                break;
+            }
         }
-        const myorder=cl.orders.retrieve(orderId)
-        myorder.then(r=>console.log(r))
+        console.log(orderId)
 
-        cl.orders.update(order)
-        //const customer = cl.customers.list({filters: {email_eq: attributes.email}})
 
-        /*cl.orders.retrieve(orderId).then(order => {
-            console.log(order)
-        })*/
+if(orderId){
+    const order = {
+        id: orderId,
+        language_code: language,
+        customer_email: "leonel.m.domingos@gmail.com",
+        return_url: window.location.href,
+    }
+    const myorder = cl.orders.retrieve(orderId)
+    myorder.then(r => console.log(r))
+
+    cl.orders.update(order)
+    //const customer = cl.customers.list({filters: {email_eq: attributes.email}})
+    cl.orders.retrieve(orderId).then(order => {
+        console.log(order)
+    })
+}
+
 
 
         products?.map((prod,k) => {
@@ -79,7 +91,6 @@ export default function Prods({products}: { product: SanityDocument }) {
                             filters: {code_eq: stegaClean(vrnt.sku)}
                         })
 
-console.log(skuVariantsPrices)
 
                         skuVariantsPrices[0] ? prod.variantsPrice.push([skuVariantsPrices[0]["prices"][0].amount_cents, skuVariantsPrices[0]["prices"][0].formatted_amount]) : null
                         prod.variantsPrice = prod.variantsPrice.sort((a, b) => a[0] - b[0])
