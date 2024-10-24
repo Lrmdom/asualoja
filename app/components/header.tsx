@@ -89,8 +89,9 @@ export default function Header(props) {
                 <li>
                     <IdentityLinks></IdentityLinks>
                 </li>
+
                 <li>
-                     <cl-cart-link>
+                    <cl-cart-link>
                         <svg
                             width="32"
                             height="32"

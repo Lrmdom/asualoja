@@ -28,6 +28,17 @@ export default function IdentityLinks(props) {
                     </button>
                 </cl-my-account-link>
             </li>
+            <li>
+                <cl-identity-link type="logout" target="_parent">
+                    <button
+                        className="flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium underline-offset-4 transition-colors ring-offset-background text-primary hover:underline focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+
+                        {t("Logout")}
+
+                    </button>
+                </cl-identity-link>
+
+            </li>
 
             {/*<li>
         <cl-identity-status type="guest" target="_self">
