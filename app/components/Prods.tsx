@@ -28,7 +28,6 @@ export default function Prods({products}: { product: SanityDocument }) {
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
     const location = useLocation();
-console.log(location)
     useEffect(() => {
         const orderId = localStorage.getItem("execlogdemoorder")
         const getCookieToken = Cookies.get("clIntegrationToken")
@@ -76,12 +75,16 @@ console.log(location)
                     const prices = async () => {
 
                         const skuVariantsPrices = await cl.skus.list({
-                            include: ['prices'],
+                            include: ['prices','stock_items'],
                             filters: {code_eq: stegaClean(vrnt.sku)}
                         })
 
+console.log(skuVariantsPrices)
+
                         skuVariantsPrices[0] ? prod.variantsPrice.push([skuVariantsPrices[0]["prices"][0].amount_cents, skuVariantsPrices[0]["prices"][0].formatted_amount]) : null
                         prod.variantsPrice = prod.variantsPrice.sort((a, b) => a[0] - b[0])
+                        prod.stock_items = skuVariantsPrices[0]["stock_items"]
+
                         //setVariantsPrices(prod.variantsPrice)
 
                         products[k] = prod
