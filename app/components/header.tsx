@@ -111,7 +111,7 @@ export default function Header(props) {
                     <IdentityLinks></IdentityLinks>
                 </li>
                 <li>
-                   {/* <cl-cart-link>
+                    {/* <cl-cart-link>
                         <svg
                             width="32"
                             height="32"
@@ -142,14 +142,13 @@ export default function Header(props) {
                             ></path>
                         </svg>
                         <cl-cart-count></cl-cart-count>
-                        <cl-cart></cl-cart>
+                        <cl-cart open-on-add="true"></cl-cart>
                     </cl-cart-link>*/}
                 </li>
                 <li>
 
 
-
-                        {/*<PricesContainer>
+                {/*<PricesContainer>
                     <ClientOnly fallback={null}>
                         {() => <Price
                             className="font-bold text-primary"
