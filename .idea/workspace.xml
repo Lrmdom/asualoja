@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/variants.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/variants.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="stock items...can i use cart from dropinjs now? maybe yes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -503,7 +498,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729710141993</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="stock items...can i use cart from dropinjs now? maybe yes">
+      <option name="closed" value="true" />
+      <created>1729778255555</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1729778255555</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -662,7 +665,8 @@
     <MESSAGE value="CL.skus api working filtered and with relation PRICES...." />
     <MESSAGE value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
     <MESSAGE value="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent" />
-    <option name="LAST_COMMIT_MESSAGE" value="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent" />
+    <MESSAGE value="stock items...can i use cart from dropinjs now? maybe yes" />
+    <option name="LAST_COMMIT_MESSAGE" value="stock items...can i use cart from dropinjs now? maybe yes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
