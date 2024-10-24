@@ -36,7 +36,6 @@ import Loading from "~/components/loading"
 import {authenticator} from "~/services/auth.server";
 import {authenticate} from "@commercelayer/js-auth";
 import Cookies from "js-cookie";
-import {CommerceLayer, OrderContainer, OrderStorage} from '@commercelayer/react-components'
 
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
@@ -155,24 +154,15 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-        {myToken != null ? (
 
-                <CommerceLayer
-                    accessToken={Cookies.get("clIntegrationToken") ? Cookies.get("clIntegrationToken") : ""}
-                    endpoint="https://execlog.commercelayer.io">
-                    <OrderStorage persistKey="execlogdemoorder">
-                        <OrderContainer>
-                            <Suspense fallback={<Loading/>}>
-                            <Header taxonomies={data} user={user} myToken={myToken}></Header>
-                            <MyNavMenu taxonomies={data}></MyNavMenu>
-                            {children}
-                            </Suspense>
-                        </OrderContainer>
-                    </OrderStorage>
-                </CommerceLayer>
 
-        ) : null
-        }
+        <Suspense fallback={<Loading/>}>
+            <Header taxonomies={data} user={user} myToken={myToken}></Header>
+            <MyNavMenu taxonomies={data}></MyNavMenu>
+            {children}
+        </Suspense>
+
+
         <ScrollRestoration/>
         <script
             dangerouslySetInnerHTML={{
@@ -189,8 +179,8 @@ export function Layout({children}: { children: React.ReactNode }) {
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
             <Suspense>
-            <LiveVisualEditing
-            />
+                <LiveVisualEditing
+                />
             </Suspense>
         ) : null}
 
