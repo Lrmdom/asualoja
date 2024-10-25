@@ -12,7 +12,6 @@ import {CommerceLayer} from "@commercelayer/sdk";
 // import {authenticate} from '@commercelayer/js-auth'
 import {create} from 'zustand'
 import Loading from "~/components/loading"
-import {Cookie} from "lucide-react";
 
 const usePricesStore = create((set) => ({
     prices: [],
@@ -25,46 +24,42 @@ export default function Prods({products}: { product: SanityDocument }) {
 
     const [variantsPrices, setVariantsPrices] = useState()
 
-
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
     const location = useLocation();
-    useEffect(() => {
-        const getCookieToken = Cookies.get("clIntegrationToken")
+    const getCookieToken = Cookies.get("clIntegrationToken")
 
+
+
+    useEffect(() => {
         const cl = CommerceLayer({
             organization: import.meta.env.VITE_MY_ORGANIZATION,
             accessToken: getCookieToken,
         })
-        let orderId;
+       /* let orderId;
         for (const [name, value] of Object.entries(Cookies.get())) {
             if (name.startsWith('commercelayer_order-id')) {
                 orderId = value;
+                console.log(orderId)
                 break;
             }
         }
-        console.log(orderId)
+        if(orderId){
+            const order = {
+                id: orderId,
+                language_code: language,
+                //customer_email: "leonel.m.domingos@gmail.com",
+                return_url: window.location.href,
+            }
+            const myorder = cl.orders.retrieve(orderId)
+            /!* myorder.then(r => console.log(r))*!/
 
-
-if(orderId){
-    const order = {
-        id: orderId,
-        language_code: language,
-        customer_email: "leonel.m.domingos@gmail.com",
-        return_url: window.location.href,
-    }
-    const myorder = cl.orders.retrieve(orderId)
-    myorder.then(r => console.log(r))
-
-    cl.orders.update(order)
-    //const customer = cl.customers.list({filters: {email_eq: attributes.email}})
-    cl.orders.retrieve(orderId).then(order => {
-        console.log(order)
-    })
-}
-
-
-
+            cl.orders.update(order)
+            //const customer = cl.customers.list({filters: {email_eq: attributes.email}})
+            cl.orders.retrieve(orderId).then(order => {
+                console.log(order)
+            })
+        }*/
         products?.map((prod,k) => {
             if (Array.isArray(prod.variants)) {
                 prod.variantsImages = []
@@ -90,17 +85,17 @@ if(orderId){
                             include: ['prices','stock_items'],
                             filters: {code_eq: stegaClean(vrnt.sku)}
                         })
-
-
                         skuVariantsPrices[0] ? prod.variantsPrice.push([skuVariantsPrices[0]["prices"][0].amount_cents, skuVariantsPrices[0]["prices"][0].formatted_amount]) : null
                         prod.variantsPrice = prod.variantsPrice.sort((a, b) => a[0] - b[0])
-                        prod.stock_items = skuVariantsPrices[0]["stock_items"]
+
+                        skuVariantsPrices[0]? prod.stock_items = skuVariantsPrices[0]["stock_items"]:null
 
                         //setVariantsPrices(prod.variantsPrice)
 
                         products[k] = prod
+
                         //all state must be ready before render
-                        await new Promise(r => setTimeout(r, 500))
+                        await new Promise(r => setTimeout(r, 100))
                         setVariantsPrices(products)
 
 
@@ -116,6 +111,10 @@ if(orderId){
 
             } else {
                 prod.variantsImages = [{"url": prod.imageUrl, "alt": stegaClean(prod.title)}]
+                prod.variantsPrice=[]
+                prod.stock_items=[]
+                products[k] = prod
+                setVariantsPrices(products)
             }
         })
     }, [])
@@ -157,6 +156,7 @@ if(orderId){
                                     prod.variantsImages = [{"url": prod.imageUrl, "alt": stegaClean(prod.title)}]
                                 }
                                 let taxonomy = prod.taxonomies ? prod.taxonomies[0] : prod.taxonomy
+
                                 return (
                                     <>
 
@@ -167,9 +167,7 @@ if(orderId){
                                                 to={stegaClean(`/${language}/${encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}>
                                                 {/*to={varianDetailLink}*/}
                                                 {stegaClean(prod.title)}</Link>
-                                            <Suspense fallback={<Loading/>}>
                                             <Variants product={variantsPrices[key]}></Variants>
-                                            </Suspense>
                                         </div>
                                     </>
                                 )
