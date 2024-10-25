@@ -140,7 +140,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <script
                 type="module"
-                src="https://cdn.jsdelivr.net/npm/@commercelayer/drop-in.js@2.4.3/dist/drop-in/drop-in.esm.js"
+                src="https://cdn.jsdelivr.net/npm/@commercelayer/drop-in.js@2/dist/drop-in/drop-in.esm.js"
             ></script>
             <link
                 href="https://cdn.jsdelivr.net/npm/@commercelayer/drop-in.js@2/dist/drop-in/drop-in.css"
@@ -158,6 +158,7 @@ export function Layout({children}: { children: React.ReactNode }) {
 
         <Suspense fallback={<Loading/>}>
             <Header taxonomies={data} user={user} myToken={myToken}></Header>
+
             <MyNavMenu taxonomies={data}></MyNavMenu>
             {children}
         </Suspense>
