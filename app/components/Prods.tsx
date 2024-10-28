@@ -12,6 +12,7 @@ import {CommerceLayer} from "@commercelayer/sdk";
 // import {authenticate} from '@commercelayer/js-auth'
 import {create} from 'zustand'
 import Loading from "~/components/loading"
+import {authenticate} from "@commercelayer/js-auth";
 
 const usePricesStore = create((set) => ({
     prices: [],
@@ -27,15 +28,53 @@ export default function Prods({products}: { product: SanityDocument }) {
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
     const location = useLocation();
-    const getCookieToken = Cookies.get("clIntegrationToken")
-
 
 
     useEffect(() => {
+        const getCookieToken = Cookies.get("clIntegrationToken")
+
         const cl = CommerceLayer({
             organization: import.meta.env.VITE_MY_ORGANIZATION,
             accessToken: getCookieToken,
         })
+
+        let customer
+        let customerId
+        let orderId
+        for (const [name, value] of Object.entries(Cookies.get())) {
+            if (name.startsWith('commercelayer_order-id')) {
+                orderId = value;
+                console.log(orderId)
+                break;
+            }
+
+        }
+        for (const [name, value] of Object.entries(Cookies.get())) {
+            if (name.startsWith('commercelayer_session')) {
+                const myArray = value.split("; ");
+
+                customerId = JSON.parse(myArray).customerId
+
+                const auth = authenticate('client_credentials', {
+                    clientId: 'vuuLuWnTGhUayS4-7LY8AR2mzbak5IxSf2Ts_VgQDTI',
+                    clientSecret: '8O9ft8XbknVZZcAqbd0BrxeUjlW7_ixb8pLhcR5f9SY'
+                })
+
+                console.log(auth)
+                const cl = CommerceLayer({
+                    organization: import.meta.env.VITE_MY_ORGANIZATION,
+                    accessToken: auth.accessToken
+                })
+                const customerOrder=cl.customers.orders(customerId, {
+                    fields: ['updated_at','status', 'number', 'id','created_at'],
+                    sort: {updated_at: 'desc'},
+                    filters: {status_start: 'Pend'}
+                })
+                customerOrder.then(r => console.log(r))
+                break;
+            }
+        }
+
        /* let orderId;
         for (const [name, value] of Object.entries(Cookies.get())) {
             if (name.startsWith('commercelayer_order-id')) {
@@ -81,10 +120,12 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                     const prices = async () => {
 
+
                         const skuVariantsPrices = await cl.skus.list({
                             include: ['prices','stock_items'],
                             filters: {code_eq: stegaClean(vrnt.sku)}
                         })
+
                         skuVariantsPrices[0] ? prod.variantsPrice.push([skuVariantsPrices[0]["prices"][0].amount_cents, skuVariantsPrices[0]["prices"][0].formatted_amount]) : null
                         prod.variantsPrice = prod.variantsPrice.sort((a, b) => a[0] - b[0])
 
@@ -95,9 +136,9 @@ export default function Prods({products}: { product: SanityDocument }) {
                         products[k] = prod
 
                         //all state must be ready before render
-                        await new Promise(r => setTimeout(r, 100))
-                        setVariantsPrices(products)
 
+                        await new Promise(r => setTimeout(r, 200))
+                        setVariantsPrices(products)
 
                     }
 
@@ -115,8 +156,11 @@ export default function Prods({products}: { product: SanityDocument }) {
                 prod.stock_items=[]
                 products[k] = prod
                 setVariantsPrices(products)
+
             }
         })
+
+
     }, [])
 //ZUSTAND code
     /*const prodPrices = usePricesStore((state) => state.prices)
