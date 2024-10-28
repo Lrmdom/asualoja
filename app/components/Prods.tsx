@@ -10,6 +10,7 @@ import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import {CommerceLayer} from "@commercelayer/sdk";
 // import {authenticate} from '@commercelayer/js-auth'
 import Cookies from "js-cookie";
+import { authenticate } from '@commercelayer/js-auth';
 
 export default function Prods({products}: { product: SanityDocument }) {
 

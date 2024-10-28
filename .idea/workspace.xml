@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="dropinjs and order language removed because of performance. studying moving to other parts of the code">
+    <list default="true" id="f18d6f69-5d89-4f49-87ab-40c5b89484ee" name="Changes" comment="dropinjs and order langua etc... in place">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/Prods.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Prods.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -527,7 +526,23 @@
       <option name="project" value="LOCAL" />
       <updated>1729790840615</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="dropinjs and order langua etc... in place">
+      <option name="closed" value="true" />
+      <created>1730085616234</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1730085616234</updated>
+    </task>
+    <task id="LOCAL-00047" summary="dropinjs and order langua etc... in place">
+      <option name="closed" value="true" />
+      <created>1730085845193</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1730085845193</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -686,9 +701,9 @@
     <MESSAGE value="CL.skus api working filtered and with relation PRICES...." />
     <MESSAGE value="more or less price s done , just not by the best way. Not perfoemant, some rerenders" />
     <MESSAGE value="variants prices on products listing is working ok.&#10;Fixed the function to create user on brevo and cl if not exist. Emails also sent" />
-    <MESSAGE value="dropinjs and order langua etc... in place" />
     <MESSAGE value="dropinjs and order language removed because of performance. studying moving to other parts of the code" />
-    <option name="LAST_COMMIT_MESSAGE" value="dropinjs and order language removed because of performance. studying moving to other parts of the code" />
+    <MESSAGE value="dropinjs and order langua etc... in place" />
+    <option name="LAST_COMMIT_MESSAGE" value="dropinjs and order langua etc... in place" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
