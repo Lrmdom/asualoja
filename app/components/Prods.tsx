@@ -19,13 +19,51 @@ export default function Prods({products}: { product: SanityDocument }) {
     const language = i18n.resolvedLanguage
     const getCookieToken = Cookies.get("clIntegrationToken")
 
+    const cl = CommerceLayer({
+        organization: import.meta.env.VITE_MY_ORGANIZATION,
+        accessToken: getCookieToken,
+    })
 
+    let customer
+    let customerId
+    let orderId
+    for (const [name, value] of Object.entries(Cookies.get())) {
+        if (name.startsWith('commercelayer_order-id')) {
+            orderId = value;
+            console.log(orderId)
+            break;
+        }
+
+    }
+    for (const [name, value] of Object.entries(Cookies.get())) {
+        if (name.startsWith('commercelayer_session')) {
+            const myArray = value.split("; ");
+
+            customerId = JSON.parse(myArray).customerId
+
+            const auth = authenticate('client_credentials', {
+                clientId: 'vuuLuWnTGhUayS4-7LY8AR2mzbak5IxSf2Ts_VgQDTI',
+                clientSecret: '8O9ft8XbknVZZcAqbd0BrxeUjlW7_ixb8pLhcR5f9SY'
+            })
+
+console.log(auth)
+            const cl = CommerceLayer({
+                organization: import.meta.env.VITE_MY_ORGANIZATION,
+                accessToken: auth.accessToken
+            })
+            const customerOrder=cl.customers.orders(customerId, {
+                fields: ['updated_at','status', 'number', 'id','created_at'],
+                sort: {updated_at: 'desc'},
+                filters: {status_start: 'Pend'}
+            })
+            customerOrder.then(r => console.log(r))
+            break;
+        }
+    }
 
     useEffect(() => {
-        const cl = CommerceLayer({
-            organization: import.meta.env.VITE_MY_ORGANIZATION,
-            accessToken: getCookieToken,
-        })
+
+
        /* let orderId;
         for (const [name, value] of Object.entries(Cookies.get())) {
             if (name.startsWith('commercelayer_order-id')) {
