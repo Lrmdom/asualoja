@@ -39,6 +39,7 @@ export default function Prods({products}: { product: SanityDocument }) {
         const order = {
             id: orderId,
             language_code: language,
+            //guest: false,
             //customer_email: "leonel.m.domingos@gmail.com",
             return_url: window.location.href,
         }
