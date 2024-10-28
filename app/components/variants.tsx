@@ -15,7 +15,6 @@ import VariantsAttributes from "~/components/variantAttributes";
 export default function Variants({product, emblaImageDetail, setEmblaImageDetail}: {
     variant: SanityDocument
 }) {
-
     const {t} = useTranslation('')
     const [selectedSku, setSelectedSku] = useState(null)
     const [emblaImage, setEmblaImage] = useState(null)
@@ -92,6 +91,16 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
                     <div className="font-semibold">
                         {product.variantsPrice[0][1]} --- {product.variantsPrice[product.variantsPrice.length - 1][1]}
                     </div>
+
+                : null
+            }
+            {
+                product.stock_items?.length?
+                    <div className="font-semibold">
+
+                        {product.stock_items[0]?.quantity?`Qt in stock:  ${product.stock_items[0].quantity}`:null}
+                    </div>
+
                     : null
             }
 

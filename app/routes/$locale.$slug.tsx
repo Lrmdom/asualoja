@@ -7,12 +7,9 @@ import {loadQuery} from '~/sanity/loader.server'
 import Taxonomy from '~/components/Taxonomy'
 import {TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED} from '~/sanity/queries'
 import Sidebar from "~/components/sideBar";
-import invariant from "tiny-invariant";
-import {Suspense} from "react";
 
 
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
-    invariant(params.slug, "Missing Slug param")
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED,
         params

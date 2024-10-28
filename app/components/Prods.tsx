@@ -1,59 +1,119 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import {Link, useLocation} from "@remix-run/react";
+import {Link} from "@remix-run/react";
 import {useTranslation} from "react-i18next";
 
 
 import Variants from "~/components/variants";
-import * as React from "react";
-import {Suspense, useEffect, useState} from "react";
-import Cookies from "js-cookie";
+import {useEffect, useState} from "react";
+import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import {CommerceLayer} from "@commercelayer/sdk";
 // import {authenticate} from '@commercelayer/js-auth'
-import {create} from 'zustand'
-import Loading from "~/components/loading"
+import Cookies from "js-cookie";
+import { authenticate } from '@commercelayer/js-auth';
 
-const usePricesStore = create((set) => ({
-    prices: [],
-    //savePrices: () => set((state) => ({state: state.prices})),
-    updatePrices: (prices) => set({prices: prices})
+const auth = await authenticate('client_credentials', {
+    clientId: 'vuuLuWnTGhUayS4-7LY8AR2mzbak5IxSf2Ts_VgQDTI',
+    clientSecret: '8O9ft8XbknVZZcAqbd0BrxeUjlW7_ixb8pLhcR5f9SY'
+})
 
-}))
+
+const clIntegration = CommerceLayer({
+    organization: import.meta.env.VITE_MY_ORGANIZATION,
+    accessToken: auth.accessToken
+})
+
+
 
 export default function Prods({products}: { product: SanityDocument }) {
 
     const [variantsPrices, setVariantsPrices] = useState()
 
-
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-    const location = useLocation();
-console.log(location)
+
     useEffect(() => {
-        const orderId = localStorage.getItem("execlogdemoorder")
+
+
         const getCookieToken = Cookies.get("clIntegrationToken")
         const cl = CommerceLayer({
             organization: import.meta.env.VITE_MY_ORGANIZATION,
             accessToken: getCookieToken,
         })
-        console.log(window.location.href)
-        const order = {
-            id: orderId,
-            language_code: language,
-            customer_email: "leonel.m.domingos@gmail.com",
-            return_url: window.location.href,
+
+
+        let customerId
+        let orderId
+        for (const [name, value] of Object.entries(Cookies.get())) {
+            if (name.startsWith('commercelayer_order-id')) {
+                orderId = value;
+                console.log(orderId)
+                break;
+            }
+
         }
-        const myorder=cl.orders.retrieve(orderId)
-        myorder.then(r=>console.log(r))
+        for (const [name, value] of Object.entries(Cookies.get())) {
+            if (name.startsWith('commercelayer_session')) {
+                const myArray = value.split("; ");
 
-        cl.orders.update(order)
-        //const customer = cl.customers.list({filters: {email_eq: attributes.email}})
-
-        /*cl.orders.retrieve(orderId).then(order => {
-            console.log(order)
-        })*/
+                customerId = JSON.parse(myArray).customerId
 
 
+                clIntegration.customers.orders(customerId, {
+                    fields: ['updated_at','status', 'number', 'id','created_at'],
+                    sort: {updated_at: 'desc'},
+                    filters: {status_start: 'Pend'}
+                }).then(orders => {
+
+
+                    console.log(orders[0])
+                    orderId = orders[0].id
+
+                    const order = {
+                        id: orderId,
+                        language_code: language,
+                        return_url: window.location.href,
+                    }
+                    cl.orders.update(order)
+                    cl.orders.retrieve(orderId).then(order => {
+                        console.log(order)
+                    })
+                    /*  let sorted = () => customer[0].orders.sort((a,b)=>{
+                          return Date.parse(b.updated_at) - Date.parse(a.updated_at);
+                      })
+                      customer[0].orders=sorted()
+                      console.log(customer[0].orders[0])*/
+                })
+                break;
+            }
+        }
+
+        let customer
+
+       /* let orderId;
+        for (const [name, value] of Object.entries(Cookies.get())) {
+            if (name.startsWith('commercelayer_order-id')) {
+                orderId = value;
+                console.log(orderId)
+                break;
+            }
+        }
+        if(orderId){
+            const order = {
+                id: orderId,
+                language_code: language,
+                //customer_email: "leonel.m.domingos@gmail.com",
+                return_url: window.location.href,
+            }
+            const myorder = cl.orders.retrieve(orderId)
+            /!* myorder.then(r => console.log(r))*!/
+
+            cl.orders.update(order)
+            //const customer = cl.customers.list({filters: {email_eq: attributes.email}})
+            cl.orders.retrieve(orderId).then(order => {
+                console.log(order)
+            })
+        }*/
         products?.map((prod,k) => {
             if (Array.isArray(prod.variants)) {
                 prod.variantsImages = []
@@ -76,17 +136,20 @@ console.log(location)
                     const prices = async () => {
 
                         const skuVariantsPrices = await cl.skus.list({
-                            include: ['prices'],
+                            include: ['prices','stock_items'],
                             filters: {code_eq: stegaClean(vrnt.sku)}
                         })
-
                         skuVariantsPrices[0] ? prod.variantsPrice.push([skuVariantsPrices[0]["prices"][0].amount_cents, skuVariantsPrices[0]["prices"][0].formatted_amount]) : null
                         prod.variantsPrice = prod.variantsPrice.sort((a, b) => a[0] - b[0])
+
+                        skuVariantsPrices[0]? prod.stock_items = skuVariantsPrices[0]["stock_items"]:null
+
                         //setVariantsPrices(prod.variantsPrice)
 
                         products[k] = prod
+
                         //all state must be ready before render
-                        await new Promise(r => setTimeout(r, 500))
+                        await new Promise(r => setTimeout(r, 100))
                         setVariantsPrices(products)
 
 
@@ -102,6 +165,10 @@ console.log(location)
 
             } else {
                 prod.variantsImages = [{"url": prod.imageUrl, "alt": stegaClean(prod.title)}]
+                prod.variantsPrice=[]
+                prod.stock_items=[]
+                products[k] = prod
+                setVariantsPrices(products)
             }
         })
     }, [])
@@ -143,6 +210,7 @@ console.log(location)
                                     prod.variantsImages = [{"url": prod.imageUrl, "alt": stegaClean(prod.title)}]
                                 }
                                 let taxonomy = prod.taxonomies ? prod.taxonomies[0] : prod.taxonomy
+
                                 return (
                                     <>
 
@@ -153,9 +221,7 @@ console.log(location)
                                                 to={stegaClean(`/${language}/${encodeURI(stegaClean(taxonomy))}/${encodeURI(stegaClean(prod.taxons) || stegaClean(prod.parenttaxon))}/${encodeURI(stegaClean(prod.title))}`)}>
                                                 {/*to={varianDetailLink}*/}
                                                 {stegaClean(prod.title)}</Link>
-                                            <Suspense fallback={<Loading/>}>
                                             <Variants product={variantsPrices[key]}></Variants>
-                                            </Suspense>
                                         </div>
                                     </>
                                 )
@@ -165,8 +231,6 @@ console.log(location)
                     </div>
                 </div>
             </div>
-
         </>
-
     )
 }

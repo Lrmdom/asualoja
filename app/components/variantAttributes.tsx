@@ -4,6 +4,10 @@ import {RadioGroup} from "@/components/ui/radio-group";
 import VariantAttr from "~/components/variantAttr";
 
 export default function VariantsAttributes(props) {
+
+    //todo show only if it exists in stock
+
+
     const Reg_Exp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
     const {
         product,
@@ -31,6 +35,7 @@ export default function VariantsAttributes(props) {
                 Object.keys(attribute[1]).forEach(k => attribute[1][k].value = typeof attribute[1][k].value == 'string' ? attribute[1][k].value.trim().toUpperCase() : attribute[1][k].value)
 
                 attribute[1].sort((a, b) => a.value.localeCompare(b.value))
+
                 return (
                     <>
                         <hr className="m-2"/>

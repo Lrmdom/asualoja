@@ -70,28 +70,7 @@ export default function Header(props) {
         avatar = null
     }
 
-    const MyCartIcon = () => (
-        <div className='relative inline-block cursor-pointer text-xs font-bold'>
-            <LineItemsContainer>
 
-                {/* static icon */}
-                <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='36'
-                    height='36'
-                    fill='currentColor'
-                    viewBox='0 0 256 256'
-                >
-                    <path
-                        d='M216,64H176a48,48,0,0,0-96,0H40A16,16,0,0,0,24,80V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64ZM128,32a32,32,0,0,1,32,32H96A32,32,0,0,1,128,32Zm88,168H40V80H80V96a8,8,0,0,0,16,0V80h64V96a8,8,0,0,0,16,0V80h40Z'/>
-                </svg>
-
-                {/* total number of cart items */}
-                <LineItemsCount className='absolute bottom-2 left-1/2 transform -translate-x-1/2'/>
-
-            </LineItemsContainer>
-        </div>
-    )
 
 
 
@@ -110,8 +89,9 @@ export default function Header(props) {
                 <li>
                     <IdentityLinks></IdentityLinks>
                 </li>
+
                 <li>
-                   {/* <cl-cart-link>
+                    <cl-cart-link>
                         <svg
                             width="32"
                             height="32"
@@ -142,56 +122,14 @@ export default function Header(props) {
                             ></path>
                         </svg>
                         <cl-cart-count></cl-cart-count>
-                        <cl-cart></cl-cart>
-                    </cl-cart-link>*/}
+                        <cl-cart open-on-add="true"></cl-cart>
+                    </cl-cart-link>
                 </li>
                 <li>
 
 
 
-                        {/*<PricesContainer>
-                    <ClientOnly fallback={null}>
-                        {() => <Price
-                            className="font-bold text-primary"
-                            compareClassName="line-through ml-2 text-xl"
-                            skuCode={stegaClean(selectedSku)}
-                        />}
-
-                    </ClientOnly>
-                </PricesContainer>*/}
-                        {/*
-                <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
-
-                    <AvailabilityTemplate
-                        showShippingMethodName
-                        showShippingMethodPrice
-                        timeFormat="days"
-                    />
-                </AvailabilityContainer>*/}
-
-
-
-                                <HostedCart type='mini' openAdd
-                                            /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
-
-                                            style={{
-                                                container: {
-                                                    backgroundColor: 'white'
-                                                }
-                                            }}/>
-                                <CartLink
-                                    /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
-
-                                    label={MyCartIcon()}
-                                    onClick={function Fa() {
-                                    }}
-                                    target="_blank"
-                                />
-
-
-
-
-                </li>
+             </li>
 
 
             </ul>
