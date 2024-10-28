@@ -12,6 +12,19 @@ import {CommerceLayer} from "@commercelayer/sdk";
 import Cookies from "js-cookie";
 import { authenticate } from '@commercelayer/js-auth';
 
+const auth = await authenticate('client_credentials', {
+    clientId: 'vuuLuWnTGhUayS4-7LY8AR2mzbak5IxSf2Ts_VgQDTI',
+    clientSecret: '8O9ft8XbknVZZcAqbd0BrxeUjlW7_ixb8pLhcR5f9SY'
+})
+
+
+const clIntegration = CommerceLayer({
+    organization: import.meta.env.VITE_MY_ORGANIZATION,
+    accessToken: auth.accessToken
+})
+
+
+
 export default function Prods({products}: { product: SanityDocument }) {
 
     const [variantsPrices, setVariantsPrices] = useState()
@@ -20,6 +33,7 @@ export default function Prods({products}: { product: SanityDocument }) {
     const language = i18n.resolvedLanguage
 
     useEffect(() => {
+
 
         const getCookieToken = Cookies.get("clIntegrationToken")
         const cl = CommerceLayer({
@@ -44,24 +58,26 @@ export default function Prods({products}: { product: SanityDocument }) {
 
                 customerId = JSON.parse(myArray).customerId
 
-                const auth = authenticate('client_credentials', {
-                    clientId: 'vuuLuWnTGhUayS4-7LY8AR2mzbak5IxSf2Ts_VgQDTI',
-                    clientSecret: '8O9ft8XbknVZZcAqbd0BrxeUjlW7_ixb8pLhcR5f9SY'
-                })
 
-
-                const clIntegration = CommerceLayer({
-                    organization: import.meta.env.VITE_MY_ORGANIZATION,
-                    accessToken: auth.accessToken
-                })
                 clIntegration.customers.orders(customerId, {
                     fields: ['updated_at','status', 'number', 'id','created_at'],
                     sort: {updated_at: 'desc'},
                     filters: {status_start: 'Pend'}
-                }).then(c => {
+                }).then(orders => {
 
-                    customer = c
-                    console.log(customer[0].orders[0])
+
+                    console.log(orders[0])
+                    orderId = orders[0].id
+
+                    const order = {
+                        id: orderId,
+                        language_code: language,
+                        return_url: window.location.href,
+                    }
+                    cl.orders.update(order)
+                    cl.orders.retrieve(orderId).then(order => {
+                        console.log(order)
+                    })
                     /*  let sorted = () => customer[0].orders.sort((a,b)=>{
                           return Date.parse(b.updated_at) - Date.parse(a.updated_at);
                       })
