@@ -6,15 +6,10 @@ import {loadQuery} from '~/sanity/loader.server'
 
 import Taxonomy from '~/components/Taxonomy'
 import {TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED} from '~/sanity/queries'
-import {authenticate} from "@commercelayer/js-auth";
-import {CommerceLayer} from "@commercelayer/sdk";
-import Cookies from "js-cookie"
-
+import Sidebar from "~/components/sideBar";
 
 
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
-
-
     const {data} = await loadQuery<SanityDocument>(
         TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED,
         params
@@ -37,7 +32,7 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
       data.headers.append(key, realtimeCaches[key]);
     }*/
     if (!data) {
-        throw new Response("Not Found", {status: 404});
+        throw new Response("Not Found", { status: 404 });
     }
     return {data}
 }
@@ -45,13 +40,10 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
 export default function TaxonomyRoute() {
     const {data} = useLoaderData<typeof loader>()
 
-
-
-
     return (
         <>
-            {/* <Sidebar></Sidebar>*/}
-            <Taxonomy taxonomies={data}/>
+               {/* <Sidebar></Sidebar>*/}
+                <Taxonomy taxonomies={data}/>
 
         </>
 
