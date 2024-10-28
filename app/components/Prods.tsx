@@ -18,7 +18,7 @@ export default function Prods({products}: { product: SanityDocument }) {
 
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-    const getCookieToken = Cookies.get("clIntegrationToken")
+    /*const getCookieToken = Cookies.get("clIntegrationToken")
 
     const cl = CommerceLayer({
         organization: import.meta.env.VITE_MY_ORGANIZATION,
@@ -60,7 +60,7 @@ console.log(auth)
             customerOrder.then(r => console.log(r))
             break;
         }
-    }
+    }*/
 
     useEffect(() => {
 
