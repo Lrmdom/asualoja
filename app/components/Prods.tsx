@@ -5,9 +5,11 @@ import {useTranslation} from "react-i18next";
 
 
 import Variants from "~/components/variants";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
+import {CommerceLayer} from "@commercelayer/sdk";
 // import {authenticate} from '@commercelayer/js-auth'
+import Cookies from "js-cookie";
 
 export default function Prods({products}: { product: SanityDocument }) {
 
@@ -15,7 +17,6 @@ export default function Prods({products}: { product: SanityDocument }) {
 
     const {i18n} = useTranslation()
     const language = i18n.resolvedLanguage
-    const location = useLocation();
     const getCookieToken = Cookies.get("clIntegrationToken")
 
 
