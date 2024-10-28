@@ -13,11 +13,11 @@ export let authenticator = new Authenticator(sessionStorage)
 authenticator.use(
     new LinkedinStrategy(
         {
-            clientID: '77sukk301f74bf',
-            clientSecret: 'liwPtmOReOVePGKd',
+            clientID: import.meta.env.VITE_LINKEDIN_CLIENT_ID,
+            clientSecret: import.meta.env.VITE_LINKEDIN_CLIENT_SECRET,
             // LinkedIn is expecting a full URL here, not a relative path
             // see: https://learn.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?tabs=HTTPS1#step-1-configure-your-application
-            callbackURL: 'http://localhost:3000/auth/linkedin/callback',
+            callbackURL: import.meta.env.VITE_LINKEDIN_CALLBACK_URL,
         },
         async ({accessToken, refreshToken, extraParams, profile, context}) => {
             const email = profile._json.email
@@ -68,11 +68,10 @@ authenticator.use(
 authenticator.use(
     new GoogleStrategy(
         {
-            clientID:
-                '1091535953121-mb4b5ap4uij06s5nqmcbpia3mpdo4437.apps.googleusercontent.com',
-            clientSecret: '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',
+            clientID:import.meta.env.VITE_GOOGLE_CLIENT_ID,
+            clientSecret: import.meta.env.VITE_GOOGLE_CLIENT_SECRET,
             //callbackURL: "http://localhost:3000/auth/google/callback"
-            callbackURL: 'http://execlog.com/auth/google/callback',
+            callbackURL: import.meta.env.VITE_GOOGLE_CALLBACK_URL,
         },
         async ({accessToken, refreshToken, extraParams, profile}) => {
             // here you would find or create a user in your database
@@ -97,9 +96,9 @@ authenticator.use(
 authenticator.use(
     new FacebookStrategy(
         {
-            clientID: '1031654645049512',
-            clientSecret: 'a47b82c7a365970bca801ebde865adaa',
-            callbackURL: 'http://localhost:3000/auth/facebook/callback',
+            clientID: import.meta.env.VITE_FACEBOOK_CLIENT_ID,
+            clientSecret: import.meta.env.VITE_FACEBOOK_CLIENT_SECRET,
+            callbackURL: import.meta.env.VITE_FACEBOOK_CALLBACK_URL,
         },
         async ({profile}) => {
 
