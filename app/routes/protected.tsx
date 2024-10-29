@@ -5,16 +5,16 @@ import {CommerceLayer} from "@commercelayer/sdk";
 import {authenticate} from "@commercelayer/js-auth";
 import SibApiV3Sdk from "sib-api-v3-typescript"
 
-const createUser = async (attributes,ENV) => {
+const createUser = async (attributes) => {
 
     const auth = await authenticate('client_credentials', {
         clientId: 'vuuLuWnTGhUayS4-7LY8AR2mzbak5IxSf2Ts_VgQDTI',
-        clientSecret:'8O9ft8XbknVZZcAqbd0BrxeUjlW7_ixb8pLhcR5f9SY'
+        clientSecret: '8O9ft8XbknVZZcAqbd0BrxeUjlW7_ixb8pLhcR5f9SY'
     })
 
 
     const cl = CommerceLayer({
-        organization: ENV.MY_ORGANIZTION,
+        organization: import.meta.env.VITE_MY_ORGANIZATION,
         accessToken: auth.accessToken
     })
 
@@ -23,7 +23,7 @@ const createUser = async (attributes,ENV) => {
             method: 'GET',
             headers: {
                 'accept': 'application/json',
-                'api-key': ENV.BREVO_API_KEY
+                'api-key': import.meta.env.VITE_BREVO_API_KEY
             }
         })
     const brevoCustomer = await response.json();
@@ -31,7 +31,7 @@ const createUser = async (attributes,ENV) => {
     const customer = await cl.customers.list({filters: {email_eq: attributes.email}})
 
     customer.length > 0 ? null :
-    await cl.customers.create({password:attributes.email,email:attributes.email})
+        await cl.customers.create({password: attributes.email, email: attributes.email})
 
 
     if (brevoCustomer) {
@@ -43,7 +43,7 @@ const createUser = async (attributes,ENV) => {
 
         let apiKey = apiInstance.authentications['apiKey'];
 
-        apiKey.apiKey = ENV.BREVO_API_KEY;
+        apiKey.apiKey = import.meta.env.VITE_BREVO_API_KEY;
 
         let createContact = new SibApiV3Sdk.CreateContact();
         createContact.email = attributes.email;
@@ -59,10 +59,36 @@ const createUser = async (attributes,ENV) => {
     try {
         //console.log(await cl.skus.list())
         //todo Special authorization to reset a password? send email with linkpwdreset
-        const linkPwdReset = await cl.customer_password_resets.create({
+        /*const linkPwdReset = await cl.customer_password_resets.create({
             customer_email: attributes.email
         })
-        console.log(linkPwdReset)
+        cl.customer_password_resets.update({
+            "id": linkPwdReset.id,
+            "_reset_password_token": linkPwdReset.reset_password_token,
+            "customer_password": attributes.email
+        })*/
+
+
+        let customerPwdResets = await cl.customer_password_resets.list({filters: {customer_email_eq: attributes.email}})
+        console.log(customerPwdResets)
+        customerPwdResets.map(async (item) => {
+            await cl.customer_password_resets.delete(item.id)
+        })
+        /* customerPwdResets = await cl.customer_password_resets.list({filters: {customer_email_eq: attributes.email}})
+        console.log(customerPwdResets) */
+        /* {
+        id: "BEpAsqlpnm",
+        type: "customer_password_resets",
+        customer_email: "lmatiasdomingos@gmail.com",
+        reset_password_token: "pPFQWWVjN97cHVQkL4vG",
+        reset_password_at: null,
+        created_at: "2024-10-28T14:36:05.408Z",
+        updated_at: "2024-10-28T14:36:05.408Z",
+        reference: null,
+        reference_origin: null,
+        metadata: {
+        },
+      } */
 
     } catch (e) {
         console.log(e)
@@ -72,12 +98,12 @@ const createUser = async (attributes,ENV) => {
     let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
     let apiKey = apiInstance.authentications['apiKey'];
-    apiKey.apiKey = ENV.BREVO_API_KEY;
+    apiKey.apiKey = import.meta.env.VITE_BREVO_API_KEY;
 
     let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
     sendSmtpEmail.subject = "My {{params.subject}}";
-    sendSmtpEmail.htmlContent = "<html><body><h1>This is my first transactional email {{params.parameter}}</h1></body></html>";
+    sendSmtpEmail.htmlContent = `<html><body><h1>This is my first transactional email {{params.parameter}}</h1></body></html>`;
     sendSmtpEmail.sender = {"name": "John Doe", "email": "example@example.com"};
     sendSmtpEmail.to = [{"email": attributes.email, "name": "Jane Doe"}];
     sendSmtpEmail.cc = [{"email": "example2@example2.com", "name": "Janice Doe"}];
@@ -103,19 +129,19 @@ export async function loader({request}) {
     const token = myArray[1].split("=")[1]
 
 
-    const ENV = {
-        BREVO_API_KEY: import.meta.env.VITE_BREVO_API_KEY,
-        MY_ORGANIZATION: import.meta.env.VITE_MY_ORGANIZATION,
-        CL_INTEGRATION_TOKEN: token,
+    /* const ENV = {
+         BREVO_API_KEY: import.meta.env.VITE_BREVO_API_KEY,
+         MY_ORGANIZATION: import.meta.env.VITE_MY_ORGANIZATION,
+         CL_INTEGRATION_TOKEN: token,
 
-    }
-    console.log(ENV)
+     }
+     console.log(ENV)*/
     const user = await authenticator.isAuthenticated(request, {
         failureRedirect: '/login',
         //successRedirect: `/auth/newCustomerPwd`
     })
 
-    createUser(user._json, ENV)
+    createUser(user._json)
 
     return json(user)
 }
