@@ -10,14 +10,14 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
-    useLoaderData,
+    useLoaderData, useLocation,
     useMatches,
     useNavigate,
     useNavigation,
     useRevalidator,
     useRouteLoaderData,
 } from '@remix-run/react'
-import type {LinksFunction} from '@remix-run/node'
+import {LinksFunction, MetaFunction} from '@remix-run/node'
 import {json} from '@remix-run/node'
 
 import Footer from '~/components/footer'
@@ -36,7 +36,7 @@ import Loading from "~/components/loading"
 import {authenticator} from "~/services/auth.server";
 import {authenticate} from "@commercelayer/js-auth";
 import Cookies from "js-cookie";
-
+import { AnimatePresence, motion } from "framer-motion";
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
@@ -86,9 +86,15 @@ export const handle = {
     // It can be a string or an array.
     i18n: 'common',
 }
-
+export const meta: MetaFunction = () => {
+    return [
+        {title: "location.pathname"},
+        {name: 'description', content: 'Welcome to Remix!'},
+    ]
+}
 
 export function Layout({children}: { children: React.ReactNode }) {
+    const matches = useMatches();
 
     const navigate = useNavigate()
     const [myToken, setMyToken] = useState(null)
@@ -123,7 +129,6 @@ export function Layout({children}: { children: React.ReactNode }) {
     /*
     myToken?null:navigate('.', { replace: true })
     */
-    const matches = useMatches();
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
@@ -160,6 +165,18 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Header taxonomies={data} user={user} myToken={myToken}></Header>
 
             <MyNavMenu taxonomies={data}></MyNavMenu>
+            <ol>
+                {matches
+                    .filter(
+                        (match) =>
+                            match.handle && match.handle.breadcrumb
+                    )
+                    .map((match, index) => (
+                        <li key={index}>
+                            {match.handle.breadcrumb(match)}
+                        </li>
+                    ))}
+            </ol>
             {children}
         </Suspense>
 
@@ -202,14 +219,28 @@ export default function App() {
 
     return (
 
-        <div className={
+        /*<div className={ //working animation
             navigation.state === "loading" ? "opacity-70" : ""
         }
-        >
+        >*/
 
-            <Outlet/>
+            /*<AnimatePresence mode="sync"> //working animation
+                <motion.div
+                    key={useLocation().pathname}
+                    variants={{
+                        initial: { opacity: 0, y: -1000 },
+                        animate: { opacity: 1, y: 0 },
+                        exit: { opacity: 1, y: 1000 },
+                    }}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                >*/
+                    <Outlet />
+               /* </motion.div>
+            </AnimatePresence>*/
 
-        </div>
+       /* </div>*/
 
     )
 }

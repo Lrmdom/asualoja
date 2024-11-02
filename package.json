@@ -70,6 +70,7 @@
     "dotenv-cli": "^7.4.2",
     "embla-carousel": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
+    "framer-motion": "^11.11.10",
     "fuse.js": "^7.0.0",
     "groq": "^3.60.0",
     "i18next": "^23.15.2",

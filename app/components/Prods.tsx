@@ -47,7 +47,7 @@ export default function Prods({products}: { product: SanityDocument }) {
         for (const [name, value] of Object.entries(Cookies.get())) {
             if (name.startsWith('commercelayer_order-id')) {
                 orderId = value;
-                console.log(orderId)
+                //console.log(orderId)
                 break;
             }
 
@@ -66,7 +66,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                 }).then(orders => {
 
 
-                    console.log(orders[0])
+                    //console.log(orders[0])
                     orderId = orders[0].id
 
                     const order = {
