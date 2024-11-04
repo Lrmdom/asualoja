@@ -149,11 +149,12 @@ export default function Prods({products}: { product: SanityDocument }) {
                         products[k] = prod
 
                         //all state must be ready before render
-                        await new Promise(r => setTimeout(r, 150))
+                        await new Promise(r => setTimeout(r, 300))
                         setVariantsPrices(products)
 
 
                     }
+
 
                     prices()
 
