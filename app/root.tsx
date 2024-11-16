@@ -10,15 +10,14 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
-    useLoaderData, useLocation,
+    useLoaderData,
     useMatches,
     useNavigate,
     useNavigation,
     useRevalidator,
     useRouteLoaderData,
 } from '@remix-run/react'
-import {LinksFunction, MetaFunction} from '@remix-run/node'
-import {json} from '@remix-run/node'
+import {json, LinksFunction, MetaFunction} from '@remix-run/node'
 
 import Footer from '~/components/footer'
 import SubscribeNews from '~/components/subscribeNews'
@@ -36,7 +35,6 @@ import Loading from "~/components/loading"
 import {authenticator} from "~/services/auth.server";
 import {authenticate} from "@commercelayer/js-auth";
 import Cookies from "js-cookie";
-import { AnimatePresence, motion } from "framer-motion";
 
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
 
@@ -159,7 +157,20 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-
+        <script src="https://accounts.google.com/gsi/client" async></script>
+        <div id="g_id_onload"
+             data-client_id='1091535953121-mb4b5ap4uij06s5nqmcbpia3mpdo4437.apps.googleusercontent.com'
+             data-login_uri="http://localhost:5173"
+             data-auto_prompt="true">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="sign_in_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
 
         <Suspense fallback={<Loading/>}>
             <Header taxonomies={data} user={user} myToken={myToken}></Header>
@@ -224,23 +235,23 @@ export default function App() {
         }
         >*/
 
-            /*<AnimatePresence mode="sync"> //working animation
-                <motion.div
-                    key={useLocation().pathname}
-                    variants={{
-                        initial: { opacity: 0, y: -1000 },
-                        animate: { opacity: 1, y: 0 },
-                        exit: { opacity: 1, y: 1000 },
-                    }}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                >*/
-                    <Outlet />
-               /* </motion.div>
-            </AnimatePresence>*/
+        /*<AnimatePresence mode="sync"> //working animation
+            <motion.div
+                key={useLocation().pathname}
+                variants={{
+                    initial: { opacity: 0, y: -1000 },
+                    animate: { opacity: 1, y: 0 },
+                    exit: { opacity: 1, y: 1000 },
+                }}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+            >*/
+        <Outlet/>
+        /* </motion.div>
+     </AnimatePresence>*/
 
-       /* </div>*/
+        /* </div>*/
 
     )
 }
