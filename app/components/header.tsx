@@ -122,7 +122,7 @@ export default function Header(props) {
                             ></path>
                         </svg>
                         <cl-cart-count></cl-cart-count>
-                        {/*<cl-cart open-on-add="true"></cl-cart>*/}
+                        <cl-cart open-on-add="true"></cl-cart>
                     </cl-cart-link>
                 </li>
                 <li>
