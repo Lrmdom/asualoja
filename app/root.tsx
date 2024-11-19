@@ -165,9 +165,9 @@ export function Layout({children}: { children: React.ReactNode }) {
         </div>
         <div class="g_id_signin"
              data-type="standard"
-             data-size="large"
+             data-size="small"
              data-theme="outline"
-             data-text="sign_in_with"
+             data-text="signin_with"
              data-shape="rectangular"
              data-logo_alignment="left">
         </div>
