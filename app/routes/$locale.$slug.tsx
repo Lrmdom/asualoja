@@ -46,7 +46,7 @@ export const handle = {
 
 export const meta: MetaFunction = () => {
     return [
-        {title: location.pathname},
+        {title: useParams().slug},
         {name: 'description', content: 'Welcome to Remix!'},
     ]
 }
