@@ -1,6 +1,6 @@
 FROM node:20-alpine
 #ENV NODE_ENV development
-WORKDIR /app
+WORKDIR /
 COPY package.json .
 RUN npm install --legacy-peer-deps
 COPY . .
