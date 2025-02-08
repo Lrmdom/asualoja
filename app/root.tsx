@@ -159,8 +159,8 @@ export function Layout({children}: { children: React.ReactNode }) {
         <body>
         <script src="https://accounts.google.com/gsi/client" async></script>
         <div id="g_id_onload"
-             data-client_id='1091535953121-mb4b5ap4uij06s5nqmcbpia3mpdo4437.apps.googleusercontent.com'
-             data-login_uri="http://localhost:5173"
+             data-client_id='1091535953121-vb87e8uilgqlkg61np78ivuo8otvp0as.apps.googleusercontent.com'
+             data-login_uri="http://localhost:5173/login"
              data-auto_prompt="true">
         </div>
         <div class="g_id_signin"

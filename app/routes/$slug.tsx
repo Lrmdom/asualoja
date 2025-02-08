@@ -16,6 +16,7 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
         SERVICE_QUERY_LOCALIZED,
         params
     )
+
     return {data}
 }
 
