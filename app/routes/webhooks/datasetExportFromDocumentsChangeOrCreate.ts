@@ -18,12 +18,78 @@ const client = createClient({
     },
 });
 
+const { curly } = require('node-libcurl')
+
+const fs = require('fs');
+const request = require('request');
+
+const fs = require("fs");
+const { mkdir } = require("fs/promises");
+const { Readable } = require('stream');
+const { finished } = require('stream/promises');
+const path = require("path");
 
 export const loader = async ({
                                  request,
                              }: LoaderFunctionArgs) => {
 
+    const downloadFile = (async (url, fileName) => {
+        const res = await fetch(url);
+        console.log(res)
+        if (!fs.existsSync("downloads")) await mkdir("downloads"); //Optional if you already have downloads directory
+        const destination = path.resolve("./downloads", fileName);
+        const fileStream = fs.createWriteStream(destination, { flags: 'wx' });
+        await finished(Readable.fromWeb(res.body).pipe(fileStream));
+    });
 
+    await downloadFile("https://ho1tf79n.api.sanity.io/v2021-06-07/data/export/production", "myfiledata.ndjson")
+
+
+
+    /* const { data } = await curly.post('https://ho1tf79n.api.sanity.io/v2021-06-07/data/export/production', {
+         //postFields: JSON.stringify({ field: 'value' }),
+         httpHeader: [
+             'Content-Type: application/json',
+             'Accept: application/json',
+             'Authorization: Bearer sknWtK4sRtdBnGntwSiu8QA4bjYRark5Zh5c9xxKdOP7CaXbdVQeOYAHJSVNt4OGbOjAQIYcWuaCE36TdnuL01UyUv5N0zlTQC7vfxrjSqJY4GLRjobBsAoBKzN7kcl6wPrkR8AIi0BN6Wz3VucDNrct0CrzyMIZiddRDyHC4fIpEvZJibOj'
+         ],
+     })
+
+     console.log(data)*/
+    /*const { exec } = require('child_process');
+
+    exec('curl -H "Authorization: Bearer sknWtK4sRtdBnGntwSiu8QA4bjYRark5Zh5c9xxKdOP7CaXbdVQeOYAHJSVNt4OGbOjAQIYcWuaCE36TdnuL01UyUv5N0zlTQC7vfxrjSqJY4GLRjobBsAoBKzN7kcl6wPrkR8AIi0BN6Wz3VucDNrct0CrzyMIZiddRDyHC4fIpEvZJibOj" "https://ho1tf79n.api.sanity.io/v2021-06-07/data/export/production" > mydataexported.ndjson');
+*/
+
+
+
+// Define the URL you want to request
+    const url = 'https://ho1tf79n.api.sanity.io/v2021-06-07/data/export/production'; // Example URL
+
+// Make a GET request to the URL
+    request(url, (error, response, body) => {
+        if (error) {
+            console.error('Error occurred:', error);
+            return;
+        }
+
+        // Check if the request was successful (status code 200)
+        if (response.statusCode === 200) {
+            // Save the response data (body) to a file
+            fs.writeFile('responseData.json', body, (err) => {
+                if (err) {
+                    console.error('Error writing to file:', err);
+                } else {
+                    console.log('Response data saved to responseData.json');
+                }
+            });
+        } else {
+            console.log('Request failed with status code:', response.statusCode);
+        }
+    });
+
+
+/*
     const client = createClient({
         projectId,
         dataset,
@@ -33,7 +99,7 @@ export const loader = async ({
             enabled: stegaEnabled,
             studioUrl,
         },
-       token : "sknWtK4sRtdBnGntwSiu8QA4bjYRark5Zh5c9xxKdOP7CaXbdVQeOYAHJSVNt4OGbOjAQIYcWuaCE36TdnuL01UyUv5N0zlTQC7vfxrjSqJY4GLRjobBsAoBKzN7kcl6wPrkR8AIi0BN6Wz3VucDNrct0CrzyMIZiddRDyHC4fIpEvZJibOj"
+       token : "Authorization: Bearer sknWtK4sRtdBnGntwSiu8QA4bjYRark5Zh5c9xxKdOP7CaXbdVQeOYAHJSVNt4OGbOjAQIYcWuaCE36TdnuL01UyUv5N0zlTQC7vfxrjSqJY4GLRjobBsAoBKzN7kcl6wPrkR8AIi0BN6Wz3VucDNrct0CrzyMIZiddRDyHC4fIpEvZJibOj"
     });
 
     // handle "GET" request
@@ -64,6 +130,8 @@ export const loader = async ({
         // Optional, default: all types
         types: ['products', 'variants'],
 
+
+
         // Run 12 concurrent asset downloads
         assetConcurrency: 12,
 
@@ -72,5 +140,5 @@ export const loader = async ({
         // Default: 'stream'
         mode: 'stream',
     })
-    return json({success: true}, 200);
+    return json({success: true}, 200);*/
 };
