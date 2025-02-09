@@ -1,8 +1,8 @@
 import type {LoaderFunctionArgs} from "@remix-run/node"; // or cloudflare/deno
 import {json} from "@remix-run/node";
-import {createClient} from "@sanity/client";
+import {createClient, type SanityDocument} from "@sanity/client";
 
-import {dataset, projectId, stegaEnabled, studioUrl} from "../../sanity/projectDetails";
+import {dataset, projectId, stegaEnabled, studioUrl} from "../sanity/projectDetails";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const exportDataset = require('@sanity/export')
@@ -23,28 +23,81 @@ const { curly } = require('node-libcurl')
 const fs = require('fs');
 const request = require('request');
 
-const fs = require("fs");
 const { mkdir } = require("fs/promises");
 const { Readable } = require('stream');
 const { finished } = require('stream/promises');
 const path = require("path");
 
+import {parse, evaluate} from 'groq-js'
+
+
+import {TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED} from '~/sanity/queries'
+import {loadQuery} from "~/sanity/loader.server";
+
+
 export const loader = async ({
-                                 request,
+                                 request,params
                              }: LoaderFunctionArgs) => {
 
-    const downloadFile = (async (url, fileName) => {
+
+
+
+//todo params to input try with loadQuery???
+    //todo remove 'groq' from querie and inject params
+const input=`*[_type == "taxon" && title[_key == "${params.locale}"][0].value == "${params.slug}"][0]`
+//console.log(TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED)
+// Returns an ESTree-inspired syntax tree
+    let tree = parse(input)
+
+    let resp =  await fetch('https://ho1tf79n.api.sanity.io/v2022-03-07/data/query/production?query=*%5B_type+in+%5B%22taxon%22%2C+%22taxonomy%22%2C%22product%22%2C%22variant%22%5D%5D&perspective=published')
+    const jsn = await resp.json()
+    const filename=Date.now()+"myfiledata.json"
+
+    fs.writeFileSync(filename, JSON.stringify(jsn.result));
+
+
+    const dataset=JSON.parse(await fs.readFileSync(filename,{ encoding: 'utf8', flag: 'r' }));
+// Evaluate a tree against a dataset
+    let value = await evaluate(tree, {dataset})
+
+// Gather everything into one JavaScript object
+    let result = await value.get()
+
+    console.log(input)
+    return {result}
+
+    /* const resp = await fetch('https://ho1tf79n.api.sanity.io/v2022-03-07/data/query/production?query=*%5B_type+in+%5B%22taxon%22%2C+%22taxonomy%22%2C%22product%22%2C%22variant%22%5D%5D&perspective=published');
+
+    const dataset = await resp.json();
+
+    console.log(dataset)
+
+    let input = '*[_type == "taxon"]'
+
+// Returns an ESTree-inspired syntax tree
+    let tree = parse(input)
+
+// Evaluate a tree against a dataset
+    let value = await evaluate(tree, {dataset})
+
+// Gather everything into one JavaScript object
+    let result = await value.get()*/
+
+    console.log(result)
+
+
+ /*   const downloadFile = (async (url, fileName) => {
+
         const res = await fetch(url);
-        console.log(res)
         if (!fs.existsSync("downloads")) await mkdir("downloads"); //Optional if you already have downloads directory
         const destination = path.resolve("./downloads", fileName);
-        const fileStream = fs.createWriteStream(destination, { flags: 'wx' });
+        const fileStream = fs.createWriteStream(destination, { flags: 'wx'});
         await finished(Readable.fromWeb(res.body).pipe(fileStream));
     });
 
-    await downloadFile("https://ho1tf79n.api.sanity.io/v2021-06-07/data/export/production", "myfiledata.ndjson")
+    await downloadFile("https://ho1tf79n.api.sanity.io/v2022-03-07/data/query/production?query=*%5B_type+in+%5B%22taxon%22%2C+%22taxonomy%22%2C%22product%22%2C%22variant%22%5D%5D&%24locale=%22pt%22&%24taxons=%22Estrada%22&%24taxonomy=%22Bicicletas%22&%24slug=%22Bicicleta+estrada+trek+Madone+SL+77Gen+8%22&perspective=published", Date.now()+"myfiledata.ndjson")
 
-
+*/
 
     /* const { data } = await curly.post('https://ho1tf79n.api.sanity.io/v2021-06-07/data/export/production', {
          //postFields: JSON.stringify({ field: 'value' }),
@@ -63,7 +116,7 @@ export const loader = async ({
 
 
 
-// Define the URL you want to request
+/*// Define the URL you want to request
     const url = 'https://ho1tf79n.api.sanity.io/v2021-06-07/data/export/production'; // Example URL
 
 // Make a GET request to the URL
@@ -86,7 +139,7 @@ export const loader = async ({
         } else {
             console.log('Request failed with status code:', response.statusCode);
         }
-    });
+    });*/
 
 
 /*
@@ -141,4 +194,5 @@ export const loader = async ({
         mode: 'stream',
     })
     return json({success: true}, 200);*/
+    return result
 };
