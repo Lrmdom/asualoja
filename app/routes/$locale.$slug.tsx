@@ -8,7 +8,6 @@ import Taxonomy from '~/components/Taxonomy'
 import {TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED} from '~/sanity/queries'
 import Sidebar from "~/components/sideBar";
 
-import {parse, evaluate} from 'groq-js'
 
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
     const {data} = await loadQuery<SanityDocument>(

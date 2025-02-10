@@ -31,8 +31,7 @@ const path = require("path");
 import {parse, evaluate} from 'groq-js'
 
 
-import {TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED} from '~/sanity/queries'
-import {loadQuery} from "~/sanity/loader.server";
+import {PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED} from '~/sanity/queries'
 
 
 export const loader = async ({
@@ -42,12 +41,11 @@ export const loader = async ({
 
 
 
-//todo params to input try with loadQuery???
-    //todo remove 'groq' from querie and inject params
-const input=`*[_type == "taxon" && title[_key == "${params.locale}"][0].value == "${params.slug}"][0]`
-//console.log(TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED)
+    const {locale,slug}  = {...params}
+//const input=`*[_type == "taxonomy" && title[_key == "${locale}"][0].value == "${slug}"][0]`
+    const input=PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED
 // Returns an ESTree-inspired syntax tree
-    let tree = parse(input)
+    let tree = parse(input,{params})
 
     let resp =  await fetch('https://ho1tf79n.api.sanity.io/v2022-03-07/data/query/production?query=*%5B_type+in+%5B%22taxon%22%2C+%22taxonomy%22%2C%22product%22%2C%22variant%22%5D%5D&perspective=published')
     const jsn = await resp.json()
@@ -63,7 +61,6 @@ const input=`*[_type == "taxon" && title[_key == "${params.locale}"][0].value ==
 // Gather everything into one JavaScript object
     let result = await value.get()
 
-    console.log(input)
     return {result}
 
     /* const resp = await fetch('https://ho1tf79n.api.sanity.io/v2022-03-07/data/query/production?query=*%5B_type+in+%5B%22taxon%22%2C+%22taxonomy%22%2C%22product%22%2C%22variant%22%5D%5D&perspective=published');
@@ -83,7 +80,6 @@ const input=`*[_type == "taxon" && title[_key == "${params.locale}"][0].value ==
 // Gather everything into one JavaScript object
     let result = await value.get()*/
 
-    console.log(result)
 
 
  /*   const downloadFile = (async (url, fileName) => {
