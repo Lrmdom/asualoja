@@ -5,9 +5,15 @@ import { projectId, stegaEnabled, studioUrl} from "../sanity/projectDetails";
 import {Storage} from "@google-cloud/storage";
 import {evaluate, parse} from 'groq-js'
 
-import {PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED} from '~/sanity/queries'
+import {
+    PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED,
+    PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE
+} from '~/sanity/queries'
 import dataset from './dataset.json';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+
+
+
 
 const client = createClient({
     projectId,
@@ -21,13 +27,15 @@ const client = createClient({
 
 import fs from "fs"
 
+//todo groqwebhook export with sanity dataset export production  localPath.tar.gz  to file (use http?- to local path or gcp bucket)
+// todo convert ndjson to json with a script or gcp serverless function???
 
 export const loader = async ({
                                  request, params
                              }: LoaderFunctionArgs) => {
 
     //const input=`*[_type == "taxonomy" && title[_key == $locale][0].value == $taxonomy]`
-    const input = PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED
+    const input = PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE
 // Returns an ESTree-inspired syntax tree
     let tree = parse(input, {params})
 
