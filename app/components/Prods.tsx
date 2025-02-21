@@ -5,7 +5,7 @@ import {useTranslation} from "react-i18next";
 
 
 import Variants from "~/components/variants";
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
 import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import {CommerceLayer} from "@commercelayer/sdk";
 // import {authenticate} from '@commercelayer/js-auth'

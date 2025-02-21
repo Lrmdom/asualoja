@@ -8,6 +8,13 @@ import Taxonomy from '~/components/Taxonomy'
 import {TAXONOMY_PRODS_ATTRS_VARIANTS_ATTRS_QUERY_LOCALIZED} from '~/sanity/queries'
 import Sidebar from "~/components/sideBar";
 
+export function  headers(){
+    return {
+        "Cache-Control": "max-age=3600",
+        "CDN-Cache-Control": "max-age=3600"
+    }
+}
+
 
 export const loader = async ({request, params}: LoaderFunctionArgs) => {
     const {data} = await loadQuery<SanityDocument>(
@@ -21,10 +28,10 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
 //https://sergiodxa.com/articles/http-vs-server-side-cache-in-remix
 //https://remix.run/docs/en/main/discussion/state-management
 
-    /*data.headers=new Headers()
+    data.headers=new Headers()
     const realtimeCaches: { [key: string]: string } = {
-      "Cache-Control": "public, max-age=0, must-revalidate",
-      "CDN-Cache-Control": "public, s-maxage=3600, stale-while-revalidate=82800"
+      "Cache-Control": "public, max-age=3600",
+      "CDN-Cache-Control": "public, max-age=3600"
     };
 
     // Apply the cache settings to the response
@@ -33,14 +40,7 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
     }
     if (!data) {
         throw new Response("Not Found", { status: 404 });
-    }*/
-
-
-
-
-
-
-
+    }
     return {data}
 
 }
@@ -54,7 +54,7 @@ export const handle = {
 
 export const meta: MetaFunction = () => {
     return [
-        {title: useParams().slug},
+        {title: "location.pathname"},
         {name: 'description', content: 'Welcome to Remix!'},
     ]
 }
