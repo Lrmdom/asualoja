@@ -9,7 +9,7 @@ import {
     PRODUCT_FILTEREDBY_TAXONOMY_TAXON_LOCALIZED,
     PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE
 } from '~/sanity/queries'
-import dataset from './dataset.json';
+import dataset2 from '../dataset.json';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 
 
@@ -26,9 +26,12 @@ const client = createClient({
 });
 
 import fs from "fs"
+import {ndjsonToJsonText} from "ndjson-to-json-text";
 
 //todo groqwebhook export with sanity dataset export production  localPath.tar.gz  to file (use http?- to local path or gcp bucket)
-// todo convert ndjson to json with a script or gcp serverless function???
+// todo convert ndjson to json with a script or gcp serverless function??? Google serach - convert ndjson to json serverless function
+//stringify ndjson and then ndjsontext to jsontext
+//TODO or use https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-topic-to-text?hl=pt-br#api
 
 export const loader = async ({
                                  request, params
@@ -38,7 +41,10 @@ export const loader = async ({
     const input = PRODUCT_FILTEREDBY_TAXONOMY_TAXON_PRODUCTTITLE
 // Returns an ESTree-inspired syntax tree
     let tree = parse(input, {params})
-
+    const jsonText = ndjsonToJsonText(dataset2)
+// [{"id":1,"name":"Alice"},{"id":2,"name":"Bob"},{"id":3,"name":"Carol"}]
+    const dataset = JSON.parse(jsonText);
+// actual json object!!
 
     // Evaluate a tree against a dataset
     let value = await evaluate(tree, {dataset})

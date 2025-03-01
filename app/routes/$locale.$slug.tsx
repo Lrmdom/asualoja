@@ -30,9 +30,10 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
 
     data.headers=new Headers()
     const realtimeCaches: { [key: string]: string } = {
-      "Cache-Control": "public, max-age=3600",
-      "CDN-Cache-Control": "public, max-age=3600"
+        "Cache-Control": "public, max-age=3600, must-revalidate",
+        "CDN-Cache-Control": "public, s-maxage=3600, stale-while-revalidate=82800"
     };
+
 
     // Apply the cache settings to the response
     for (const key of Object.keys(realtimeCaches)) {

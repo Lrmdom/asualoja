@@ -90,7 +90,6 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.446.0",
     "manifest": "^4.0.5",
-    "ndjson-to-json-text": "^1.0.2",
     "next-themes": "^0.3.0",
     "npm": "^10.9.2",
     "query-string": "^9.1.0",

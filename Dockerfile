@@ -11,4 +11,4 @@ CMD [ "npm", "run", "start" ]
 #docker build -t foo .  && docker run -p 80:3000 -it foo
 
 # works on gcp cloud run
-#docker buildx build --platform=linux/amd64 -t execlog/execlogdemo --push .
+#
