@@ -1,5 +1,5 @@
-import type {LoaderFunctionArgs} from '@remix-run/node'
-import {Link, useLoaderData} from '@remix-run/react'
+import {LoaderFunctionArgs, MetaFunction} from '@remix-run/node'
+import {Link, useLoaderData, useParams} from '@remix-run/react'
 import type {SanityDocument} from '@sanity/client'
 
 import {loadQuery} from '~/sanity/loader.server'
@@ -31,7 +31,16 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
 
     return {data}
 }
+export const handle = {
 
+    breadcrumb: () => <Link to="/locale/">{useParams().taxonomy}/{useParams().taxons}/{useParams().slug}</Link>,
+};
+export const meta: MetaFunction = () => {
+    return [
+        {title: `${useParams().taxonomy}/${useParams().taxons}/${useParams().slug}`},
+        {name: 'description', content: 'Welcome to Remix!'},
+    ]
+}
 export default function ProductRoute() {
     const {data} = useLoaderData<typeof loader>()
     const {i18n} = useTranslation()

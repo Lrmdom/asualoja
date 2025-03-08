@@ -5,7 +5,7 @@ import {useTranslation} from "react-i18next";
 
 
 import Variants from "~/components/variants";
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
 import EmblaCarousel from "~/components/emblaCarousel/EmblaCarousel";
 import {CommerceLayer} from "@commercelayer/sdk";
 // import {authenticate} from '@commercelayer/js-auth'
@@ -47,7 +47,7 @@ export default function Prods({products}: { product: SanityDocument }) {
         for (const [name, value] of Object.entries(Cookies.get())) {
             if (name.startsWith('commercelayer_order-id')) {
                 orderId = value;
-                console.log(orderId)
+                //console.log(orderId)
                 break;
             }
 
@@ -66,7 +66,7 @@ export default function Prods({products}: { product: SanityDocument }) {
                 }).then(orders => {
 
 
-                    console.log(orders[0])
+                    //console.log(orders[0])
                     orderId = orders[0].id
 
                     const order = {
@@ -149,11 +149,12 @@ export default function Prods({products}: { product: SanityDocument }) {
                         products[k] = prod
 
                         //all state must be ready before render
-                        await new Promise(r => setTimeout(r, 100))
+                        await new Promise(r => setTimeout(r, 300))
                         setVariantsPrices(products)
 
 
                     }
+
 
                     prices()
 

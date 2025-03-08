@@ -53,8 +53,7 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
 
     const handleAttributeChange = (attributeName, attributeValue) => {
         setDynamicAttributes((prevState) => ({
-            ...prevState,
-            [attributeName.toUpperCase()]: attributeValue,
+            ...prevState, [attributeName.toUpperCase()]: attributeValue,
         }));
     };
 
@@ -63,20 +62,19 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
 
     return (<main className="">
 
-        {product.variantsImages.length > 1 ?
-            <EmblaCarousel slides={product.variantsImages}
-                           setSelectedSku={setSelectedSku}
-                           selectedSku={selectedSku}
-                           setEmblaImage={setEmblaImage || setEmblaImageDetail}
-                           emblaImage={emblaImage || emblaImageDetail}
-                           setEmblaImageDetail={setEmblaImageDetail}
-                           emblaImageDetail={emblaImageDetail}
-                           options={OPTIONS}
-                           groupedVariantsAttrs={groupedVariantsAttrs}
-                           variantsAttrs={variantsAttrs}
-                           handleAttributeChange={handleAttributeChange}
-                           dynamicAttributes={dynamicAttributes}
-                           setDynamicAttributes={setDynamicAttributes}
+        {product.variantsImages.length > 1 ? <EmblaCarousel slides={product.variantsImages}
+                                                            setSelectedSku={setSelectedSku}
+                                                            selectedSku={selectedSku}
+                                                            setEmblaImage={setEmblaImage || setEmblaImageDetail}
+                                                            emblaImage={emblaImage || emblaImageDetail}
+                                                            setEmblaImageDetail={setEmblaImageDetail}
+                                                            emblaImageDetail={emblaImageDetail}
+                                                            options={OPTIONS}
+                                                            groupedVariantsAttrs={groupedVariantsAttrs}
+                                                            variantsAttrs={variantsAttrs}
+                                                            handleAttributeChange={handleAttributeChange}
+                                                            dynamicAttributes={dynamicAttributes}
+                                                            setDynamicAttributes={setDynamicAttributes}
 
             />
 
@@ -86,23 +84,19 @@ export default function Variants({product, emblaImageDetail, setEmblaImageDetail
         <div>
             {
 
-                product.variantsPrice?.length?
+                product.variantsPrice?.length ?
 
                     <div className="font-semibold">
                         {product.variantsPrice[0][1]} --- {product.variantsPrice[product.variantsPrice.length - 1][1]}
                     </div>
 
-                : null
-            }
-            {
-                product.stock_items?.length?
-                    <div className="font-semibold">
+                    : null}
+            {product.stock_items?.length ? <div className="font-semibold">
 
-                        {product.stock_items[0]?.quantity?`Qt in stock:  ${product.stock_items[0].quantity}`:null}
-                    </div>
+                    {product.stock_items[0]?.quantity ? `Qt in stock:  ${product.stock_items[0].quantity}` : null}
+                </div>
 
-                    : null
-            }
+                : null}
 
         </div>
 

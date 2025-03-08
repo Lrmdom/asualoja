@@ -17,8 +17,7 @@ import {
     useRevalidator,
     useRouteLoaderData,
 } from '@remix-run/react'
-import type {LinksFunction} from '@remix-run/node'
-import {json} from '@remix-run/node'
+import {json, LinksFunction, MetaFunction} from '@remix-run/node'
 
 import Footer from '~/components/footer'
 import SubscribeNews from '~/components/subscribeNews'
@@ -37,8 +36,17 @@ import {authenticator} from "~/services/auth.server";
 import {authenticate} from "@commercelayer/js-auth";
 import Cookies from "js-cookie";
 
-
 const LiveVisualEditing = lazy(() => import("~/components/LiveVisualEditing"));
+
+
+
+export function  headers(){
+    return {
+        "Cache-Control": "max-age=3600",
+        "CDN-Cache-Control": "max-age=3600"
+    }
+}
+
 
 export let loader = async ({request, params}) => {
 
@@ -86,9 +94,15 @@ export const handle = {
     // It can be a string or an array.
     i18n: 'common',
 }
-
+export const meta: MetaFunction = () => {
+    return [
+        {title: "location.pathname"},
+        {name: 'description', content: 'Welcome to Remix!'},
+    ]
+}
 
 export function Layout({children}: { children: React.ReactNode }) {
+    const matches = useMatches();
 
     const navigate = useNavigate()
     const [myToken, setMyToken] = useState(null)
@@ -123,7 +137,6 @@ export function Layout({children}: { children: React.ReactNode }) {
     /*
     myToken?null:navigate('.', { replace: true })
     */
-    const matches = useMatches();
     const {data, locale, ENV, user} = useRouteLoaderData<typeof loader>('root')
     //const {data, locale, ENV} = useLoaderData<typeof loader>()
     const revalidator = useRevalidator()
@@ -154,12 +167,37 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Links/>
         </head>
         <body>
-
+        <script src="https://accounts.google.com/gsi/client" async></script>
+        <div id="g_id_onload"
+             data-client_id='1091535953121-mb4b5ap4uij06s5nqmcbpia3mpdo4437.apps.googleusercontent.com'
+             data-login_uri="https://execlogdemo-1091535953121.us-central1.run.app/auth/google"
+             data-auto_prompt="true">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="small"
+             data-theme="outline"
+             data-text="signin_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
 
         <Suspense fallback={<Loading/>}>
             <Header taxonomies={data} user={user} myToken={myToken}></Header>
 
             <MyNavMenu taxonomies={data}></MyNavMenu>
+            <ol>
+                {matches
+                    .filter(
+                        (match) =>
+                            match.handle && match.handle.breadcrumb
+                    )
+                    .map((match, index) => (
+                        <li key={index}>
+                            {match.handle.breadcrumb(match)}
+                        </li>
+                    ))}
+            </ol>
             {children}
         </Suspense>
 
@@ -202,14 +240,28 @@ export default function App() {
 
     return (
 
-        <div className={
+        /*<div className={ //working animation
             navigation.state === "loading" ? "opacity-70" : ""
         }
-        >
+        >*/
 
-            <Outlet/>
+        /*<AnimatePresence mode="sync"> //working animation
+            <motion.div
+                key={useLocation().pathname}
+                variants={{
+                    initial: { opacity: 0, y: -1000 },
+                    animate: { opacity: 1, y: 0 },
+                    exit: { opacity: 1, y: 1000 },
+                }}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+            >*/
+        <Outlet/>
+        /* </motion.div>
+     </AnimatePresence>*/
 
-        </div>
+        /* </div>*/
 
     )
 }

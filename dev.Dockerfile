@@ -8,4 +8,4 @@ COPY . .
 EXPOSE 5173
 CMD [ "npm", "run", "dev" ]
 
-#docker build -t execlog/execlogdemo_dev -f dev.Dockerfile .  && docker run -p 80:5173 -it execlog/execlogdemo_dev
+#docker build --platform=linux/amd64 -t execlog/execlogdemo_dev -f dev.Dockerfile .  && docker run -p 80:5173 -it execlog/execlogdemo_dev

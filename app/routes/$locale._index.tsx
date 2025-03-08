@@ -6,10 +6,12 @@ import {Link, useRouteLoaderData} from "@remix-run/react";
 import {loader} from "~/root";
 import {stegaClean} from "@sanity/client/stega";
 
-
+export const handle = {
+    breadcrumb: () => <Link to="/">Home</Link>,
+};
 export const meta: MetaFunction = () => {
     return [
-        {title: 'Execlog E-commerce'},
+        {title: "location.pathname"},
         {name: 'description', content: 'Welcome to Remix!'},
     ]
 }
