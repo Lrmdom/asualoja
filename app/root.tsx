@@ -99,8 +99,9 @@ export function Layout({children}: { children: React.ReactNode }) {
         const getCookieToken = Cookies.get("clIntegrationToken");
         if (!getCookieToken || getCookieToken === "undefined") {
             const auth = await authenticate('client_credentials', {
-                clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
-                scope: 'market:id:vlkaZhkGNj'
+                clientId: 'TcdVOPT9zG3jEjGN76NeLWhW2iBL49GDYg_2HJQVziw',
+                clientSecret:'8hRKZxCDdpT7t_86t2eEjwimnSdhI_bXR0i7TMCuvdc',
+                //scope: 'market:id:vlkaZhkGNj'
             })
             token = auth.accessToken;
             Cookies.set("clIntegrationToken", token, {

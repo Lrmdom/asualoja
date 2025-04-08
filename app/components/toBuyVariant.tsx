@@ -1,34 +1,67 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import {useTranslation} from 'react-i18next'
 
 import {
     AddToCartButton,
     AvailabilityContainer,
     AvailabilityTemplate,
-    LineItemsContainer,
-    LineItemsCount,
-    OrderContainer,
-    OrderStorage,
     Price,
     PricesContainer
 } from "@commercelayer/react-components"
 import * as React from "react";
-import {useEffect, useState} from "react";
 
 import {ClientOnly} from "remix-utils/client-only"
-import {useNavigate} from "@remix-run/react";
-import {redirect} from "@remix-run/node";
 import {CommerceLayer} from "@commercelayer/sdk";
 import Cookies from "js-cookie";
 
+async function addCartExternalPrice() {
+    const sku = "SKU-BICI-TDOTERR-TREKPWRFLY-FS7GEN3"
+    const orderId = "KaehedWZrB"
+    //const orderId = localStorage.getItem("execlogdemoorder")
+    const getCookieToken = Cookies.get("clIntegrationToken")
+    const cl = CommerceLayer({
+        organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken,
+    })
+    const data = {
+        sku_code: sku, _external_price: true, name: "my test name to use i18n", quantity: 1, unit_amount_cents: 10000,
+
+        "order": {
+
+            "id": orderId
+
+        }
+
+        /*relationships: {
+            "order": {
+                "data": {
+                    "type": "orders",
+                    "id": orderId
+                }
+            }
+        }*/
+    }
+
+
+    const orderData = {
+        "type": "orders", "id": orderId,
+
+        metadata: {
+            startDate: new Date().toISOString(), endDate: new Date().toISOString(), vehicleModel: "Yamaha R1"
+        }
+    }
+
+    const newordermetadata = await cl.orders.update(orderData)
+    const newLine_item = await cl.line_items.create(data)
+    console.log(newLine_item)
+    console.log(newordermetadata)
+
+}
 
 export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
 
-    return (
-        <>
-
-            {/*<SkusContainer
+    return (<>
+        <button className="bg-primary" onClick={addCartExternalPrice}>add cart external price</button>
+        {/*<SkusContainer
                     skus={[
                         "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
                         stegaClean(selectedSku?selectedSku:"trekMadoneSL7")
@@ -43,8 +76,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                     </Skus>
                 </SkusContainer>
                 </SkusContainer>*/}
-            {selectedSku ? (
-                <>
+        {selectedSku ? (<>
             <PricesContainer>
 
                 <ClientOnly fallback={null}>
@@ -57,41 +89,39 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 </ClientOnly>
             </PricesContainer>
 
-                    <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
+            <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
 
-                        <AvailabilityTemplate>
-                            {/*//TODO id selectedSku?show:hide*/}
-                            {
-                                childrenProps => {
-                                    return <div>
-                                        <p className='font-bold'>Custom logic:</p>
-                                        <p className='mb-8'>
-                                            {childrenProps.quantity} items available delivered in{' '}
-                                            {childrenProps.min?.days} - {childrenProps.max?.days} days
-                                        </p>
-                                        <p className='font-bold'>The delivery_lead_times object</p>
-                                        <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
-                                    </div>;
-                                }}
+                <AvailabilityTemplate>
+                    {/*//TODO id selectedSku?show:hide*/}
+                    {childrenProps => {
+                        return <div>
+                            <p className='font-bold'>Custom logic:</p>
+                            <p className='mb-8'>
+                                {childrenProps.quantity} items available delivered in{' '}
+                                {childrenProps.min?.days} - {childrenProps.max?.days} days
+                            </p>
+                            <p className='font-bold'>The delivery_lead_times object</p>
+                            <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
+                        </div>;
+                    }}
 
-                        </AvailabilityTemplate>
-                        <AvailabilityTemplate
-                            showShippingMethodName
-                            showShippingMethodPrice
-                            timeFormat="days"
-                            className="text-gray-600"
-                        />
+                </AvailabilityTemplate>
+                <AvailabilityTemplate
+                    showShippingMethodName
+                    showShippingMethodPrice
+                    timeFormat="days"
+                    className="text-gray-600"
+                />
 
-                    </AvailabilityContainer>
-                </>
-            ) : null}
+            </AvailabilityContainer>
+        </>) : null}
 
 
-            {/*<OrderStorage persistKey="execlogdemoorder">
+        {/*<OrderStorage persistKey="execlogdemoorder">
 
                 <OrderContainer>*/}
 
-                    {/*<p>
+        {/*<p>
                                 <AddToCartButton
                                     className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-70"
                                     label="Add SKU to cart"
@@ -102,21 +132,21 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                             </p>*/}
 
 
-                    <AddToCartButton
-                        disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
-                        skuCode={stegaClean(selectedSku)}
-                        quantity="1"
-
-                        className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
-                        label="Add SKU to cart"
-                        hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
-                        checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
-                        /*buyNowMode={true}*/
-                        /*redirectToHostedCart={true}*/
-                        /*buyNowMode={true}
-                        redirectToHostedCart={true}*/
-                    >
-                        {/*{
+        <AddToCartButton
+            disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
+            skuCode={stegaClean(selectedSku)}
+            quantity="1"
+            lineItem={{external_price: true}}
+            className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
+            label="Add SKU to cart"
+            hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
+            checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
+            /*buyNowMode={true}*/
+            /*redirectToHostedCart={true}*/
+            /*buyNowMode={true}
+            redirectToHostedCart={true}*/
+        >
+            {/*{
                         childrenProps => {
                             return <div>
 
@@ -124,14 +154,14 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                             </div>;
                         }}*/}
 
-                    </AddToCartButton>
+        </AddToCartButton>
 
-               {/* </OrderContainer>
+        {/* </OrderContainer>
 
             </OrderStorage>*/}
 
 
-            {/*<div>
+        {/*<div>
         <cl-availability code={stegaClean(selectedSku)}>
             <cl-availability-status type="available" style={{color: "green"}}>
                 {t("• available")}
@@ -166,8 +196,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             </cl-add-to-cart>
         </div>
     </div>*/}
-        </>
-    )
+    </>)
 
 }
 
