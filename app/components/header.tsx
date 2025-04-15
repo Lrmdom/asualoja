@@ -5,6 +5,7 @@ import IdentityLinks from "~/components/identyLinks";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import SearchForm from "~/components/searchForm";
 import {
+    CheckoutLink,
     CartLink,
     CommerceLayer,
     LineItemsContainer,
@@ -13,42 +14,41 @@ import {
     OrderStorage
 } from "@commercelayer/react-components";
 import Cookies from "js-cookie";
-import {HostedCart} from "@commercelayer/react-components/orders/HostedCart";
+import {HostedCart, HostedCheckout} from "@commercelayer/react-components/orders/HostedCart";
 import {useEffect, useState} from "react";
 import {authenticate} from "@commercelayer/js-auth";
 
 
-
 export default function Header(props) {
-   /* if(props.myToken!=null ) {
-        // const getCookieToken = Cookies.get("clIntegrationToken")
-        const cl = CommerceLayer({
-            organization: 'Execlog',
-            accessToken: props.myToken ? props.myToken : Cookies.get("clIntegrationToken") ,
-        })
+    /* if(props.myToken!=null ) {
+         // const getCookieToken = Cookies.get("clIntegrationToken")
+         const cl = CommerceLayer({
+             organization: 'Execlog',
+             accessToken: props.myToken ? props.myToken : Cookies.get("clIntegrationToken") ,
+         })
 
-        const lists= async () => {
-            const lists2 = await cl.skus.list()
-            console.log(lists2())
-        }
+         const lists= async () => {
+             const lists2 = await cl.skus.list()
+             console.log(lists2())
+         }
 
-        console.log(lists().then())
-        const createSku = async () => {
+         console.log(lists().then())
+         const createSku = async () => {
 
-            const newSku = await cl.skus.create({
-                shipping_category: cl.shipping_categories.relationship("JNxyxFLOXw"), // assigning the shipping category relationship
-                code: "HOODIEGR0001XLXX",
-                name: "Grey Coding Hoodie",
-                description: "A very beautiful and cozy unisex hoodie",
-                reference: "HOODIEGR0001",
-                weight: "500",
-                unit_of_weight: "gr"
-            }).catch(error => console.log(error.errors));
+             const newSku = await cl.skus.create({
+                 shipping_category: cl.shipping_categories.relationship("JNxyxFLOXw"), // assigning the shipping category relationship
+                 code: "HOODIEGR0001XLXX",
+                 name: "Grey Coding Hoodie",
+                 description: "A very beautiful and cozy unisex hoodie",
+                 reference: "HOODIEGR0001",
+                 weight: "500",
+                 unit_of_weight: "gr"
+             }).catch(error => console.log(error.errors));
 
-            console.log(`SKU: ${newSku.id} created succefully`);
-            console.log(createSku); // this will return the created resource object
-        };
-    }*/
+             console.log(`SKU: ${newSku.id} created succefully`);
+             console.log(createSku); // this will return the created resource object
+         };
+     }*/
     let identity
     if (props.user) {
         identity =
@@ -92,7 +92,6 @@ export default function Header(props) {
             </LineItemsContainer>
         </div>
     )
-
 
 
     return (
@@ -148,7 +147,7 @@ export default function Header(props) {
                 <li>
 
 
-                {/*<PricesContainer>
+                    {/*<PricesContainer>
                     <ClientOnly fallback={null}>
                         {() => <Price
                             className="font-bold text-primary"
@@ -158,7 +157,7 @@ export default function Header(props) {
 
                     </ClientOnly>
                 </PricesContainer>*/}
-                        {/*
+                    {/*
                 <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
 
                     <AvailabilityTemplate
@@ -168,26 +167,26 @@ export default function Header(props) {
                     />
                 </AvailabilityContainer>*/}
 
+                    <CheckoutLink label="mycheckeout hostedCheckout" hostedCheckout={false}
+                    />
+                    <HostedCart type='mini' openAdd hostedCart={false}
+                                customDomain="brilliant-custard-06fc9a.netlify.app"
 
+                                style={{
+                                    container: {
+                                        backgroundColor: 'white'
+                                    }
+                                }}/>
+                    {/* <CheckoutLink label="Checkout" hostedCheckout={false}
+                    />*/}
+                    <CartLink
+                        customDomain="brilliant-custard-06fc9a.netlify.app"
 
-                                <HostedCart type='mini' openAdd
-                                            /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
-
-                                            style={{
-                                                container: {
-                                                    backgroundColor: 'white'
-                                                }
-                                            }}/>
-                                <CartLink
-                                    /*customDomain="brilliant-custard-06fc9a.netlify.app"*/
-
-                                    label={MyCartIcon()}
-                                    onClick={function Fa() {
-                                    }}
-                                    target="_blank"
-                                />
-
-
+                        label={MyCartIcon()}
+                        onClick={function Fa() {
+                        }}
+                        target="_blank"
+                    />
 
 
                 </li>

@@ -70,8 +70,10 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             "type": "orders",
             "id": orderId,
             "_validate": true,
-
+            /*"cart_url": "brilliant-custard-06fc9a.netlify.app",*/
+            // "checkout_url": "resplendent-gnome-8fd84a.netlify.app",
             "customer_email": "john@example.com",
+
             metadata: {
                 store_location: "to define fn yet",
                 user_event: "to define fn yet",
@@ -79,7 +81,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 start_Date: new Date().toISOString(), end_Date: new Date().toISOString(), vehicleModel: "Yamaha R1 Leon"
             }
         }
-        
+
 
         const newordermetadata = await cl.orders.update(orderData).catch(error => console.log(error.errors))
         console.log(newordermetadata)
@@ -182,7 +184,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                             skuOptions.map((option) => (
                                 <div key={option.id}>
                                     <button onClick={addSkuOption}
-                                            className="bg-primary-500">{t(option.name)} - {option.formatted_price_amount}</button>
+                                            className="bg-primary-500">{t(stegaClean(option.name))} - {option.formatted_price_amount}</button>
                                     {t("Elevate Your Digital Presence")}
                                 </div>
 
@@ -268,8 +270,8 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             // lineItem={{external_price: true}}
             className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
             label={stegaClean(selectedSku)}
-            /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
-            checkoutUrl='resplendent-gnome-8fd84a.netlify.app'*/
+            hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
+            checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
             /*buyNowMode={true}*/
             /*redirectToHostedCart={true}*/
             /*buyNowMode={true}
