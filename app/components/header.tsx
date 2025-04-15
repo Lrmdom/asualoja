@@ -169,8 +169,20 @@ export default function Header(props) {
 
                     <CheckoutLink label="mycheckeout hostedCheckout" hostedCheckout={false}
                     />
-                    <HostedCart type='mini' openAdd hostedCart={false}
-                                customDomain="brilliant-custard-06fc9a.netlify.app"
+                    {/*<HostedCart type='mini' openAdd hostedCart={true}
+
+                                style={{
+                                    container: {
+                                        backgroundColor: 'white'
+                                    }
+                                }}/>*/}
+                    <CartLink
+                        label={MyCartIcon()}
+                        onClick={function Fa() {
+                        }}
+                        target="_blank"
+                    />
+                    <HostedCart type='mini' openAdd
 
                                 style={{
                                     container: {
@@ -179,15 +191,14 @@ export default function Header(props) {
                                 }}/>
                     {/* <CheckoutLink label="Checkout" hostedCheckout={false}
                     />*/}
-                    <CartLink
-                        customDomain="brilliant-custard-06fc9a.netlify.app"
+//this is an inline minicart
+                    {/*<HostedCart
 
-                        label={MyCartIcon()}
-                        onClick={function Fa() {
-                        }}
-                        target="_blank"
-                    />
-
+                                style={{
+                                    container: {
+                                        backgroundColor: 'white'
+                                    }
+                                }}/>*/}
 
                 </li>
 

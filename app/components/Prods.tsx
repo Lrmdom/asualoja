@@ -29,7 +29,7 @@ export default function Prods({products}: { product: SanityDocument }) {
     const language = i18n.resolvedLanguage
     const location = useLocation();
     useEffect(() => {
-        const orderId = localStorage.getItem("execlogdemoorder")
+        const orderId = localStorage.getItem("execlogOrderPersistKey")
         const getCookieToken = Cookies.get("clIntegrationToken")
         const cl = CommerceLayer({
             organization: import.meta.env.VITE_MY_ORGANIZATION,

@@ -5,7 +5,7 @@ import React, {useState, useEffect} from 'react';
 import {
     AddToCartButton,
     AvailabilityContainer,
-    AvailabilityTemplate,
+    AvailabilityTemplate, PlaceOrderButton,
     Price,
     PricesContainer, SkuField, Skus, SkusContainer
 } from "@commercelayer/react-components"
@@ -44,7 +44,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
     async function addCartExternalPrice() {
         const sku = stegaClean(selectedSku)
-        const orderId = localStorage.getItem("execlogdemoorder")
+        const orderId = localStorage.getItem("execlogOrderPersistKey")
         const getCookieToken2 = Cookies.get("clIntegrationToken2")
         const cl = CommerceLayer({
             organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken2,
@@ -109,7 +109,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken2,
         })
 
-        const orderId = localStorage.getItem("execlogdemoorder")
+        const orderId = localStorage.getItem("execlogOrderPersistKey")
         /*
                 {"data":{
                     "sku_code": "SKU-BICI-GRAVTREK-SLR6",
@@ -246,7 +246,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             </>) : null}
 
 
-        {/*<OrderStorage persistKey="execlogdemoorder">
+        {/*<OrderStorage persistKey="execlogOrderPersistKey">
 
                 <OrderContainer>*/}
 
@@ -259,7 +259,6 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                                     skuCode={stegaClean(selectedSku)}
                                 />
                             </p>*/}
-
 
         <AddToCartButton
             /*onClick={addCartExternalPrice(stegaClean(selectedSku))}*/
