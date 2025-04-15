@@ -49,20 +49,28 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
         const cl = CommerceLayer({
             organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken2,
         })
+
+
         const lineData = {
             "type": "line_items",
-            "sku_code": "SKU-BICI-TDOTERR-TREKMAR5-GEN3-1",
+            "sku_code": selectedSku,
             "quantity": 1,
             "_update_quantity": true,
-            "order": {id: orderId, type: "orders"}
+            "order": {id: orderId, type: "orders"},
+            metadata: {}
 
         }
+
+
+        const newLine_item = await cl.line_items.create(lineData).catch(error => console.log(error.errors))
+        console.log(newLine_item)
 
 
         const orderData = {
             "type": "orders",
             "id": orderId,
-            _validate: true,
+            "_validate": true,
+
             "customer_email": "john@example.com",
             metadata: {
                 store_location: "to define fn yet",
@@ -71,13 +79,23 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 start_Date: new Date().toISOString(), end_Date: new Date().toISOString(), vehicleModel: "Yamaha R1 Leon"
             }
         }
+        
 
-
-        const newLine_item = await cl.line_items.create(lineData).catch(error => console.log(error.errors))
-        console.log(newLine_item)
-
-        const newordermetadata = await cl.orders.update(orderData)
+        const newordermetadata = await cl.orders.update(orderData).catch(error => console.log(error.errors))
         console.log(newordermetadata)
+
+
+        const lineItemOptionData = {
+            "type": "line_item_options",
+            "line_item": {id: newLine_item.id, type: "line_items"},
+            "quantity": 1,
+            "options": {},
+            "sku_option": {id: "BzaPsKYePX", type: "sku_options"}
+
+        }
+
+        const newLine_item_option = await cl.line_item_options.create(lineItemOptionData).catch(error => console.log(error.errors))
+        console.log(newLine_item_option)
 
     }
 
