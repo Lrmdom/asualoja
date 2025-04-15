@@ -36,17 +36,22 @@ export default function Prods({products}: { product: SanityDocument }) {
             accessToken: getCookieToken,
         })
         console.log(window.location.href)
-        const order = {
-            id: orderId,
-            language_code: language,
-            //guest: false,
-            //customer_email: "leonel.m.domingos@gmail.com",
-            return_url: window.location.href,
-        }
-        const myorder=cl.orders.retrieve(orderId)
-        myorder.then(r=>console.log(r))
 
-        cl.orders.update(order)
+        if (orderId) {
+            const order = {
+                id: orderId,
+                language_code: language,
+                //guest: false,
+                //customer_email: "leonel.m.domingos@gmail.com",
+                return_url: window.location.href,
+            }
+
+            const myorder = cl.orders.retrieve(orderId)
+            myorder.then(r => console.log(r))
+
+            cl.orders.update(order)
+        }
+
         //const customer = cl.customers.list({filters: {email_eq: attributes.email}})
 
         /*cl.orders.retrieve(orderId).then(order => {
@@ -54,7 +59,7 @@ export default function Prods({products}: { product: SanityDocument }) {
         })*/
 
 
-        products?.map((prod,k) => {
+        products?.map((prod, k) => {
             if (Array.isArray(prod.variants)) {
                 prod.variantsImages = []
 
@@ -76,11 +81,11 @@ export default function Prods({products}: { product: SanityDocument }) {
                     const prices = async () => {
 
                         const skuVariantsPrices = await cl.skus.list({
-                            include: ['prices','stock_items'],
+                            include: ['prices', 'stock_items'],
                             filters: {code_eq: stegaClean(vrnt.sku)}
                         })
 
-console.log(skuVariantsPrices)
+                        console.log(skuVariantsPrices)
 
                         skuVariantsPrices[0] ? prod.variantsPrice.push([skuVariantsPrices[0]["prices"][0].amount_cents, skuVariantsPrices[0]["prices"][0].formatted_amount]) : null
                         prod.variantsPrice = prod.variantsPrice.sort((a, b) => a[0] - b[0])
@@ -116,8 +121,6 @@ console.log(skuVariantsPrices)
     console.log(prodPrices)*/
 
 
-
-
     return (
         <>
             <div className="bg-white">
@@ -125,7 +128,7 @@ console.log(skuVariantsPrices)
                     <div
                         className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-                        { variantsPrices?
+                        {variantsPrices ?
 
                             products.map((prod, key) => {
                                 if (Array.isArray(prod.variants)) {
@@ -158,13 +161,13 @@ console.log(skuVariantsPrices)
                                                 {/*to={varianDetailLink}*/}
                                                 {stegaClean(prod.title)}</Link>
                                             <Suspense fallback={<Loading/>}>
-                                            <Variants product={variantsPrices[key]}></Variants>
+                                                <Variants product={variantsPrices[key]}></Variants>
                                             </Suspense>
                                         </div>
                                     </>
                                 )
                             })
-                            :null
+                            : null
                         }
                     </div>
                 </div>

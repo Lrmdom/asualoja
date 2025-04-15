@@ -6,61 +6,93 @@ import {
     AvailabilityContainer,
     AvailabilityTemplate,
     Price,
-    PricesContainer
+    PricesContainer, SkuField, Skus, SkusContainer
 } from "@commercelayer/react-components"
 import * as React from "react";
 
 import {ClientOnly} from "remix-utils/client-only"
 import {CommerceLayer} from "@commercelayer/sdk";
 import Cookies from "js-cookie";
-
-async function addCartExternalPrice() {
-    const sku = "SKU-BICI-TDOTERR-TREKPWRFLY-FS7GEN3"
-    const orderId = "KaehedWZrB"
-    //const orderId = localStorage.getItem("execlogdemoorder")
-    const getCookieToken = Cookies.get("clIntegrationToken")
-    const cl = CommerceLayer({
-        organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken,
-    })
-    const data = {
-        sku_code: sku, _external_price: true, name: "my test name to use i18n", quantity: 1, unit_amount_cents: 10000,
-
-        "order": {
-
-            "id": orderId
-
-        }
-
-        /*relationships: {
-            "order": {
-                "data": {
-                    "type": "orders",
-                    "id": orderId
-                }
-            }
-        }*/
-    }
+import {authenticate} from "@commercelayer/js-auth";
 
 
-    const orderData = {
-        "type": "orders", "id": orderId,
+//todo
+/*prices are influenced by factors like seasonality; location, particularly related to other factors like an event (e.g. Paris 2024 Olympics);
+property size; and so on. However, the advent of AI introduces new possibilities for all brands to utilize dynamic pricing. Specifically, OpenAI's ChatGPT has revolutionized the way a business can implement a dynamic pricing strategy*/
 
-        metadata: {
-            startDate: new Date().toISOString(), endDate: new Date().toISOString(), vehicleModel: "Yamaha R1"
-        }
-    }
-
-    const newordermetadata = await cl.orders.update(orderData)
-    const newLine_item = await cl.line_items.create(data)
-    console.log(newLine_item)
-    console.log(newordermetadata)
-
-}
 
 export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
 
+    async function getSkuOptions() {
+        const sku = stegaClean(selectedSku)
+        const getCookieToken = Cookies.get("clIntegrationToken")
+        const cl = CommerceLayer({
+            organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken,
+        })
+        const mysku = await cl.skus.retrieve(stegaClean(sku))
+        console.log(mysku)
+        return mysku
+    }
+
+    async function addCartExternalPrice() {
+        const sku = stegaClean(selectedSku)
+        //const orderId = "kykhjGgGoR"
+        const orderId = localStorage.getItem("execlogdemoorder")
+        const getCookieToken2 = Cookies.get("clIntegrationToken2")
+        const cl = CommerceLayer({
+            organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken2,
+        })
+        const lineData = {
+            sku_code: sku,
+            _external_price: true,
+            name: "my test name to use i18n",
+            quantity: 1, unit_amount_cents: 10000,
+            order: orderId,
+
+            //orderId: orderId,
+            /*order: {
+                orderId: orderId
+            },*/
+            /*relationships: {
+                "order": {
+                    orderId: orderId
+                }
+            },*/
+            metadata: {
+                store_location: "to define fn yet",
+                user_event: "to define fn yet",
+                user_location: "to define fn yet",
+                start_Date: new Date().toISOString(), end_Date: new Date().toISOString(), vehicleModel: "Yamaha R1 Leon"
+            }
+        }
+        const orderData = {
+            "type": "orders",
+            "id": orderId,
+            _validate: true,
+            "customer_email": "john@example.com",
+            metadata: {
+                store_location: "to define fn yet",
+                user_event: "to define fn yet",
+                user_location: "to define fn yet",
+                start_Date: new Date().toISOString(), end_Date: new Date().toISOString(), vehicleModel: "Yamaha R1 Leon"
+            }
+        }
+        const newordermetadata = await cl.orders.update(orderData)
+        const newLine_item = await cl.line_items.create(lineData)
+        console.log(newLine_item)
+        //console.log(newordermetadata)
+
+    }
+
     return (<>
-        <button className="bg-primary" onClick={addCartExternalPrice}>add cart external price</button>
+        {selectedSku &&
+            <>
+                <button className="bg-primary" onClick={addCartExternalPrice}> add cart external
+                    price{selectedSku}</button>
+                <button className="bg-secondary" onClick={getSkuOptions}>Get sku options
+                    from {selectedSku}</button>
+            </>
+        }
         {/*<SkusContainer
                     skus={[
                         "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
@@ -77,6 +109,18 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 </SkusContainer>
                 </SkusContainer>*/}
         {selectedSku ? (<>
+            <SkusContainer
+                skus={[
+                    selectedSku
+                ]}
+            >
+                <Skus>
+                    <SkuField
+                        attribute="name"
+                        tagElement="div"
+                    />
+                </Skus>
+            </SkusContainer>
             <PricesContainer>
 
                 <ClientOnly fallback={null}>
@@ -133,18 +177,21 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
 
         <AddToCartButton
+            /*onClick={addCartExternalPrice(stegaClean(selectedSku))}*/
             disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
+            //skuCode={stegaClean(selectedSku)}
             skuCode={stegaClean(selectedSku)}
             quantity="1"
-            lineItem={{external_price: true}}
+            // lineItem={{external_price: true}}
             className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
-            label="Add SKU to cart"
-            hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
-            checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
+            label={stegaClean(selectedSku)}
+            /*hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
+            checkoutUrl='resplendent-gnome-8fd84a.netlify.app'*/
             /*buyNowMode={true}*/
             /*redirectToHostedCart={true}*/
             /*buyNowMode={true}
             redirectToHostedCart={true}*/
+
         >
             {/*{
                         childrenProps => {

@@ -93,15 +93,15 @@ export function Layout({children}: { children: React.ReactNode }) {
 
     const navigate = useNavigate()
     const [myToken, setMyToken] = useState(null)
+    const [myToken2, setMyToken2] = useState(null)
 
     async function handleToken() {
         let token = "";
         const getCookieToken = Cookies.get("clIntegrationToken");
         if (!getCookieToken || getCookieToken === "undefined") {
             const auth = await authenticate('client_credentials', {
-                clientId: 'TcdVOPT9zG3jEjGN76NeLWhW2iBL49GDYg_2HJQVziw',
-                clientSecret:'8hRKZxCDdpT7t_86t2eEjwimnSdhI_bXR0i7TMCuvdc',
-                //scope: 'market:id:vlkaZhkGNj'
+                clientId: '9BrD4FUMzRDTHx5MLBIOCOrs7TUWl6II0l8Q5BNE6w8',
+                scope: 'market:id:vlkaZhkGNj'
             })
             token = auth.accessToken;
             Cookies.set("clIntegrationToken", token, {
@@ -113,13 +113,47 @@ export function Layout({children}: { children: React.ReactNode }) {
         return token;
     }
 
+    async function handleToken2() {
+        let token = "";
+        const getCookieToken = Cookies.get("clIntegrationToken2");
+        if (!getCookieToken || getCookieToken === "undefined") {
+            const auth = await authenticate('client_credentials', {
+                clientId: 'TcdVOPT9zG3jEjGN76NeLWhW2iBL49GDYg_2HJQVziw',
+                clientSecret: '8hRKZxCDdpT7t_86t2eEjwimnSdhI_bXR0i7TMCuvdc',
+                scope: 'market:id:vlkaZhkGNj'
+            })
+            token = auth.accessToken;
+            Cookies.set("clIntegrationToken2", token, {
+                expires: auth.expires
+            });
+        } else {
+            token = getCookieToken || "";
+        }
+        return token;
+    }
+
+    handleToken2().then(t => {
+        setMyToken2(t)
+
+    }).catch(e => {
+        console.log(e)
+    })
+    
     useEffect(() => {
         handleToken().then(r => {
             setMyToken(r)
 
+
         }).catch(e => {
             console.log(e)
         })
+        /*handleToken2().then(t => {
+            setMyToken2(t)
+
+        }).catch(e => {
+            console.log(e)
+        })*/
+
     }, [])
 
     /*
@@ -158,19 +192,19 @@ export function Layout({children}: { children: React.ReactNode }) {
         <body>
         {myToken != null ? (
 
-                <CommerceLayer
-                    accessToken={Cookies.get("clIntegrationToken") ? Cookies.get("clIntegrationToken") : ""}
-                    endpoint="https://execlog.commercelayer.io">
-                    <OrderStorage persistKey="execlogdemoorder">
-                        <OrderContainer>
-                            <Suspense fallback={<Loading/>}>
+            <CommerceLayer
+                accessToken={Cookies.get("clIntegrationToken") ? Cookies.get("clIntegrationToken") : ""}
+                endpoint="https://execlog.commercelayer.io">
+                <OrderStorage persistKey="execlogdemoorder">
+                    <OrderContainer>
+                        <Suspense fallback={<Loading/>}>
                             <Header taxonomies={data} user={user} myToken={myToken}></Header>
                             <MyNavMenu taxonomies={data}></MyNavMenu>
                             {children}
-                            </Suspense>
-                        </OrderContainer>
-                    </OrderStorage>
-                </CommerceLayer>
+                        </Suspense>
+                    </OrderContainer>
+                </OrderStorage>
+            </CommerceLayer>
 
         ) : null
         }
@@ -190,8 +224,8 @@ export function Layout({children}: { children: React.ReactNode }) {
         />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
             <Suspense>
-            <LiveVisualEditing
-            />
+                <LiveVisualEditing
+                />
             </Suspense>
         ) : null}
 
