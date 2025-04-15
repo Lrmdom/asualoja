@@ -1,5 +1,6 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
+import React, {useState, useEffect} from 'react';
 
 import {
     AddToCartButton,
@@ -14,6 +15,7 @@ import {ClientOnly} from "remix-utils/client-only"
 import {CommerceLayer} from "@commercelayer/sdk";
 import Cookies from "js-cookie";
 import {authenticate} from "@commercelayer/js-auth";
+import {useTranslation} from "react-i18next";
 
 
 //todo
@@ -22,21 +24,25 @@ property size; and so on. However, the advent of AI introduces new possibilities
 
 
 export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
+    const {t} = useTranslation()
+
+    const [skuOptions, setSkuOptions] = useState([]);
+
 
     async function getSkuOptions() {
-        const sku = stegaClean(selectedSku)
+        //const sku = stegaClean(selectedSku)
         const getCookieToken = Cookies.get("clIntegrationToken")
         const cl = CommerceLayer({
             organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken,
         })
-        const mysku = await cl.skus.retrieve(stegaClean(sku))
+        const mysku = await cl.skus.list({include: ['sku_options'], filters: {code_eq: selectedSku}})
         console.log(mysku)
-        return mysku
+        setSkuOptions(mysku[0].sku_options);
+        return mysku[0].sku_options
     }
 
     async function addCartExternalPrice() {
         const sku = stegaClean(selectedSku)
-        //const orderId = "kykhjGgGoR"
         const orderId = localStorage.getItem("execlogdemoorder")
         const getCookieToken2 = Cookies.get("clIntegrationToken2")
         const cl = CommerceLayer({
@@ -84,81 +90,127 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
     }
 
-    return (<>
-        {selectedSku &&
-            <>
-                <button className="bg-primary" onClick={addCartExternalPrice}> add cart external
-                    price{selectedSku}</button>
-                <button className="bg-secondary" onClick={getSkuOptions}>Get sku options
-                    from {selectedSku}</button>
-            </>
+
+    async function addSkuOption() {
+
+        const getCookieToken2 = Cookies.get("clIntegrationToken2")
+        const cl = CommerceLayer({
+            organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken2,
+        })
+
+        const orderId = localStorage.getItem("execlogdemoorder")
+
+        const lineData = {
+            type: "line_items",
+            //_external_price: true,
+            name: "my test name to use i18n",
+            quantity: 1, unit_amount_cents: 10000,
+            order: orderId,
+            metadata: {
+                store_location: "to define fn yet",
+                user_event: "to define fn yet",
+                user_location: "to define fn yet",
+                start_Date: new Date().toISOString(), end_Date: new Date().toISOString(), vehicleModel: "Yamaha R1 Leon"
+            }
         }
-        {/*<SkusContainer
+
+
+        const mylineitem = await cl.line_items.create({lineData})
+
+        const lineDataOption = {
+            name: "opção Seguro",
+            line_item: mylineitem.id,
+            metadata: {
+                store_location: "to define fn yet",
+                user_event: "to define fn yet",
+                user_location: "to define fn yet",
+                start_Date: new Date().toISOString(), end_Date: new Date().toISOString(), vehicleModel: "Yamaha R1 Leon"
+            }
+        }
+
+        const mylineitemoption = await cl.line_item_options.create({lineDataOption})
+        console.log(mylineitemoption)
+    }
+
+
+    let optionName = "";
+
+    return (<>
+
+
+        {
+
+            selectedSku ? (<>
+                <>
+                    <button className="bg-primary" onClick={addCartExternalPrice}> add cart external
+                        price{selectedSku}</button>
+                    <button className="bg-primary-300" onClick={getSkuOptions}>Get sku options
+                        from {selectedSku} </button>
+                    <div>
+                        {skuOptions && skuOptions.length > 0 ? (
+                            skuOptions.map((option) => (
+                                <div key={option.id}>
+                                    <button onClick={addSkuOption}
+                                            className="bg-primary-500">{t(option.name)} - {option.formatted_price_amount}</button>
+                                    {t("Elevate Your Digital Presence")}
+                                </div>
+
+                            ))
+                        ) : (
+                            <div>No options available for this SKU.</div>
+                        )}
+                    </div>
+                </>
+                <SkusContainer
                     skus={[
-                        "SKU-BICI-TDOTERR-TREKFUEL9.8-GXGEN4-1"
-                        stegaClean(selectedSku?selectedSku:"trekMadoneSL7")
+                        selectedSku
                     ]}
                 >
                     <Skus>
                         <SkuField
-                            attribute="code"
                             attribute="name"
                             tagElement="div"
                         />
                     </Skus>
                 </SkusContainer>
-                </SkusContainer>*/}
-        {selectedSku ? (<>
-            <SkusContainer
-                skus={[
-                    selectedSku
-                ]}
-            >
-                <Skus>
-                    <SkuField
-                        attribute="name"
-                        tagElement="div"
+                <PricesContainer>
+
+                    <ClientOnly fallback={null}>
+                        {() => <Price
+                            className="font-bold text-primary"
+                            compareClassName="line-through ml-2 text-xl"
+                            skuCode={stegaClean(selectedSku)}
+                        />}
+
+                    </ClientOnly>
+                </PricesContainer>
+
+                <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
+
+                    <AvailabilityTemplate>
+                        {/*//TODO id selectedSku?show:hide*/}
+                        {childrenProps => {
+                            return <div>
+                                <p className='font-bold'>Custom logic:</p>
+                                <p className='mb-8'>
+                                    {childrenProps.quantity} items available delivered in{' '}
+                                    {childrenProps.min?.days} - {childrenProps.max?.days} days
+                                </p>
+                                <p className='font-bold'>The delivery_lead_times object</p>
+                                <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
+                            </div>;
+                        }}
+
+                    </AvailabilityTemplate>
+                    <AvailabilityTemplate
+                        showShippingMethodName
+                        showShippingMethodPrice
+                        timeFormat="days"
+                        className="text-gray-600"
                     />
-                </Skus>
-            </SkusContainer>
-            <PricesContainer>
 
-                <ClientOnly fallback={null}>
-                    {() => <Price
-                        className="font-bold text-primary"
-                        compareClassName="line-through ml-2 text-xl"
-                        skuCode={stegaClean(selectedSku)}
-                    />}
-
-                </ClientOnly>
-            </PricesContainer>
-
-            <AvailabilityContainer skuCode={stegaClean(selectedSku)}>
-
-                <AvailabilityTemplate>
-                    {/*//TODO id selectedSku?show:hide*/}
-                    {childrenProps => {
-                        return <div>
-                            <p className='font-bold'>Custom logic:</p>
-                            <p className='mb-8'>
-                                {childrenProps.quantity} items available delivered in{' '}
-                                {childrenProps.min?.days} - {childrenProps.max?.days} days
-                            </p>
-                            <p className='font-bold'>The delivery_lead_times object</p>
-                            <pre>{JSON.stringify(childrenProps, null, 20)}</pre>
-                        </div>;
-                    }}
-
-                </AvailabilityTemplate>
-                <AvailabilityTemplate
-                    showShippingMethodName
-                    showShippingMethodPrice
-                    timeFormat="days"
-                    className="text-gray-600"
-                />
-
-            </AvailabilityContainer>
-        </>) : null}
+                </AvailabilityContainer>
+            </>) : null}
 
 
         {/*<OrderStorage persistKey="execlogdemoorder">
@@ -246,11 +298,3 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
     </>)
 
 }
-
-
-
-
-
-
-
-
