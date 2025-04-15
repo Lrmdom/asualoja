@@ -41,6 +41,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
         return mysku[0].sku_options
     }
 
+
     async function addCartExternalPrice() {
         const sku = stegaClean(selectedSku)
         const orderId = localStorage.getItem("execlogdemoorder")
@@ -49,28 +50,15 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken2,
         })
         const lineData = {
-            sku_code: sku,
-            _external_price: true,
-            name: "my test name to use i18n",
-            quantity: 1, unit_amount_cents: 10000,
-            order: orderId,
+            "type": "line_items",
+            "sku_code": "SKU-BICI-TDOTERR-TREKMAR5-GEN3-1",
+            "quantity": 1,
+            "_update_quantity": true,
+            "order": {id: orderId, type: "orders"}
 
-            //orderId: orderId,
-            /*order: {
-                orderId: orderId
-            },*/
-            /*relationships: {
-                "order": {
-                    orderId: orderId
-                }
-            },*/
-            metadata: {
-                store_location: "to define fn yet",
-                user_event: "to define fn yet",
-                user_location: "to define fn yet",
-                start_Date: new Date().toISOString(), end_Date: new Date().toISOString(), vehicleModel: "Yamaha R1 Leon"
-            }
         }
+
+
         const orderData = {
             "type": "orders",
             "id": orderId,
@@ -83,10 +71,13 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                 start_Date: new Date().toISOString(), end_Date: new Date().toISOString(), vehicleModel: "Yamaha R1 Leon"
             }
         }
-        const newordermetadata = await cl.orders.update(orderData)
-        const newLine_item = await cl.line_items.create(lineData)
+
+
+        const newLine_item = await cl.line_items.create(lineData).catch(error => console.log(error.errors))
         console.log(newLine_item)
-        //console.log(newordermetadata)
+
+        const newordermetadata = await cl.orders.update(orderData)
+        console.log(newordermetadata)
 
     }
 
@@ -99,18 +90,40 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
         })
 
         const orderId = localStorage.getItem("execlogdemoorder")
+        /*
+                {"data":{
+                    "sku_code": "SKU-BICI-GRAVTREK-SLR6",
+                        "type": "line_items",
+                        //_external_price: true,
+                        "name": "my test name to use i18n",
+                        "quantity": 1,
+                        "unit_amount_cents": 10000,
+                        "order": "KaehedryvA",
+                        "metadata": {
+                        "store_location": "to define fn yet",
+                            "user_event": "to define fn yet",
+                            "user_location": "to define fn yet",
+                            "start_Date": "2025-04-25", "end_Date": "2025-04-27",
+                            "vehicleModel": "Yamaha R1 Leon"
+                    }
+                }
+                }*/
+
 
         const lineData = {
-            type: "line_items",
-            //_external_price: true,
-            name: "my test name to use i18n",
-            quantity: 1, unit_amount_cents: 10000,
-            order: orderId,
-            metadata: {
-                store_location: "to define fn yet",
-                user_event: "to define fn yet",
-                user_location: "to define fn yet",
-                start_Date: new Date().toISOString(), end_Date: new Date().toISOString(), vehicleModel: "Yamaha R1 Leon"
+            "type": "line_items",
+            "attributes": {
+                "sku_code": "SKU-BICI-TDOTERR-TREKMAR5-GEN3-1",
+                "quantity": 1,
+                "_update_quantity": true
+            },
+            "relationships": {
+                "order": {
+                    "data": {
+                        "id": "KaehednKpR",
+                        "type": "orders"
+                    }
+                }
             }
         }
 
