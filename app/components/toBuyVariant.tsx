@@ -270,8 +270,8 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             // lineItem={{external_price: true}}
             className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
             label={stegaClean(selectedSku)}
-            hostedCartUrl='brilliant-custard-06fc9a.netlify.app'
-            checkoutUrl='resplendent-gnome-8fd84a.netlify.app'
+            hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app/'
+            checkoutUrl='https://resplendent-gnome-8fd84a.netlify.app/'
             /*buyNowMode={true}*/
             /*redirectToHostedCart={true}*/
             /*buyNowMode={true}
