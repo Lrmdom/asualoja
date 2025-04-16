@@ -55,9 +55,10 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
         const lineData = {
             "type": "line_items",
             "sku_code": selectedSku,
-            "_external_price":true,
+            //"_external_price":true,  //todo finish endpoint honojs price https://docs.commercelayer.io/core/external-resources/external-prices
             "quantity": 1,
-            "unit_amount_cents": 555555,
+            "unit_amount_cents": 10000,
+            compare_at_amount_cents:9000,
             "order": {id: orderId, type: "orders"},
             "metadata": {}
 
@@ -71,7 +72,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
         const orderData = {
             "type": "orders",
             "id": orderId,
-            "validate": true,
+            "_validate": true, //todo build order validate endpoint
             /*"cart_url": "brilliant-custard-06fc9a.netlify.app",*/
             // "checkout_url": "resplendent-gnome-8fd84a.netlify.app",
             "customer_email": "john@example.com",
@@ -268,13 +269,13 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             //skuCode={stegaClean(selectedSku)}
             skuCode={stegaClean(selectedSku)}
             quantity="1"
-            lineItem={
+            /*lineItem={
                 {
                     name:"leo test line_item with external_price",
-                    externalPrice: true,
-                    metadata:{}
+                    externalPrice: true, //todo build the price honojs endpoint .https://docs.commercelayer.io/core/external-resources/external-prices
+                    metadata:{},
                 }
-            }
+            }*/
             lineItemOption={{skuOptionId:"BzaPsKYePX", options:{}, quantity:1 }}
             className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
             label={stegaClean(selectedSku)}
