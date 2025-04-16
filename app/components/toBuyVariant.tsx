@@ -71,7 +71,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
         const orderData = {
             "type": "orders",
             "id": orderId,
-            "_validate": true,
+            "validate": true,
             /*"cart_url": "brilliant-custard-06fc9a.netlify.app",*/
             // "checkout_url": "resplendent-gnome-8fd84a.netlify.app",
             "customer_email": "john@example.com",
