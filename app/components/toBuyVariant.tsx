@@ -28,6 +28,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
     const [skuOptions, setSkuOptions] = useState([]);
 
+    //TODO test webhooks with https://app.requestbin.net/
 
     async function getSkuOptions() {
         //const sku = stegaClean(selectedSku)
@@ -54,10 +55,11 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
         const lineData = {
             "type": "line_items",
             "sku_code": selectedSku,
+            "_external_price":true,
             "quantity": 1,
-            "_update_quantity": true,
+            "unit_amount_cents": 555555,
             "order": {id: orderId, type: "orders"},
-            metadata: {}
+            "metadata": {}
 
         }
 
@@ -92,7 +94,8 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             "line_item": {id: newLine_item.id, type: "line_items"},
             "quantity": 1,
             "options": {},
-            "sku_option": {id: "BzaPsKYePX", type: "sku_options"}
+            "sku_option": {id: "BzaPsKYePX", type: "sku_options"},
+            metadata:{}
 
         }
 
@@ -166,7 +169,6 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
     }
 
 
-    let optionName = "";
 
     return (<>
 
@@ -269,12 +271,11 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             lineItem={
                 {
                     name:"leo test line_item with external_price",
-                    external_price: true,
-                    metadata:{},
-
+                    externalPrice: true,
+                    metadata:{}
                 }
             }
-            lineItemOption={{skuOptionId:"BzaPsKYePX", options:{}, quantity:1, metadata:{} }}
+            lineItemOption={{skuOptionId:"BzaPsKYePX", options:{}, quantity:1 }}
             className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
             label={stegaClean(selectedSku)}
             hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app/'
