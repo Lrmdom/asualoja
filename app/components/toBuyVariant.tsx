@@ -266,7 +266,15 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             //skuCode={stegaClean(selectedSku)}
             skuCode={stegaClean(selectedSku)}
             quantity="1"
-            // lineItem={{external_price: true}}
+            lineItem={
+                {
+                    name:"leo test line_item with external_price",
+                    external_price: true,
+                    metadata:{},
+
+                }
+            }
+            lineItemOption={{skuOptionId:"BzaPsKYePX", options:{}, quantity:1, metadata:{} }}
             className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
             label={stegaClean(selectedSku)}
             hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app/'
