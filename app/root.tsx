@@ -196,7 +196,7 @@ export function Layout({children}: { children: React.ReactNode }) {
                 accessToken={Cookies.get("clIntegrationToken") ? Cookies.get("clIntegrationToken") : ""}
                 endpoint="https://execlog.commercelayer.io">
                 <OrderStorage persistKey="execlogOrderPersistKey">
-                    <OrderContainer orderId={localStorage.getItem("execlogOrderPersistKey")}>
+                    <OrderContainer orderId={localStorage.getItem("execlogOrderPersistKey")} _validate={true} validate={true}>
                         <Suspense fallback={<Loading/>}>
                             <Header taxonomies={data} user={user} myToken={myToken}></Header>
                             <MyNavMenu taxonomies={data}></MyNavMenu>

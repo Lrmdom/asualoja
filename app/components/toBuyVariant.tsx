@@ -1,20 +1,21 @@
 import type {SanityDocument} from '@sanity/client'
 import {stegaClean} from "@sanity/client/stega"
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 import {
     AddToCartButton,
     AvailabilityContainer,
-    AvailabilityTemplate, PlaceOrderButton,
+    AvailabilityTemplate,
     Price,
-    PricesContainer, SkuField, Skus, SkusContainer
+    PricesContainer,
+    SkuField,
+    Skus,
+    SkusContainer
 } from "@commercelayer/react-components"
-import * as React from "react";
 
 import {ClientOnly} from "remix-utils/client-only"
 import {CommerceLayer} from "@commercelayer/sdk";
 import Cookies from "js-cookie";
-import {authenticate} from "@commercelayer/js-auth";
 import {useTranslation} from "react-i18next";
 
 
@@ -25,7 +26,7 @@ property size; and so on. However, the advent of AI introduces new possibilities
 
 export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument }) {
     const {t} = useTranslation()
-
+debugger;
     const [skuOptions, setSkuOptions] = useState([]);
 
     //TODO test webhooks with https://app.requestbin.net/
@@ -42,6 +43,28 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
         return mysku[0].sku_options
     }
 
+    async function addOrderValidation(){
+    const orderId = localStorage.getItem("execlogOrderPersistKey")
+    const getCookieToken2 = Cookies.get("clIntegrationToken2")
+    const cl = CommerceLayer({
+        organization: import.meta.env.VITE_MY_ORGANIZATION, accessToken: getCookieToken2,
+    })
+    const orderData = {
+        "type": "orders",
+        "id": orderId,
+        //"validate": true, //todo build order validate endpoint
+        "_validate": true
+    }
+
+
+    const newordermetadata = await cl.orders.update(orderData).catch(error => console.log(error.errors))
+    console.log(newordermetadata)
+        const neworderdata= await cl.orders.retrieve(orderId,)
+        console.log(neworderdata)
+        const resource_error= await cl.orders.list({ filters: { id_eq: orderId },include: ['resource_errors'] })
+        console.log(resource_error)
+
+}
 
     async function addCartExternalPrice() {
         const sku = stegaClean(selectedSku)
@@ -58,7 +81,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             //"_external_price":true,  //todo finish endpoint honojs price https://docs.commercelayer.io/core/external-resources/external-prices
             "quantity": 1,
             "unit_amount_cents": 10000,
-            compare_at_amount_cents:9000,
+            compare_at_amount_cents: 9000,
             "order": {id: orderId, type: "orders"},
             "metadata": {}
 
@@ -96,7 +119,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
             "quantity": 1,
             "options": {},
             "sku_option": {id: "BzaPsKYePX", type: "sku_options"},
-            metadata:{}
+            metadata: {}
 
         }
 
@@ -170,7 +193,6 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
     }
 
 
-
     return (<>
 
 
@@ -178,7 +200,7 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
 
             selectedSku ? (<>
                 <>
-                    <button className="bg-primary" onClick={addCartExternalPrice}> add cart external
+                    <button className="bg-primary" onClick={addOrderValidation}> add cart external
                         price{selectedSku}</button>
                     <button className="bg-primary-300" onClick={getSkuOptions}>Get sku options
                         from {selectedSku} </button>
@@ -263,20 +285,21 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                                 />
                             </p>*/}
 
+
         <AddToCartButton
-            /*onClick={addCartExternalPrice(stegaClean(selectedSku))}*/
+            /*onClick={ addOrderValidation()}*/
             disabled={stegaClean(selectedSku) ? false : true}//TODO if is available activate button
-            //skuCode={stegaClean(selectedSku)}
             skuCode={stegaClean(selectedSku)}
+            //skuCode="motorbike-125cc"
             quantity="1"
-            /*lineItem={
+            lineItem={
                 {
-                    name:"leo test line_item with external_price",
+                    name: "test name extenal_price feature",
                     externalPrice: true, //todo build the price honojs endpoint .https://docs.commercelayer.io/core/external-resources/external-prices
-                    metadata:{},
+                    metadata: {},
                 }
-            }*/
-            lineItemOption={{skuOptionId:"BzaPsKYePX", options:{}, quantity:1 }}
+            }
+            lineItemOption={{skuOptionId: "BzaPsKYePX", options: {}, quantity: 1}}
             className="px-3 py-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
             label={stegaClean(selectedSku)}
             hostedCartUrl='https://brilliant-custard-06fc9a.netlify.app/'
@@ -296,7 +319,20 @@ export default function ToBuyVariant({selectedSku}: { attribute: SanityDocument 
                         }}*/}
 
         </AddToCartButton>
-
+        <AddToCartButton
+            className="px-3 py-2  m-2 bg-black text-white rounded disabled:opacity-50 hover:opacity-90 focus:outline focus:outline-offset-20 focus:outline-purple-500 "
+            skuCode="e-bike-type-2"
+            label="e-bike-type-2"
+            quantity="1"
+            /*lineItem={
+                {
+                    name: "e-bike-type-2",
+                    externalPrice: true, //todo build the price honojs endpoint .https://docs.commercelayer.io/core/external-resources/external-prices
+                    metadata: {},
+                }
+            }*/
+        >
+        </AddToCartButton>
         {/* </OrderContainer>
 
             </OrderStorage>*/}
